@@ -20,7 +20,7 @@ const Webcam = () => {
         })
     }
 
-    useEffect(() => {	//끼얏호우
+    useEffect(() => {	//끼얏호우블끼얏호우
         getCamera();
     }, [videoRef]);
 
