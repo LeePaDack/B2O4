@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Webcam from './component/WebCam';
 
-function App(){
+function App() {
 
-  return(
-    <>
-    <Webcam/>
-    </>
+
+  return (
+    <div>
+      <Webcam />
+
+    </div>
   )
 }
 
