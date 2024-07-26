@@ -19,9 +19,7 @@ const Webcam = () => {
             console.log(error);
         })
     }
-    const qwe = () => {
-        
-    }
+
     useEffect(() => {
         getCamera();
     }, [videoRef]);
