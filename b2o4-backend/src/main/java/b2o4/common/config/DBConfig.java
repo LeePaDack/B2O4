@@ -1,5 +1,4 @@
-package b204.common.config;
-
+package b2o4.common.config;
 
 import javax.sql.DataSource;
 
@@ -45,7 +44,7 @@ public class DBConfig {
 		SqlSessionFactoryBean sfb = new SqlSessionFactoryBean();
 		sfb.setDataSource(dataSource);
 		sfb.setMapperLocations(applicationContext.getResources("classpath:/mappers/**.xml"));
-		sfb.setTypeAliasesPackage("B2O4.dto"); 
+		sfb.setTypeAliasesPackage("b2o4.dto"); 
 		
 		sfb.setConfigLocation(applicationContext.getResource("classpath:mybatis-config.xml"));
 		return sfb.getObject();
