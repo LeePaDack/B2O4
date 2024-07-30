@@ -1,6 +1,8 @@
 package b2o4.common.config;
 
 
+import java.io.IOException;
+
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -18,47 +20,42 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@PropertySource("classpath:/config.properties")
+@PropertySource("classpath:/config.properties") // = src/main/resources
 public class DBConfig {
-	
+
 	@Autowired
-	private ApplicationContext applicationContext;
+	private ApplicationContext applicationContext; //연결되는 주소 관리자. xml과 같은 경로를 보유하고 관리
 	
-	
-	@Bean 
-	@ConfigurationProperties(prefix = "spring.datasource.hikari")
+	@Bean
+	@ConfigurationProperties(prefix="spring.datasource.hikari")
 	public HikariConfig hikariConfig() {
-		HikariConfig config = new HikariConfig();
-		return new HikariConfig();
+
+		return new HikariConfig(); //hikari : DataBase 연결을 도와주는 라이브러리
 	}
 	
-	
-	@Bean 
+	@Bean
 	public DataSource dataSource(HikariConfig config) {
 		DataSource dataSource = new HikariDataSource(config);
 		return dataSource;
 	}
-	
 	
 	@Bean
 	public SqlSessionFactory sessionFactory(DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean sfb = new SqlSessionFactoryBean();
 		sfb.setDataSource(dataSource);
 		sfb.setMapperLocations(applicationContext.getResources("classpath:/mappers/**.xml"));
-		sfb.setTypeAliasesPackage("b2o4.dto"); 
-		
-		sfb.setConfigLocation(applicationContext.getResource("classpath:mybatis-config.xml"));
+		sfb.setTypeAliasesPackage("b2o4.dto"); // 추후 본인의 dto 패키지 명으로 변경. database에 작성한 컬럼명과 dto에 작성한 변수명 대조
+		sfb.setConfigLocation(applicationContext.getResource("classpath:mybatis-config.xml")); // 추후 컬럼명을 카멜케이스 형식으로 들여옴을 설정
 		return sfb.getObject();
 	}
 	
-	
-	@Bean
+	@Bean 
 	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sf) {
 		return new SqlSessionTemplate(sf);
 	}
 	
 	@Bean
-	public DataSourceTransactionManager dataSourceTransactionManager(DataSource ds) {
-		return new DataSourceTransactionManager(ds);
+	public DataSourceTransactionManager dataSourceTransactionManager(DataSource dataSource) {
+		return new DataSourceTransactionManager(dataSource);
 	}
 }
