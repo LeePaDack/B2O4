@@ -2,11 +2,13 @@ package b2o4.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import b2o4.dto.GalleryBoard;
 
 public interface GalleryService {
 	// 게시판 업로드
-	void GalleryUpload(GalleryBoard galleryBoard);
+	int GalleryUpload(String GBPostTitle, String GBPostContent, MultipartFile file);
 		
 	// 갤러기 게시판 보기
 	List<GalleryBoard> AllGalleryBoard();

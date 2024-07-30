@@ -8,8 +8,8 @@
 
 	<!-- 게시판 업로드 -->
 	<insert id="GalleryUpload" parameterType="GalleryBoard" useGeneratedKeys="true" keyProperty="GBPostNo">
-		insert into galleryBoard(GBPostTitle, GBPostContent, GBPostImages)
-		values(#{GBPostTitle}, #{GBPostContent}, #{GBPostImages})
+		insert into galleryBoard(GBPostTitle, GBPostContent, GBImages)
+		values(#{GBPostTitle}, #{GBPostContent}, #{GBImages})
 	</insert>
 	
 	<!-- 게시판 보기 -->

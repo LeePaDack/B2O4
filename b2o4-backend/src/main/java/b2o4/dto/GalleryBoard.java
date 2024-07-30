@@ -9,7 +9,7 @@ public class GalleryBoard {
 	private int GBPostNo;
 	private String GBPostTitle;
 	private String GBPostContent;
-	private String GBPostImages;
+	private String GBImages;
 	private String GBPostCreateDate;
 	
 }
