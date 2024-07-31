@@ -5,6 +5,8 @@
         
 <mapper namespace="b2o4.mapper.BoardMapper">
 	<select id="boardMainSelect">
-		SELECT boardNo, boardTitle, boardCreateDate FROM board
+		SELECT b.boardNo, b.memberNo, b.boardTitle, b.boardContent, b.boardCreateDate, m.memberName 
+		FROM board b
+		JOIN member m ON b.memberNo = m.memberNo
 	</select>
 </mapper>
