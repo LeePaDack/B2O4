@@ -17,4 +17,14 @@ public class BoardServiceImpl implements BoardService{
 	public List<Board> boardMainSelect() {
 		return boardMapper.boardMainSelect();
 	}
+	
+	@Override
+	public void insertBoardPost(Board board) {
+		boardMapper.insertBoardPost(board);
+	}
+	
+	@Override
+	public Board getBoardById(int boardNo) {
+		return boardMapper.getBoardById(boardNo);
+	}
 }

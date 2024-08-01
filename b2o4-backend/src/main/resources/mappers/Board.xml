@@ -9,4 +9,14 @@
 		FROM board b
 		JOIN member m ON b.memberNo = m.memberNo
 	</select>
+	
+	<insert id="insertBoardPost" parameterType="Board" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO board (boardTitle, boardContent)
+		VALUES (#{boardTitle}, #{boardContent})
+	</insert>
+	
+	<select id="getBoardById" parameterType="int">
+		SELECT * FROM board
+		WHERE boardNo = #{boardNo}
+	</select>
 </mapper>

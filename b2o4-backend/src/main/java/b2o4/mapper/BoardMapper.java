@@ -9,4 +9,8 @@ import b2o4.dto.Board;
 @Mapper
 public interface BoardMapper {
 	List<Board> boardMainSelect();
+	
+	void insertBoardPost(Board board);
+	
+	Board getBoardById(int boardNo);
 }
