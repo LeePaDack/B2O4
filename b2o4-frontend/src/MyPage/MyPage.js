@@ -7,7 +7,6 @@ const MyPage = () => {
 
   const [memberInfo, setMemberinfo] = useState("");
 
-  
   useEffect(() => {
     UserInfo();
   }, []);
@@ -27,21 +26,21 @@ const MyPage = () => {
       reader.readAsDataURL(file);
     }
   };
-    
+
   return (
     <div className="mypage-container">
-        <table>
-            <tbody>
-                {memberInfo.map(member => (
-                    <tr key={member.memberNo}>
-                        <td>{member.memberName}</td>
-                        <td>{member.memberEmail}</td>
-                        <td>{member.memberAddress}</td>
-                        <td>{member.memberPhone}</td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+      <table>
+        <tbody>
+          {memberInfo.map((member) => (
+            <tr key={member.memberNo}>
+              <td>{member.memberName}</td>
+              <td>{member.memberEmail}</td>
+              <td>{member.memberAddress}</td>
+              <td>{member.memberPhone}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <div className="profile-container">
         <h4>프로필 사진 변경</h4>
         {selectProfile && (

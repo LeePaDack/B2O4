@@ -10,4 +10,10 @@
 		from member
 		where memberNo = #{memberNo}
 	</select>
+	
+	<select id="login">
+		SELECT * FROM member
+		WHERE memberId = #{memberId}
+		AND memberPw = #{memberPw}
+	</select>
 </mapper>

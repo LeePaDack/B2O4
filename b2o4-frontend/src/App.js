@@ -1,12 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
 import MyPage from './MyPage/MyPage';
+import MyPageContext from './MyPage/MyPageContext';
+import { useState } from 'react';
+import Login from './MyPage/testLogin';
 
 function App() {
+  const [loginMember, setLoginMember] = useState(null);
   return (
-    <div className="App">
-      <MyPage/>
-    </div>
+    <MyPageContext.Provider value={{loginMember, setLoginMember}}>
+      
+      <Login/>
+    </MyPageContext.Provider>
   );
 }
 

@@ -7,5 +7,7 @@ import b2o4.dto.Mypage;
 @Mapper
 public interface MypageMapper {
 
-	void userFind(Mypage mypage);
+	void userFind(int memberNo);
+	
+	Mypage login(Mypage mypage);
 }
