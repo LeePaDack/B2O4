@@ -27,14 +27,14 @@ const BoardMain = ({}) => {
                     {boards.map(board => (
                         <tr key={board.boardNo}>
                             <td>{board.boardNo}</td>
-                            <td>{board.boardTitle}</td> {/* 클릭시 글로 이동 boardContent.js */}
+                            <Link to={"/boardContent/" + board.boardNo}><td>{board.boardTitle}</td></Link> {/* 클릭시 글로 이동 boardContent.js */}
                             <td>{board.memberName || 'No name available'}</td>
                             <td>{board.boardCreateDate}</td>
                         </tr>
                     ))}
                      
                 </tbody>
-                <Link to={"/BoardPosting"}><button>문의하기</button></Link> {/* 클릭시 글쓰기로 이동 boardPosting.js */}
+                <Link to="/BoardPosting"><button>문의하기</button></Link> {/* 클릭시 글쓰기로 이동 boardPosting.js */}
 
             </table>
     )

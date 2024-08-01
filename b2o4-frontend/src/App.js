@@ -5,6 +5,7 @@ import ResTime from '../src/component/reservationTime.js';
 import BoardMain from './component/boardMain.js';
 import BoardPosting from './component/boardPosting.js';
 import { Route, Routes } from 'react-router-dom';
+import BoardContent from './component/boardContent.js';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path='/boardPosting' element={<BoardPosting/>}/>
         <Route path='/boardMain' element={<BoardMain/>}/>
+        <Route path='/boardContent/' element={<BoardContent/>}/>
       </Routes>
       
     </div>
