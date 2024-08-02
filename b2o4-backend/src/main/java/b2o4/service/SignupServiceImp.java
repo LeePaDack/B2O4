@@ -9,12 +9,12 @@ import b2o4.dto.Signup;
 import b2o4.mapper.SignupMapper;
 
 @Service
-public class SignupServiceImpl implements SignupService {
+public class SignupServiceImp implements SignupService {
 
     private final SignupMapper signupMapper;
 
     @Autowired
-    public SignupServiceImpl(SignupMapper signupMapper) {
+    public SignupServiceImp(SignupMapper signupMapper) {
         this.signupMapper = signupMapper;
     }
 
