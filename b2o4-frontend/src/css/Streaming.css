@@ -1,0 +1,117 @@
+.streaming-container {
+  display: flex;
+}
+
+.webcam-container {
+  margin: 10px;
+  padding: 20px;
+  flex: 2;
+  position: relative; 
+  width: 100%;
+  height: 76vh;
+}
+
+.webcam {
+  width: 100%;
+  height: 100%; 
+  object-fit: cover; /* 현재 감싸고 있는 object에 맞춤. cover : 모서리까지 */
+  position: relative; 
+  z-index: 1; 
+}
+
+.blackScreen {
+  position: relative; 
+  width: 100%;
+  height: 100%;
+  background-color: black; 
+  color: white; 
+  z-index: 2; /* 이걸 쓰면 숫자가 높은 요소 순서대로 위에 보임 */
+  font-size: 25px;
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
+}
+
+.button-container {
+  margin-top: 10px;
+  position: absolute; 
+
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 700px; 
+  width: 400px;
+  margin: 10px;
+  border: 1px solid #ccc;
+}
+
+.messages {
+  flex: 1; 
+  flex-direction: column-reverse; /* 새 메시지가 아래에 추가되도록 */
+  display: flex; /* 새 메시지가 아래쪽에 추가되도록 */
+  overflow-y: auto; 
+  padding: 10px;
+}
+
+.chat-box {
+  display: flex;
+  align-items: center; 
+  padding: 10px;
+  border-top: 1px solid #ccc; 
+  background: #fff; 
+}
+
+.input-container {
+  position: relative; /* 이모지 아이콘을 입력창 안에 넣기 */
+  flex: 1;
+}
+
+.message-input {
+  width: 100%;
+  padding: 10px;
+  padding-right: 40px; 
+  box-sizing: border-box;
+}
+
+.emoji-icon {
+  position: absolute;
+  right: 10px; 
+  top: 50%; 
+  transform: translateY(-50%); /* 대상을 y축(수직) 이동. -50% : 자신의 높이의 절반만큼 위로 이동 */
+  cursor: pointer; 
+  width: 24px;
+  height: 24px; 
+}
+
+.emoji-list {
+  font-family: sans-serif;
+  text-align: center;
+  padding: 1rem; 
+  width: 400px; 
+  height: 200px;  
+  border: 1px solid #ccc;
+  background: #fff; 
+  position: absolute; 
+  bottom: 100%; 
+  left: 50%; 
+  transform: translateX(-50%); /* 대상을 x축(수평) 이동. -50% : 자신의 너비의 절반만큼 왼쪽로 이동 */
+  z-index: 1000; 
+}
+
+.emoji-picker {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-height: 100%; 
+  overflow-y: auto; /* 스크롤바 생성 */
+  padding-right: 10px;
+}
+
+.emoji {
+  cursor: pointer;
+  font-size: 1rem;
+}
+

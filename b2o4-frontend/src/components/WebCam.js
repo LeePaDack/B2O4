@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
-import '../css/WebCam.css';
+import '../css/Streaming.css';
 
-const Webcam = () => {
+const WebCam = () => {
     const videoRef = useRef(null);
     const [webCamView, setWebCamView] = useState(false);
 
@@ -27,19 +27,20 @@ const Webcam = () => {
     }, [webCamView]);
 
     return (
-        <div>
-            <div className='webcam-layout-container'>
-                {webCamView ? <span className="blackScreen"></span> : <video className='webcam-container' ref={videoRef} />}
-                <div className="button-container">
-                    <button onClick={() => setWebCamView(!webCamView)}>
-                        {webCamView ? '스트리밍 시작' : '스트리밍 종료'}
-                    </button>
-                </div>      
-            </div>
+        <div className='webcam-container'>
+            <video className='webcam' ref={videoRef} style={{ display: webCamView ? 'block' : 'none' }} />
+            <span className='blackScreen' style={{ display: webCamView ? 'none' : 'flex' }}>
+                <p>준비 중 입니다.</p>
+            </span>
+            <div className="button-container">
+                <button onClick={() => setWebCamView(!webCamView)}>
+                    {webCamView ? '스트리밍 종료' : '스트리밍 시작'}
+                </button>
+            </div>  
         </div>
-
+        
 
     )
 };
 
-export default Webcam;
+export default WebCam;
