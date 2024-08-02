@@ -228,7 +228,9 @@ const Signup = () => {
 
   return (
     <div className="signup-container">
-      <label>아이디
+    <label>
+      아이디
+      <div className="input-container">
         <input
           type="text"
           onChange={handleIdChange}
@@ -236,85 +238,96 @@ const Signup = () => {
           className={idError ? 'id-err' : ''}
         />
         <button onClick={checkIdAvailability}>중복 검사</button>
-        {idError && <div style={{ color: 'red' }}>{idError}</div>}
-      </label>
-      <br />
-      <label>비밀번호
-        <input
-          type="password"
-          onChange={handlePwChange}
-          value={memberPw}
-        />
-        {pwError && <div style={{ color: 'red' }}>{pwError}</div>}
-      </label>
-      <br />
-      <label>비밀번호 일치확인
-        <input
-          type="password"
-          onChange={handlePwCheckChange}
-          value={memberPwCheck}
-        />
-        {pwCheckError && <div style={{ color: 'red' }}>{pwCheckError}</div>}
-      </label>
-      <br />
-      <label>이름
-        <input
-          type="text"
-          onChange={handleNameChange}
-          value={memberName}
-        />
-        {nameError && <div style={{ color: 'red' }}>{nameError}</div>}
-      </label>
-      <br />
-      <label>이메일
+      </div>
+      {idError && <div style={{ color: 'red' }}>{idError}</div>}
+    </label>
+    <br />
+    <label>
+      비밀번호
+      <input
+        type="password"
+        onChange={handlePwChange}
+        value={memberPw}
+      />
+      {pwError && <div style={{ color: 'red' }}>{pwError}</div>}
+    </label>
+    <br />
+    <label>
+      비밀번호 일치확인
+      <input
+        type="password"
+        onChange={handlePwCheckChange}
+        value={memberPwCheck}
+      />
+      {pwCheckError && <div style={{ color: 'red' }}>{pwCheckError}</div>}
+    </label>
+    <br />
+    <label>
+      이름
+      <input
+        type="text"
+        onChange={handleNameChange}
+        value={memberName}
+      />
+      {nameError && <div style={{ color: 'red' }}>{nameError}</div>}
+    </label>
+    <br />
+    <label>
+      이메일
+      <div className="input-container">
         <input
           type="email"
           onChange={handleEmailChange}
           value={memberEmail}
         />
         <button onClick={sendVerificationEmail}>인증 이메일 발송</button>
-        {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
-        {verificationSent && <div style={{ color: 'green' }}>인증 이메일이 발송되었습니다.</div>}
-      </label>
-      <br />
-      <label>생년월일
-        <input
-          type="text"
-          onChange={handleBirthChange}
-          value={memberBirth}
-        />
-        {birthError && <div style={{ color: 'red' }}>{birthError}</div>}
-      </label>
-      <br />
-      <label>휴대폰번호
-        <input
-          type="text"
-          onChange={handlePhoneChange}
-          value={memberPhone}
-        />
-        {phoneError && <div style={{ color: 'red' }}>{phoneError}</div>}
-      </label>
-      <br />
-      <label>주소
-        <input
-          type="text"
-          onChange={e => setAddress(e.target.value)}
-          value={memberAddress}
-        />
-      </label>
-      <br />
-      <label>Profile:
-        <input
-          type="file"
-          onChange={handleProfileUpload}
-        />
-        {memberProfile && (
-          <span>File selected: {memberProfile.name}</span>
-        )}
-      </label>
-      <br />
-      <button onClick={회원가입버튼}>가입하기</button>
-    </div>
+      </div>
+      {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
+      {verificationSent && <div style={{ color: 'green' }}>인증 이메일이 발송되었습니다.</div>}
+    </label>
+    <br />
+    <label>
+      생년월일
+      <input
+        type="text"
+        onChange={handleBirthChange}
+        value={memberBirth}
+      />
+      {birthError && <div style={{ color: 'red' }}>{birthError}</div>}
+    </label>
+    <br />
+    <label>
+      휴대폰번호
+      <input
+        type="text"
+        onChange={handlePhoneChange}
+        value={memberPhone}
+      />
+      {phoneError && <div style={{ color: 'red' }}>{phoneError}</div>}
+    </label>
+    <br />
+    <label>
+      주소
+      <input
+        type="text"
+        onChange={e => setAddress(e.target.value)}
+        value={memberAddress}
+      />
+    </label>
+    <br />
+    <label>
+      Profile:
+      <input
+        type="file"
+        onChange={handleProfileUpload}
+      />
+      {memberProfile && (
+        <span>File selected: {memberProfile.name}</span>
+      )}
+    </label>
+    <br />
+    <button onClick={회원가입버튼}>가입하기</button>
+  </div>
   );
 }
 
