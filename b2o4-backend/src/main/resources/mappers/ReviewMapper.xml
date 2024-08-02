@@ -5,4 +5,8 @@
 	<select id="stadiumGetList">
 		select * from stadium
 	</select>
+	<!-- 참가자 평가 참가자 목록 보기 -->
+	<select id="memberGetList">
+		select * from member
+	</select>
 </mapper>

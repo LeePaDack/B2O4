@@ -6,6 +6,7 @@ import { useState } from "react";
 import Login from "./MyPage/testLogin";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import StadiumsInfo from "./Review/StadiumMain";
+import MembersInfo from "./Review/MemberMain";
 
 function App() {
   const [loginMember, setLoginMember] = useState(null);
@@ -14,6 +15,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<StadiumsInfo />} />
+          <Route path="/memberInfo" element={<MembersInfo/>}/>
         </Routes>
       </Router>
     </div>

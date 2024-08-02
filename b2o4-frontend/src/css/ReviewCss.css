@@ -1,0 +1,50 @@
+/* member, stadium mainReview  */
+.stadiumReviewMain-container, .memberReviewMain-container {
+  text-align: center;
+}
+
+.stadiumReviewMain-content, .memberReviewMain-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.stadiumReview, .memberReview {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  width: 200px;
+  box-shadow: 0 4px 8px #ddd;
+  background-color: rgb(244, 248, 206);
+  
+}
+
+.stadiumReview-img, .memberReview-img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background-color: white;
+}
+
+.stadiumReview h2 , .memberReview h2 {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.stadiumReview p, .memberReview p {
+  margin: 5px 0;
+}
+
+.stadiumReview-textline, .memberReview-textline {
+  border-radius: 10px;
+  border: 1px solid aliceblue;
+  background-color: aliceblue;
+  margin-top: 20px;
+}
+
+.stadiumReview-link, .stadiumReview-link:link, .stadiumReview-link:visited, .stadiumReview-link:active, .stadiumReview-link:hover 
+.memberReview-link, .memberReview-link:link, .memberReview-link:visited, .memberReview-link:active, .memberReview-link:hover {
+  text-decoration: none;
+  color: rgb(41, 41, 41);
+}

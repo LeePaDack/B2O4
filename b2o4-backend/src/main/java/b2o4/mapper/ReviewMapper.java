@@ -11,4 +11,7 @@ public interface ReviewMapper {
 
 	// 구장 리스트 보기
 	List<Review> stadiumGetList();
+	
+	// 참가자 리스트 보기
+	List<Review> memberGetList();
 }

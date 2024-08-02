@@ -11,13 +11,18 @@ import b2o4.dto.Review;
 import b2o4.service.ReviewService;
 
 @RestController
-@RequestMapping("/stadium")
+@RequestMapping("/api")
 public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
 	
-	@GetMapping
+	@GetMapping("/stadiumReview")
 	public List<Review> stadiumGetList() {
 		return reviewService.stadiumGetList();
+	}
+	
+	@GetMapping("/memberReview")
+	public List<Review> memberGetList() {
+		return reviewService.memberGetList();
 	}
 }
