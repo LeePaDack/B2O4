@@ -1,0 +1,48 @@
+.stadiumMain-container {
+  text-align: center;
+}
+
+.stadiumMain-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.stadium {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  width: 200px;
+  box-shadow: 0 4px 8px #ddd;
+  background-color: rgb(244, 248, 206);
+  
+}
+
+.stadium-img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background-color: white;
+}
+
+.stadium h2 {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.stadium p {
+  margin: 5px 0;
+}
+
+.stadium-textline {
+  border-radius: 10px;
+  border: 1px solid aliceblue;
+  background-color: aliceblue;
+  margin-top: 20px;
+}
+
+.stadium-link, .stadium-link:link, .stadium-link:visited, .stadium-link:active, .stadium-link:hover {
+  text-decoration: none;
+  color: rgb(41, 41, 41);
+}

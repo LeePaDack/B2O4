@@ -1,19 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import "../css/MyPageCss.css";
+import MyPageContext from "./MyPageContext";
 
 const MyPage = () => {
+  const { loginMember } = useContext(MyPageContext);
   const [selectProfile, setSelectProfile] = useState(null);
 
-  const [memberInfo, setMemberinfo] = useState("");
+  const [memberInfo, setMemberInfo] = useState("");
 
   useEffect(() => {
-    UserInfo();
-  }, []);
+    if (loginMember) {
+      axios
+        .get("/mypage", { params: { memberId: loginMember.memberId } })
+        .then((response) => {
+          const { data } = response;
+          setMemberInfo(data.member);
+        });
+    }
+  }, [loginMember]);
+
+  if (!loginMember) {
+    return <div>로그인이 필요합니다.</div>;
+  }
+
+  if (!memberInfo) {
+    return <div>로딩 중...</div>;
+  }
 
   const UserInfo = async () => {
-    const res = await axios.get("/members");
-    setMemberinfo(res.data);
+    const response = axios.get("/members");
+    setMemberInfo(response.data);
   };
 
   const updateProfile = (event) => {
