@@ -18,6 +18,7 @@ const StadiumsInfo = () => {
     },[]);
   return (
     <div className="stadiumMain-container">
+        <h1>구장 평가</h1>
       <div className="stadiumMain-content">
         {stadiumList.map(list => (
 
@@ -27,7 +28,7 @@ const StadiumsInfo = () => {
           <Link to="/" className="stadium-link">
             <img src="/player.png" className="stadium-img" />
             <div className="stadium-textline">
-              <h2>{/* 풋살장 이름 넣기 */}{list.stadiumName}</h2>
+              <h2>{/* 풋살장 이름 넣기 */}{list.stadiumName}</h2><hr/>
               <p>{/* 구장지역 넣기 */}지역 : {list.stadiumLocation}</p>
               <p>{/* 수용가능 인원 */}수용가능 인원 : {list.stadiumCapacity}</p>
             </div>
