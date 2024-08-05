@@ -32,4 +32,9 @@ public class SignupServiceImpl implements SignupService {
     	// TODO Auto-generated method stub
     	
     }
+    @Override
+    public boolean isIdAvailable(String memberId) {
+    	// TODO Auto-generated method stub
+    	return false;
+    }
 }

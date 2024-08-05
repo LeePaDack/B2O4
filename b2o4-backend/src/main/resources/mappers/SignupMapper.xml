@@ -24,5 +24,7 @@
             #{memberBirth}, #{memberPhone}, #{memberAddress}, #{memberProfile}
         )
     </insert>
-
+    <select id="selectById" resultType="b2o4.dto.Signup">
+        SELECT * FROM user WHERE memberId = #{id}
+    </select>
 </mapper>

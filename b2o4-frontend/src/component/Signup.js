@@ -49,7 +49,7 @@ const Signup = () => {
   };
 
   const validatePhone = (phone) => {
-    const phoneRegex = /^[0-9]{8,11}$/;
+    const phoneRegex = /^[0-9]{8,12}$/;
     return phoneRegex.test(phone);
   };
 
@@ -63,10 +63,11 @@ const Signup = () => {
       setIsIdAvailable(false);
       return;
     }
-
+    
     fetch(`/idCheck?id=${memberId}`)
     .then(response => response.text())
     .then(result => {
+
       if (Number(result) === 0) {
         setIdError('중복된 아이디입니다.');
         setIsIdAvailable(false);

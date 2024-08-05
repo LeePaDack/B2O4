@@ -8,6 +8,7 @@ public interface SignupService {
     List<Signup> findAll();
     void insertSignup(Signup signup);
     void insertImage();
+	boolean isIdAvailable(String memberId);
     
     
 }

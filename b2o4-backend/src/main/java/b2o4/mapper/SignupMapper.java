@@ -11,7 +11,13 @@ import b2o4.dto.Signup;
 @Mapper
 public interface SignupMapper {
 
+	
     List<Signup> findAll();
 
     void insertSignup(Signup signup);
+    
+    void SelectSugnup(Signup signup);
+
+    
+    
 }

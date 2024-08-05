@@ -61,4 +61,6 @@ public class DBConfig {
 	public DataSourceTransactionManager dataSourceTransactionManager(DataSource ds) {
 		return new DataSourceTransactionManager(ds);
 	}
+	
+	
 }
