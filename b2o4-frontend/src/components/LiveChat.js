@@ -10,6 +10,7 @@ const LiveChat = () => {
   const [stompClient, setStompClient] = useState(null);
   const [connected, setConnected] = useState(false);
   const [emojiPick, setEmojiPick] = useState(false);
+  const [freezeChat, setFreezeChat] = useState(false);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -48,7 +49,7 @@ const LiveChat = () => {
 
   useEffect(() => {
     // 메시지가 업데이트될 때마다 자동으로 스크롤을 아래로 이동
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   const sendMessage = () => {
@@ -79,12 +80,22 @@ const LiveChat = () => {
     
   }
 
+  const deleteMessage = (index) => {
+    setMessages(messages.filter((message, i) => i !== index));
+    
+  }
+
+  const handleFreezeChat = () => {
+    setFreezeChat(!freezeChat);
+  }
+
   return (
     <div className='chat-container'>
       <div className='messages'>
         {messages.map((msg, index) => (
-          <div key={index}>
-            <strong>{msg.sender}</strong>: {msg.content}
+          <div key={index} className='message'>
+            <strong>{msg.sender}</strong>: {msg.content} 
+            <button className='deleteBtn' onClick={() => deleteMessage(index)}>X</button>
           </div>
         ))}
         <div ref={messagesEndRef} />
@@ -96,7 +107,7 @@ const LiveChat = () => {
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            disabled={!connected}
+            disabled={!connected || freezeChat}
             onKeyDown={enterKey}
             className='message-input'
           />
@@ -114,6 +125,7 @@ const LiveChat = () => {
           </svg>
         </div>
       </div>   
+      <button onClick={handleFreezeChat}>{freezeChat ? '채팅창 동결 해제' : '채팅창 동결'}</button>
       {!connected && <p>서버 연결중...</p>}
     </div>
   );

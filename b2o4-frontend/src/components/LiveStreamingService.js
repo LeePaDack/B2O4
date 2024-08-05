@@ -1,15 +1,16 @@
 import React from 'react'
-import WebCam from './components/WebCam';
-import LiveChat from './components/LiveChat';
-import './css/Streaming.css';
-
+import WebCam from './WebCam';
+import LiveChat from './LiveChat';
+import '../css/Streaming.css';
 
 function LiveStreamingService() {
 
   return (
     <div className='streaming-container'>
-        <WebCam/>
-        <LiveChat/>
+
+      <WebCam/>
+      <LiveChat/>
+
     </div>
   )
 

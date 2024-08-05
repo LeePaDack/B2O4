@@ -12,10 +12,4 @@
 		WHERE L.memberNo = #{memberNo}
 	</select>
 	-->
-	<insert id="recordMessage">
-		insert into LiveChatMessage(msgContent) values (#{msgContent})
-	</insert>
-	<select id="showMessage" resultType="String">
-		SELECT msgContent FROM LiveChatMessage 
-	</select>
 </mapper>
