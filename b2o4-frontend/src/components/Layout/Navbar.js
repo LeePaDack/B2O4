@@ -7,6 +7,7 @@ const Navbar = () => {
             <ul>
                 <li><Link to='/'>Home</Link></li>
                 <li><Link to='/galleryUpload'>갤러리 등록</Link></li>
+                <li><Link to='/galleryBoard'>갤러리 게시판</Link></li>
             </ul>
         </nav>
     )

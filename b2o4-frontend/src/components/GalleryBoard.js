@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 const GalleryBoard = () => {
 
@@ -27,9 +28,11 @@ const GalleryBoard = () => {
             <tbody>
                 {GBList.map(list => (
                     <tr key={list.gbpostNo}>
+                        <Link to={`/galleryBoard/${list.gbpostNo}`} state={{list : list}}>
                         <td>{list.gbpostNo}</td>
                         <td>{list.gbpostTitle}</td>
                         <td>{list.gbpostCreateDate}</td>
+                        </Link>
                     </tr>
                 ))}
             </tbody>

@@ -14,4 +14,7 @@ public interface GalleryMapper {
 	
 	// 갤러기 게시판 보기
 	List<GalleryBoard> AllGalleryBoard();
+	
+	// 갤러리 상세보기
+	GalleryBoard GalleryDetail(int GBPostNo);
 }

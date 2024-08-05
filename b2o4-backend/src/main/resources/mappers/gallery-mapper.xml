@@ -12,9 +12,15 @@
 		values(#{GBPostTitle}, #{GBPostContent}, #{GBImages})
 	</insert>
 	
-	<!-- 게시판 보기 -->
+	<!-- 게시판 목록 보기 -->
 	<select id="AllGalleryBoard">
 		select * from galleryBoard
+	</select>
+	
+	<!-- 게시판 상세보기 -->
+	<select id="GalleryDetail" resultType="b2o4.dto.GalleryBoard" parameterType="int">
+		SELECT * FROM galleryBoard
+		WHERE GBPostNO = #{GBPostNO}
 	</select>
 	
 </mapper>

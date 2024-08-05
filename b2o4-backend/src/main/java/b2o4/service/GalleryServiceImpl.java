@@ -21,7 +21,7 @@ public class GalleryServiceImpl implements GalleryService{
 	@Override
 	public int GalleryUpload(String GBPostTitle, String GBPostContent, MultipartFile file) {
 		String fileName = file.getOriginalFilename();
-		String uploadDir = "C:/Users/user1/Final-Project/B2O4/b2o4-backend/src/main/resources/Images/galleryBoard/";
+		String uploadDir = "C:/Users/user1/Final-Project/B2O4/b2o4-frontend/public/Images/galleryBoard/";
 		
 
 		try {
@@ -49,4 +49,9 @@ public class GalleryServiceImpl implements GalleryService{
 		return galleryMapper.AllGalleryBoard();
 	}
 
+	// 갤러리 상세보기
+	public GalleryBoard GalleryDetail(int GBPostNo) {
+		return galleryMapper.GalleryDetail(GBPostNo);
+	}
+	
 }
