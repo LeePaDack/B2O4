@@ -23,6 +23,8 @@
 
 /* 각 상품 */
 .goods {
+    display: flex;
+    flex-direction: column;
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 20px;
@@ -45,19 +47,20 @@
 
 /* 상품 제목 */
 .goods h2 {
-    font-size: 1.5em;
-    color: #333;
+    font-size: 25px;
+    color: #000000;
     margin-bottom: 10px;
 }
 
 /* 상품 정보*/
 .goods p {
-    margin: 5px 0;
+    margin: 5px;
     color: #555;
 }
 
 /* 장바구니 추가버튼*/
 .goods button {
+    margin-top: auto;
     display: block;
     width: 100%;
     padding: 10px;

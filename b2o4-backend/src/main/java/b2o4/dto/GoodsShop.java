@@ -14,7 +14,7 @@ import lombok.ToString;
 public class GoodsShop {
 	private int goodsNo;
 	private String goodsName;
-	private int goodsKind;
+	private String goodsKind;
 	private int goodsPrice;
 	private String goodsImage;
 	private String goodsComment;
