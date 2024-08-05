@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import axios from 'axios';
 import {Link} from "react-router-dom";
 
-const BoardPosting = () => {
+const BoardPosting = (boardNo) => {
     const [posting, setPosting] = useState([]);
 
     const addPost = async(board) => {
-        const res = await axios.post('/boards', board); // controller PostMapping 으로 전달하는 유저 정보
-        // ...users 기존에 작성한 유저 목록에 유저 데이터 하나를 추가
+        const res = await axios.post('/boards', board);
         setPosting([...posting], res.data);
       }
     const [boardTitle, setBoardTitle] = useState('');
@@ -17,6 +16,11 @@ const BoardPosting = () => {
         e.preventDefault();
         addPost({boardTitle,boardContent});
     }
+
+    const deletePost = async (boardNo) => {
+        await axios.delete(`/boards?boardNo=${boardNo}`);
+        setPosting(posting.filter(board => board.boardNo !== boardNo));
+    } 
 
     return (
         <div>
@@ -30,7 +34,8 @@ const BoardPosting = () => {
                     <label>내용 : </label>
                     <input type="text" value={boardContent} onChange={(e) => setBoardContent(e.target.value)} required/>
                 </div>
-                <Link to={"/BoardMain"}><button type="submit">글 작성 완료</button></Link> 
+                <Link to={"/BoardMain"}><button type="submit">글 수정 완료</button></Link> 
+                <button onClick={() => deletePost(posting.boardNo)}>글 삭제 하기</button>
             </form>
         </div>
     )

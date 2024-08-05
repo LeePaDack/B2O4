@@ -27,4 +27,9 @@ public class BoardServiceImpl implements BoardService{
 	public Board getBoardById(int boardNo) {
 		return boardMapper.getBoardById(boardNo);
 	}
+	
+	@Override
+	public void deletePost(int boardNo) {
+		boardMapper.deletePost(boardNo);
+	}
 }

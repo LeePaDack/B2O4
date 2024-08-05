@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import boardMainPagination from './boardMainPagiNation';
 
 const BoardMain = ({}) => {
     
@@ -36,6 +37,7 @@ const BoardMain = ({}) => {
                      
                 </tbody>
                 <Link to="/BoardPosting"><button>문의하기</button></Link> {/* 클릭시 글쓰기로 이동 boardPosting.js */}
+
 
             </table>
     )

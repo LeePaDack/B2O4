@@ -5,7 +5,7 @@ import BoardPosting from './component/boardPosting.js';
 import {BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import BoardContent from './component/boardContent.js';
 import StadiumList from './component/stadiumList.js';
-
+import BoardUpdate from './component/boardUpdate.js';
 
 function App() {
 
@@ -25,6 +25,7 @@ function App() {
           <Route path='stadiumList' element={<StadiumList/>}/>
           <Route path='reservationStadium' element={<Date2/>}/>
           <Route path='/boardPosting' element={<BoardPosting/>}/>
+          <Route path='/boardUpdate' element={<BoardUpdate/>}/>
           <Route path='/boardMain' element={<BoardMain/>}/>
           <Route path='/boardContent/:boardNo' element={<BoardContent/>}/>
         </Routes>

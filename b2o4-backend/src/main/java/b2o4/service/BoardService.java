@@ -10,4 +10,6 @@ public interface BoardService {
 	void insertBoardPost(Board board);
 	
 	Board getBoardById(int boardNo);
+	
+	void deletePost(int boardNo);
 }
