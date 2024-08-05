@@ -1,0 +1,43 @@
+.detail-container {
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    justify-content: center;
+}
+
+.detail-container img {
+    margin: 15px 30% 0 30%;
+    width: 40%;
+    height: 40%;
+    align-items: center;
+}
+
+.detail-container h2 {
+    text-align: center;
+}
+
+.detail-container p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.detail-container .detail-text p {
+    text-align: center;
+    max-width: 60%;
+    margin: 10px 20% 10px 20%;
+}
+
+/*버튼*/
+.return-button {
+    text-align: center;
+}
+.return-button button{
+    width: 130px;
+    height: 50px;
+    background-color: rgb(53, 181, 89);
+    color: white;
+    border-radius: 5px;
+    border-style: none;
+    margin-bottom: 50px;
+}

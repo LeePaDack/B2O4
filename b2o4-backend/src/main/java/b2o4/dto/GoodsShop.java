@@ -20,5 +20,5 @@ public class GoodsShop {
 	private String goodsComment;
 	private String goodsSize;
 	private int goodsSellNow;
-
+	private String goodsDetail;
 }

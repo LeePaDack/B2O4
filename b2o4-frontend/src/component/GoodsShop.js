@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import './css/GoodsShop.css';
+import { Link } from "react-router-dom";
 
 const GoodsShop = () => {
     const [goods, setGoods] = useState([]); 
@@ -37,12 +38,15 @@ const GoodsShop = () => {
                     console.log(imgSrc);
                     return (
                         <div key={good.goodsNo} className='goods'>
+                            {/* <Link key={list.goodsNo} to={`/goodsDetail/${list.goodsNo}`} state={{list : list}} className="GoodsDetail-link"></Link> */}                      
+                            <Link key={good.goodsNo} to={`/goodsDetail/${good.goodsNo}`} state={{ good: good }} className="GoodsDetail-link">
                             <img src={imgSrc} alt={good.goodsImage} />
                             <h2>{good.goodsName}</h2>
                             <p>상품종류 : {good.goodsKind}</p>
                             <p>상품가격 : {good.goodsPrice}</p>
                             <p>사이즈 : {good.goodsSize}</p>
                             <p>판매상태 : {good.goodsSellNow ? "판매중" : "판매중지"}</p>
+                            </Link>
                             <button onClick={() => addToShoppingBasket(good)}>장바구니에 추가</button>
                         </div>
                     );
@@ -59,12 +63,14 @@ const GoodsShop = () => {
                     console.log(imgSrc);
                     return (
                         <div key={good.goodsNo} className='goods'>
+                            <Link key={good.goodsNo} to={`/goodsDetail/${good.goodsNo}`} state={{ good: good }} className="GoodsDetail-link">
                             <img src={imgSrc} alt={good.goodsImage} />
                             <h2>{good.goodsName}</h2>
                             <p>상품종류 : {good.goodsKind}</p>
                             <p>상품가격 : {good.goodsPrice}</p>
                             <p>사이즈 : {good.goodsSize}</p>
                             <p>판매상태 : {good.goodsSellNow ? "판매중" : "판매중지"}</p>
+                            </Link>
                             <button onClick={() => addToShoppingBasket(good)}>장바구니에 추가</button>
                         </div>
                     );
