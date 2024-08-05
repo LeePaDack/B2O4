@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const BoardMain = ({}) => {
+    
     const [boards,setBoards] = useState([]);
     useEffect(() => {
         BoardPostList();
@@ -27,7 +28,7 @@ const BoardMain = ({}) => {
                     {boards.map(board => (
                         <tr key={board.boardNo}>
                             <td>{board.boardNo}</td>
-                            <Link to={"/boardContent/" + board.boardNo}><td>{board.boardTitle}</td></Link> {/* 클릭시 글로 이동 boardContent.js */}
+                            <Link to={`/boardContent/${board.boardNo}`} state={{board: board}}><td>{board.boardTitle}</td></Link> {/* 클릭시 글로 이동 boardContent.js */}
                             <td>{board.memberName || 'No name available'}</td>
                             <td>{board.boardCreateDate}</td>
                         </tr>

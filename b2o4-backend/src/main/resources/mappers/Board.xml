@@ -15,7 +15,7 @@
 		VALUES (#{boardTitle}, #{boardContent})
 	</insert>
 	
-	<select id="getBoardById" parameterType="int">
+	<select id="getBoardById" parameterType="int" resultType="Board">
 		SELECT * FROM board
 		WHERE boardNo = #{boardNo}
 	</select>

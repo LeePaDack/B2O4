@@ -40,6 +40,7 @@ public class BoardController {
 		boardService.insertBoardPost(board);
 	}
 	
+	/*
 	@GetMapping("/boardContent/{boardNo}")
 	public String getBoardById(Model model, @PathVariable int boardNo) {
 		Board board = boardService.getBoardById(boardNo);
@@ -47,4 +48,10 @@ public class BoardController {
 		
 		return "boardContent";
 	}
+	*/
+	
+    @GetMapping("/boardContent/{boardNo}")
+    public Board getBoardById(@PathVariable int boardNo) {
+        return boardService.getBoardById(boardNo);  // 특정 게시글을 JSON으로 반환
+    }
 }
