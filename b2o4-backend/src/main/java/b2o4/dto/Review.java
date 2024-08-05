@@ -35,4 +35,11 @@ public class Review {
 	private char memberType;
 	private String memberPay;
 	private String memberProfil;
+	
+	// 구장 평가 리스트 보기 dto
+	private int stadiumReviewNo;
+	private int likeCount;
+	private int dislikeCount;
+	private String stadiumComment;
+	private String stadiumCommentDate;
 }

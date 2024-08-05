@@ -9,4 +9,8 @@
 	<select id="memberGetList">
 		select * from member
 	</select>
+	<!-- 구장 평가 리스트 보기 -->
+	<select id="stadiumReviewList">
+		select * from stadiumReview
+	</select>
 </mapper>
