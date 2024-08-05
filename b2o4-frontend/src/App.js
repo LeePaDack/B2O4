@@ -1,11 +1,10 @@
 import './App.css';
-import Date from '../src/component/date.js';
 import Date2 from '../src/component/date2.js';
-import ResTime from '../src/component/reservationTime.js';
 import BoardMain from './component/boardMain.js';
 import BoardPosting from './component/boardPosting.js';
-import { Route, Routes } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import BoardContent from './component/boardContent.js';
+import StadiumList from './component/stadiumList.js';
 
 
 function App() {
@@ -13,20 +12,23 @@ function App() {
 
   return (
     <div>
-      <h1>Test</h1>
-      <Date/>
-      <h1>---------------</h1>
-      <Date2/>
-      <h1>----------------</h1>
-      <ResTime/>
-      <h1>-------------</h1>
-      <BoardMain/>
-      <Routes>
-        <Route path='/boardPosting' element={<BoardPosting/>}/>
-        <Route path='/boardMain' element={<BoardMain/>}/>
-        <Route path='/boardContent/' element={<BoardContent/>}/>
-      </Routes>
-      
+      <h1>메인</h1>
+      <Router>
+        <Link to='/boardMain'>고객센터</Link>
+        <br></br>
+        <Link to='/reservationStadium'>예약관련</Link>
+        <br></br>
+        <Link to='/StadiumList'>구장정보</Link>
+        <br></br>
+        <Link to='/'><button>돌아가기</button></Link>
+        <Routes>
+          <Route path='stadiumList' element={<StadiumList/>}/>
+          <Route path='reservationStadium' element={<Date2/>}/>
+          <Route path='/boardPosting' element={<BoardPosting/>}/>
+          <Route path='/boardMain' element={<BoardMain/>}/>
+          <Route path='/boardContent/:boardNo' element={<BoardContent/>}/>
+        </Routes>
+      </Router>
     </div>
   );
 }
