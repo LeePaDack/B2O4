@@ -23,7 +23,7 @@ public class SignupController {
 		return signupService.findAll();
 	}
 	
-	@PostMapping
+	@PostMapping("/register")
 	public void insertSignup(@RequestBody Signup signup) {
 		signupService.insertSignup(signup);
 	}

@@ -7,4 +7,7 @@ import b2o4.dto.Signup;
 public interface SignupService {
     List<Signup> findAll();
     void insertSignup(Signup signup);
+    void insertImage();
+    
+    
 }

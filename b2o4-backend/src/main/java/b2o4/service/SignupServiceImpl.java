@@ -9,14 +9,14 @@ import b2o4.dto.Signup;
 import b2o4.mapper.SignupMapper;
 
 @Service
-public class SignupServiceImp implements SignupService {
+public class SignupServiceImpl implements SignupService {
 
+	@Autowired
     private final SignupMapper signupMapper;
 
-    @Autowired
-    public SignupServiceImp(SignupMapper signupMapper) {
-        this.signupMapper = signupMapper;
-    }
+	  public SignupServiceImpl(SignupMapper signupMapper) {
+	        this.signupMapper = signupMapper;
+	    }
 
     @Override
     public List<Signup> findAll() {
@@ -26,5 +26,10 @@ public class SignupServiceImp implements SignupService {
     @Override
     public void insertSignup(Signup signup) {
         signupMapper.insertSignup(signup);
+    }
+    @Override
+    public void insertImage() {
+    	// TODO Auto-generated method stub
+    	
     }
 }
