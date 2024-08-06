@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const StadiumList = ({}) => {
     const [stadiums,setStadiums] = useState([]);
@@ -24,8 +25,8 @@ const StadiumList = ({}) => {
             <tbody>
                 {stadiums.map(stadium => (
                     <tr key={stadium.stadiumNo}>
-                        {/* 사진 주소값 들어가게 수정필요 */}
-                        <td><img src={`../images${stadium.stadiumImage}`}/></td>
+                        <td>{stadium.stadiumNo}</td>
+                        <Link to={`/stadiumDetail/${stadium.stadiumNo}`} state={{stadium: stadium}}><td><img src={`../images${stadium.stadiumImage}`}/></td></Link>
                         <td>{stadium.stadiumName}</td>
                     </tr>
                 ))}

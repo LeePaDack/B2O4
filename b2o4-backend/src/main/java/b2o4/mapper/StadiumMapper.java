@@ -9,4 +9,8 @@ import b2o4.dto.Stadium;
 @Mapper
 public interface StadiumMapper {
 	List<Stadium> stadiumMainList();
+	
+	Stadium getStadiumById(int stadiumNo);
+	
+	Stadium reservationStadiumByNo(int stadiumNo);
 }

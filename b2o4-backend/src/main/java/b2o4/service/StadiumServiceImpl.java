@@ -17,4 +17,14 @@ public class StadiumServiceImpl implements StadiumService{
 	public List<Stadium> stadiumMainList() {
 		return stadiumMapper.stadiumMainList();
 	}
+	
+	@Override
+	public Stadium getStadiumById(int stadiumNo) {
+		return stadiumMapper.getStadiumById(stadiumNo);
+	}
+	
+	@Override
+	public Stadium reservationStadiumByNo(int stadiumNo) {
+		return stadiumMapper.getStadiumById(stadiumNo);
+	}
 }

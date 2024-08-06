@@ -6,4 +6,8 @@ import b2o4.dto.Stadium;
 
 public interface StadiumService {
 	List<Stadium> stadiumMainList();
+	
+	Stadium getStadiumById(int stadiumNo);
+	
+	Stadium reservationStadiumByNo(int stadiumNo);
 }

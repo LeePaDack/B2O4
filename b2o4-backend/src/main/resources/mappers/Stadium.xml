@@ -5,7 +5,18 @@
         
 <mapper namespace="b2o4.mapper.StadiumMapper">
 	<select id="stadiumMainList">
-		SELECT stadiumName, stadiumImage
+		SELECT *
 		FROM stadium
 	</select>
+	
+	<select id="getStadiumById" parameterType="int" resultType="Stadium">
+		SELECT * FROM stadium
+		WHERE stadiumNo = #{stadiumNo}
+	</select>
+	
+	<select id="reservationStadiumByNo" parameterType="int" resultType="Stadium">
+		SELECT * FROM stadium
+		WHERE stadiumNo = #{stadiumNo}
+	</select>
+
 </mapper>
