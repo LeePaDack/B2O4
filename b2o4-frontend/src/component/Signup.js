@@ -64,7 +64,7 @@ const Signup = () => {
       return;
     }
     
-    fetch(`/idCheck?id=${memberId}`)
+    fetch('/idCheck?memberId='+memberId)
     .then(response => response.text())
     .then(result => {
 
@@ -181,15 +181,7 @@ const Signup = () => {
           setBirth('');
           setPhone('');
           setAddress('');
-          setProfile(null);
-          setIdError('');
-          setPwError('');
-          setPwCheckError('');
-          setNameError('');
-          setEmailError('');
-          setBirthError('');
-          setPhoneError('');
-          setIsIdAvailable(false);
+
         } else {
           alert('회원가입 실패');
         }

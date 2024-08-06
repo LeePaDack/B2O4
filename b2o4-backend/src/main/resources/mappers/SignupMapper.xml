@@ -24,7 +24,7 @@
             #{memberBirth}, #{memberPhone}, #{memberAddress}, #{memberProfile}
         )
     </insert>
-    <select id="selectById" resultType="b2o4.dto.Signup">
-        SELECT * FROM user WHERE memberId = #{id}
-    </select>
+	<select id="idCheck">
+	SELECT COUNT(*) FROM TODO_MEMBER WHERE ID = #{memberId}
+	</select>
 </mapper>

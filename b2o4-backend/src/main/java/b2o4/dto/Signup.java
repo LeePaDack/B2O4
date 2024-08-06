@@ -13,11 +13,11 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Signup {
 	private int memberId;
-	private String mamberPw;
-	private String mamberEmail;
-	private String mamberName;
-	private int mamberBirth;
-	private int mamberPhone;
-	private String mamberAddress;
-	private String mamberProfile;
+	private String memberPw;
+	private String memberEmail;
+	private String memberName;
+	private int memberBirth;
+	private int memberPhone;
+	private String memberAddress;
+	private String memberProfile;
 }

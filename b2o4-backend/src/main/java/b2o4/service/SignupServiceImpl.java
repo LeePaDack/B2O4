@@ -29,12 +29,12 @@ public class SignupServiceImpl implements SignupService {
     }
     @Override
     public void insertImage() {
-    	// TODO Auto-generated method stub
+   
     	
     }
-    @Override
-    public boolean isIdAvailable(String memberId) {
-    	// TODO Auto-generated method stub
-    	return false;
-    }
+	@Override
+	public int idCheck(String memberId) {
+		return signupMapper.idCheck(memberId);
+	}
+    
 }

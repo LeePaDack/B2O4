@@ -10,7 +10,8 @@ import b2o4.dto.Signup;
 
 @Mapper
 public interface SignupMapper {
-
+	
+	int idCheck(String memberId);
 	
     List<Signup> findAll();
 
