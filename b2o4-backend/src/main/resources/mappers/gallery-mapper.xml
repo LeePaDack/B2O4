@@ -7,20 +7,20 @@
 <mapper namespace="b2o4.mapper.GalleryMapper">
 
 	<!-- 게시판 업로드 -->
-	<insert id="GalleryUpload" parameterType="GalleryBoard" useGeneratedKeys="true" keyProperty="GBPostNo">
-		insert into galleryBoard(GBPostTitle, GBPostContent, GBImages)
-		values(#{GBPostTitle}, #{GBPostContent}, #{GBImages})
-	</insert>
+	<insert id="GalleryUpload" parameterType="b2o4.dto.GalleryBoard" useGeneratedKeys="true" keyProperty="gbPostNo">
+        INSERT INTO GalleryBoard (GBPostTitle, GBPostContent, GBImages)
+        VALUES (#{gbPostTitle}, #{gbPostContent}, #{gbImages})
+    </insert>
 	
 	<!-- 게시판 목록 보기 -->
-	<select id="AllGalleryBoard">
+	<select id="AllGalleryBoard" resultType='b2o4.dto.GalleryBoard'>
 		select * from galleryBoard
 	</select>
-	
+
 	<!-- 게시판 상세보기 -->
 	<select id="GalleryDetail" resultType="b2o4.dto.GalleryBoard" parameterType="int">
 		SELECT * FROM galleryBoard
-		WHERE GBPostNO = #{GBPostNO}
+		WHERE GBPostNO = #{gbPostNo}
 	</select>
 	
 </mapper>

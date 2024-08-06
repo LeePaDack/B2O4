@@ -9,12 +9,9 @@ import b2o4.dto.GalleryBoard;
 @Mapper
 public interface GalleryMapper {
 
-	// 게시판 업로드
-	int GalleryUpload(GalleryBoard galleryBoard);
-	
-	// 갤러기 게시판 보기
-	List<GalleryBoard> AllGalleryBoard();
+	void GalleryUpload(GalleryBoard galleryBoard);
+    List<GalleryBoard> AllGalleryBoard();
 	
 	// 갤러리 상세보기
-	GalleryBoard GalleryDetail(int GBPostNo);
+	GalleryBoard GalleryDetail(int gbPostNo);
 }

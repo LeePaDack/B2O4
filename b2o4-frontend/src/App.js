@@ -15,6 +15,7 @@ function App() {
 
   return (
     <div className="App">
+    <MyPageContext.Provider value={{loginMember, setLoginMember}}> 
       <BrowserRouter>
       <Navbar/>
         <Routes>
@@ -23,11 +24,10 @@ function App() {
           <Route path='/galleryUpload' element={<GalleryUpload />} />
           <Route path='/galleryBoard' element={<GalleryBoard />} />
           <Route path='/galleryBoard/:gbpostNo' element={<GalleryDetail />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </BrowserRouter>
-      <MyPageContext.Provider value={{loginMember, setLoginMember}}>
-        <Login />
-      </MyPageContext.Provider>
+    </MyPageContext.Provider>
     </div>
   );
 }

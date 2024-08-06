@@ -7,7 +7,7 @@ const GalleryBoard = () => {
     const [GBList, setGBList] = useState([]);
 
     const boardList = async () => {
-        const response = await axios.get('/gallery');
+        const response = await axios.get('/gallery/posts');
         setGBList(response.data);
     }
 
@@ -15,6 +15,7 @@ const GalleryBoard = () => {
         boardList();
         console.log("GBList : ", GBList);
     },[GBList]);
+
 
     return(
         <table>
@@ -27,11 +28,11 @@ const GalleryBoard = () => {
             </thead>
             <tbody>
                 {GBList.map(list => (
-                    <tr key={list.gbpostNo}>
-                        <Link to={`/galleryBoard/${list.gbpostNo}`} state={{list : list}}>
-                        <td>{list.gbpostNo}</td>
-                        <td>{list.gbpostTitle}</td>
-                        <td>{list.gbpostCreateDate}</td>
+                    <tr key={list.gbPostNo}>
+                        <Link to={`/galleryBoard/${list.gbPostNo}`} state={{list : list}}>
+                        <td>{list.gbPostNo}</td>
+                        <td>{list.gbPostTitle}</td>
+                        <td>{list.gbPostCreateDate}</td>
                         </Link>
                     </tr>
                 ))}

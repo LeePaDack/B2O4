@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import MyPageContext from "./MyPageContext";
+import { Link } from "react-router-dom";
+import '../components/css/Login.css'
 
 const Login = () => {
-  const { loginMember, setLoginMember } = useContext(MyPageContext);
+  const {loginMember, setLoginMember} = useContext(MyPageContext);
 
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
@@ -33,36 +35,46 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <table>
-        <tbody>
-          <tr>
-            <th>ID</th>
-            <td>
-              <input
-                type="text"
-                onChange={(e) => setId(e.target.value)}
-                value={id}
-              />
-            </td>
-          </tr>
-          <tr>
-            <th>PW</th>
-            <td>
-              <input
-                type="password"
-                onChange={(e) => setPw(e.target.value)}
-                value={pw}
-              />
-            </td>
-            <td>
-              <button onClick={login}>로그인</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      {loginMember && <button onClick={logout}>로그아웃</button>}
-    </div>
+    <div className="wrapper">
+        <div className="login-container">
+          {!loginMember && (
+          <table className="input-login">
+            <tbody>
+              <tr>
+                <th>ID</th>
+                <td>
+                  <input
+                    type="text"
+                    onChange={(e) => setId(e.target.value)}
+                    value={id}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>PW</th>
+                <td>
+                  <input
+                    type="password"
+                    onChange={(e) => setPw(e.target.value)}
+                    value={pw}
+                  />
+                </td>
+                <td>
+                  <button onClick={login}>로그인</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          )}
+          {loginMember && (
+          <>
+            <p>{loginMember.memberId}님 환영합니다.</p>
+            <button><Link to='/'>Home</Link></button>
+            <button onClick={logout}>로그아웃</button>
+          </>
+          )}
+        </div>
+      </div>
   );
 };
 
