@@ -23,7 +23,7 @@ const StadiumList = ({}) => {
                 </tr>
             </thead>
             <tbody>
-                {stadiums.map(stadium => (
+                {stadiums.map(stadium => ( 
                     <tr key={stadium.stadiumNo}>
                         <td>{stadium.stadiumNo}</td>
                         <Link to={`/stadiumDetail/${stadium.stadiumNo}`} state={{stadium: stadium}}><td><img src={`../images${stadium.stadiumImage}`}/></td></Link>

@@ -20,7 +20,7 @@ const StadiumDetail = () => {
     };
 
     return (
-        <table>
+        <table> 
             <tbody>
                     <tr>
                         <td><img src={`../images${stadium.stadiumImage}`}/></td>
