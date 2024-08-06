@@ -14,21 +14,47 @@ body {
     background-image: url("../../../public/background.png");
     background-size: 100% 100%;
 }
+
 .login-container{
-    border-radius: 10px;
     background-image: url("../../../public/축구장.jpg");
     background-size: 100% 100%;
     position: absolute;
     width: 700px;
     min-height: 500px;
-    overflow: hidden;
+    border-radius: 10px;
 }
 
-.input-login{
-  padding: 16px;
-  margin: 8px 0;
-  width: 85%;
-  border: 0;
-  outline: none;
-  border-radius: 20px;
+.login-container h2{
+  margin-top: 50px;
+  padding: 0;
+  text-align: center;
+}
+
+.input-login {
+  display: flex; /* 자식 요소들을 수평으로 배치 */
+  justify-content: center; /* 자식 요소들을 가로로 가운데 정렬 */
+  gap: 20px; /* 입력 필드와 버튼 사이의 간격 */
+  margin-top: 50px;
+}
+
+.input-fields {
+  display: flex;
+  flex-direction: column; /* 입력 필드들을 세로로 배치 */
+  gap: 20px; /* 입력 필드 사이의 간격 */
+}
+
+.input-fields input {
+  width: 350px; /* 적절한 너비 설정 */
+  padding: 15px;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+}
+
+.input-login button {
+  padding: 30px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }

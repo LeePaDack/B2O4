@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import MyPageContext from './MyPageContext';
 
 const GalleryUpload = () => {
   const [files, setFiles] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [posts, setPosts] = useState([]);
+ 
 
   useEffect(() => {
     fetchPosts();

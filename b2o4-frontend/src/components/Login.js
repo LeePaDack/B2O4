@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import MyPageContext from "./MyPageContext";
 import { Link } from "react-router-dom";
 import '../components/css/Login.css'
+
 
 const Login = () => {
   const {loginMember, setLoginMember} = useContext(MyPageContext);
@@ -19,6 +20,9 @@ const Login = () => {
         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
         return;
       }
+      // 저장된 토큰을 로컬 스토리지에 저장
+      localStorage.setItem("authToken", data.token);
+
       setLoginMember(data.loginMember);
       setId("");
       setPw("");
@@ -27,7 +31,9 @@ const Login = () => {
     });
   };
 
+
   const logout = () => {
+    localStorage.removeItem("authToken");
     setId("");
     setPw("");
     setLoginMember(null);
@@ -37,44 +43,42 @@ const Login = () => {
   return (
     <div className="wrapper">
         <div className="login-container">
+          <h2>Login</h2>
           {!loginMember && (
-          <table className="input-login">
-            <tbody>
-              <tr>
-                <th>ID</th>
-                <td>
+            <>
+              <div className="input-login">
+                <div className="input-fields">
                   <input
                     type="text"
                     onChange={(e) => setId(e.target.value)}
                     value={id}
+                    placeholder="Id"
                   />
-                </td>
-              </tr>
-              <tr>
-                <th>PW</th>
-                <td>
                   <input
                     type="password"
                     onChange={(e) => setPw(e.target.value)}
                     value={pw}
+                    placeholder="Password"
                   />
-                </td>
-                <td>
-                  <button onClick={login}>로그인</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                </div>
+                <button onClick={login}>로그인</button>
+              </div>
+          </>
           )}
           {loginMember && (
-          <>
+          <div className="login-complete">
             <p>{loginMember.memberId}님 환영합니다.</p>
             <button><Link to='/'>Home</Link></button>
             <button onClick={logout}>로그아웃</button>
-          </>
+          </div>
           )}
+          <ul>
+            <li><Link to='/' >아이디ㆍ비밀번호 찾기</Link></li>
+            <li><Link to='/' >회원가입</Link></li>
+          </ul>
         </div>
-      </div>
+       
+    </div>
   );
 };
 
