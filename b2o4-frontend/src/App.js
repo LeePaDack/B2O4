@@ -26,7 +26,7 @@ function App() {
           <Route path='stadiumList' element={<StadiumList/>}/>
           <Route path='/stadiumDetail/:stadiumNo' element={<StadiumDetail/>}/>
           <Route path='/boardPosting' element={<BoardPosting/>}/>
-          <Route path='/boardUpdate' element={<BoardUpdate/>}/>
+          <Route path='/boardUpdate/:boardNo' element={<BoardUpdate/>}/>
           <Route path='/boardMain' element={<BoardMain/>}/>
           <Route path='/boardContent/:boardNo' element={<BoardContent/>}/>
           <Route path='/reservationStadium/:stadiumNo' element={<ReservationStadium/>}/>

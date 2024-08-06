@@ -1,8 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 const BoardPosting = (boardNo) => {
+
+    const location = useLocation();
+    const [boards, setBoards] = useState([]);
+    const board = location.state.board;
+
+    console.log("location",location);
+
+    useEffect(() => {
+        BoardUpdateReady();
+    }, []);
+
+    const BoardUpdateReady = async() => {
+        const res = await axios.get('/boards');
+        setBoards(res.data);
+    };
+
+
+
     const [posting, setPosting] = useState([]);
 
     const addPost = async(board) => {
@@ -25,6 +43,7 @@ const BoardPosting = (boardNo) => {
     return (
         <div>
             <h1> 고객센터 </h1>
+            <tr>{board.boardTitle}</tr>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>제목 : </label>
