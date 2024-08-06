@@ -1,11 +1,5 @@
 import React, {createContext} from "react";
 
-const initialState = {
-    reviewList: [],
-    setReviewList: () => {},
-    loginMember: null
-};
-
-const MyPageContext = createContext(initialState);
+const MyPageContext = createContext();
 
 export default MyPageContext;
