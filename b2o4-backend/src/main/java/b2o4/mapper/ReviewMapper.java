@@ -14,4 +14,10 @@ public interface ReviewMapper {
 	
 	// 참가자 리스트 보기
 	List<Review> memberGetList();
+	
+	// 구장 평가 리스트 보기
+	List<Review> stadiumReviewList(int stadiumReviewNo);
+	
+	// 구장 평가 업로드
+	int stadiumReviewUpload(Review review);
 }

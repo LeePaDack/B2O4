@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
+import StadiumReviewUpload from "./StadiumReviewUpload";
 
 const StadiumDetail = () => {
 
     const location = useLocation();
     const list = location.state.list;
     console.log(location);
+    const [contentBoxView, setContentBoxView] = useState(false);
     
 
    
@@ -19,7 +21,12 @@ const StadiumDetail = () => {
                 <p>주소 : {list.stadiumAddress}</p>
             </div>
             <div className="stadiumreview">
-                
+                <button onClick={() => {setContentBoxView(!contentBoxView)}}>
+                    {contentBoxView ? ('닫기') : ('작성하기')}
+                </button>
+                <div className="contentBoxView-wrapper">
+                    {contentBoxView === true && (<StadiumReviewUpload/>)}
+                </div>
             </div>
         </div>
     )

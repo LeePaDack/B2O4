@@ -12,5 +12,13 @@
 	<!-- 구장 평가 리스트 보기 -->
 	<select id="stadiumReviewList">
 		select * from stadiumReview
+		where stadiumReviewNo = #{stadiumReviewNo}
+		order by 1
 	</select>
+	<!-- 구장 평가하기 insert -->
+	<insert id="stadiumReviewUpload" parameterType="b2o4.dto.Review">
+			insert into stadiumReview (stadiumComment)
+			values(#{stadiumComment})
+	</insert>
+	
 </mapper>

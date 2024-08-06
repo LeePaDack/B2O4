@@ -24,4 +24,19 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<Review> memberGetList() {
 		return reviewMapper.memberGetList();
 	}
+	
+	// 구장 평가 리스트 보기
+	/*
+	@Override
+	public List<Review> stadiumReviewList() {
+		return reviewMapper.stadiumReviewList();
+	}
+	*/
+	// 구장 평가 업로드
+	@Override
+	public int stadiumReviewUpload(Review review) {
+		return reviewMapper.stadiumReviewUpload(review);
+				
+	}
+	
 }
