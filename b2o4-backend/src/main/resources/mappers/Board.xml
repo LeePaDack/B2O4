@@ -20,7 +20,12 @@
 		WHERE boardNo = #{boardNo}
 	</select>
 	
+	<select id="beforeUpdateBoard" parameterType="int" resultType="Board">
+		SELECT * FROM board
+		WHERE boardNo = #{boardNo}
+	</select>
+	
 	<delete id="deletePost">
-		DELETE FROM board WHERE id = #{id}
+		DELETE FROM board WHERE boardNo = #{boardNo}
 	</delete>
 </mapper>

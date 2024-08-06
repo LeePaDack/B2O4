@@ -32,4 +32,9 @@ public class BoardServiceImpl implements BoardService{
 	public void deletePost(int boardNo) {
 		boardMapper.deletePost(boardNo);
 	}
+	
+	@Override
+	public Board beforeUpdateBoard(int boardNo) {
+		return boardMapper.beforeUpdateBoard(boardNo);
+	}
 }

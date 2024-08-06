@@ -15,4 +15,6 @@ public interface BoardMapper {
 	Board getBoardById(int boardNo);
 	
 	void deletePost(int boardNo);
+	
+	Board beforeUpdateBoard(int boardNo);
 }

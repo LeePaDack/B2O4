@@ -56,6 +56,11 @@ public class BoardController {
         return boardService.getBoardById(boardNo);  // 특정 게시글을 JSON으로 반환
     }
     
+    @GetMapping("/boardUpdate/{boardNo}")
+    public Board beforeUpdateBoard(@PathVariable int boardNo) {
+    	return boardService.getBoardById(boardNo);
+    }
+    
     @DeleteMapping
     public void deletePost(@RequestParam("boardNo") int boardNo) {
     	boardService.deletePost(boardNo);
