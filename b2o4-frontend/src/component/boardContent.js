@@ -8,7 +8,7 @@ const BoardContent = () => {
     const [boards, setBoards] = useState([]);
     const board = location.state.board;
 
-    console.log("asda",location);
+    console.log("location",location);
 
     useEffect(() => {
         BoardPostList();
