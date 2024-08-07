@@ -1,12 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 
 import '../css/Streaming.css';
 
 const WebCam = () => {
     const videoRef = useRef(null);
     const [webCamView, setWebCamView] = useState(false);
-    const handleFullScreen = useFullScreenHandle();
 
     const getCamera = () => {
 
@@ -31,19 +29,18 @@ const WebCam = () => {
 
     return (
         <div className='webcam-container'>
-            {webCamView ?             
-            <FullScreen handle={handleFullScreen} >
-                <video className='webcam' ref={videoRef}/>
-            </FullScreen> :
-            <span className='blackScreen' style={{ display: 'flex' }}>
-                <p>준비 중 입니다.</p>
-            </span>
+            {webCamView ?
+                <video className='webcam' ref={videoRef} controls/>
+                :
+                <span className='blackScreen' style={{ display: 'flex' }}>
+                    <p>준비 중 입니다.</p>
+                </span>
             }
             <div className="button-container">
-                <button onClick={() => setWebCamView(!webCamView)}>
+                <button onClick={() => setWebCamView(!webCamView)} className='btn btn-outline-success'>
                     {webCamView ? '스트리밍 종료' : '스트리밍 시작'}
                 </button>
-                <button onClick={handleFullScreen.enter}>전체화면</button>
+
             </div>
         </div>
     )

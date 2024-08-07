@@ -1,4 +1,9 @@
+.livePage-container{
+  display: block;
+}
+
 .streaming-container {
+  margin-top: 100px;
   display: flex;
 }
 
@@ -8,21 +13,15 @@
   flex: 2;
   position: relative; 
   width: 100%;
-  height: 76vh;
-}
-
-.fullscreen{
-  width: 100%;
-  height: 100%; 
-  object-fit: cover; /* 현재 감싸고 있는 object에 맞춤. cover : 모서리까지 */
-  position: relative; 
-  z-index: 1; 
+  height: 90vh;
 }
 
 .webcam{
   width: 100%;
   height: 100%; 
   object-fit: cover;
+  position: relative; 
+  z-index: 1; 
 }
 
 .blackScreen {
@@ -41,13 +40,13 @@
 .button-container {
   margin-top: 10px;
   position: absolute; 
-
+  bottom: -20px;
 }
 
 .chat-container {
   display: flex;
   flex-direction: column;
-  height: 740px; 
+  height: 880px; 
   width: 400px;
   margin: 10px;
   border: 1px solid #ccc;
@@ -55,7 +54,7 @@
 
 .messages {
   flex: 1;
-  flex-direction: column-reverse;
+  flex-direction: column;
   display: flex;
   overflow: auto;
   padding: 0;

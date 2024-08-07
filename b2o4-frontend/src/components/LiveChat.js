@@ -3,6 +3,7 @@ import { Client } from '@stomp/stompjs'; //   Client from 'stomp/stompjs'  ->   
 import SockJS from 'sockjs-client';
 import '../css/Streaming.css';
 import Emoji from './Emoji';
+import axios from 'axios';
 
 const LiveChat = () => {
   const [messages, setMessages] = useState([]);
@@ -11,7 +12,7 @@ const LiveChat = () => {
   const [connected, setConnected] = useState(false);
   const [emojiPick, setEmojiPick] = useState(false);
   const [freezeChat, setFreezeChat] = useState(false);
-  const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
 
   useEffect(() => {
     const socket = new SockJS('http://localhost:9001/ws'); // java 쪽의 서버포트 설정과 맞춰서 작성
@@ -27,6 +28,10 @@ const LiveChat = () => {
         client.subscribe('/topic/messages', (response) => { // java 쪽의 컨트롤러(@SendTo)와 맞춰서 작성
           const newMessage = JSON.parse(response.body);
           setMessages((prevMessages) => [...prevMessages, newMessage]);
+        });
+        client.subscribe('/topic/freezeChat', (response) => {
+          console.log(freezeChat);
+          setFreezeChat(JSON.parse(response.body));
         });
       },
       onStompError: function (frame) {
@@ -45,11 +50,12 @@ const LiveChat = () => {
         client.deactivate();
       }
     };
-  }, []);
+  }, [messages]);
 
   useEffect(() => {
-    // 메시지가 업데이트될 때마다 자동으로 스크롤을 아래로 이동
-    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
   }, [messages]);
 
   const sendMessage = () => {
@@ -80,25 +86,36 @@ const LiveChat = () => {
     
   }
 
-  const deleteMessage = (index) => {
-    setMessages(messages.filter((message, i) => i !== index));
+  const deleteMessage = async (msgNo) => {
+    await axios.delete(`/chat`, {
+      params:{msgNo},
+      headers: { 'Content-Type': 'application/json' }
+    });
+    setMessages(messages.filter((message, i) => i !== msgNo));
     
   }
 
   const handleFreezeChat = () => {
-    setFreezeChat(!freezeChat);
+    if (stompClient) {
+      stompClient.publish({
+        destination: '/app/chat.freezeChat'
+      });
+      stompClient.subscribe('/topic/freezeChat', (response) => {
+        const newFreezeChatState = JSON.parse(response.body);
+        setFreezeChat(newFreezeChatState);
+      });
+    }
   }
 
   return (
     <div className='chat-container'>
-      <div className='messages'>
+      <div className='messages' ref={messagesContainerRef}>
         {messages.map((msg, index) => (
           <div key={index} className='message'>
             <strong>{msg.sender}</strong>: {msg.content} 
             <button className='deleteBtn' onClick={() => deleteMessage(index)}>X</button>
           </div>
         ))}
-        <div ref={messagesEndRef} />
       </div>
       <div className='chat-box'>
         <div className='input-container'>
@@ -125,7 +142,9 @@ const LiveChat = () => {
           </svg>
         </div>
       </div>   
-      <button onClick={handleFreezeChat}>{freezeChat ? '채팅창 동결 해제' : '채팅창 동결'}</button>
+      <button onClick={handleFreezeChat} className='btn btn-outline-success'>
+        {freezeChat ? '채팅창 동결 해제' : '채팅창 동결'}
+      </button>
       {!connected && <p>서버 연결중...</p>}
     </div>
   );
