@@ -76,7 +76,7 @@ const ReservationStadium = () => {
       &nbsp; &nbsp; &nbsp;
       <select value={personCount} onChange={handlePersonCountChange}> 
 
-        <option>인원수{/*{구장 수용인원 DB 에서 가져오기}*/}</option>
+        <option value="0">인원수{/*{구장 수용인원 DB 에서 가져오기}*/}</option>
         <option value="1">1명</option>
         <option value="2">2명</option>
         <option value="3">3명</option>
