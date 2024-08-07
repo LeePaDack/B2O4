@@ -11,8 +11,8 @@ const Header = () => {
     return (
         <header>
             <div className="header-top">
-                <Link to="/Main" className="d-flex align-items-center">
-                    <img src="/image/pngwing.com.png" className="brand-logo" alt="Brand Logo" />
+                <Link to="/" className="d-flex align-items-center">
+                    <img src="/images/pngwing.com.png" className="brand-logo" alt="Brand Logo" />
                 </Link>
                 <div className="search-bar">
                     <Form className="d-flex">
@@ -57,11 +57,11 @@ const Header = () => {
                                 <NavDropdown.Item href="#action/3.3">장바구니</NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown title="구장 모음" id="basic-nav-dropdown" className="item">
-                                <NavDropdown.Item href="#action/3.1">구장 목록</NavDropdown.Item>
+                                <NavDropdown.Item href="StadiumList">구장 목록</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">구장 찾기</NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown title="라이브" id="basic-nav-dropdown" className="item">
-                                <NavDropdown.Item href="#action/3.1">라이브 경기 보러 가기</NavDropdown.Item>
+                                <NavDropdown.Item href="LiveStreamingPage">라이브 경기 보러 가기</NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown title="고객센터" id="basic-nav-dropdown" className="item">
                                 <NavDropdown.Item href="#action/3.1">1:1문의</NavDropdown.Item>
