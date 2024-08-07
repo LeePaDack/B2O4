@@ -37,4 +37,9 @@ public class BoardServiceImpl implements BoardService{
 	public Board beforeUpdateBoard(int boardNo) {
 		return boardMapper.beforeUpdateBoard(boardNo);
 	}
+	
+	@Override
+	public void updateBoard(Board board) {
+		boardMapper.updateBoard(board);
+	}
 }

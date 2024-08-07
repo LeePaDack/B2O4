@@ -14,4 +14,6 @@ public interface BoardService {
 	void deletePost(int boardNo);
 	
 	Board beforeUpdateBoard(int boardNo);
+	
+	void updateBoard(Board board);
 }

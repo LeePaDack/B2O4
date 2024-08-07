@@ -25,6 +25,12 @@
 		WHERE boardNo = #{boardNo}
 	</select>
 	
+	<update id="updateBoard" parameterType="Board">
+		UPDATE board
+		SET boardTitle = #{boardTitle}, boardContent = #{boardContent}
+		WHERE boardNo = #{boardNo}
+	</update> 
+	
 	<delete id="deletePost">
 		DELETE FROM board WHERE boardNo = #{boardNo}
 	</delete>
