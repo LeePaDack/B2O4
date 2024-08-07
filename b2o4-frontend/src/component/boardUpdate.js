@@ -1,58 +1,74 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import {Link, useLocation} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const BoardUpdate = () => {
-
     const location = useLocation();
+    const navigate = useNavigate();
     const [boards, setBoards] = useState([]);
+    const [boardTitle, setBoardTitle] = useState('');
+    const [boardContent, setBoardContent] = useState('');
     const board = location.state.board;
-
-    console.log("location",location);
 
     useEffect(() => {
         BoardUpdateReady();
-    }, []);
+        if (board) {
+            setBoardTitle(board.boardTitle);
+            setBoardContent(board.boardContent);
+        }
+    }, [board]);
 
     const BoardUpdateReady = async() => {
         const res = await axios.get('/boards');
         setBoards(res.data);
     };
 
-
-
-    const [boardTitle, setBoardTitle] = useState('');
-    const [boardContent, setBoardContent] = useState('');
-
-
-    const UpdatePost = async (boardNo) => {
-        await axios.put(`/boards?boardNo=${boardNo}`);
-        setBoards(boards.map(b=> (b.boardNo === board.boardNo ? board : b)));
+    const UpdatePost = async (e) => {
+        e.preventDefault();
+        const updatedBoard = {
+            ...board,
+            boardTitle,
+            boardContent,
+        };
+        await axios.put(`/boards?boardNo=${board.boardNo}`, updatedBoard);
+        setBoards(boards.map(b => (b.boardNo === board.boardNo ? updatedBoard : b)));
+        navigate("/boardMain");
     }
 
-    const deletePost = async (boardNo) => {
-        await axios.delete(`/boards?boardNo=${boardNo}`);
-        setBoards(boards.filter(board => board.boardNo !== boardNo));
-    } 
+    const deletePost = async (e) => {
+        e.preventDefault();
+        await axios.delete(`/boards?boardNo=${board.boardNo}`);
+        setBoards(boards.filter(b => b.boardNo !== board.boardNo));
+        navigate("/boardMain");
+    }
 
     return (
         <div>
-            <h1> 고객센터 </h1>
-            <form>
+            <h1>고객센터</h1>
+            <form onSubmit={UpdatePost}>
                 <div>
-                    <label>제목 : </label>
-                    <input type="text" value={boardTitle} onChange={(e) => setBoardTitle(e.target.value)} required/>
+                    <label>제목: </label>
+                    <input 
+                        type="text" 
+                        value={boardTitle} 
+                        onChange={(e) => setBoardTitle(e.target.value)} 
+                        required
+                    />
                 </div>
                 <div>
-                    <label>내용 : </label>
-                    <input type="text" value={board.boardContent} onChange={(e) => setBoardContent(e.target.value)} required/>
+                    <label>내용: </label>
+                    <input 
+                        type="text" 
+                        value={boardContent} 
+                        onChange={(e) => setBoardContent(e.target.value)} 
+                        required
+                    />
                 </div>
-                <Link to={"/boardMain"}><button onClick={() =>UpdatePost(board.boardNo)} type="submit">글 수정 완료</button></Link> 
-                <Link to={"/boardMain"}><button onClick={() => deletePost(board.boardNo)}>글 삭제 하기</button></Link>
+                <button type="submit">글 수정 완료</button>
+                <button type="button" onClick={deletePost}>글 삭제 하기</button>
             </form>
         </div>
     )
-
 }
 
 export default BoardUpdate;
