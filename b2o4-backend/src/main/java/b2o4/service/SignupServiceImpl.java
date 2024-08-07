@@ -11,12 +11,12 @@ import b2o4.mapper.SignupMapper;
 @Service
 public class SignupServiceImpl implements SignupService {
 
-	@Autowired
     private final SignupMapper signupMapper;
 
-	  public SignupServiceImpl(SignupMapper signupMapper) {
-	        this.signupMapper = signupMapper;
-	    }
+    @Autowired
+    public SignupServiceImpl(SignupMapper signupMapper) {
+        this.signupMapper = signupMapper;
+    }
 
     @Override
     public List<Signup> findAll() {
@@ -27,14 +27,9 @@ public class SignupServiceImpl implements SignupService {
     public void insertSignup(Signup signup) {
         signupMapper.insertSignup(signup);
     }
+
     @Override
-    public void insertImage() {
-   
-    	
+    public int idCheck(String memberId) {
+        return signupMapper.idCheck(memberId);
     }
-	@Override
-	public int idCheck(String memberId) {
-		return signupMapper.idCheck(memberId);
-	}
-    
 }

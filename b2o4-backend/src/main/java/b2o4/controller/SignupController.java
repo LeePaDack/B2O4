@@ -15,11 +15,12 @@ import b2o4.dto.Signup;
 import b2o4.service.SignupService;
 
 @RestController
+@RequestMapping("/api")
 public class SignupController {
 	@Autowired
 	private SignupService signupService;
 	
-
+	
 	/*
 	@GetMapping("/idCheck")
 	public int idCheck(@RequestParam("memberid") String memberid) {
@@ -32,7 +33,7 @@ public class SignupController {
 		return signupService.idCheck(memberid);
 	}
 	
-	@PostMapping("/register")
+	@PostMapping("./register")
 	public void insertSignup(@RequestBody Signup signup) {
 		signupService.insertSignup(signup);
 	}

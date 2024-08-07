@@ -1,14 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom';
+import './Signup.css';
 import Signup from './component/Signup';
-//import onValidMail from './component/onValidMail';
+import Footer from './component/Footer';
+import Header from './component/Header';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <Signup/>
-      {/*<onValidMail/>*/}
-    </div>
+    <Router>
+      <Header/>
+      <Routes>
+        <Route path='/'element={<Signup/>}/>
+
+      </Routes>
+      <Footer/>
+    </Router>
+
+
   );
 }
 

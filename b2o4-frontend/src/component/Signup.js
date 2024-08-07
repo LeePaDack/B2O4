@@ -181,6 +181,7 @@ const Signup = () => {
           setBirth('');
           setPhone('');
           setAddress('');
+          setProfile('');
 
         } else {
           alert('회원가입 실패');

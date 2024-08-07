@@ -1,0 +1,96 @@
+/* 기본 스타일: 컨테이너 */
+.signup-container {
+    width: 50%; /* 컨테이너의 너비를 80%로 설정 */
+    max-width: 500px; /* 최대 너비를 600px로 설정 */
+    margin: 0 auto; /* 중앙 정렬을 위해 자동 마진 설정 */
+    padding: 20px; /* 내부 여백 20px 설정 */
+    border: 1px solid #ddd; /* 연한 회색 테두리 */
+    border-radius: 8px; /* 모서리 둥글게 처리 */
+    background-color: #f9f9f9; /* 배경 색상 설정 */
+    margin-top: 150px;
+  }
+  
+  /* 입력 필드와 레이블 스타일 */
+  .signup-container label {
+    display: flex; /* 레이블과 입력 필드를 수직으로 배치 */
+    flex-direction: column; /* 레이블 아래에 입력 필드를 배치 */
+    margin: 10px 0; /* 상하 마진 10px 설정 */
+    font-size: 16px; /* 글자 크기 16px 설정 */
+  }
+  
+  /* 레이블 내용의 플렉스 컨테이너 */
+  .signup-container .input-container {
+    display: flex; /* 플렉스 박스 레이아웃 적용 */
+    align-items: center; /* 세로 중앙 정렬 */
+  }
+  
+  /* 텍스트, 이메일, 비밀번호 입력 필드 스타일 */
+  .signup-container input[type="text"],
+  .signup-container input[type="email"],
+  .signup-container input[type="password"] {
+    flex: 1; /* 입력 필드가 남은 공간을 차지하도록 설정 */
+    padding: 8px; /* 내부 여백 8px 설정 */
+    margin: 5px 0; /* 상하 마진 5px 설정 */
+    border: 1px solid #ccc; /* 회색 테두리 */
+    border-radius: 4px; /* 모서리 둥글게 처리 */
+    
+  }
+  
+  /* 파일 입력 필드 스타일 */
+  .signup-container input[type="file"] {
+    margin-top: 5px; /* 상단 여백 5px 설정 */
+  }
+  
+  /* 버튼 스타일 */
+  .signup-container button {
+    padding: 4px 8px; /* 내부 여백을 줄여서 버튼 크기 축소 */
+    border: none; /* 테두리 제거 */
+    border-radius: 4px; /* 모서리 둥글게 처리 */
+    background-color: #007bff; /* 버튼 배경 색상 설정 */
+    color: white; /* 버튼 텍스트 색상 흰색 */
+    cursor: pointer; /* 클릭 커서 모양 설정 */
+    margin-left: 10px; /* 입력 필드와 버튼 사이의 공간 설정 */
+    display: inline-flex; /* 버튼 크기를 텍스트에 맞게 조절 */
+    white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+    font-size: 14px; /* 텍스트 크기 조정 */
+    width: 100px;
+    
+  }
+  
+  .signup-container button:hover {
+    background-color: #0056b3; /* 버튼 호버 시 배경 색상 변경 */
+  }
+  
+  /* 버튼을 오른쪽으로 정렬 */
+  .signup-container .input-container {
+    justify-content: flex-end; /* 버튼을 오른쪽으로 정렬 */
+  }
+  
+  .signup-container .input-container button {
+    margin-left: 10px; /* 입력 필드와 버튼 사이의 공간 설정 */
+    width: 130px;
+  }
+  
+  /* 오류 메시지 스타일 */
+  .signup-container div {
+    margin: 5px 0; /* 상하 마진 5px 설정 */
+  }
+  
+  .signup-container div[style*="color: red"] {
+    color: red; /* 오류 메시지 빨간색으로 표시 */
+  }
+  
+  .signup-container div[style*="color: green"] {
+    color: green; /* 성공 메시지 초록색으로 표시 */
+  }
+  
+  /* "가입하기" 버튼 스타일 */
+  .signup-container button:last-of-type {
+    display: block; /* 블록 형태로 설정 */    
+    background-color: #28a745; /* 버튼 배경 색상 설정 */
+  }
+  
+  .signup-container button:last-of-type:hover {
+    background-color: #218838; /* 버튼 호버 시 배경 색상 변경 */
+  }
+  
