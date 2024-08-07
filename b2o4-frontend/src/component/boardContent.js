@@ -35,7 +35,7 @@ const BoardContent = () => {
                         <td>{board.boardContent}</td>
                     </tr>
             </tbody>
-            <Link to={`/boardUpdate/${board.boardNo}`}><button>수정하기</button></Link> {/* 이 글의 수정하기로 가야함 */}
+            <Link to={`/boardUpdate/${board.boardNo}` }state={{board: board}}><button>수정하기</button></Link> {/* 이 글의 수정하기로 가야함 */}
             {/* 로그인 세션으로 본인 글일 경우에만 뜨게 하기 */}
             <Link to={"/boardMain"}><button>돌아가기</button></Link>
         </table>

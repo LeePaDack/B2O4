@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import {Link, useLocation} from "react-router-dom";
 
-const BoardPosting = (boardNo) => {
+const BoardUpdate = () => {
 
     const location = useLocation();
     const [boards, setBoards] = useState([]);
@@ -21,44 +21,38 @@ const BoardPosting = (boardNo) => {
 
 
 
-    const [posting, setPosting] = useState([]);
-
-    const addPost = async(board) => {
-        const res = await axios.post('/boards', board);
-        setPosting([...posting], res.data);
-      }
     const [boardTitle, setBoardTitle] = useState('');
     const [boardContent, setBoardContent] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        addPost({boardTitle,boardContent});
+
+    const UpdatePost = async (boardNo) => {
+        await axios.put(`/boards?boardNo=${boardNo}`);
+        setBoards(boards.map(b=> (b.boardNo === board.boardNo ? board : b)));
     }
 
     const deletePost = async (boardNo) => {
         await axios.delete(`/boards?boardNo=${boardNo}`);
-        setPosting(posting.filter(board => board.boardNo !== boardNo));
+        setBoards(boards.filter(board => board.boardNo !== boardNo));
     } 
 
     return (
         <div>
             <h1> 고객센터 </h1>
-            <tr>{board.boardTitle}</tr>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <div>
                     <label>제목 : </label>
                     <input type="text" value={boardTitle} onChange={(e) => setBoardTitle(e.target.value)} required/>
                 </div>
                 <div>
                     <label>내용 : </label>
-                    <input type="text" value={boardContent} onChange={(e) => setBoardContent(e.target.value)} required/>
+                    <input type="text" value={board.boardContent} onChange={(e) => setBoardContent(e.target.value)} required/>
                 </div>
-                <Link to={"/BoardMain"}><button type="submit">글 수정 완료</button></Link> 
-                <button onClick={() => deletePost(posting.boardNo)}>글 삭제 하기</button>
+                <Link to={"/boardMain"}><button onClick={() =>UpdatePost(board.boardNo)} type="submit">글 수정 완료</button></Link> 
+                <Link to={"/boardMain"}><button onClick={() => deletePost(board.boardNo)}>글 삭제 하기</button></Link>
             </form>
         </div>
     )
 
 }
 
-export default BoardPosting;
+export default BoardUpdate;
