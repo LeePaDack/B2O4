@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import MyPageContext from "./MyPageContext";
 import { Link } from "react-router-dom";
@@ -20,8 +20,6 @@ const Login = () => {
         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
         return;
       }
-      // 저장된 토큰을 로컬 스토리지에 저장
-      localStorage.setItem("authToken", data.token);
 
       setLoginMember(data.loginMember);
       setId("");
@@ -33,7 +31,6 @@ const Login = () => {
 
 
   const logout = () => {
-    localStorage.removeItem("authToken");
     setId("");
     setPw("");
     setLoginMember(null);
@@ -80,6 +77,5 @@ const Login = () => {
        
     </div>
   );
-};
-
+}
 export default Login;

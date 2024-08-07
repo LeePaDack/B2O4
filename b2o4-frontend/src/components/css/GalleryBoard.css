@@ -1,0 +1,28 @@
+body{
+    margin: 0;
+}
+
+.galleryBoard-container{
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    flex-direction: column; /* 카드가 열 방향으로 나열되도록 설정 */
+    margin: 0 auto; /* 컨테이너를 수평 중앙에 배치 */
+    padding: 1rem; /* 선택적으로 패딩 추가 */
+    max-width: 1200px; /* 최대 너비를 설정하여 너무 넓어지지 않도록 함 */
+}
+
+.galleryBoard-container img{
+    width: 100%;
+    height: 200px;
+}
+
+.Link-custom{
+    color: black;
+    text-decoration: none;
+}
+
+.card-custom {
+    border: none; /* 카드의 기본 테두리 제거 */
+    box-shadow: none;
+}

@@ -11,7 +11,7 @@ import MyPageContext from "../MyPageContext";
 
 const Header = () => {
     const {loginMember, setLoginMember} = useContext(MyPageContext);
-
+    console.log("loginMember",loginMember);
     return (
         <header>
             <div className="header-top">

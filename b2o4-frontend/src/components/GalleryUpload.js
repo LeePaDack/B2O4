@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import MyPageContext from './MyPageContext';
 
@@ -7,6 +7,8 @@ const GalleryUpload = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [posts, setPosts] = useState([]);
+
+  const {loginMember} = useContext(MyPageContext);
  
 
   useEffect(() => {

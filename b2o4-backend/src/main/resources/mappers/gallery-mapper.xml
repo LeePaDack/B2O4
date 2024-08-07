@@ -15,6 +15,7 @@
 	<!-- 게시판 목록 보기 -->
 	<select id="AllGalleryBoard" resultType='b2o4.dto.GalleryBoard'>
 		select * from galleryBoard
+		order by GBPostNo desc
 	</select>
 
 	<!-- 게시판 상세보기 -->
