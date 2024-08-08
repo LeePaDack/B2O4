@@ -4,14 +4,19 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
 import '../css/Layout.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
 import MyPageContext from "../MyPageContext";
 
-
 const Header = () => {
     const {loginMember, setLoginMember} = useContext(MyPageContext);
-    console.log("loginMember",loginMember);
+
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        setLoginMember(null);
+        localStorage.removeItem("loginMember");
+        navigate('/');
+    };
     return (
         <header>
             <div className="header-top">
@@ -31,20 +36,10 @@ const Header = () => {
                     </Form>
                 </div>
                 <div className="login-session">
-                {/* 
-                {isLogin ?
-                <div>
-                    <p>{memberName}님 환영합니다.</p>
-                    <a href="#">로그아웃</a>  
-                </div>  
-                :
-                    <a className="login-hypertext">로그인</a>
-                }
-                */}
                 {loginMember ?
                 <div>
                     <p className="login-hypertext">{loginMember.memberId}님 환영합니다.</p>
-                    <a href="/" className="login-hypertext">로그아웃</a>  
+                    <a href="/" className="login-hypertext" onClick={handleLogout}>로그아웃</a>  
                 </div>  
                 :
                 <Button className="login-hypertext" href="/login">로그인</Button>

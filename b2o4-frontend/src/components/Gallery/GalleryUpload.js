@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import MyPageContext from './MyPageContext';
+import MyPageContext from '../MyPageContext';
 
 const GalleryUpload = () => {
   const [files, setFiles] = useState([]);
@@ -43,6 +43,7 @@ const GalleryUpload = () => {
           'Content-Type': 'multipart/form-data'
         }
       });
+      alert("자바로 이미지 전송했습니다.");
       fetchPosts();
     } catch (error) {
       console.error("파일 업로드에 실패했습니다.", error);

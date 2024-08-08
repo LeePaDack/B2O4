@@ -13,4 +13,3 @@ public class GalleryBoard {
 	private String gbPostCreateDate;
 	
 }
-// 뭐했길래 GBPostTitle 로 있는거죠?
