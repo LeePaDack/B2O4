@@ -23,12 +23,14 @@ public class StadiumController {
 	}
 	
 	@GetMapping("/stadiumDetail/{stadiumNo}")
-	public Stadium getStadiumById(@PathVariable int stadiumNo) {
+	public Stadium getStadiumById(@PathVariable("stadiumNo") int stadiumNo) {
 		return stadiumService.getStadiumById(stadiumNo);
 	}
 	
 	@GetMapping("/reservationStadium/{stadiumNo}")
-	public Stadium reservationStadiumByNo(@PathVariable int stadiumNo) {
+	public Stadium reservationStadiumByNo(@PathVariable("stadiumNo") int stadiumNo) {
 		return stadiumService.getStadiumById(stadiumNo);
 	}
+	
+	
 }

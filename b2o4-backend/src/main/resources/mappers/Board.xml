@@ -11,8 +11,8 @@
 	</select>
 	
 	<insert id="insertBoardPost" parameterType="Board" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO board (boardTitle, boardContent)
-		VALUES (#{boardTitle}, #{boardContent})
+		INSERT INTO board (memberNo, boardTitle, boardContent)
+		VALUES (#{memberNo}, #{boardTitle}, #{boardContent})
 	</insert>
 	
 	<select id="getBoardById" parameterType="int" resultType="Board">
