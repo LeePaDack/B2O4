@@ -1,8 +1,8 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MyPageContext from "../MyPage/MyPageContext";
 import { useParams } from "react-router-dom";
 
-const StadiumReviewUpload = () => {
+const MemberReviewUpload = () => {
   const { reviewList, setReviewList, loginMember } = useContext(MyPageContext);
   const [inputReview, setInputReview] = useState("");
   const [likeCount, setLikeCount] = useState(0);
@@ -10,14 +10,14 @@ const StadiumReviewUpload = () => {
   const [hasReviewed, setHasReviewed] = useState(false);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-  const { stadiumNo } = useParams(); // URL에서 stadiumNo 파라미터 추출 -> 경기장번호 가져옴
+  const { memberNo } = useParams();
 
   useEffect(() => {
     if (loginMember) {
       const existingReview = reviewList.find(
         (review) =>
-          review.reviewMemberNo === loginMember.memberNo &&
-          review.stadiumNo === stadiumNo
+          review.reviewMemberNo === loginMember.userNo &&
+          review.memberNo === memberNo
       );
       if (existingReview) {
         setHasReviewed(true);
@@ -25,7 +25,7 @@ const StadiumReviewUpload = () => {
         setDisliked(existingReview.dislikeCount > 0);
       }
     }
-  }, [reviewList, loginMember, stadiumNo]);
+  }, [reviewList, loginMember, memberNo]);
 
   const addReview = () => {
     if (inputReview.trim().length === 0) {
@@ -33,12 +33,12 @@ const StadiumReviewUpload = () => {
       return;
     }
 
-    if (!stadiumNo.trim().length) {
-      alert("경기장을 선택해주세요.");
+    if (!memberNo.trim().length) {
+      alert("참가자를 선택해주세요.");
       return;
     }
 
-    if (!loginMember || !loginMember.memberNo) {
+    if (!loginMember || !loginMember.userNo) {
       alert("로그인이 필요합니다.");
       return;
     }
@@ -48,15 +48,15 @@ const StadiumReviewUpload = () => {
       return;
     }
 
-    fetch("http://localhost:9000/api/stadiuminputreview", {
+    fetch("http://localhost:9000/api/memberinputreview", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        stadiumNo,
+        memberNo,
         likeCount: liked ? 1 : 0,
         dislikeCount: disliked ? 1 : 0,
-        stadiumComment: inputReview,
-        reviewMemberNo: loginMember.memberNo,
+        memberComment: inputReview,
+        reviewMemberNo: loginMember.userNo,
       }),
     })
       .then((response) => {
@@ -65,11 +65,11 @@ const StadiumReviewUpload = () => {
       .then((data) => {
         if (data.success) {
           const newReview = {
-            stadiumReviewNo: data.stadiumReviewNo,
-            stadiumNo,
+            memberReviewNo: data.memberReviewNo,
+            memberNo,
             likeCount: liked ? 1 : 0,
             dislikeCount: disliked ? 1 : 0,
-            stadiumComment: inputReview,
+            memberComment: inputReview,
             reviewMemberNo: loginMember.memberNo,
           };
 
@@ -100,7 +100,6 @@ const StadiumReviewUpload = () => {
       setDislikeCount(dislikeCount + 1);
     }
   };
-
   return (
     <div>
         <main>
@@ -109,8 +108,8 @@ const StadiumReviewUpload = () => {
                 <button onClick={handleDislike} disabled={liked || disliked}>👎 {dislikeCount}</button>
             </div>
             <section>
-                <label style={{ display: 'none' }}>경기장 번호:
-                    <input type="text" value={stadiumNo} readOnly style={{ display: 'none' }} />
+                <label style={{ display: 'none' }}>참가자 번호:
+                    <input type="text" value={memberNo} readOnly style={{ display: 'none' }} />
                 </label>
                 <label>내용:
                     <textarea type="text" onChange={e => setInputReview(e.target.value)} value={inputReview}></textarea>
@@ -120,7 +119,7 @@ const StadiumReviewUpload = () => {
             <section>
                 {reviewList.map((review, index) => (
                     <div key={index}>
-                        <p>{review.stadiumComment}</p>
+                        <p>{review.memberComment}</p>
                     </div>
                 ))}
             </section>
@@ -129,4 +128,4 @@ const StadiumReviewUpload = () => {
 );
 };
 
-export default StadiumReviewUpload;
+export default MemberReviewUpload;

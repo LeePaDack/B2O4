@@ -1,13 +1,17 @@
 package b2o4.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
-public class Review {
+@NoArgsConstructor
+@AllArgsConstructor
+public class StadiumReview {
 	// 구장 리스트 보기 dto
 	private int stadiumNo;
 	private String stadiumName;
@@ -20,26 +24,15 @@ public class Review {
 	private int stadiumPrice;
 	private String stadiumImage;
 	
-	// 참가자 리스트 보기 dto
-	private int memberNo;
-	private String memberId;
-	private String memberPw;
-	private String memberEmail;
-	private String memberName;
-	private String memberBirth;
-	private String memberPhone;
-	private String memberAddress;
-	private String signUpDate;
-	private String memberRank;
-	private int matchCount;
-	private char memberType;
-	private String memberPay;
-	private String memberProfil;
 	
-	// 구장 평가 리스트 보기 dto
+	// 구장 평가 리스트 dto
 	private int stadiumReviewNo;
 	private int likeCount;
 	private int dislikeCount;
 	private String stadiumComment;
 	private String stadiumCommentDate;
+	
+	
+	
+	
 }

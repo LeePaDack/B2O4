@@ -4,34 +4,16 @@ import "../css/MyPageCss.css";
 import MyPageContext from "./MyPageContext";
 
 const MyPage = () => {
-  const { loginMember } = useContext(MyPageContext);
+  const  loginMember  = useContext(MyPageContext);
   const [selectProfile, setSelectProfile] = useState(null);
 
-  const [memberInfo, setMemberInfo] = useState("");
+  const [memberInfo, setMemberInfo] = useState(MyPageContext);
 
-  useEffect(() => {
-    if (loginMember) {
-      axios
-        .get("/mypage", { params: { memberId: loginMember.memberId } })
-        .then((response) => {
-          const { data } = response;
-          setMemberInfo(data.member);
-        });
-    }
-  }, [loginMember]);
 
-  if (!loginMember) {
-    return <div>로그인이 필요합니다.</div>;
+  // 수정내용 제출버튼
+  const updateInfo = (e) => {
+    
   }
-
-  if (!memberInfo) {
-    return <div>로딩 중...</div>;
-  }
-
-  const UserInfo = async () => {
-    const response = axios.get("/members");
-    setMemberInfo(response.data);
-  };
 
   const updateProfile = (event) => {
     const file = event.target.files[0];
@@ -49,11 +31,11 @@ const MyPage = () => {
       <table>
         <tbody>
           {memberInfo.map((member) => (
-            <tr key={member.memberNo}>
-              <td>{member.memberName}</td>
-              <td>{member.memberEmail}</td>
-              <td>{member.memberAddress}</td>
-              <td>{member.memberPhone}</td>
+            <tr >
+              <td><input type="text" />{/* 유저 이름 */}</td>
+              <td><input type="email" />{/* 유저 이메일 */}</td>
+              <td><input type="text" />{/* 유저 주소 */}</td>
+              <td><input type="text" />{/* 유저 핸드폰번호 */}</td>
             </tr>
           ))}
         </tbody>
@@ -76,6 +58,7 @@ const MyPage = () => {
           className="updateProFileInput"
         />
       </div>
+      <button onClick={updateInfo} >수정하기</button>
     </div>
   );
 };
