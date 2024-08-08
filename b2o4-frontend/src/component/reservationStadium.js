@@ -3,11 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const ReservationStadium = () => {
-
   const [personCount, setPersonCount] = useState(1); 
-
   const [minDate, setMinDate] = useState("");
   const [maxDate, setMaxDate] = useState("");
+  const [stadiumCapacity, setStadiumCapacity] = useState(1); // Default value
 
   const location = useLocation();
   const [stadiums, setStadiums] = useState([]);
@@ -20,8 +19,12 @@ const ReservationStadium = () => {
   }, []);
 
   const StadiumReservationList = async() => {
-      const res = await axios.get('/stadiums');
+      const res = await axios.get(`http://localhost:9000/stadiums/stadiumDetail/${stadium.stadiumNo}`);
       setStadiums(res.data);
+
+      if (res.data && res.data.stadiumCapacity) {
+        setStadiumCapacity(res.data.stadiumCapacity);
+      }
   };
 
   useEffect(() => {
@@ -41,7 +44,6 @@ const ReservationStadium = () => {
     setMaxDate(max);
   }, []);
 
-
   const handlePersonCountChange = (event) => {
     setPersonCount(parseInt(event.target.value));
   };
@@ -49,6 +51,7 @@ const ReservationStadium = () => {
   const calculateTotalPrice = () => {
     return stadium.stadiumPrice * personCount;
   };
+
   return (
     <div>
       <h6>예매하기</h6>
@@ -74,21 +77,17 @@ const ReservationStadium = () => {
         <option>00:00 ~ 02:00</option>
       </select>
       &nbsp; &nbsp; &nbsp;
-      <select value={personCount} onChange={handlePersonCountChange}> 
-
-        <option value="0">인원수{/*{구장 수용인원 DB 에서 가져오기}*/}</option>
-        <option value="1">1명</option>
-        <option value="2">2명</option>
-        <option value="3">3명</option>
-        <option>...</option>
+      <select value={personCount} onChange={handlePersonCountChange}>
+        {[...Array(stadiumCapacity).keys()].map(i => (
+          <option key={i+1} value={i+1}>{i+1}명</option>
+        ))}
       </select>
       <tr>
         <td>구장이름<span id="stadiumName">{stadium.stadiumName}</span></td>
         <td>총액 : <span id="totalPrice">{calculateTotalPrice().toLocaleString()}</span></td>
-        </tr>
-        <button type="button">결제하기</button> {/* toss 로 넘어가는 루트 만들어야함 */}
+      </tr>
+      <button type="button">결제하기</button>
     </div>
-    
   );
 };
 

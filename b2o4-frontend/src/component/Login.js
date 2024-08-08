@@ -34,6 +34,7 @@ const Login = () => {
     setId("");
     setPw("");
     setLoginMember(null);
+    localStorage.removeItem("loginMember");
     console.log("로그인 멤버 : " + id);
   };
 
