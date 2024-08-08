@@ -1,10 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
-
+import { Client } from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
 import '../css/Streaming.css';
 
 const WebCam = () => {
     const videoRef = useRef(null);
     const [webCamView, setWebCamView] = useState(false);
+    const [stompClient, setStompClient] = useState(null);
+    const [connected, setConnected] = useState(false);
 
     const getCamera = () => {
 
@@ -23,25 +26,73 @@ const WebCam = () => {
             })
     }
 
+    // 스트리밍 시작 버튼 활성화/비활성화 다른 사용자들에게 공유 시키기
+    useEffect(() => {
+        const socket = new SockJS('http://localhost:9001/ws'); // java 쪽의 서버포트 설정과 맞춰서 작성
+        const client = new Client({
+            webSocketFactory: () => socket,
+            connectHeaders: {},
+            debug: function (str) {
+                console.log('STOMP Debug:', str);
+            },
+            onConnect: function (frame) {
+                console.log('STOMP Connected:', frame);
+                setConnected(true);
+                client.subscribe('/topic/streaming', (response) => {
+                    console.log(webCamView);
+                    setWebCamView(JSON.parse(response.body));
+                });
+            },
+            onStompError: function (frame) {
+                console.error('STOMP Error:', frame);
+            },
+            onWebSocketError: function (error) {
+                console.error('웹소켓 에러:', error);
+            }
+        });
+
+        client.activate();
+        setStompClient(client);
+
+        return () => {
+            if (client) {
+                client.deactivate();
+            }
+        };
+    }, [webCamView]);
+
     useEffect(() => {
         getCamera();
     }, [webCamView]);
 
+    //스트리밍 시작 버튼 모든 사용자들에게 뿌리기
+    const handleBeginStreaming = () => {
+        if (stompClient) {
+            stompClient.publish({
+                destination: '/app/chat.streaming'
+            });
+            stompClient.subscribe('/topic/streaming', (response) => {
+                const newStreamingState = JSON.parse(response.body);
+                setWebCamView(newStreamingState);
+            });
+        }
+    }
+
     return (
         <div className='webcam-container'>
             {webCamView ?
-                <video className='webcam' ref={videoRef} controls/>
+                <video className='webcam' ref={videoRef} controls />
                 :
                 <span className='blackScreen' style={{ display: 'flex' }}>
                     <p>준비 중 입니다.</p>
                 </span>
             }
             <div className="button-container">
-                <button onClick={() => setWebCamView(!webCamView)} className='btn btn-outline-success'>
-                    {webCamView ? '스트리밍 종료' : '스트리밍 시작'}
+                <button onClick={handleBeginStreaming} className='btn btn-outline-success'>
+                    {webCamView ? 'Quit Streaming' : 'Begin Streaming'}
                 </button>
-
             </div>
+            {!connected && <p>서버 연결중...</p>}
         </div>
     )
 };

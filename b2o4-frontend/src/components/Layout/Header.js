@@ -37,7 +37,7 @@ const Header = () => {
                     <a className="login-hypertext">로그인</a>
                 }
                 */}
-                <a className="login-hypertext">로그인</a>
+                <Link to="/login" className="login-hypertext">로그인</Link>
                 <div>
                     <p className="login-hypertext">님 환영합니다.</p>
                     <a href="#" className="login-hypertext">로그아웃</a>  

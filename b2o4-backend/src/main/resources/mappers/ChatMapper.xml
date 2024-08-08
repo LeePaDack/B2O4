@@ -4,18 +4,11 @@
 
 	<!-- 채팅 기록 DB에 넣기 -->
     <insert id="recordChatMessage" parameterType="b2o4.dto.ChatLog" useGeneratedKeys="true" keyProperty="msgNo">
-        INSERT INTO LiveChatMessage(memberNo, msgContent, msgAt) VALUES (#{memberNo}, #{msgContent}, now())
+        INSERT INTO LiveChatMessage(memberId, msgContent, msgAt) VALUES (#{memberId}, #{msgContent}, now())
     </insert>
 	
 	<!-- 채팅 삭제 -->
 	<delete id="deleteChatMessage" parameterType="int">
 		DELETE FROM LiveChatMessage WHERE msgNo = #{msgNo}
 	</delete>
-	
-	<!--  
-	<select id="showMessage">
-		SELECT M.memberId, L.msgContent FROM LiveChatMessage L JOIN member M ON (L.memberNo = M.memberNo)
-		WHERE L.memberNo = #{memberNo}
-	</select>
-	-->
 </mapper>

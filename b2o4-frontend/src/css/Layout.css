@@ -55,11 +55,10 @@ header {
     background-color: white;
 }
 
-.navbar-items{
-    justify-content :center;
-}
+
 .item{
     margin-right: 150px;
+    justify-content : space-around;
 }
 
 .login-session {

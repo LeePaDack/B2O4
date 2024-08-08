@@ -8,6 +8,7 @@ import lombok.Setter;
 public class ChatMessage {
     private String sender;
     private String content;
-    
+    private String profile;
+    private String time;
 }
 
