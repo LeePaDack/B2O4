@@ -3,8 +3,34 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
         
-<mapper namespace="b2o4.mapper.ShoppingCartMapper">
-	<select id="ShoppingCartFindAll">
-	SELECT * FROM shoppingCart
+<mapper namespace="b2o4.mapper.ShoppingBasketMapper">
+
+	<!-- 전체보기 -->
+	<select id="ShoppingBasketFindAll">
+		SELECT * FROM shoppingBasket
 	</select>
+	
+	
+	<!-- 품목추가 -->
+	<insert id="insertShoppingBasket">
+		INSERT INTO shoppingBasket (basketNo, memberNo, goodsNo, goodsQuantity, basketTotal)
+		VALUES ( #{basketNo}, #{memberNo}, #{goodsNo}, #{goodsQuantity}, #{basketTotal})
+		
+	</insert>
+	
+	
+	<!-- 수량변경 -->
+	<update id="updateShoppingBasket">
+		UPDATE shoppingBasket
+		SET goodsQuantity = #{goodsQuantity}, basketTotal = #{basketTotal}
+		WHERE basketNo = #{basketNo}, AND memberNo = #{memberNo} AND goodsNo = #{goodsNo}
+	</update>
+	
+	
+	<!-- 품목삭제 -->
+	<delete id="deleteShoppingBasket">
+		DELETE FROM shoppingBasket
+		WHERE basketNo = #{basketNo}, AND memberNo = #{memberNo} AND goodsNo = #{goodsNo}
+	</delete>
+	
 </mapper>        

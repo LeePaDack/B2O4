@@ -20,9 +20,6 @@ public class GoodsShopController {
 	@GetMapping("/goods/all")
 	public List<GoodsShop> GoodsFindAll() {
 		return goodsShopService.GoodsFindAll();
-		
-	
-	
 	
 	}
 }

@@ -34,7 +34,7 @@ const GoodsShop = () => {
                 {soccerShoes.map(good => {/* process = 컴퓨터 env = 환경에서 PUBLIC_URL = 퍼블릭 폴더가 있는 위치에   images = 이미지 폴더 안에 good.goodsImage = 지금 가져와야할 상품의 이미지 가져오기  
                 alt= 이미지가 안보일 때 개발자가 이미지를 찾아서 다시 보이게 넣을 수 있도록 설명 작성
                 */
-                    const imgSrc = `${process.env.PUBLIC_URL}/images/${good.goodsImage}`;
+                    const imgSrc = `${process.env.PUBLIC_URL}/images/goodsImage1/${good.goodsImage}`;
                     console.log(imgSrc);
                     return (
                         <div key={good.goodsNo} className='goods'>
@@ -43,7 +43,7 @@ const GoodsShop = () => {
                             <img src={imgSrc} alt={good.goodsImage} />
                             <h2>{good.goodsName}</h2>
                             <p>상품종류 : {good.goodsKind}</p>
-                            <p>상품가격 : {good.goodsPrice}</p>
+                            <p>상품가격 : {good.goodsPrice.toLocaleString()}</p>
                             <p>사이즈 : {good.goodsSize}</p>
                             <p>판매상태 : {good.goodsSellNow ? "판매중" : "판매중지"}</p>
                             </Link>
@@ -53,13 +53,13 @@ const GoodsShop = () => {
                 })}
             </div>
 
-            <hr></hr>
+            
             <h1>풋살화</h1>
             <div className='goods-content'>
                 {futsalShoes.map(good => {/* process = 컴퓨터 env = 환경에서 PUBLIC_URL = 퍼블릭 폴더가 있는 위치에   images = 이미지 폴더 안에 good.goodsImage = 지금 가져와야할 상품의 이미지 가져오기  
                 alt= 이미지가 안보일 때 개발자가 이미지를 찾아서 다시 보이게 넣을 수 있도록 설명 작성
                 */
-                    const imgSrc = `${process.env.PUBLIC_URL}/images/${good.goodsImage}`;
+                    const imgSrc = `${process.env.PUBLIC_URL}/images/goodsImage1/${good.goodsImage}`;
                     console.log(imgSrc);
                     return (
                         <div key={good.goodsNo} className='goods'>
@@ -67,7 +67,7 @@ const GoodsShop = () => {
                             <img src={imgSrc} alt={good.goodsImage} />
                             <h2>{good.goodsName}</h2>
                             <p>상품종류 : {good.goodsKind}</p>
-                            <p>상품가격 : {good.goodsPrice}</p>
+                            <p>상품가격 : {good.goodsPrice.toLocaleString()}</p>
                             <p>사이즈 : {good.goodsSize}</p>
                             <p>판매상태 : {good.goodsSellNow ? "판매중" : "판매중지"}</p>
                             </Link>

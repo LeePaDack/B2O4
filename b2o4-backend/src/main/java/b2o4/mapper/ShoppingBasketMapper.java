@@ -5,16 +5,16 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import b2o4.dto.GoodsShop;
-import b2o4.dto.ShoppingCart;
+import b2o4.dto.ShoppingBasket;
 
 @Mapper
-public interface ShoppingCartMapper {
+public interface ShoppingBasketMapper {
 	
-	List<ShoppingCart> ShoppingCartFindAll();
+	List<ShoppingBasket> ShoppingBasketFindAll();
 	
-	void insertShoppingCart(GoodsShop goodsShop);
+	void insertShoppingBasket(ShoppingBasket shoppingBasket);
 	
-	void deleteShoppingCart(int goodsNo);
+	void deleteShoppingBasket(int BasketNo);
 	
-	void updateShoppingCart(GoodsShop goodsShop);
+	void updateShoppingBasket(ShoppingBasket shoppingBasket);
 }

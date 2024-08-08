@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShoppingCart {
+public class ShoppingBasket {
 	
 	private int basketNo;
 	private int memberNo;

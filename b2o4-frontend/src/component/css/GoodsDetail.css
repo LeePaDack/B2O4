@@ -5,14 +5,16 @@
 }
 
 .detail-container img {
-    margin: 15px 30% 0 30%;
-    width: 40%;
-    height: 40%;
+    margin: 15px 35% 0 35%;
+    width: 30%;
+    height: 30%;
     align-items: center;
 }
 
 .detail-container h2 {
+    padding-top: 20px;
     text-align: center;
+    font-weight: bold;
 }
 
 .detail-container p {
@@ -24,20 +26,39 @@
 
 .detail-container .detail-text p {
     text-align: center;
-    max-width: 60%;
-    margin: 10px 20% 10px 20%;
+    max-width: 44%;
+    margin: 10px 28% 10px 28%;
 }
 
 /*버튼*/
-.return-button {
+.buttons {
     text-align: center;
 }
-.return-button button{
+
+.cartadd-button button {
+    width: 130px;
+    height: 50px;
+    background-color: #ff6f61;
+    color: white;
+    border-radius: 5px;
+    border-style: none;
+    margin: 10px;
+}
+
+.back-button button {
     width: 130px;
     height: 50px;
     background-color: rgb(53, 181, 89);
     color: white;
     border-radius: 5px;
     border-style: none;
-    margin-bottom: 50px;
+    margin: 10px;
+}
+
+.buttons .cartadd-button button:hover {
+    background-color: #e65b50;
+}
+
+.buttons .back-button button:hover {
+    background-color: rgb(24, 148, 59);
 }

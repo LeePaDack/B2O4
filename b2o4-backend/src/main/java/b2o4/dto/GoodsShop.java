@@ -21,4 +21,5 @@ public class GoodsShop {
 	private String goodsSize;
 	private int goodsSellNow;
 	private String goodsDetail;
+	private String goodsImage2;	//상세페이지가면 사진 하나 더 출력
 }
