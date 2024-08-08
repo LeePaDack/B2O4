@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
+import MemberReviewUpload from "./MemberReviewUpload";
 
 const MemberDetail = () => {
 
@@ -22,7 +23,7 @@ const MemberDetail = () => {
                     {contentBoxView ? ('닫기') : ('작성하기')}
                 </button>
                 <div className="contentBoxView-wrapper">
-                    {contentBoxView === true && (<MemberReviewUpload/>)}
+                    {contentBoxView && (<MemberReviewUpload/>)}
                 </div>
             </div>
         </div>

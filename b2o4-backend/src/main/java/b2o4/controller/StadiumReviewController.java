@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,13 +30,13 @@ public class StadiumReviewController {
 	}
 
 	// 풋살장 평가 보기 리스트
-	/*
-	 * @GetMapping("/stadiumreview") public List<Review> stadiumReviewList() {
-	 * return reviewService.memberGetList(); }
-	 */
+	@GetMapping("/stadiumReview/{stadiumNo}")
+	public List<StadiumReview> getStadiumReviewList(@PathVariable("stadiumNo") int stadiumNo) {
+		return stadiumReviewService.getStadiumReviewList(stadiumNo);
+	}
 
 	// 풋살장 평가하기
-	@PostMapping("/stadiumInputReview")
+	@PostMapping("/stadiuminputreview")
 	public Map<String, Object> stadiumReviewUpload(@RequestBody StadiumReview stadiumReview) {
 		log.info("Received review request: " + stadiumReview.toString());
 		Map<String, Object> response = stadiumReviewService.stadiumReviewUpload(stadiumReview);

@@ -13,7 +13,7 @@ public interface StadiumReviewMapper {
 	List<StadiumReview> stadiumGetList();
 
 	// 구장 평가 리스트 보기
-	List<StadiumReview> stadiumReviewList(int stadiumReviewNo);
+	List<StadiumReview> getStadiumReviewList(int stadiumNo);
 
 	// 구장 평가 업로드
 	int stadiumReviewUpload(StadiumReview stadiumReview);

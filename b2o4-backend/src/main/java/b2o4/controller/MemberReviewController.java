@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import b2o4.dto.MemberReview;
-import b2o4.dto.StadiumReview;
 import b2o4.service.MemberReviewService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,7 +29,7 @@ public class MemberReviewController {
 	}
 
 	// 참가자 평가하기
-	@PostMapping("/memberInputReview")
+	@PostMapping("/memberinputreview")
 	public Map<String, Object> stadiumReviewUpload(@RequestBody MemberReview memberReview) {
 		log.info("Received review request: " + memberReview.toString());
 		Map<String, Object> response = memberReviewService.memberReviewUpload(memberReview);
@@ -46,7 +45,7 @@ public class MemberReviewController {
 		return result;
 	}
 
-	@PostMapping("/updateDislikeCount")
+	@PostMapping("/updateMeberDislikeCount")
 	public Map<String, Object> updateDislikeCount(@RequestBody MemberReview memberReview) {
 		boolean success = memberReviewService.updateMemberDislikeCount(memberReview);
 		Map<String, Object> result = new HashMap<>();

@@ -21,13 +21,12 @@ public class StadiumReviewServiceImpl implements StadiumReviewService {
 		return stadiumReviewMapper.stadiumGetList();
 	}
 
-	
-
 	// 구장 평가 리스트 보기
-	/*
-	 * @Override public List<Review> stadiumReviewList() { return
-	 * reviewMapper.stadiumReviewList(); }
-	 */
+	@Override
+	public List<StadiumReview> getStadiumReviewList(int stadiumNo) {
+		return stadiumReviewMapper.getStadiumReviewList(stadiumNo);
+	}
+	
 	// 구장 평가 업로드
 	@Override
 	public Map<String, Object> stadiumReviewUpload(StadiumReview stadiumReview) {

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 const MemberReviewUpload = () => {
   const { reviewList, setReviewList, loginMember } = useContext(MyPageContext);
+  console.log("로그인 멤버 : ", loginMember);
   const [inputReview, setInputReview] = useState("");
   const [likeCount, setLikeCount] = useState(0);
   const [dislikeCount, setDislikeCount] = useState(0);
@@ -70,7 +71,7 @@ const MemberReviewUpload = () => {
             likeCount: liked ? 1 : 0,
             dislikeCount: disliked ? 1 : 0,
             memberComment: inputReview,
-            reviewMemberNo: loginMember.memberNo,
+            reviewMemberNo: loginMember.userNo,
           };
 
           const newReviewList = Array.isArray(reviewList)

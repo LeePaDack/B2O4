@@ -32,7 +32,6 @@ const MemberInfo = () => {
               <p>레벨 : {list.memberRank}</p>{/* 참가자 레벨 (루키, 아마추어, 세미프로) */}
               <p>참여 경기 수 : {list.memberCount} 게임</p>{/* 참여 경기 수 */}
             </div>
-          
         </div>
         </Link>
         ))}

@@ -55,4 +55,6 @@
 		#{memberReviewNo}
 		AND userNo = #{userNo}
 	</delete>
+	
+	
 </mapper>

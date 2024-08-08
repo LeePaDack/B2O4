@@ -5,32 +5,36 @@
 	<select id="stadiumGetList">
 		select * from stadium
 	</select>
-	
+
 	<!-- 구장 평가 리스트 보기 -->
-	<select id="stadiumReviewList">
+	<select id="getStadiumReviewList">
 		select * from stadiumReview
-		where stadiumReviewNo = #{stadiumReviewNo}
-		order by 1
+		where stadiumNo = #{stadiumNo}
 	</select>
-	
-	
+
+
 	<!-- 구장 평가하기 insert -->
-	<insert id="stadiumReviewUpload" parameterType="b2o4.dto.StadiumReview">
-		insert into stadiumReview (stadiumNo, likeCount, dislikeCount,
+	<insert id="stadiumReviewUpload"
+		parameterType="b2o4.dto.StadiumReview">
+		insert into stadiumReview (stadiumNo, likeCount,
+		dislikeCount,
 		stadiumComment)
-		values(#{stadiumNo}, #{likeCount}, #{dislikeCount}, #{stadiumComment})
+		values(#{stadiumNo}, #{likeCount},
+		#{dislikeCount}, #{stadiumComment})
 	</insert>
 
 	<!-- 리뷰 업데이트 쿼리 -->
 	<update id="updateReviewLike">
 		UPDATE stadiumreview
-		SET likeCount = likeCount + #{increment}
+		SET likeCount = likeCount +
+		#{increment}
 		WHERE stadiumReviewNo = #{stadiumReviewNo}
 	</update>
 
 	<update id="updateReviewDislike">
 		UPDATE stadiumreview
-		SET dislikeCount = dislikeCount + #{increment}
+		SET dislikeCount = dislikeCount +
+		#{increment}
 		WHERE stadiumReviewNo = #{stadiumReviewNo}
 	</update>
 
@@ -42,21 +46,25 @@
 
 	<delete id="deleteLike">
 		DELETE FROM review_like
-		WHERE stadiumReviewNo = #{stadiumReviewNo}
+		WHERE stadiumReviewNo =
+		#{stadiumReviewNo}
 		AND memberNo = #{memberNo}
 	</delete>
 
 	<insert id="insertDislike">
-		INSERT INTO review_dislike (stadiumReviewNo, memberNo)
+		INSERT INTO review_dislike (stadiumReviewNo,
+		memberNo)
 		VALUES (#{stadiumReviewNo}, #{memberNo})
 	</insert>
 
 	<delete id="deleteDislike">
 		DELETE FROM review_dislike
-		WHERE stadiumReviewNo = #{stadiumReviewNo}
+		WHERE stadiumReviewNo =
+		#{stadiumReviewNo}
 		AND memberNo = #{memberNo}
 	</delete>
-	
-	
-	
+
+	<!-- 구장 평가 리스트 보기 -->
+
+
 </mapper>

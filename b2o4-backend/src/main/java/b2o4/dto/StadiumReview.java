@@ -31,8 +31,6 @@ public class StadiumReview {
 	private int dislikeCount;
 	private String stadiumComment;
 	private String stadiumCommentDate;
-	
-	
-	
+	private int memberNo;
 	
 }
