@@ -10,7 +10,7 @@
 		JOIN member m ON b.memberNo = m.memberNo
 	</select>
 	
-	<insert id="insertBoardPost" parameterType="Board" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insertBoardPost" parameterType="Board">
 		INSERT INTO board (memberNo, boardTitle, boardContent)
 		VALUES (#{memberNo}, #{boardTitle}, #{boardContent})
 	</insert>

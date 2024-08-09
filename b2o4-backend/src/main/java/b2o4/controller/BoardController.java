@@ -29,18 +29,25 @@ public class BoardController {
 	
 	/*
 	@PostMapping
-	public void insertBoardPost(@RequestParam("boardTitle") String boardTitle, 
-								@RequestParam("boardContent") String boardContent) {
-		Board board = new Board();
-		board.setBoardTitle(boardTitle);
-		board.setBoardContent(boardContent);
-		boardService.insertBoardPost(board);
+	public void insertBoardPost(
+	    @RequestParam("boardTitle") String boardTitle, 
+	    @RequestParam("boardContent") String boardContent,
+	    @RequestParam("memberNo") int memberNo) {
+	    
+	    Board board = new Board();
+	    board.setBoardTitle(boardTitle);
+	    board.setBoardContent(boardContent);
+	    board.setMemberNo(memberNo);
+	    
+	    boardService.insertBoardPost(board);
 	}
 	*/
+	
 	@PostMapping
 	public void insertBoardPost(@RequestBody Board board) {
 		boardService.insertBoardPost(board);
 	}
+	
 	
 	/*
 	@GetMapping("/boardContent/{boardNo}")
