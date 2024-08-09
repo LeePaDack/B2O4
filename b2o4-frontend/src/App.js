@@ -1,18 +1,17 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './Signup.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./Signup.css";
 
-import Signup from './component/Signup';
-import Footer from './component/Footer';
-import Header from './component/Header';
+import Signup from "./component/Signup";
+import Footer from "./component/Footer";
+import Header from "./component/Header";
 
 function App() {
-  
   return (
     <Router>
-      <Header/>
+      <Header />
       <Routes>
-        <Route path="/" element={<Signup />} />
-        
+        <Route path="/" element={<Signup />}></Route>
+        <Route path="/members/signup" element={<Signup />}></Route>
       </Routes>
       <Footer />
     </Router>

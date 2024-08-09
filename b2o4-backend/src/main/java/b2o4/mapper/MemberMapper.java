@@ -16,5 +16,4 @@ public interface MemberMapper {
 	
 	int signup(Member member);
 	
-	Member login(Member member);
 }

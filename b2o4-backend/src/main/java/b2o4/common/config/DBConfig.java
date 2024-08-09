@@ -40,7 +40,7 @@ public class DBConfig {
 		SqlSessionFactoryBean sfb = new SqlSessionFactoryBean();
 		sfb.setDataSource(dataSource);
 		sfb.setMapperLocations(applicationContext.getResources("classpath:/mappers/**.xml"));
-		sfb.setTypeAliasesPackage("b2o4.dto");
+		sfb.setTypeAliasesPackage("base.ball.dto");
 		
 		sfb.setConfigLocation(applicationContext.getResource("classpath:mybatis-config.xml"));
 		return sfb.getObject();

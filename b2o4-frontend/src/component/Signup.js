@@ -20,7 +20,7 @@ const Signup = () => {
   const [phoneError, setPhoneError] = useState('');
   const [isIdAvailable, setIsIdAvailable] = useState(false);
 
- //정규식
+  // 정규식을 통한 유효성 검사 함수들
  const validateId = (id) => {
   const idRegex = /^[a-zA-Z0-9]{4,8}$/;
   return idRegex.test(id);
@@ -50,18 +50,18 @@ const validatePhone = (phone) => {
   const phoneRegex = /^[0-9]{8,12}$/;
   return phoneRegex.test(phone);
 };
-
+  // 입력 필드 핸들러 함수들
 const handleIdChange = (e) => {
   setId(e.target.value);
 };
-
+ // 아이디 중복 체크 함수
   const checkIdAvailability = () => {
     if (!validateId(memberId)) {
       setIdError('아이디는 4-8자의 영문, 숫자만 가능합니다.');
       setIsIdAvailable(false);
       return;
     }
-    
+  // API 호출을 통해 아이디 중복 여부 확인
     fetch('idCheck?memberId=' + memberId) 
       .then(response => response.json())
       .then(result => {
@@ -79,7 +79,7 @@ const handleIdChange = (e) => {
         setIdError('아이디 확인 중 오류가 발생했습니다.');
       });
   };
-
+// 비밀번호 변경 핸들러
   const handlePwChange = (e) => {
     const value = e.target.value;
     setPw(value);
@@ -89,7 +89,7 @@ const handleIdChange = (e) => {
       setPwError('');
     }
   };
-
+ // 이름 변경 핸들러
   const handlePwCheckChange = (e) => {
     const value = e.target.value;
     setPwCheck(value);
@@ -99,7 +99,7 @@ const handleIdChange = (e) => {
       setPwCheckError('');
     }
   };
-
+// 이메일 변경 핸들러
   const handleNameChange = (e) => {
     const value = e.target.value;
     setName(value);
@@ -109,7 +109,7 @@ const handleIdChange = (e) => {
       setNameError('');
     }
   };
-
+ // 생년월일 변경 핸들러
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
@@ -119,7 +119,7 @@ const handleIdChange = (e) => {
       setEmailError('');
     }
   };
-
+ // 전화번호 변경 핸들러
   const handleBirthChange = (e) => {
     const value = e.target.value;
     setBirth(value);
@@ -129,7 +129,7 @@ const handleIdChange = (e) => {
       setBirthError('');
     }
   };
-
+ // 프로필 파일 업로드 핸들러
   const handlePhoneChange = (e) => {
     const value = e.target.value;
     setPhone(value);
@@ -139,20 +139,21 @@ const handleIdChange = (e) => {
       setPhoneError('');
     }
   };
-
+// 회원가입 요청 처리 함수
   const handleProfileUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
       setProfile(file);
     }
   };
-  
+  // 회원가입 요청 처리 함수
   const handleSignup = () => {
+    // 필수 입력 필드 확인 및 유효성 검사 결과 확인
     if (!memberId || !memberPw || !memberPwCheck || !memberEmail || !memberName || !memberBirth || !memberPhone || idError || pwError || pwCheckError || nameError || emailError || birthError || phoneError || !isIdAvailable) {
       alert('모든 필수 입력 필드를 올바르게 입력해 주세요.');
       return;
     }
-    
+     // FormData를 이용해 회원 정보를 서버에 전송
     const formData = new FormData();
     formData.append('memberId', memberId);
     formData.append('memberPw', memberPw);
@@ -169,6 +170,7 @@ const handleIdChange = (e) => {
     })
       .then(response => {
         if (response.ok) {
+           // 회원가입 성공 시 입력 필드 초기화
           alert('회원가입 성공!');
           setId('');
           setPw('');

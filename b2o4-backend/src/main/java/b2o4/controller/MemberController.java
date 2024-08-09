@@ -15,8 +15,7 @@ import b2o4.dto.Member;
 import b2o4.service.MemberService;
 
 @RestController
-@RequestMapping("/member")
-@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/members")
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
@@ -31,14 +30,13 @@ public class MemberController {
 		memberService.insertMember(member);
 	}
 	
-	@GetMapping("'idCheck?memberId=' + memberId")
+	@GetMapping("idCheck")
 	public int idCheck(@RequestParam("id") String id) {
 		return memberService.idCheck(id);
 	}
 	
-	@PostMapping(value="/signup")
+	@PostMapping("/signup")
 	public int signup(@RequestBody Member member) {
 		return memberService.signup(member);
 	}
-	
 }
