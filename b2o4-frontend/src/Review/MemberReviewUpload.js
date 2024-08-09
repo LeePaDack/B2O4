@@ -4,26 +4,28 @@ import { useParams } from "react-router-dom";
 
 const MemberReviewUpload = () => {
   const { reviewList, setReviewList, loginMember } = useContext(MyPageContext);
-  console.log("로그인 멤버 : ", loginMember);
+  
   const [inputReview, setInputReview] = useState("");
   const [likeCount, setLikeCount] = useState(0);
   const [dislikeCount, setDislikeCount] = useState(0);
   const [hasReviewed, setHasReviewed] = useState(false);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-  const { memberNo } = useParams();
+  const { memberNo } = useParams(); // 평가 대상의 번호
 
   useEffect(() => {
     if (loginMember) {
       const existingReview = reviewList.find(
         (review) =>
-          review.reviewMemberNo === loginMember.userNo &&
+          review.reviewMemberNo === loginMember.memberNo &&
           review.memberNo === memberNo
       );
       if (existingReview) {
         setHasReviewed(true);
         setLiked(existingReview.likeCount > 0);
         setDisliked(existingReview.dislikeCount > 0);
+        setLikeCount(existingReview.likeCount);
+        setDislikeCount(existingReview.dislikeCount);
       }
     }
   }, [reviewList, loginMember, memberNo]);
@@ -39,7 +41,7 @@ const MemberReviewUpload = () => {
       return;
     }
 
-    if (!loginMember || !loginMember.userNo) {
+    if (!loginMember || !loginMember.memberNo) {
       alert("로그인이 필요합니다.");
       return;
     }
@@ -57,12 +59,10 @@ const MemberReviewUpload = () => {
         likeCount: liked ? 1 : 0,
         dislikeCount: disliked ? 1 : 0,
         memberComment: inputReview,
-        reviewMemberNo: loginMember.userNo,
+        reviewMemberNo: loginMember.memberNo, // 평가하는 사람의 번호
       }),
     })
-      .then((response) => {
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((data) => {
         if (data.success) {
           const newReview = {
@@ -71,7 +71,7 @@ const MemberReviewUpload = () => {
             likeCount: liked ? 1 : 0,
             dislikeCount: disliked ? 1 : 0,
             memberComment: inputReview,
-            reviewMemberNo: loginMember.userNo,
+            reviewMemberNo: loginMember.memberNo, // 평가하는 사람의 번호
           };
 
           const newReviewList = Array.isArray(reviewList)
@@ -101,32 +101,53 @@ const MemberReviewUpload = () => {
       setDislikeCount(dislikeCount + 1);
     }
   };
+
   return (
     <div>
-        <main>
-            <div>
-                <button onClick={handleLike} disabled={liked || disliked}>👍 {likeCount}</button>
-                <button onClick={handleDislike} disabled={liked || disliked}>👎 {dislikeCount}</button>
-            </div>
-            <section>
-                <label style={{ display: 'none' }}>참가자 번호:
-                    <input type="text" value={memberNo} readOnly style={{ display: 'none' }} />
-                </label>
-                <label>내용:
-                    <textarea type="text" onChange={e => setInputReview(e.target.value)} value={inputReview}></textarea>
-                </label>
-                <button onClick={addReview} disabled={hasReviewed}>작성하기</button>
-            </section>
-            <section>
-                {reviewList.map((review, index) => (
-                    <div key={index}>
-                        <p>{review.memberComment}</p>
-                    </div>
-                ))}
-            </section>
-        </main>
+      <main>
+        <div>
+          <button onClick={handleLike} disabled={liked || disliked}>
+            👍 {likeCount}
+          </button>
+          <button onClick={handleDislike} disabled={liked || disliked}>
+            👎 {dislikeCount}
+          </button>
+        </div>
+        <section>
+          <label style={{ display: "none" }}>
+            평가 대상 번호:
+            <input
+              type="text"
+              value={memberNo}
+              readOnly
+              style={{ display: "none" }}
+            />
+          </label>
+          <label>
+            내용:
+            <textarea
+              type="text"
+              onChange={(e) => setInputReview(e.target.value)}
+              value={inputReview}
+            ></textarea>
+          </label>
+          <button onClick={addReview} disabled={hasReviewed}>
+            작성하기
+          </button>
+        </section>
+        <section>
+          {reviewList
+            .filter((review) => review.memberNo === memberNo) // 평가 대상에 대한 리뷰만 필터링
+            .map((review, index) => (
+              <div key={index}>
+                <p>{review.memberComment}</p>
+                <p>👍 {review.likeCount} 👎 {review.dislikeCount}</p>
+              </div>
+            ))}
+        </section>
+      </main>
     </div>
-);
+  );
 };
 
 export default MemberReviewUpload;

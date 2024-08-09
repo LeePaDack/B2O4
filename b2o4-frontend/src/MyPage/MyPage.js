@@ -1,65 +1,93 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import MyPageContext from "../MyPage/MyPageContext";
 import axios from "axios";
-import "../css/MyPageCss.css";
-import MyPageContext from "./MyPageContext";
 
 const MyPage = () => {
-  const  loginMember  = useContext(MyPageContext);
-  const [selectProfile, setSelectProfile] = useState(null);
+  const { loginMember, setLoginMember } = useContext(MyPageContext);
+  console.log(loginMember);
+  const [memberInfo, setMemberInfo] = useState({
+    memberId: "",
+    memberPw: "",
+    memberEmail: "",
+    memberName: "",
+    memberPhone: "",
+    memberAddress: "",
+  });
 
-  const [memberInfo, setMemberInfo] = useState(MyPageContext);
+  const [isEditing, setIsEditing] = useState(false);
 
-
-  // 수정내용 제출버튼
-  const updateInfo = (e) => {
-    
-  }
-
-  const updateProfile = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setSelectProfile(reader.result);
-      };
-      reader.readAsDataURL(file);
+  useEffect(() => {
+    if (loginMember) {
+      // loginMember가 null이 아닌 경우에만 API 호출
+      axios
+        .get(`/api/mypage/${loginMember.memberId}`)
+        .then((response) => {
+          setMemberInfo(response.data);
+        })
+        .catch((error) => {
+          console.error("멤버 불러오기 실패 :", error);
+        });
     }
+  }, [loginMember]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setMemberInfo((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
+  const handleSubmit = () => {
+    axios
+      .put("/api/mypage/update", memberInfo)
+      .then((response) => {
+        alert("회원 정보 업데이트 성공");
+        setLoginMember(response.data); // 업데이트된 정보를 Context에 반영
+        setIsEditing(false);
+      })
+      .catch((error) => {
+        console.error("회원 정보 업데이트 실패 :", error);
+      });
+  };
+
+  const cancelBtn = () => {
+    setIsEditing(false);
+  };
+
+  if (!loginMember) {
+    return <div>로그인이 필요합니다.</div>; // loginMember가 null인 경우 렌더링되는 내용
+  }
+console.log("멤버 정보",memberInfo);
   return (
-    <div className="mypage-container">
-      <table>
-        <tbody>
-          {memberInfo.map((member) => (
-            <tr >
-              <td><input type="text" />{/* 유저 이름 */}</td>
-              <td><input type="email" />{/* 유저 이메일 */}</td>
-              <td><input type="text" />{/* 유저 주소 */}</td>
-              <td><input type="text" />{/* 유저 핸드폰번호 */}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="profile-container">
-        <h4>프로필 사진 변경</h4>
-        {selectProfile && (
-          <div>
-            <img src={selectProfile} className="proFileImg" />
-          </div>
-        )}
-        <label htmlFor="imgSelect" className="updateProFileBtn">
-          사진 선택하기
-        </label>
-        <input
-          type="file"
-          id="imgSelect"
-          accept="image/*"
-          onChange={updateProfile}
-          className="updateProFileInput"
+    <div>
+      <h1>마이페이지</h1>
+      <label>
+        이름 : 
+        <input type="text"
+        value={memberInfo.memberName}
+        placeholder={loginMember.memberName}
+        onChange={handleChange}
         />
-      </div>
-      <button onClick={updateInfo} >수정하기</button>
+      </label>
+      <label>
+        이메일 : 
+        <input type="email"
+        value={memberInfo.memberEmail}
+        placeholder={loginMember.memberEmail}
+        onChange={handleChange}
+        />
+      </label>
+      <label>
+        핸드폰 번호 : 
+        <input type="text"
+        value={memberInfo.memberPhone}
+        placeholder={loginMember.memberPhone}
+        onChange={handleChange}
+        />
+      </label>
     </div>
   );
 };
+
 export default MyPage;

@@ -5,7 +5,7 @@ import axios from "axios";
 
 
 
-const StadiumsInfo = () => {
+const StadiumsMain = () => {
 
     const [stadiumList, setStadiumList] = useState([]);
 
@@ -42,4 +42,4 @@ const StadiumsInfo = () => {
   );
 };
 
-export default StadiumsInfo;
+export default StadiumsMain;

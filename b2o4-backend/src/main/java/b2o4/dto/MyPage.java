@@ -1,8 +1,16 @@
 package b2o4.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class MyPage {
 
 	// 마이페이지 회원 정보
@@ -20,4 +28,6 @@ public class MyPage {
 	private char memberType;
 	private String memberPay;
 	private String memberProfil;
+	
+	
 }

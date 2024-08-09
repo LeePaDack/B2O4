@@ -10,10 +10,8 @@
 	<!-- 참가자 평가하기 insert -->
 	<insert id="memberReviewUpload" parameterType="b2o4.dto.MemberReview">
 		insert into
-		memberReview (memberNo, likeCount, dislikeCount,
-		memberComment, userNo)
-		values(#{memberNo}, #{likeCount}, #{dislikeCount}, #{memberComment},
-		#{userNo})
+		memberReview (memberNo, likeCount, dislikeCount, memberComment)
+		values(#{memberNo}, #{likeCount}, #{dislikeCount}, #{memberComment})
 	</insert>
 
 	<!-- 리뷰 업데이트 쿼리 -->

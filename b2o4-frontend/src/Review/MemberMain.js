@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import '../css/ReviewCss.css';
 
 
-const MemberInfo = () => {
+const MemberMain = () => {
     const [memberList, setMemberList] = useState([]);
 
     const members = async () => {
@@ -40,4 +40,4 @@ const MemberInfo = () => {
     )
 }
 
-export default MemberInfo;
+export default MemberMain;

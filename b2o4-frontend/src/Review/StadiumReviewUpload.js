@@ -1,9 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
 import MyPageContext from "../MyPage/MyPageContext";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const StadiumReviewUpload = () => {
+
+  const stadiumInputReviewAPI = "http://localhost:9000/api/stadiuminputreview";
+
   const { reviewList, setReviewList, loginMember } = useContext(MyPageContext);
+  
   const [inputReview, setInputReview] = useState("");
   const [likeCount, setLikeCount] = useState(0);
   const [dislikeCount, setDislikeCount] = useState(0);
@@ -48,21 +53,15 @@ const StadiumReviewUpload = () => {
       return;
     }
 
-    fetch("http://localhost:9000/api/stadiuminputreview", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    axios.post(stadiumInputReviewAPI, {
         stadiumNo,
         likeCount: liked ? 1 : 0,
         dislikeCount: disliked ? 1 : 0,
         stadiumComment: inputReview,
         reviewMemberNo: loginMember.memberNo,
-      }),
-    })
-      .then((response) => {
-        return response.json();
       })
-      .then((data) => {
+      .then((response) => {
+        const data = response.data;
         if (data.success) {
           const newReview = {
             stadiumReviewNo: data.stadiumReviewNo,

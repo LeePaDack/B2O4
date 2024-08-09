@@ -12,7 +12,7 @@ public interface StadiumReviewService {
 
 	// 구장 평가 리스트 보기
 	List<StadiumReview> getStadiumReviewList(int stadiumNo);
-	
+
 	// 구장 평가 업로드
 	Map<String, Object> stadiumReviewUpload(StadiumReview stadiumReview);
 
@@ -20,5 +20,6 @@ public interface StadiumReviewService {
 
 	boolean updateDislikeCount(StadiumReview stadiumReview);
 
+	// 구장 평가 삭제
 	
 }

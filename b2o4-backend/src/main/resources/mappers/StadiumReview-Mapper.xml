@@ -22,6 +22,13 @@
 		values(#{stadiumNo}, #{likeCount},
 		#{dislikeCount}, #{stadiumComment})
 	</insert>
+	
+	<!-- 구장 평가 삭제하기 -->
+	<delete id="deleteStadiumReview">
+		delete from stadiumreview
+		where stadiumReviewNo = #{stadiumReview}
+		and memberNo = #{memberNo}
+	</delete>
 
 	<!-- 리뷰 업데이트 쿼리 -->
 	<update id="updateReviewLike">

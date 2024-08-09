@@ -24,6 +24,8 @@ public interface StadiumReviewMapper {
 	// 싫어요 카운트
 	int updateDislikeCount(StadiumReview stadiumReview);
 
+	// 구장 평가 삭제
+	int deleteStadiumReview(int stadiumReviewNo, int memberNo);
 	
 
 }

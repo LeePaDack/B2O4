@@ -22,7 +22,7 @@ public class MemberReview {
 	private int matchCount;
 	private char memberType;
 	private String memberPay;
-	private String memberProfil;
+	private String memberProfile;
 	
 	// 참가자 평가 리스트 dto
 	private int memberReviewNo;
@@ -30,5 +30,7 @@ public class MemberReview {
 	private int dislikeCount;
 	private String memberComment;
 	private String memberCommentDate;
+	private int userNo;
+	
 
 }

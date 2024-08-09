@@ -124,7 +124,7 @@ const Header = () => {
                 id="basic-nav-dropdown"
                 className="item"
               >
-                <NavDropdown.Item href="#action/3.1">
+                <NavDropdown.Item href="/mypage">
                   내 정보 수정
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/stadiumInfo">평가하기</NavDropdown.Item>
