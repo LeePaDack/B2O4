@@ -1,6 +1,5 @@
 package b2o4.common.config;
 
-
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -20,37 +19,32 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 @PropertySource("classpath:/config.properties")
 public class DBConfig {
-	
 	@Autowired
 	private ApplicationContext applicationContext;
 	
-	
-	@Bean 
+	@Bean
 	@ConfigurationProperties(prefix = "spring.datasource.hikari")
 	public HikariConfig hikariConfig() {
 		HikariConfig config = new HikariConfig();
-		return new HikariConfig();
+		return config;
 	}
 	
-	
-	@Bean 
+	@Bean
 	public DataSource dataSource(HikariConfig config) {
 		DataSource dataSource = new HikariDataSource(config);
 		return dataSource;
 	}
-	
 	
 	@Bean
 	public SqlSessionFactory sessionFactory(DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean sfb = new SqlSessionFactoryBean();
 		sfb.setDataSource(dataSource);
 		sfb.setMapperLocations(applicationContext.getResources("classpath:/mappers/**.xml"));
-		sfb.setTypeAliasesPackage("b2o4.dto"); 
+		sfb.setTypeAliasesPackage("b2o4.dto");
 		
 		sfb.setConfigLocation(applicationContext.getResource("classpath:mybatis-config.xml"));
 		return sfb.getObject();
 	}
-	
 	
 	@Bean
 	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sf) {
@@ -61,6 +55,4 @@ public class DBConfig {
 	public DataSourceTransactionManager dataSourceTransactionManager(DataSource ds) {
 		return new DataSourceTransactionManager(ds);
 	}
-	
-	
 }

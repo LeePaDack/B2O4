@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const Signup = () => {
-  //변수명
   const [memberId, setId] = useState('');
   const [memberPw, setPw] = useState('');
   const [memberPwCheck, setPwCheck] = useState('');
@@ -10,7 +9,7 @@ const Signup = () => {
   const [memberBirth, setBirth] = useState('');
   const [memberPhone, setPhone] = useState('');
   const [memberAddress, setAddress] = useState('');
-  const [memberProfile, setProfile] = useState(null);
+  const [memberProfile, setProfile] = useState('F');
 
   const [idError, setIdError] = useState('');
   const [pwError, setPwError] = useState('');
@@ -21,42 +20,41 @@ const Signup = () => {
   const [phoneError, setPhoneError] = useState('');
   const [isIdAvailable, setIsIdAvailable] = useState(false);
 
+ //정규식
+ const validateId = (id) => {
+  const idRegex = /^[a-zA-Z0-9]{4,8}$/;
+  return idRegex.test(id);
+};
 
-  //정규식
-  const validateId = (id) => {
-    const idRegex = /^[a-zA-Z0-9]{4,8}$/;
-    return idRegex.test(id);
-  };
+const validatePw = (pw) => {
+  const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+  return pwRegex.test(pw);
+};
 
-  const validatePw = (pw) => {
-    const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-    return pwRegex.test(pw);
-  };
+const validateName = (name) => {
+  const nameRegex = /^[가-힣]{2,5}$/;
+  return nameRegex.test(name);
+};
 
-  const validateName = (name) => {
-    const nameRegex = /^[가-힣]{2,5}$/;
-    return nameRegex.test(name);
-  };
+const validateEmail = (email) => {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email);
+};
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
-  };
+const validateBirth = (birth) => {
+  const birthRegex = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))$/;
+  return birthRegex.test(birth);
+};
 
-  const validateBirth = (birth) => {
-    const birthRegex = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))$/;
-    return birthRegex.test(birth);
-  };
+const validatePhone = (phone) => {
+  const phoneRegex = /^[0-9]{8,12}$/;
+  return phoneRegex.test(phone);
+};
 
-  const validatePhone = (phone) => {
-    const phoneRegex = /^[0-9]{8,12}$/;
-    return phoneRegex.test(phone);
-  };
+const handleIdChange = (e) => {
+  setId(e.target.value);
+};
 
-  const handleIdChange = (e) => {
-    setId(e.target.value);
-  };
-//기능
   const checkIdAvailability = () => {
     if (!validateId(memberId)) {
       setIdError('아이디는 4-8자의 영문, 숫자만 가능합니다.');
@@ -64,23 +62,22 @@ const Signup = () => {
       return;
     }
     
-    fetch('/idCheck?memberId='+memberId)
-    .then(response => response.text())
-    .then(result => {
-
-      if (Number(result) === 0) {
-        setIdError('중복된 아이디입니다.');
-        setIsIdAvailable(false);
-      } else {
-        setIdError('');
-        setIsIdAvailable(true);
-        alert('사용 가능한 아이디입니다.');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      setIdError('아이디 확인 중 오류가 발생했습니다.');
-    });
+    fetch('idCheck?memberId=' + memberId) 
+      .then(response => response.json())
+      .then(result => {
+        if (!result) {
+          setIdError('');
+          setIsIdAvailable(true);
+          alert('사용 가능한 아이디입니다.');
+        } else {
+          setIdError('중복된 아이디입니다.');
+          setIsIdAvailable(false);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        setIdError('아이디 확인 중 오류가 발생했습니다.');
+      });
   };
 
   const handlePwChange = (e) => {
@@ -149,13 +146,13 @@ const Signup = () => {
       setProfile(file);
     }
   };
-
-  const 회원가입버튼 = () => {
+  
+  const handleSignup = () => {
     if (!memberId || !memberPw || !memberPwCheck || !memberEmail || !memberName || !memberBirth || !memberPhone || idError || pwError || pwCheckError || nameError || emailError || birthError || phoneError || !isIdAvailable) {
       alert('모든 필수 입력 필드를 올바르게 입력해 주세요.');
       return;
     }
-
+    
     const formData = new FormData();
     formData.append('memberId', memberId);
     formData.append('memberPw', memberPw);
@@ -165,8 +162,8 @@ const Signup = () => {
     formData.append('memberPhone', memberPhone);
     formData.append('memberAddress', memberAddress);
     formData.append('memberProfile', memberProfile);
-
-    fetch("./register", {
+    
+    fetch("/register", {
       method: "POST",
       body: formData
     })
@@ -182,7 +179,6 @@ const Signup = () => {
           setPhone('');
           setAddress('');
           setProfile('');
-
         } else {
           alert('회원가입 실패');
         }
@@ -191,7 +187,6 @@ const Signup = () => {
         console.error('Error registering:', error);
         alert('회원가입 중 오류가 발생했습니다.');
       });
-
   };
 
   return (
@@ -282,7 +277,7 @@ const Signup = () => {
       </label>
       <br />
       <label>
-        Profile:
+        프로필
         <input
           type="file"
           onChange={handleProfileUpload}
@@ -292,7 +287,7 @@ const Signup = () => {
         )}
       </label>
       <br />
-      <button onClick={회원가입버튼}>가입하기</button>
+      <button onClick={handleSignup}>가입하기</button>
     </div>
   );
 }
