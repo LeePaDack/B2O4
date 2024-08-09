@@ -26,21 +26,19 @@ public class ShoppingBasketServiceImpl implements ShoppingBasketService {
 	
 	
 	@Override
-	public void insertShoppingBasket(ShoppingBasket shoppingBasket) {
-		shoppingBasketMapper.insertShoppingBasket(shoppingBasket);
+	public void insertBasket(ShoppingBasket shoppingBasket) {
+		shoppingBasketMapper.insertBasket(shoppingBasket);
 		
 	}
-	
+
 	@Override
-	public void updateShoppingBasket(ShoppingBasket shoppingBasket) {
-		
-		
+	public void updateBasketQuantity(ShoppingBasket basket) {
+		shoppingBasketMapper.updateBasketQuantity(basket);
 	}
-	
+
 	@Override
-	public void deleteShoppingBasket(int basketNo) {
-		// TODO Auto-generated method stub
-		
+	public void deleteBasketItem(int basketNo) {
+		shoppingBasketMapper.deleteBasketItem(basketNo);
 	}
 
 	

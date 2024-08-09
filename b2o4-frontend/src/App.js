@@ -4,7 +4,7 @@ import Header from "./component/layout/Header.js";
 import Footer from "./component/layout/Footer.js";
 import GoodsShop from "./component/GoodsShop";
 import GoodsDetail from "./component/GoodsDetail";
-import ShoppingBasket from "./component/ShoppingBasket인가.js";
+import ShoppingBasket from "./component/ShoppingBasket.js";
 
 function App() {
   return (
@@ -13,8 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<GoodsShop />} /> 
         <Route path="/goodsDetail/:goodsNo" element={<GoodsDetail />} />
-        {/*    <Routes path="/shoppingBasket/:memberNo" element={<ShoppingBasket />} />   */}
-        <Route path="/" element={<ShoppingBasket/> } />
+        <Route path="/shoppingBasket/:memberNo" element={<ShoppingBasket />} />
       </Routes>
       <Footer />
     </Router>

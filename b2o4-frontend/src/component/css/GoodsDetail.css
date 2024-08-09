@@ -35,7 +35,7 @@
     text-align: center;
 }
 
-.cartadd-button button {
+.buttons .cartadd-button {
     width: 130px;
     height: 50px;
     background-color: #ff6f61;
@@ -45,7 +45,7 @@
     margin: 10px;
 }
 
-.back-button button {
+.buttons .back-button {
     width: 130px;
     height: 50px;
     background-color: rgb(53, 181, 89);
@@ -55,10 +55,10 @@
     margin: 10px;
 }
 
-.buttons .cartadd-button button:hover {
+.buttons .cartadd-button:hover {
     background-color: #e65b50;
 }
 
-.buttons .back-button button:hover {
+.buttons .back-button:hover {
     background-color: rgb(24, 148, 59);
 }

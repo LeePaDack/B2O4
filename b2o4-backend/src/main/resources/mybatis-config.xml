@@ -12,7 +12,7 @@
 		  -->
 		  
 		  
-		<setting name="mapUnderscoreToCamelCase" value="true" />	
+		<!-- <setting name="mapUnderscoreToCamelCase" value="true" /> -->	
 		<!--   Under score = todo_name 과 같이 중간에 _ 들어가는 것을 언더 스코어
 			Camel Case  = todoName 과 같이 중간에 대문자가 들어가는 것을 카멜케이스
 			DB에 언더스코어로 작성된 값을 java에선 카멜케이스로 표기하겠다 선언

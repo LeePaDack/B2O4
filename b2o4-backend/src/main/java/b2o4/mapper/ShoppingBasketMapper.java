@@ -12,9 +12,9 @@ public interface ShoppingBasketMapper {
 	
 	List<ShoppingBasket> ShoppingBasketFindAll();
 	
-	void insertShoppingBasket(ShoppingBasket shoppingBasket);
+	void insertBasket(ShoppingBasket shoppingBasket);
 	
-	void deleteShoppingBasket(int BasketNo);
+	void deleteBasketItem(int BasketNo);
 	
-	void updateShoppingBasket(ShoppingBasket shoppingBasket);
+	void updateBasketQuantity(ShoppingBasket shoppingBasket);
 }

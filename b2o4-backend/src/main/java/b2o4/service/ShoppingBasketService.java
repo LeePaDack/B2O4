@@ -8,10 +8,10 @@ public interface ShoppingBasketService {
 
 	List<ShoppingBasket> ShoppingBasketFindAll();
 	
-	void insertShoppingBasket (ShoppingBasket shoppingBasket);
+	void insertBasket (ShoppingBasket shoppingBasket);
 	
-	void updateShoppingBasket (ShoppingBasket shoppingBasket);
+	void updateBasketQuantity (ShoppingBasket shoppingBasket);
 	
-	void deleteShoppingBasket (int basketNo);
+	void deleteBasketItem (int basketNo);
 
 }
