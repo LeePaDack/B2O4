@@ -1,6 +1,7 @@
 package b2o4.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
@@ -28,11 +29,13 @@ public class LoginServiceImpl implements LoginService{
 	
 	// 아이디 찾기
 	@Override
-	public Map<String, Object> findId(Member member) {
-		Member findId = loginMapper.login(member);
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("findId", findId);
-		return map;
+	public Member findId(Member member) {
+		return loginMapper.findId(member);
+	}
+	
+	// 비밀번호 찾기
+	@Override
+	public Member findPw(Member member) {
+		return loginMapper.findPw(member);
 	}
 }

@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Header from './components/Layout/Header.js'
 import FindId from './components/Login/FindId.js';
 import FindPw from './components/Login/FindPw.js';
+import Footer from './components/Layout/Footer.js';
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
           <Route path='/findId' element={<FindId />} />
           <Route path='/findPw' element={<FindPw />} />
         </Routes>
+        <Footer />
       </Router>
     </MyPageContext.Provider>
   );

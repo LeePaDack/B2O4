@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,15 +40,22 @@ public class GalleryController {
       
     }
 
+    // 갤러리 게시판 목록보기
     @GetMapping("/posts")
     public ResponseEntity<List<GalleryBoard>> getAllPosts() {
     	System.out.println(galleryService.AllGalleryBoards());
         return ResponseEntity.ok(galleryService.AllGalleryBoards());
     }
 	
+    // 갤러리게시판 상세보기
 	@GetMapping("/{gbpostNo}")
 	public GalleryBoard GalleryDetail(@PathVariable("gbPostNo") int gbPostNo) {
 		return galleryService.GalleryDetail(gbPostNo);
+	}
+	
+	@DeleteMapping("{gbpostNo}")
+	public int deleteGallery(@PathVariable("gbPostNo") int gbPostNo) {
+		return galleryService.deleteGallery(gbPostNo);
 	}
 	
 }

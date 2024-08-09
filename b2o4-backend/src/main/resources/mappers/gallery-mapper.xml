@@ -24,4 +24,12 @@
 		WHERE GBPostNO = #{gbPostNo}
 	</select>
 	
+	<!-- 게시판 수정하기 -->
+	
+	
+	<!-- 게시판 삭제하기 -->
+	<delete id="deleteGallery">
+		DELETE FROM galleryBoard
+		WHERE GBPostNO = ${gbPostNo}
+	</delete>
 </mapper>

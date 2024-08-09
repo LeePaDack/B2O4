@@ -1,5 +1,6 @@
 package b2o4.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
@@ -11,5 +12,8 @@ public interface LoginService {
 	Map<String, Object> login(Member member);
 	
 	// 아이디 찾기
-	Map<String, Object> findId(Member member);
+	Member findId(Member member);
+	
+	// 비밀번호 찾기
+	Member findPw(Member member);
 }

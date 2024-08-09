@@ -87,4 +87,9 @@ public class GalleryServiceImpl implements GalleryService{
 		return galleryMapper.GalleryDetail(GBPostNo);
 	}
 	
+	// 갤러리 삭제하기
+	@Override
+	public int deleteGallery(int gbPostNo) {
+		return galleryMapper.deleteGallery(gbPostNo);
+	}
 }

@@ -1,4 +1,4 @@
-.findId-container{
+.findIdPw-container{
     display: flex;
     flex-direction: column; /* 세로 방향으로 정렬 */
     align-items: center; /* 수평 가운데 정렬 */
@@ -25,17 +25,41 @@
     color: black;
 }
 
-.findId{
+.findId-container{
     width: 70%;
+    padding: 20px;
 }
 
 .findId-title{
-    border-bottom: 3px solid gray;
+    border-bottom: 2px solid gray;
     margin-top: 50px;
 }
 
-.findId-input{
+.findId{
     border: 1px solid black;
     margin-top: 50px;
     height: 400px;
+    
+    
+}
+
+.findId-input{
+   margin-top: 30px;
+   margin-left: 30px;
+   display: flex;
+   width: 100%;
+   align-items: center; /* 수평 가운데 정렬 */
+   justify-content: center; /* 수직 가운데 정렬 */
+}
+
+.findId-input input{
+    width: 80%;
+}
+
+.findId-input > div:nth-child(1) {
+	width: 20%;
+}
+
+.findId-input  > div:nth-child(2) {
+	width: 80%;
 }

@@ -11,13 +11,18 @@
 	</select>
 	
 	<!-- 아이디 찾기 -->
-	<select id="findId">
+	<select id="findId" parameterType="Member">
 		SELECT * FROM member
 		WHERE memberName = #{memberName}
 		AND memberPhone = #{memberPhone}
 	</select>
-		
 	
-	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPw" parameterType="Member">
+		SELECT * FROM member
+		WHERE memberId = #{memberId} 
+		AND memberName = #{memberName}
+		AND memberPhone = #{memberPhone}
+	</select>
 	
 </mapper>

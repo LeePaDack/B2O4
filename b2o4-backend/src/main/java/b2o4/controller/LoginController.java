@@ -1,5 +1,6 @@
 package b2o4.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,14 @@ public class LoginController {
 	
 	// 아이디 찾기
 	@PostMapping("/findId")
-	public Map<String, Object> findId(@RequestBody Member member) {
-		return loginService.login(member);
+	public ResponseEntity<Member> findId(@RequestBody Member member) {
+		return ResponseEntity.ok(loginService.findId(member));
 	}
+	
+	// 비밀번호 찾기
+	@PostMapping("/findPw")
+	public ResponseEntity<Member> findPw(@RequestBody Member member) {
+		return ResponseEntity.ok(loginService.findPw(member));
+	}
+	
 }
