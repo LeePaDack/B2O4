@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./css/GoodsDetail.css";
+import './css/GoodsDetail.css';
 import addShoppingBasket from "./ShoppingBasket";
+import { Dropdown } from "bootstrap";
 
 //디테일
 const GoodsDetail = ({ loginMember, userCartItem, checkLogin }) => {
@@ -16,6 +17,13 @@ const GoodsDetail = ({ loginMember, userCartItem, checkLogin }) => {
   };
 
   
+  // 선택한 사이즈
+  const [selectSize, setSelectSize] = useState(good.goodsSize[0]);
+
+  // 사이즈 선택
+  const handleSizeChange = (event) => {
+    setSelectSize(event.target.value);
+  };
 
 
   //각 이미지 출력
@@ -36,6 +44,20 @@ const GoodsDetail = ({ loginMember, userCartItem, checkLogin }) => {
         <p>₩ {good.goodsPrice.toLocaleString()}</p>
         <p>{good.goodsDetail}</p>
       </div>
+
+
+      <div className="detail-sizeSelect">
+      {/* 사이즈 선택 */}
+        <label htmlFor="size-select">사이즈 선택 : </label>
+        <select id="size-select" value={selectSize} onChange={handleSizeChange}>
+          {good.goodsSize.split(",").map((size, index) => (
+            <option key={index} value={size}>
+              {size}
+            </option>
+          ))}
+      </select>
+      </div>
+
 
       <div className="buttons">
         <button className="cartadd-button" onClick={() => addShoppingBasket(good, loginMember, userCartItem, checkLogin)}>장바구니에 추가</button>

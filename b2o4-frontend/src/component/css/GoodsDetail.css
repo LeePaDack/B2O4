@@ -30,6 +30,19 @@
     margin: 10px 28% 10px 28%;
 }
 
+
+/* 사이즈선택 라벨 */
+.detail-container .detail-sizeSelect label {
+    margin-right: 10px; 
+}
+
+.detail-container .detail-sizeSelect select {
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
 /*버튼*/
 .buttons {
     text-align: center;
