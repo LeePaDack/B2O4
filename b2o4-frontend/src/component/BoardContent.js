@@ -23,7 +23,7 @@ const BoardContent = () => {
         <table>
             <thead>
                 <tr>게시글 제목</tr>
-                <tr>작성자 </tr>
+                <tr>작성자</tr>
                 <br/>
                 <tr>게시글 내용</tr>
                 {/* <tr>댓글</tr> 나중에 구현 */} 
