@@ -1,12 +1,48 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
 import '../../css/Layout.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import MyPageContext from '../MyPageContext';
 
 const Header = () => {
+    const { loginMember, setLoginMember } = useContext(MyPageContext);
+    const [id, setId] = useState("");
+    const [pw, setPw] = useState("");
+    const navigate = useNavigate();
+
+    const logout = () => {
+        setId("");
+        setPw("");
+        setLoginMember(null);
+        localStorage.removeItem("loginMember");
+        console.log("로그인 멤버 : " + id + pw);
+    };
+
+    const afterLoginNavigate = (number) => {
+        switch (number) {
+            case 1:
+                loginMember ? navigate("/GoodsShop") : navigate("/Login");
+                break;
+            case 2:
+                loginMember ? navigate("/ShoppingBasket") : navigate("/Login");
+                break;
+            case 3:
+                loginMember ? navigate("/LiveStreamingPage") : navigate("/Login");
+                break;
+            case 4:
+                loginMember ? navigate("/boardPosting") : navigate("/Login");
+                break;
+            case 5:
+                loginMember ? navigate("/mypage") : navigate("/Login");
+                break;
+            default:
+                break;
+        }
+
+    }
 
     return (
         <header>
@@ -27,21 +63,15 @@ const Header = () => {
                     </Form>
                 </div>
                 <div className="login-session">
-                {/* 
-                {isLogin ?
-                <div>
-                    <p>{memberName}님 환영합니다.</p>
-                    <a href="#">로그아웃</a>  
-                </div>  
-                :
-                    <a className="login-hypertext">로그인</a>
-                }
-                */}
-                <Link to="/login" className="login-hypertext">로그인</Link>
-                <div>
-                    <p className="login-hypertext">님 환영합니다.</p>
-                    <a href="#" className="login-hypertext">로그아웃</a>  
-                </div>  
+                    {loginMember
+                        ?
+                        <div >
+                            <p className="login-hypertext">{loginMember.memberName}님 환영합니다.</p>
+                            <button className="logout-button" onClick={logout}>로그아웃</button>
+                        </div>
+                        :
+                        <Link to="/login" className="login-hypertext">로그인</Link>
+                    }
                 </div>
             </div>
 
@@ -50,26 +80,21 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center">
                         <Nav className="d-flex">
-                            <Nav.Link href="#link" className="item" style={{ marginLeft: "140px" }}>갤러리</Nav.Link>
+                            <Nav.Link href="galleryBoard" className="item" style={{ marginLeft: "140px" }}>갤러리</Nav.Link>
                             <NavDropdown title="용품 장터" id="basic-nav-dropdown" className="item">
-                                <NavDropdown.Item href="#action/3.1">메인 장터</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">중고 장터</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">장바구니</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => afterLoginNavigate(1)}>메인 장터</NavDropdown.Item>
+                                <NavDropdown.Item href="usedMarket">중고 장터</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => afterLoginNavigate(2)}>장바구니</NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown title="구장 모음" id="basic-nav-dropdown" className="item">
-                                <NavDropdown.Item href="#action/3.1">구장 목록</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">구장 찾기</NavDropdown.Item>
+                                <NavDropdown.Item href="StadiumList">구장 목록</NavDropdown.Item>
+                                <NavDropdown.Item href="StadiumSearch">구장 찾기</NavDropdown.Item>
                             </NavDropdown>
-                            <NavDropdown title="라이브" id="basic-nav-dropdown" className="item">
-                                <NavDropdown.Item href="LiveStreamingPage">라이브 경기 보러 가기</NavDropdown.Item>
-                            </NavDropdown>
-                            <NavDropdown title="고객센터" id="basic-nav-dropdown" className="item">
-                                <NavDropdown.Item href="#action/3.1">1:1문의</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">FAQ</NavDropdown.Item>
-                            </NavDropdown>
+                            <Nav.Link className="item" onClick={() => afterLoginNavigate(3)}>라이브</Nav.Link>
+                            <Nav.Link href="boardMain" className="item" >고객센터</Nav.Link>
                             <NavDropdown title="마이페이지" id="basic-nav-dropdown" className="item">
-                                <NavDropdown.Item href="#action/3.1">내 정보 수정</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">평가하기</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => afterLoginNavigate(5)}>내 정보 수정</NavDropdown.Item>
+                                <NavDropdown.Item href="stadiumInfo">평가하기</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>

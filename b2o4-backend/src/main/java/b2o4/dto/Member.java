@@ -12,4 +12,5 @@ public class Member {
 	private String memberId;
 	private String memberPw;
 	private String memberName;
+	private String memberProfile;
 }

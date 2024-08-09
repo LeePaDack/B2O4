@@ -1,7 +1,5 @@
 package b2o4.dto;
 
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +16,5 @@ public class ChatLog {
 	private int msgNo;
 	private String memberId;
 	private String msgContent;
-	private LocalDateTime msgAt;
+	private String msgAt;
 }

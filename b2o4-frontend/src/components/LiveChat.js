@@ -7,7 +7,7 @@ import axios from 'axios';
 import MyPageContext from './MyPageContext';
 
 const LiveChat = () => {
-  const { loginMember, setLoginMember } = useContext(MyPageContext);
+  const { loginMember } = useContext(MyPageContext);
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
   const [stompClient, setStompClient] = useState(null);
@@ -15,6 +15,7 @@ const LiveChat = () => {
   const [emojiPick, setEmojiPick] = useState(false);
   const [freezeChat, setFreezeChat] = useState(false);
   const messagesContainerRef = useRef(null);
+  //const [allMessages, setAllMessages] = useState([]);
 
   // 서버에 요청 보내서 일반 사용자들에게 뿌리는 기능
   useEffect(() => {
@@ -55,7 +56,7 @@ const LiveChat = () => {
     };
   }, [freezeChat]);
 
-  // 최신 채팅이 일어난 곳으로 채팅창 스크롤만 움직이게 하는 기능
+  // 최신 채팅이 일어난 곳으로 채팅창 스크롤만 움직이게 하기
   useEffect(() => {
     if (messagesContainerRef.current) {
       messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
@@ -79,15 +80,15 @@ const LiveChat = () => {
       const msgAt = timeFormat(new Date());
       stompClient.publish({
         destination: '/app/chat.send', //java 쪽의 컨트롤러(@MessageMapping)와 맞춰서 작성
-        body: JSON.stringify({ 
-          profile: memberProfile, 
-          sender: loginMember.memberId, 
+        body: JSON.stringify({
+          profile: memberProfile,
+          sender: loginMember.memberId,
           content: message,
-          time: msgAt
-         })
+          time: msgAt,
+        })
       });
       setMessage('');
-    } 
+    }
     else if (!connected) {
       console.error('연결이 안됩니다. 관리자에 문의하세요.');
     }
@@ -113,14 +114,16 @@ const LiveChat = () => {
   }
 
   //채팅 메시지 삭제
-  const deleteMessage = async (msgNo) => {
-    await axios.delete(`/chat`, {
-      params: { msgNo }
+  const deleteMessage = async ({ msgContent, msgAt }) => {
+    console.log("삭제할 메시지 내용:", msgContent);
+    console.log("삭제할 메시지 시간:", msgAt);
+
+    await axios.delete('/chat', {
+      params: { msgContent, msgAt }
     });
-    console.log("삭제할 msgNo:", msgNo);
-    console.log("Current messages before filter:", messages);
-    setMessages(messages.filter((message, index) => index !== msgNo));
-  }
+
+
+  };
 
   //채팅창 전체 동결
   const handleFreezeChat = () => {
@@ -134,19 +137,34 @@ const LiveChat = () => {
       });
     }
   }
+  /*
+  //메시지 다 불러오기
+  const getAllMessages = async () => {
+    await axios.get("/chat/all")
+    .then(res => {
+      setAllMessages(res.data);
+    })
+  }
 
-  console.log(messages); 
+  useEffect(() => {
+    getAllMessages();
+  },[messages])
+  
+  console.log(allMessages);
+  */
+  console.log(messages);
   return (
     <div className='chat-container'>
       <div className='messages' ref={messagesContainerRef}>
-        {messages.map((msg, index) => (
-          <div key={index} className='message'>
-            <img src='/images/7132704024_2895716_f9016d68ea114f85f67b2f4619f3914d.jpeg' alt="profileImage" className='profile-image' />
+        {messages.map((msg, msgNo) => (
+          <div key={msgNo} className='message'>
+            <img src={msg.profile} alt="profileImage" className='profile-image' />
             <div className='message-content'>
               <strong>{msg.sender}</strong>
               <p>{msg.content} <span className='time-text'>{msg.time}</span></p>
             </div>
-            <button className='deleteBtn' onClick={() => deleteMessage(index)}>X</button>
+            <button className='deleteBtn'
+              onClick={() => deleteMessage({ msgContent: msg.content, msgAt: msg.time })}>X</button>
           </div>
         ))}
       </div>

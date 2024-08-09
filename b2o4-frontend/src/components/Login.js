@@ -10,11 +10,12 @@ const Login = () => {
 
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+  const [profile, setProfile] = useState("");
 
   const login = () => {
-    axios.post("/login", { memberId: id, memberPw: pw }).then((response) => {
+    axios.post("/login", { memberId: id, memberPw: pw, memberProfile: profile }).then((response) => {
       const { data } = response;
-      console.log(data);
+      console.log("로그인 정보 : ", data);
 
       if (data.loginMember === null) {
         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
@@ -33,6 +34,7 @@ const Login = () => {
   const logout = () => {
     setId("");
     setPw("");
+    setProfile("");
     setLoginMember(null);
     localStorage.removeItem("loginMember");
     console.log("로그인 멤버 : " + id);

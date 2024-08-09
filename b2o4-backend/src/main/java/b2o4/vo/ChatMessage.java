@@ -10,5 +10,7 @@ public class ChatMessage {
     private String content;
     private String profile;
     private String time;
+    private String isoTime;
+    
 }
 

@@ -7,8 +7,8 @@
         INSERT INTO LiveChatMessage(memberId, msgContent, msgAt) VALUES (#{memberId}, #{msgContent}, now())
     </insert>
 	
-	<!-- 채팅 삭제 -->
-	<delete id="deleteChatMessage" parameterType="int">
-		DELETE FROM LiveChatMessage WHERE msgNo = #{msgNo}
-	</delete>
+    <!-- 채팅 삭제 -->
+    <delete id="deleteChatMessage" parameterType="Map">
+        DELETE FROM LiveChatMessage WHERE msgContent = #{msgContent} AND msgAt = #{msgAt}
+    </delete>
 </mapper>

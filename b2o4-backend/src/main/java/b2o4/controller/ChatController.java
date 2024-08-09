@@ -1,6 +1,10 @@
 package b2o4.controller;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,15 +29,15 @@ public class ChatController {
     
     private boolean freezeChat = false;
     private boolean streamingBegin = false;
+    ChatLog chatLog = new ChatLog();
     
     //채팅 주고받게 하기
     @MessageMapping("/chat.send")
     @SendTo("/topic/messages")
     public ChatMessage send(ChatMessage message) {
-    	ChatLog chatLog = new ChatLog();
     	chatLog.setMemberId(message.getSender()); // 유저 id
     	chatLog.setMsgContent(message.getContent()); // 유저 채팅
-    	chatLog.setMsgAt(LocalDateTime.now()); //채팅 등록 시간
+    	
     	
     	System.out.println("리액트에서 들어온 메시지 : " + message.getContent());
     	System.out.println("채팅입력한 멤버 아이디 : " + chatLog.getMemberId());
@@ -49,12 +53,21 @@ public class ChatController {
     	chatService.recordChatMessage(log);
     }
     
+    /*
+    @GetMapping("/chat/all")
+    public List<ChatLog> getAllMessages(){
+    	return chatService.getAllMessages();
+    }
+    */
+    
     //삭제할 채팅
     @DeleteMapping("/chat")
-    public ResponseEntity<String> deleteChatMessage(@RequestParam("msgNo") int msgNo) {
-		System.out.println("삭제할 msgNo: " + msgNo);
-		chatService.deleteChatMessage(msgNo);
-		return ResponseEntity.ok("삭제 되냐?");
+    public ResponseEntity<String> deleteChatMessage(
+        @RequestParam("msgContent") String msgContent,
+        @RequestParam("msgAt") String msgAt
+    ) {
+        chatService.deleteChatMessage(msgContent, msgAt);   
+        return ResponseEntity.ok("삭제 되냐?");
     }
     
     // 채팅 동결 전환
