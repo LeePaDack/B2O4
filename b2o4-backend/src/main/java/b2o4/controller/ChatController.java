@@ -1,9 +1,6 @@
 package b2o4.controller;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +34,14 @@ public class ChatController {
     public ChatMessage send(ChatMessage message) {
     	chatLog.setMemberId(message.getSender()); // 유저 id
     	chatLog.setMsgContent(message.getContent()); // 유저 채팅
+    	//chatLog.setMsgAt(message.getTime());
     	
     	
+    	DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    	String msgAt = LocalDateTime.now().format(timeFormat);
+    	chatLog.setMsgAt(msgAt);
+    	
+
     	System.out.println("리액트에서 들어온 메시지 : " + message.getContent());
     	System.out.println("채팅입력한 멤버 아이디 : " + chatLog.getMemberId());
     	System.out.println("로그로 들어온 메시지 : " + chatLog.getMsgContent());
@@ -52,16 +55,9 @@ public class ChatController {
     public void recordChatMessage(@RequestBody ChatLog log) {
     	chatService.recordChatMessage(log);
     }
-    
-    /*
-    @GetMapping("/chat/all")
-    public List<ChatLog> getAllMessages(){
-    	return chatService.getAllMessages();
-    }
-    */
-    
+
     //삭제할 채팅
-    @DeleteMapping("/chat")
+    @DeleteMapping("/chat/delete")
     public ResponseEntity<String> deleteChatMessage(
         @RequestParam("msgContent") String msgContent,
         @RequestParam("msgAt") String msgAt

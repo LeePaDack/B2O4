@@ -9,8 +9,8 @@ public class ChatMessage {
     private String sender;
     private String content;
     private String profile;
-    private String time;
-    private String isoTime;
+    private String viewedTime;
+    private String formattedTime;
     
 }
 

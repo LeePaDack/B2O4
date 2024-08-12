@@ -21,7 +21,8 @@ public class ChatServiceImpl implements ChatService{
 	
     @Override
     public void deleteChatMessage(@Param("msgContent") String msgContent, @Param("msgAt") String msgAt) {
-        System.out.println("삭제할 채팅내역: " + msgContent);
+    	
+        System.out.println("삭제할 채팅시간: " + msgAt + " 내용 :" +msgContent);
         mapper.deleteChatMessage(msgContent, msgAt);
     }
 	

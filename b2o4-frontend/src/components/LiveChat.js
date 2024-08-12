@@ -5,6 +5,7 @@ import '../css/Streaming.css';
 import Emoji from './Emoji';
 import axios from 'axios';
 import MyPageContext from './MyPageContext';
+import moment from 'moment';
 
 const LiveChat = () => {
   const { loginMember } = useContext(MyPageContext);
@@ -63,28 +64,18 @@ const LiveChat = () => {
     }
   }, [messages]);
 
-  const timeFormat = (date) => {
-    const timeFormat = new Intl.DateTimeFormat('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true
-    }).format(date).toLowerCase();
-
-    return timeFormat;
-  }
-
   // 메시지 보내기
   const sendMessage = () => {
     if (stompClient && connected && message) {
       const memberProfile = loginMember.memberProfile;
-      const msgAt = timeFormat(new Date());
       stompClient.publish({
         destination: '/app/chat.send', //java 쪽의 컨트롤러(@MessageMapping)와 맞춰서 작성
         body: JSON.stringify({
           profile: memberProfile,
           sender: loginMember.memberId,
           content: message,
-          time: msgAt,
+          viewedTime: moment().format("hh:mm a"),          
+          formattedTime : moment().format("YYYY-MM-DD HH:mm:ss")
         })
       });
       setMessage('');
@@ -118,11 +109,10 @@ const LiveChat = () => {
     console.log("삭제할 메시지 내용:", msgContent);
     console.log("삭제할 메시지 시간:", msgAt);
 
-    await axios.delete('/chat', {
+    await axios.delete('/chat/delete', {
       params: { msgContent, msgAt }
     });
-
-
+    setMessages(messages.filter(message => !(message.content === msgContent && message.formattedTime === msgAt)));  
   };
 
   //채팅창 전체 동결
@@ -137,21 +127,7 @@ const LiveChat = () => {
       });
     }
   }
-  /*
-  //메시지 다 불러오기
-  const getAllMessages = async () => {
-    await axios.get("/chat/all")
-    .then(res => {
-      setAllMessages(res.data);
-    })
-  }
 
-  useEffect(() => {
-    getAllMessages();
-  },[messages])
-  
-  console.log(allMessages);
-  */
   console.log(messages);
   return (
     <div className='chat-container'>
@@ -161,10 +137,11 @@ const LiveChat = () => {
             <img src={msg.profile} alt="profileImage" className='profile-image' />
             <div className='message-content'>
               <strong>{msg.sender}</strong>
-              <p>{msg.content} <span className='time-text'>{msg.time}</span></p>
+              <p>{msg.content} <span className='time-text'>{msg.viewedTime}</span></p>
             </div>
-            <button className='deleteBtn'
-              onClick={() => deleteMessage({ msgContent: msg.content, msgAt: msg.time })}>X</button>
+            <button className='deleteBtn' onClick={() => deleteMessage({ msgContent: msg.content, msgAt: msg.formattedTime })}>
+              X
+            </button>
           </div>
         ))}
       </div>
