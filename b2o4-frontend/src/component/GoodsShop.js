@@ -18,6 +18,7 @@ const GoodsShop = () => {
     }, []);
 
 
+  //장바구니 추가
   const addToShoppingBasket = (good) => {
     const basketItem = {
       memberNo: 1, // 실제 로그인한 회원 번호를 사용
@@ -57,8 +58,8 @@ const GoodsShop = () => {
                         <p>상품가격 : {good.goodsPrice.toLocaleString()}</p>
                         <p>사이즈 : {good.goodsSize}</p>
                         <p>판매상태 : {good.goodsSellNow ? "판매중" : "판매중지"}</p>
-                        
                       </Link>
+                      
                       <button onClick={() => addToShoppingBasket(good)}>장바구니에 추가</button>
                     </div>
                   );

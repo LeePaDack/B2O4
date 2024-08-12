@@ -46,8 +46,8 @@ const GoodsDetail = ({ loginMember, userCartItem, checkLogin }) => {
       </div>
 
 
-      <div className="detail-sizeSelect">
       {/* 사이즈 선택 */}
+      <div className="detail-sizeSelect">
         <label htmlFor="size-select">사이즈 선택 : </label>
         <select id="size-select" value={selectSize} onChange={handleSizeChange}>
           {good.goodsSize.split(",").map((size, index) => (
