@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import './css/GoodsDetail.css';
-import addShoppingBasket from "./ShoppingBasket";
-import { Dropdown } from "bootstrap";
+import ShoppingBasket from "./ShoppingBasket";
+import axios from "axios";
 
 // 디테일
-const GoodsDetail = ({ loginMember, userCartItem, checkLogin }) => {
+const GoodsDetail = ({ loginMember, userBasketItem, checkLogin }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const good = location.state.good;
@@ -18,11 +18,11 @@ const GoodsDetail = ({ loginMember, userCartItem, checkLogin }) => {
 
   
   // 선택한 사이즈
-  const [selectSize, setSelectSize] = useState(good.goodsSize[0]);
+  const [selectSize, setSelectSize] = useState(good.goodsSize.split(",")[0]);
 
   // 사이즈 선택
-  const handleSizeChange = (event) => {
-    setSelectSize(event.target.value);
+  const handleSizeChange = (e) => {
+    setSelectSize(e.target.value);
   };
 
 
@@ -33,6 +33,30 @@ const GoodsDetail = ({ loginMember, userCartItem, checkLogin }) => {
   console.log(imgSrc2);
 
 
+  // 장바구니에 추가
+  const addToShoppingBasket = () => {
+    const basketItem = {
+      memberNo: loginMember.memberNo,
+      goodsNo: good.goodsNo,
+      goodsQuantity: 1,
+      basketTotal: good.goodsPrice,
+      goodsSize: selectSize
+    };
+
+    axios.post('http://localhost:9000/basket/add', basketItem)
+      .then(() => {
+        alert("장바구니에 추가되었습니다.");
+      })
+      .catch(err => {
+        console.error("Error: ", err);
+      });
+  };
+
+
+
+
+
+  
   return (
     <div className="detail-container">
       <h2>{good.goodsName}</h2>
@@ -51,16 +75,14 @@ const GoodsDetail = ({ loginMember, userCartItem, checkLogin }) => {
         <label htmlFor="size-select">사이즈 선택 : </label>
         <select id="size-select" value={selectSize} onChange={handleSizeChange}>
           {good.goodsSize.split(",").map((size, index) => (
-            <option key={index} value={size}>
-              {size}
-            </option>
+            <option key={index} value={size}> {size} </option>
           ))}
       </select>
       </div>
 
 
       <div className="buttons">
-        <button className="basketAdd-button" onClick={() => addShoppingBasket(good, loginMember, userCartItem, checkLogin)}>장바구니에 추가</button>
+        <button className="basketAdd-button" onClick={() => ShoppingBasket(good, loginMember, userBasketItem, checkLogin)}>장바구니에 추가</button>
         <button className="back-button" onClick={returnToGoodsShop} >샵으로 돌아가기</button>
       </div>
     </div>

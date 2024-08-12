@@ -18,7 +18,7 @@ const GoodsShop = () => {
     }, []);
 
 
-  //장바구니 추가
+  //장바구니에 상품추가
   const addToShoppingBasket = (good) => {
     const basketItem = {
       memberNo: 1, // 실제 로그인한 회원 번호를 사용

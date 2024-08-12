@@ -18,4 +18,5 @@ public class ShoppingBasket {
 	private int goodsNo;
 	private String goodsQuantity;
 	private int basketTotal;
+	private String goodsSize;
 }
