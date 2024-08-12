@@ -31,7 +31,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("idCheck")
-	public int idCheck(@RequestParam("id") String id) {
+	public int idCheck(@RequestParam String id) {
 		return memberService.idCheck(id);
 	}
 	

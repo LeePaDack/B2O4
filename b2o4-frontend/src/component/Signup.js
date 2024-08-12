@@ -1,297 +1,347 @@
 import React, { useState } from "react";
+import './Signup.css'; // CSS 파일을 별도로 분리하여 불러옵니다.
 
 const Signup = () => {
-  const [memberId, setId] = useState('');
-  const [memberPw, setPw] = useState('');
-  const [memberPwCheck, setPwCheck] = useState('');
-  const [memberEmail, setEmail] = useState('');
-  const [memberName, setName] = useState('');
-  const [memberBirth, setBirth] = useState('');
-  const [memberPhone, setPhone] = useState('');
-  const [memberAddress, setAddress] = useState('');
-  const [memberProfile, setProfile] = useState('F');
+    // State 관리
+    const [formData, setFormData] = useState({
+        id: '',
+        pw: '',
+        pwCheck: '',
+        name: '',
+        email: '',
+        birth: '',
+        phone: '',
+        address: '',
+        profileImage: null,
+    });
+    const [previewImage, setPreviewImage] = useState(null); // 이미지 미리보기 상태 추가
+    const [result, setResult] = useState('');
 
-  const [idError, setIdError] = useState('');
-  const [pwError, setPwError] = useState('');
-  const [pwCheckError, setPwCheckError] = useState('');
-  const [nameError, setNameError] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [birthError, setBirthError] = useState('');
-  const [phoneError, setPhoneError] = useState('');
-  const [isIdAvailable, setIsIdAvailable] = useState(false);
+    const [idValidation, setIdValidation] = useState(false);
+    const [idError, setIdError] = useState('');
+    const [pwError, setPwError] = useState('');
+    const [pwCheckError, setPwCheckError] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [birthError, setBirthError] = useState('');
+    const [phoneError, setPhoneError] = useState('');
 
-  // 정규식을 통한 유효성 검사 함수들
- const validateId = (id) => {
-  const idRegex = /^[a-zA-Z0-9]{4,8}$/;
-  return idRegex.test(id);
-};
+    // 정규식
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\d{3}-\d{3,4}-\d{4}$/;
+    const birthRegex = /^\d{4}-\d{2}-\d{2}$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // 최소 8자, 최소 하나의 문자 및 숫자
 
-const validatePw = (pw) => {
-  const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-  return pwRegex.test(pw);
-};
+    // 입력값 변경 핸들러
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
 
-const validateName = (name) => {
-  const nameRegex = /^[가-힣]{2,5}$/;
-  return nameRegex.test(name);
-};
-
-const validateEmail = (email) => {
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  return emailRegex.test(email);
-};
-
-const validateBirth = (birth) => {
-  const birthRegex = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))$/;
-  return birthRegex.test(birth);
-};
-
-const validatePhone = (phone) => {
-  const phoneRegex = /^[0-9]{8,12}$/;
-  return phoneRegex.test(phone);
-};
-  // 입력 필드 핸들러 함수들
-const handleIdChange = (e) => {
-  setId(e.target.value);
-};
- // 아이디 중복 체크 함수
-  const checkIdAvailability = () => {
-    if (!validateId(memberId)) {
-      setIdError('아이디는 4-8자의 영문, 숫자만 가능합니다.');
-      setIsIdAvailable(false);
-      return;
-    }
-  // API 호출을 통해 아이디 중복 여부 확인
-    fetch('idCheck?memberId=' + memberId) 
-      .then(response => response.json())
-      .then(result => {
-        if (!result) {
-          setIdError('');
-          setIsIdAvailable(true);
-          alert('사용 가능한 아이디입니다.');
-        } else {
-          setIdError('중복된 아이디입니다.');
-          setIsIdAvailable(false);
+        // 입력값 유효성 검사 및 오류 메시지 설정
+        switch (name) {
+            case 'pw':
+                if (value && !passwordRegex.test(value)) {
+                    setPwError('비밀번호는 최소 8자, 최소 하나의 문자 및 숫자를 포함해야 합니다.');
+                } else {
+                    setPwError('');
+                }
+                break;
+            case 'pwCheck':
+                if (value && value !== formData.pw) {
+                    setPwCheckError('비밀번호가 일치하지 않습니다.');
+                } else {
+                    setPwCheckError('');
+                }
+                break;
+            case 'email':
+                if (value && !emailRegex.test(value)) {
+                    setEmailError('유효하지 않은 이메일 형식입니다.');
+                } else {
+                    setEmailError('');
+                }
+                break;
+            case 'birth':
+                if (value && !birthRegex.test(value)) {
+                    setBirthError('유효하지 않은 생년월일 형식입니다. (예: 1990-01-01)');
+                } else {
+                    setBirthError('');
+                }
+                break;
+            case 'phone':
+                if (value && !phoneRegex.test(value)) {
+                    setPhoneError('유효하지 않은 핸드폰 번호 형식입니다. (예: 010-1234-5678)');
+                } else {
+                    setPhoneError('');
+                }
+                break;
+            default:
+                break;
         }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        setIdError('아이디 확인 중 오류가 발생했습니다.');
-      });
-  };
-// 비밀번호 변경 핸들러
-  const handlePwChange = (e) => {
-    const value = e.target.value;
-    setPw(value);
-    if (!validatePw(value)) {
-      setPwError('비밀번호는 특수문자, 영어, 숫자를 포함한 최소 8글자여야 합니다.');
-    } else {
-      setPwError('');
-    }
-  };
- // 이름 변경 핸들러
-  const handlePwCheckChange = (e) => {
-    const value = e.target.value;
-    setPwCheck(value);
-    if (value !== memberPw) {
-      setPwCheckError('비밀번호가 일치하지 않습니다.');
-    } else {
-      setPwCheckError('');
-    }
-  };
-// 이메일 변경 핸들러
-  const handleNameChange = (e) => {
-    const value = e.target.value;
-    setName(value);
-    if (!validateName(value)) {
-      setNameError('이름은 2-5자의 한글만 가능합니다.');
-    } else {
-      setNameError('');
-    }
-  };
- // 생년월일 변경 핸들러
-  const handleEmailChange = (e) => {
-    const value = e.target.value;
-    setEmail(value);
-    if (!validateEmail(value)) {
-      setEmailError('유효한 이메일 형식을 입력해주세요.');
-    } else {
-      setEmailError('');
-    }
-  };
- // 전화번호 변경 핸들러
-  const handleBirthChange = (e) => {
-    const value = e.target.value;
-    setBirth(value);
-    if (!validateBirth(value)) {
-      setBirthError('유효한 생년월일 형식을 입력해주세요 (예: 880704)');
-    } else {
-      setBirthError('');
-    }
-  };
- // 프로필 파일 업로드 핸들러
-  const handlePhoneChange = (e) => {
-    const value = e.target.value;
-    setPhone(value);
-    if (!validatePhone(value)) {
-      setPhoneError('유효한 전화번호 형식을 입력해주세요.');
-    } else {
-      setPhoneError('');
-    }
-  };
-// 회원가입 요청 처리 함수
-  const handleProfileUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setProfile(file);
-    }
-  };
-  // 회원가입 요청 처리 함수
-  const handleSignup = () => {
-    // 필수 입력 필드 확인 및 유효성 검사 결과 확인
-    if (!memberId || !memberPw || !memberPwCheck || !memberEmail || !memberName || !memberBirth || !memberPhone || idError || pwError || pwCheckError || nameError || emailError || birthError || phoneError || !isIdAvailable) {
-      alert('모든 필수 입력 필드를 올바르게 입력해 주세요.');
-      return;
-    }
-     // FormData를 이용해 회원 정보를 서버에 전송
-    const formData = new FormData();
-    formData.append('memberId', memberId);
-    formData.append('memberPw', memberPw);
-    formData.append('memberEmail', memberEmail);
-    formData.append('memberName', memberName);
-    formData.append('memberBirth', memberBirth);
-    formData.append('memberPhone', memberPhone);
-    formData.append('memberAddress', memberAddress);
-    formData.append('memberProfile', memberProfile);
-    
-    fetch("/register", {
-      method: "POST",
-      body: formData
-    })
-      .then(response => {
-        if (response.ok) {
-           // 회원가입 성공 시 입력 필드 초기화
-          alert('회원가입 성공!');
-          setId('');
-          setPw('');
-          setPwCheck('');
-          setEmail('');
-          setName('');
-          setBirth('');
-          setPhone('');
-          setAddress('');
-          setProfile('');
-        } else {
-          alert('회원가입 실패');
-        }
-      })
-      .catch(error => {
-        console.error('Error registering:', error);
-        alert('회원가입 중 오류가 발생했습니다.');
-      });
-  };
+    };
 
-  return (
-    <div className="signup-container">
-      <label>
-        아이디
-        <div className="input-container">
-          <input
-            type="text"
-            onChange={handleIdChange}
-            value={memberId}
-            className={idError ? 'id-err' : ''}
-          />
-          <button onClick={checkIdAvailability}>중복 검사</button>
+    // 아이디 중복 확인 함수
+    const checkIdAvailability = () => {
+        const { id } = formData;
+
+        if (id.trim().length < 4) {
+            setIdValidation(false);
+            setIdError('아이디는 4글자 이상이어야 합니다.');
+            return;
+        }
+
+        fetch(`/idCheck?id=${id}`)
+            .then(response => response.text())
+            .then(result => {
+                if (Number(result) === 0) {
+                    setIdValidation(true);
+                    setIdError('사용 가능한 아이디입니다.');
+                } else {
+                    setIdValidation(false);
+                    setIdError('이미 사용 중인 아이디입니다.');
+                }
+            })
+            .catch(() => {
+                setIdValidation(false);
+                setIdError('아이디 확인 중 오류가 발생했습니다.');
+            });
+    };
+
+    // 회원가입 처리 함수
+    const handleSignup = () => {
+        const { id, pw, pwCheck, email, birth, phone } = formData;
+
+        if (!idValidation) {
+            alert('아이디가 유효하지 않습니다.');
+            return;
+        }
+
+        if (!passwordRegex.test(pw)) {
+            alert('비밀번호를 다시 확인하세요.');
+            return;
+        }
+
+        if (pw !== pwCheck) {
+            alert('비밀번호가 일치하지 않습니다.');
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            alert('유효하지 않은 이메일 형식입니다.');
+            return;
+        }
+
+        if (!birthRegex.test(birth)) {
+            alert('유효하지 않은 생년월일 형식입니다. (예: 1990-01-01)');
+            return;
+        }
+
+        if (!phoneRegex.test(phone)) {
+            alert('유효하지 않은 핸드폰 번호 형식입니다. (예: 010-1234-5678)');
+            return;
+        }
+
+        const data = new FormData();
+        for (let key in formData) {
+            data.append(key, formData[key]);
+        }
+
+        fetch("/signup", {
+            method: "POST",
+            body: data,
+        })
+            .then(response => response.text())
+            .then(result => {
+                if (Number(result) > 0) {
+                    setResult('회원가입 성공');
+                    resetForm(); // 입력 필드 초기화 함수 호출
+                } else {
+                    setResult('회원가입 실패');
+                }
+            })
+            .catch(() => setResult('회원가입 중 오류가 발생했습니다.'));
+    };
+
+    // 이미지 선택 핸들러
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        setFormData(prevState => ({
+            ...prevState,
+            profileImage: file,
+        }));
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPreviewImage(reader.result);
+        };
+        reader.readAsDataURL(file);
+    };
+
+    // 입력 폼 초기화 함수
+    const resetForm = () => {
+        setFormData({
+            id: '',
+            pw: '',
+            pwCheck: '',
+            name: '',
+            email: '',
+            birth: '',
+            phone: '',
+            address: '',
+            profileImage: null,
+        });
+        setPreviewImage(null);
+        setIdError(''); // 성공 시 에러 메시지 초기화
+        setPwError('');
+        setPwCheckError('');
+        setEmailError('');
+        setBirthError('');
+        setPhoneError('');
+    };
+
+    return (
+        <div className="signup-container">
+            <label>
+                아이디
+                <input
+                    type="text"
+                    name="id"
+                    onChange={handleChange}
+                    value={formData.id}
+                    className={idValidation || !formData.id ? '' : 'id-err'}
+                />
+                {idError && (
+                    <div style={{ color: 'red' }}>
+                        {idError}
+                    </div>
+                )}
+            </label>
+            <button onClick={checkIdAvailability}>중복확인</button>
+
+            <label>
+                비밀번호
+                <input
+                    type="password"
+                    name="pw"
+                    onChange={handleChange}
+                    value={formData.pw}
+                />
+                {pwError && formData.pw && (
+                    <div style={{ color: 'red' }}>
+                        {pwError}
+                    </div>
+                )}
+            </label>
+
+            <label>
+                비밀번호 확인
+                <input
+                    type="password"
+                    name="pwCheck"
+                    onChange={handleChange}
+                    value={formData.pwCheck}
+                />
+                {pwCheckError && formData.pwCheck && (
+                    <div style={{ color: 'red' }}>
+                        {pwCheckError}
+                    </div>
+                )}
+            </label>
+
+            <label>
+                이름
+                <input
+                    type="text"
+                    name="name"
+                    onChange={handleChange}
+                    value={formData.name}
+                />
+            </label>
+
+            <label>
+                이메일
+                <input
+                    type="email"
+                    name="email"
+                    onChange={handleChange}
+                    value={formData.email}
+                />
+                {emailError && formData.email && (
+                    <div style={{ color: 'red' }}>
+                        {emailError}
+                    </div>
+                )}
+            </label>
+
+            <label>
+                생년월일
+                <input
+                    type="text"
+                    name="birth"
+                    onChange={handleChange}
+                    value={formData.birth}
+                    placeholder="YYYY-MM-DD"
+                />
+                {birthError && formData.birth && (
+                    <div style={{ color: 'red' }}>
+                        {birthError}
+                    </div>
+                )}
+            </label>
+
+            <label>
+                핸드폰번호
+                <input
+                    type="text"
+                    name="phone"
+                    onChange={handleChange}
+                    value={formData.phone}
+                    placeholder="010-1234-5678"
+                />
+                {phoneError && formData.phone && (
+                    <div style={{ color: 'red' }}>
+                        {phoneError}
+                    </div>
+                )}
+            </label>
+
+            <label>
+                주소
+                <input
+                    type="text"
+                    name="address"
+                    onChange={handleChange}
+                    value={formData.address}
+                />
+            </label>
+
+            <label>
+                프로필 이미지
+                <input
+                    type="file"
+                    onChange={handleImageChange}
+                    accept="image/*"
+                />
+            </label>
+
+            {previewImage && (
+                <div className="image-preview">
+                    <img
+                        src={previewImage}
+                        alt="프로필 미리보기"
+                        style={{ width: '100px', height: '100px' }}
+                    />
+                </div>
+            )}
+
+            <button onClick={handleSignup}>가입하기</button>
+
+            <hr />
+
+            <h3>{result}</h3>
         </div>
-        {idError && <div style={{ color: 'red' }}>{idError}</div>}
-      </label>
-      <br />
-      <label>
-        비밀번호
-        <input
-          type="password"
-          onChange={handlePwChange}
-          value={memberPw}
-        />
-        {pwError && <div style={{ color: 'red' }}>{pwError}</div>}
-      </label>
-      <br />
-      <label>
-        비밀번호 일치확인
-        <input
-          type="password"
-          onChange={handlePwCheckChange}
-          value={memberPwCheck}
-        />
-        {pwCheckError && <div style={{ color: 'red' }}>{pwCheckError}</div>}
-      </label>
-      <br />
-      <label>
-        이름
-        <input
-          type="text"
-          onChange={handleNameChange}
-          value={memberName}
-        />
-        {nameError && <div style={{ color: 'red' }}>{nameError}</div>}
-      </label>
-      <br />
-      <label>
-        이메일
-        <div className="input-container">
-          <input
-            type="email"
-            onChange={handleEmailChange}
-            value={memberEmail}
-          />
-        </div>
-        {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
-      </label>
-      <br />
-      <label>
-        생년월일
-        <input
-          type="text"
-          onChange={handleBirthChange}
-          value={memberBirth}
-        />
-        {birthError && <div style={{ color: 'red' }}>{birthError}</div>}
-      </label>
-      <br />
-      <label>
-        휴대폰번호
-        <input
-          type="text"
-          onChange={handlePhoneChange}
-          value={memberPhone}
-        />
-        {phoneError && <div style={{ color: 'red' }}>{phoneError}</div>}
-      </label>
-      <br />
-      <label>
-        주소
-        <input
-          type="text"
-          onChange={e => setAddress(e.target.value)}
-          value={memberAddress}
-        />
-      </label>
-      <br />
-      <label>
-        프로필
-        <input
-          type="file"
-          onChange={handleProfileUpload}
-        />
-        {memberProfile && (
-          <span>File selected: {memberProfile.name}</span>
-        )}
-      </label>
-      <br />
-      <button onClick={handleSignup}>가입하기</button>
-    </div>
-  );
-}
+    );
+};
 
 export default Signup;
