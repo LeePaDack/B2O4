@@ -30,9 +30,11 @@ public class GalleryController {
     @PostMapping("/upload")
     public ResponseEntity<String> uploadImages(@RequestParam("files") MultipartFile[] files,
                                                @RequestParam("title") String title,
-                                               @RequestParam("content") String content) {
+                                               @RequestParam("content") String content,
+                                               @RequestParam("memberNo") int memberNo,
+                                               @RequestParam("memberName") String memberName) {
         try {
-        	galleryService.uploadImages(files, title, content);
+        	galleryService.uploadImages(files, title, content, memberNo, memberName);
             return ResponseEntity.ok("이미지 업로드 성공");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -53,7 +55,8 @@ public class GalleryController {
 		return galleryService.GalleryDetail(gbPostNo);
 	}
 	
-	@DeleteMapping("{gbpostNo}")
+	// 갤러리 삭제하기
+	@DeleteMapping("/{gbPostNo}")
 	public int deleteGallery(@PathVariable("gbPostNo") int gbPostNo) {
 		return galleryService.deleteGallery(gbPostNo);
 	}

@@ -11,5 +11,6 @@ public class GalleryBoard {
 	private String gbPostContent;
 	private String gbImages;
 	private String gbPostCreateDate;
-	
+	private int memberNo;
+	private String memberName;
 }

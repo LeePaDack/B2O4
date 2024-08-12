@@ -57,7 +57,9 @@ const GalleryBoard = () => {
               />
               <div className="gallery-body">
                 <h5 className="gallery-title">{list.gbPostTitle}</h5>
-                <p className="gallery-text">{list.gbPostCreateDate}</p>
+                <div className="gallery-text">
+                <p>{list.memberName} &nbsp; | &nbsp; {list.gbPostCreateDate}</p>
+                </div>
               </div>
             </Link>
           </div>

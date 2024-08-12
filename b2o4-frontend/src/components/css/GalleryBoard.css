@@ -56,6 +56,7 @@
 
 .gallery-text {
   color: gray;
+  display: flex;
 }
 
 .pagination {
@@ -79,6 +80,7 @@
 
 .detail-container button {
   margin: 5px;
+  
 }
 .button-container {
   display: flex;
@@ -89,6 +91,10 @@
 .detail-content {
   border: 1px solid gainsboro;
   border-radius: 5px;
+}
+
+.detail-text p{
+  margin: 0 0 10px 20px;
 }
 
 .category{
@@ -124,7 +130,97 @@
 }
 
 .detail-content img{
-  width: 70%;
-  max-height: 300px;
+  width: 95%;
+  max-height: 500px;
+  height: auto;
   margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+
+/* GalleryUpload.css */
+.upload-container{
+  width: 50%;
+  padding: 30px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column; /* 전체 컨테이너를 수직 방향으로 정렬 */
+}
+
+.upload h1{
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+.upload-input{
+  margin-top: 20px;
+}
+
+.upload-input button{
+  margin-top: 10px;
+}
+
+
+.input-title{
+  border: 1px solid gray;
+  padding: 15px 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.input-title input {
+  background-color: rgb(240, 236, 236);
+  border: none;
+  border-radius: 5px;
+  padding: 15px;
+  width: 100%;
+}
+
+.upload-content{
+  border: 1px solid gray;
+  border-radius: 5px;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+}
+
+
+.input-file{
+  width: 100%;
+  background-color:rgb(240, 236, 236);
+  border: 1px solid gray;
+}
+
+.input-file input{
+  display: none;
+}
+
+.input-file img{
+ width: 70px;
+ margin-left: 5px;
+}
+
+.input-text{
+  width: 100%;
+  min-height: 500px;
+  height: auto;
+  border: 1px solid gray;
+}
+
+.input-text input{
+  width: 100%;
+  border: none;
+  padding: 15px;
+}
+
+.input-text img{
+  margin-top: 5px;
+  margin-bottom: 15px;
+  width: 40%;
+  height: auto;
+  border-radius: 5%;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }

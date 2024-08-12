@@ -11,7 +11,7 @@ import Header from './components/Layout/Header.js'
 import FindId from './components/Login/FindId.js';
 import FindPw from './components/Login/FindPw.js';
 import Footer from './components/Layout/Footer.js';
-
+import GalleryUpdate from './components/Gallery/GalleryUpdate.js'
 function App() {
 
   const [loginMember, setLoginMember] = useState(null);
@@ -40,6 +40,7 @@ function App() {
           <Route path='/galleryUpload' element={<GalleryUpload />} />
           <Route path='/findId' element={<FindId />} />
           <Route path='/findPw' element={<FindPw />} />
+          <Route path='/galleryUpdate' element={<GalleryUpdate />} />
         </Routes>
         <Footer />
       </Router>

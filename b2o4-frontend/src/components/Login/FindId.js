@@ -34,10 +34,12 @@ const FindId = () => {
         if (response.data) {
           setFindResultId(response.data);
           setErrorMessage("");
+          setMemberName('');
+          setMemberPhone('');
           console.log("회원정보 : ", response.data);
         } else {
           setFindResultId(null);
-          setErrorMessage("일치하는 정보가 없습니다.");
+          setErrorMessage("일치하는 정보가 없습니다. 다시 입력해주세요");
         }
       })
       .catch((error) => {
@@ -63,7 +65,7 @@ const FindId = () => {
         <div className="findId">
           <div className="findId-input">
             <div>
-              <label>이름</label>
+              <label>이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 름</label>
             </div>
             <div>
               <input
@@ -89,15 +91,27 @@ const FindId = () => {
               />
             </div>
           </div>
-          <div>
-            <button onClick={findResult}>아이디 찾기</button>
+          <div className="findId-buttons">
+            <div>
+              <button onClick={findResult}>아이디 찾기</button>
+            </div>
+            <div>
+              <Link to="/login">
+              <button>로그인</button>
+              </Link>
+            </div>
           </div>
+          <div className="findResult">
           {errorMessage && (
             <div className="error-message">
               <p>{errorMessage}</p>
             </div>
           )}
-          {findResultId && <>{findResultId.memberId}</>}
+          {findResultId &&
+            <div>
+             <p>고객님의 아이디는 "{findResultId.memberId}" 입니다.</p>
+            </div>}
+            </div>
         </div>
       </div>
     </div>

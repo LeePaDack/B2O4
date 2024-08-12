@@ -41,7 +41,6 @@ const GalleryUpload = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("memberNo", loginMember.memberNo);
-    formData.append("memberName", loginMember.memberName);
 
     try {
       await axios.post('/gallery/upload', formData, {
@@ -60,7 +59,7 @@ const GalleryUpload = () => {
   return (
     <div className="upload-container">
       <div className='upload'>
-        <h1>게시글 작성</h1>
+        <h1>게시글 수정</h1>
       </div>
       <div className='upload-input'>
         <div className='input-title'>

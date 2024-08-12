@@ -26,7 +26,7 @@
 }
 
 .findId-container{
-    width: 70%;
+    width: 40%;
     padding: 20px;
 }
 
@@ -36,24 +36,28 @@
 }
 
 .findId{
-    border: 1px solid black;
-    margin-top: 50px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-top: 70px;
     height: 400px;
-    
-    
 }
 
 .findId-input{
-   margin-top: 30px;
+   margin-top: 50px;
    margin-left: 30px;
    display: flex;
    width: 100%;
    align-items: center; /* 수평 가운데 정렬 */
-   justify-content: center; /* 수직 가운데 정렬 */
+   justify-content: flex-start; /* 수직 가운데 정렬 */
 }
 
+
 .findId-input input{
-    width: 80%;
+    
+    width: 90%;
+    border: none;
+    background-color: gainsboro;
+    padding: 10px;
 }
 
 .findId-input > div:nth-child(1) {
@@ -62,4 +66,31 @@
 
 .findId-input  > div:nth-child(2) {
 	width: 80%;
+}
+
+
+.error-message{
+    color: red;
+}
+
+
+.findId-buttons{
+    display: flex;
+    margin: 15px;
+    justify-content: center;
+}
+
+.findId-buttons button{
+    border: none;
+    padding: 20px;
+    margin: 20px;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(124, 182, 38);
+}
+
+.findResult{
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
 }

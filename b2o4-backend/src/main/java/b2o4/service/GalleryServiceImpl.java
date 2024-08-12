@@ -40,7 +40,7 @@ public class GalleryServiceImpl implements GalleryService{
     }
 
     @Override
-    public void uploadImages(MultipartFile[] files, String title, String content) {
+    public void uploadImages(MultipartFile[] files, String title, String content, int memberNo, String memberName) {
         if (files.length == 0) {
             throw new IllegalArgumentException("파일이 없습니다.");
         }
@@ -75,6 +75,8 @@ public class GalleryServiceImpl implements GalleryService{
             galleryBoard.setGbPostTitle(title);
             galleryBoard.setGbPostContent(content);
             galleryBoard.setGbImages(String.join(",", fileNames));
+            galleryBoard.setMemberNo(memberNo);
+            galleryBoard.setMemberName(memberName);
             createGalleryBoard(galleryBoard);
         } catch (Exception e) {
             e.printStackTrace();

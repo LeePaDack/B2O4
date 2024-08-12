@@ -3,33 +3,44 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-        
+
 <mapper namespace="b2o4.mapper.GalleryMapper">
 
 	<!-- 게시판 업로드 -->
-	<insert id="GalleryUpload" parameterType="b2o4.dto.GalleryBoard" useGeneratedKeys="true" keyProperty="gbPostNo">
-        INSERT INTO GalleryBoard (GBPostTitle, GBPostContent, GBImages)
-        VALUES (#{gbPostTitle}, #{gbPostContent}, #{gbImages})
-    </insert>
-	
+	<insert id="GalleryUpload" parameterType="b2o4.dto.GalleryBoard"
+		useGeneratedKeys="true" keyProperty="gbPostNo">
+		INSERT INTO GalleryBoard (GBPostTitle, GBPostContent, GBImages, memberNo, memberName)
+		VALUES (#{gbPostTitle}, #{gbPostContent}, #{gbImages}, #{memberNo}, #{memberName})
+	</insert>
+
 	<!-- 게시판 목록 보기 -->
 	<select id="AllGalleryBoard" resultType='b2o4.dto.GalleryBoard'>
-		select * from galleryBoard
+		select * from
+		galleryBoard
 		order by GBPostNo desc
 	</select>
 
 	<!-- 게시판 상세보기 -->
-	<select id="GalleryDetail" resultType="b2o4.dto.GalleryBoard" parameterType="int">
+	<select id="GalleryDetail" resultType="b2o4.dto.GalleryBoard"
+		parameterType="int">
 		SELECT * FROM galleryBoard
 		WHERE GBPostNO = #{gbPostNo}
 	</select>
-	
+
 	<!-- 게시판 수정하기 -->
-	
-	
+	<update id="updateGallery">
+		UPDATE GalleryBoard
+		SET GBPostTitle = #{title},
+			GBPostContent = #{content},
+			GBImages = #{images}
+		WHERE GBPostNo = #{gbPostNo}
+	</update>
+
+
 	<!-- 게시판 삭제하기 -->
-	<delete id="deleteGallery">
-		DELETE FROM galleryBoard
+	<delete id="deleteGallery" parameterType="int">
+		DELETE FROM
+		galleryBoard
 		WHERE GBPostNO = ${gbPostNo}
 	</delete>
 </mapper>

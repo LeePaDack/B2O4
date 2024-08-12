@@ -3,6 +3,7 @@ import axios from "axios";
 import MyPageContext from "../MyPageContext";
 import { Link } from "react-router-dom";
 import "../../components/css/Login.css";
+import Button from "react-bootstrap/esm/Button";
 
 const Login = () => {
   const { loginMember, setLoginMember } = useContext(MyPageContext);
@@ -89,11 +90,14 @@ const Login = () => {
         {loginMember && (
           <div className="login-complete">
             <h1>{loginMember.memberId}님 환영합니다</h1>
-            <div>
-              <button>
-                <Link to="/">Home</Link>
-              </button>
-              <button onClick={logout}><img src="" /></button>
+            <div className="login-complete-buttons">
+              <Link to="/">
+                <Button variant="light">Home</Button>
+              </Link>
+              <Button variant="dark" onClick={logout}>
+                <img src="" />
+                logout
+              </Button>
             </div>
           </div>
         )}
