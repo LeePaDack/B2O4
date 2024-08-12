@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import '../css/BoardContent.css';
 
 const BoardContent = () => {
     
     const location = useLocation();
     const [boards, setBoards] = useState([]);
     const board = location.state.board;
+    const navigate = useNavigate();
 
     console.log("location",location);
 
@@ -19,26 +21,35 @@ const BoardContent = () => {
         setBoards(res.data);
     };
 
+    const handleUpdateClick = () => {
+        navigate(`/boardUpdate/${board.boardNo}`, { state: { board: board } });
+    };
+
+    const handleBackClick = () => {
+        navigate("/boardMain");
+    };
+
     return (
-        <table>
-            <thead>
-                <tr>게시글 제목</tr>
-                <tr>작성자</tr>
-                <br/>
-                <tr>게시글 내용</tr>
-                {/* <tr>댓글</tr> 나중에 구현 */} 
-            </thead>
-            <tbody>
-                    <tr>
-                        <td>{board.boardTitle}</td>
-                        <td>{board.memberName}</td>
-                        <td>{board.boardContent}</td>
-                    </tr>
-            </tbody>
-            <Link to={`/boardUpdate/${board.boardNo}` }state={{board: board}}><button>수정하기</button></Link> {/* 이 글의 수정하기로 가야함 */}
+        <div>
+            <button onClick={handleUpdateClick} className="update-button">수정하기</button> {/* 이 글의 수정하기로 가야함 */}
             {/* 로그인 세션으로 본인 글일 경우에만 뜨게 하기 */}
-            <Link to={"/boardMain"}><button>돌아가기</button></Link>
-        </table>
+            <button onClick={handleBackClick} className="back-button">돌아가기</button>
+            <table className="boardContent-table">
+                <thead>
+                    {/* <tr>댓글</tr> 나중에 구현 */} 
+                </thead>
+                <tbody className="board-tbody">
+                        <tr>
+                            <div className="content-top">
+                                <td className="board-title">{board.boardTitle}</td>
+                                <td className="board-name">{board.memberName}</td>
+                            </div>
+                        </tr>
+                        <td className="board-content">{board.boardContent}</td>
+                </tbody>    
+                
+            </table>
+        </div>
     )
 
 }

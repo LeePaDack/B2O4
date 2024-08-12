@@ -1,0 +1,38 @@
+.board-table {
+    text-align: center;
+    justify-content: center;
+    margin: 0 10%;
+    width: 80%;
+}
+
+.board-table th {
+    padding: 13px;
+}
+
+.content-title {
+    color: black;
+    text-decoration: none;
+}
+
+.content-table:hover {
+    cursor: pointer;
+}
+
+.posting-button{
+    color: white;
+    background-color: darkgreen;
+    border-radius: 8px;
+    border-style: none;
+    float: right;
+    margin-right: 10%;
+    padding: 5px 10px;
+}
+
+.posting-button:hover {
+    background-color: rgb(9, 157, 9);
+}
+
+h2 {
+    float: left;
+    margin-left: 10px;
+}

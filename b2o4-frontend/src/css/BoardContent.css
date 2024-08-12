@@ -1,0 +1,56 @@
+.update-button {
+    float: right;
+    margin-right: 10%;
+}
+
+.back-button {
+    float: left;
+    margin-left: 10%;
+}
+
+.update-button, .back-button {
+    color: white;
+    background-color: darkgreen;
+    border-radius: 8px;
+    border-style: none;
+    margin-right: 10%;
+    padding: 5px 10px;
+    margin-bottom: 45px;
+}
+
+.update-button:hover,.back-button:hover {
+    background-color: rgb(9, 157, 9);
+}
+
+.board-tbody {
+    padding-top: 16px;
+}
+
+.board-title {
+    background-color: #D9D9D9;
+    float: left;
+    width: 85%;
+    padding: 6px;
+}
+
+.board-name {
+    padding: 6px;
+    text-align: center;
+    width: 13%;
+    float: right;
+    background-color: #D9D9D9;
+}
+
+.board-content {
+    border: 2px solid #ccc;
+    float: left;
+    margin-top: 20px;
+    width: 100%;
+    height: 500px;
+    padding: 7px;
+}
+
+.boardContent-table {
+    width: 80%;
+    margin: 0 10%;
+}
