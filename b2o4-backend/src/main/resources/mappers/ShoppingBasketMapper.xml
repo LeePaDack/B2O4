@@ -14,14 +14,14 @@
 
 	<!-- 장바구니에 상품 추가 -->
 	<insert id="insertBasket" parameterType="b2o4.dto.ShoppingBasket">
-		INSERT INTO ShoppingBasket (memberNo, goodsNo, goodsQuantity, basketTotal)
-		VALUES (#{memberNo}, #{goodsNo}, #{goodsQuantity}, #{basketTotal})
+		INSERT INTO ShoppingBasket (memberNo, goodsNo, goodsQuantity, basketTotal, goodsSize)
+		VALUES (#{memberNo}, #{goodsNo}, #{goodsQuantity}, #{basketTotal}, #{goodsSize})
 	</insert>
 
 	<!-- 장바구니의 상품 수량 업데이트 -->
 	<update id="updateBasketQuantity" parameterType="b2o4.dto.ShoppingBasket">
 		UPDATE ShoppingBasket
-		SET goodsQuantity = #{goodsQuantity}, basketTotal = #{basketTotal}
+		SET goodsQuantity = #{goodsQuantity}, basketTotal = #{basketTotal}, goodsSize = #{goodsSize}
 		WHERE basketNo = #{basketNo}
 	</update>
 

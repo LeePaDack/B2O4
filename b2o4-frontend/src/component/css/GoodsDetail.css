@@ -60,7 +60,7 @@
     text-align: center;
 }
 
-.buttons .cartadd-button {
+.buttons .basketAdd-button  {
     width: 130px;
     height: 50px;
     background-color: #ff6f61;
@@ -80,7 +80,7 @@
     margin: 10px;
 }
 
-.buttons .cartadd-button:hover {
+.buttons .basketAdd-button:hover {
     background-color: #e65b50;
 }
 

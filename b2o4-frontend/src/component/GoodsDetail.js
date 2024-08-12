@@ -4,7 +4,7 @@ import './css/GoodsDetail.css';
 import addShoppingBasket from "./ShoppingBasket";
 import { Dropdown } from "bootstrap";
 
-//디테일
+// 디테일
 const GoodsDetail = ({ loginMember, userCartItem, checkLogin }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -60,7 +60,7 @@ const GoodsDetail = ({ loginMember, userCartItem, checkLogin }) => {
 
 
       <div className="buttons">
-        <button className="cartadd-button" onClick={() => addShoppingBasket(good, loginMember, userCartItem, checkLogin)}>장바구니에 추가</button>
+        <button className="basketAdd-button" onClick={() => addShoppingBasket(good, loginMember, userCartItem, checkLogin)}>장바구니에 추가</button>
         <button className="back-button" onClick={returnToGoodsShop} >샵으로 돌아가기</button>
       </div>
     </div>
