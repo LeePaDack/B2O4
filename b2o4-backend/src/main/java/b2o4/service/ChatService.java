@@ -12,7 +12,5 @@ public interface ChatService {
 	
 	// 채팅 기록 삭제
 	void deleteChatMessage(@Param("msgContent") String msgContent, @Param("msgAt") String msgAt);
-	
-	//모든 채팅 가져오기
-	/*List<ChatLog> getAllMessages();*/
+
 }

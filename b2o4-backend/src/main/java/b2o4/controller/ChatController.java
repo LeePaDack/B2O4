@@ -26,6 +26,7 @@ public class ChatController {
     
     private boolean freezeChat = false;
     private boolean streamingBegin = false;
+    ChatLog forDeleteMessage = new ChatLog();
     ChatLog chatLog = new ChatLog();
     
     //채팅 주고받게 하기
@@ -34,13 +35,11 @@ public class ChatController {
     public ChatMessage send(ChatMessage message) {
     	chatLog.setMemberId(message.getSender()); // 유저 id
     	chatLog.setMsgContent(message.getContent()); // 유저 채팅
-    	//chatLog.setMsgAt(message.getTime());
     	
-    	
+    	//신식 날짜 포맷터
     	DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     	String msgAt = LocalDateTime.now().format(timeFormat);
     	chatLog.setMsgAt(msgAt);
-    	
 
     	System.out.println("리액트에서 들어온 메시지 : " + message.getContent());
     	System.out.println("채팅입력한 멤버 아이디 : " + chatLog.getMemberId());
@@ -66,7 +65,7 @@ public class ChatController {
         return ResponseEntity.ok("삭제 되냐?");
     }
     
-    // 채팅 동결 전환
+    //채팅창 동결/재개 전환
     @MessageMapping("/chat.freezeChat")
     @SendTo("/topic/freezeChat")
     public boolean chatFreezing() {
@@ -74,7 +73,7 @@ public class ChatController {
         return freezeChat;
     }
 
-    // 채팅창 동결 상태 가져오기
+    //채팅창 동결/재개 상태 전파
     @GetMapping("/chat/freezeChat")
     public boolean getChatFreezing() {
         return freezeChat;
@@ -88,9 +87,23 @@ public class ChatController {
         return streamingBegin;
     }
     
-    //스트리밍 시작/종료 상태 가져오기
+    //스트리밍 시작/종료 상태 전파
     @GetMapping("/chat/streaming")
-    public boolean getBeginStreaming() {
+    public boolean getStreamingBegin() {
     	return streamingBegin;
+    }
+    
+    //메시지 삭제 전환
+    @MessageMapping("/chat.deleteMessage")
+    @SendTo("/topic/deleteMessage")
+    public ChatLog removeMessageSpread(@RequestBody ChatLog chatLog) {
+    	forDeleteMessage = chatLog;
+    	return chatLog;
+    }
+    
+    //삭제할 메시지 정보를 반환
+    @GetMapping("/chat/deleteMessage")
+    public ChatLog getRemoveMessageSpread() {
+        return forDeleteMessage;
     }
 }

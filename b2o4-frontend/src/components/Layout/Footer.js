@@ -27,7 +27,7 @@ const Footer = () => {
             </div>
             <p>&copy; SKILLFUL SPORTS. All Rights Reserved.</p>
             <p>
-                <a href="#">개인정보처리방침</a> | <a href="#">이용약관</a>
+                <a href="/">개인정보처리방침</a> | <a href="/">이용약관</a>
             </p>
             <hr style={{borderColor:"white"}}/> 
             <p style={{fontSize: "small"}}>서울특별시 강남구 대치동 509-2 강남구의회, 강남구민회관 | 509-2, Daechi-dong, Gangnam-gu, Seoul</p>

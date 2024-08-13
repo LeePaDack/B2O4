@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Main from "./components/Main";
+import MainPage from "./components/MainPage";
 import LiveStreamingPage from "./components/LiveStreamingPage";
 import Header from "./components/Layout/Header";
 import Footer from "./components/Layout/Footer";
@@ -29,7 +29,7 @@ function App () {
             <Header/>
             <Routes>
                 <Route path="/LiveStreamingPage" element={<LiveStreamingPage/>}/>
-                <Route path="/" element={<Main/>}/>
+                <Route path="/" element={<MainPage/>}/>
                 <Route path="/login" element={<Login/>}/>
             </Routes>
             <Footer/>

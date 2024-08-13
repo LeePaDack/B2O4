@@ -14,7 +14,5 @@ public interface ChatMapper {
 	
 	//채팅 기록 삭제
     void deleteChatMessage(@Param("msgContent") String msgContent, @Param("msgAt") String msgAt);
-	
-	//채팅 불러오기
-	/*List<ChatLog> getAllMessages();*/
+
 }
