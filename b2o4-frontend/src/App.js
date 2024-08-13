@@ -37,12 +37,6 @@ function App() {
       <MyPageContext.Provider value={{loginMember, setLoginMember}}>
       <Router>
       <Header/>
-        <Link to='/boardMain'>고객센터</Link>
-        <br></br>
-        <Link to='/StadiumList'>구장정보</Link>
-        <br></br>
-        <Link to='/login'>로그인</Link>
-        <Link to='/'><button>돌아가기</button></Link>
         <Routes>
           <Route path='/login' element={<Login />} />
           <Route path='stadiumList' element={<StadiumList/>}/>
