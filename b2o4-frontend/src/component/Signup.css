@@ -38,11 +38,7 @@
   background-color: #28a745; /* 초록색 계열 버튼 */
   color: white;
   cursor: pointer;
-  margin-left: 10px;
-  display: inline-flex;
-  white-space: nowrap;
   font-size: 14px;
-  width: 100px;
 }
 
 .signup-container button:hover {
@@ -51,7 +47,9 @@
 
 /* 중복확인 버튼 스타일 */
 .signup-container .input-container {
-  justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end; /* 버튼을 오른쪽 끝에 배치 */
+  align-items: center;
 }
 
 .signup-container .input-container button {
