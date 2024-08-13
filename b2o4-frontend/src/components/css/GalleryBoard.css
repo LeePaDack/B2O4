@@ -138,6 +138,57 @@
   border-radius: 10px;
 }
 
+.comment-write{
+  border: 1px solid #ccc;
+  margin: 15px;
+  border-radius: 5px;
+}
+
+.comment-write p{
+  font-weight: bold;
+  margin: 10px 0 0 10px;
+  font-size: 14px;
+}
+
+.comment-write input{
+  margin: 10px 0 10px 10px;
+  border: none;
+  font-size: 14px;
+  width: 90%;
+}
+
+.comment-write button{
+  border: none;
+  background-color: white;
+  color: gray;
+  font-size: 14px;
+}
+
+
+.comment-item{
+  border-bottom: 1px solid #ccc;
+  margin: 15px;
+}
+
+.comment-item img{
+  width: 100px;
+}
+
+.comment-content{
+  display: flex;
+}
+
+
+.comment-date{
+  display: flex;
+  color: gray;
+}
+
+.comment-date button{
+  border: none;
+  background-color: white;
+  color: gray;
+}
 
 /* GalleryUpload.css */
 .upload-container{

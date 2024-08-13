@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import b2o4.dto.GalleryBoard;
+import b2o4.dto.GalleryComment;
 
 @Mapper
 public interface GalleryMapper {
@@ -18,7 +19,15 @@ public interface GalleryMapper {
 	// 갤러리 상세보기
 	GalleryBoard GalleryDetail(int gbPostNo);
 	
+	// 갤러리 수정하기
+	int updateGallery(int gbPostNo);
 	
 	// 갤러리 삭제하기
 	int deleteGallery(int gbPostNo);
+	
+	// 갤러리 댓글 작성
+	void CommentUpload(GalleryComment galleryComment);
+	
+	// 갤러리 댓글 보기
+	List<GalleryComment> AllGalleryComment();
 }

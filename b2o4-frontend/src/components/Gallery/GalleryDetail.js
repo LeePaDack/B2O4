@@ -13,8 +13,12 @@ const GalleryDetail = () => {
   
   const navigate = useNavigate();
 
-  
+  const [files, setFiles] = useState([]);
+  const [content, setContent] = useState('');
+  const [comment, setComment] = useState([]);
+  const [commentList, setCommentList] = useState([]);
 
+  
   /* 삭제하고 싶은 번호를 가지고 삭제 */
   const deleteGallery = async (gbPostNo) => {
     try{
@@ -27,6 +31,64 @@ const GalleryDetail = () => {
   }
 
 
+  /****** 코멘트 *******/
+  useEffect(() => {
+    fetchComment();
+  }, []);
+
+  const fetchComment = async () => {
+    try {
+      const response = await axios.get('/gallery/comment');
+      console.log("response.data : " + response.data);
+      setComment(response.data);
+    } catch (error) {
+      console.error("게시물을 가져오는 데 실패했습니다.", error);
+    }
+  };
+
+  const commentWrite = async () => {
+    const formData = new FormData();
+    
+    // 파일이 있는 경우에만 FormData에 파일 추가
+    if (files.length > 0) {
+      Array.from(files).forEach(file => {
+        formData.append("files", file);
+      });
+    }
+    formData.append("content", content);
+    formData.append("gbPostNo", list.gbPostNo);
+    formData.append("memberNo", loginMember ? loginMember.memberNo : 0);
+    formData.append("memberName", loginMember ? loginMember.memberName : "익명"); // 익명으로 설정
+
+    try {
+      await axios.post('/gallery/comment', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      alert("댓글 작성이 완료되었습니다..");
+      fetchComment();
+    } catch (error) {
+      console.error("댓글 작성에 실패했습니다.", error);
+    }
+  }
+
+  const handleFileChange = (e) => {
+    setFiles(Array.from(e.target.files));
+  };
+
+  const CoList = async () => {
+    const response = await axios.get("/gallery/comment");
+    setCommentList(response.data);
+  };
+
+  useEffect(() => {
+    CoList();
+  }, []);
+
+   // 게시물에 해당하는 댓글만 필터링
+  const filteredComments = commentList.filter(comment => comment.gbPostNo === list.gbPostNo);
+
   return (
     <div className="detail-container">
       <div className="button-container">
@@ -38,7 +100,7 @@ const GalleryDetail = () => {
           <Button variant="secondary" onClick={() => deleteGallery(list.gbPostNo)}>삭제</Button>
           </>
         )}
-      </div>
+    </div>
       <div className="detail-content">
         <p className="category"> > 갤러리</p>
         <h1>{list.gbPostTitle}</h1>
@@ -61,7 +123,36 @@ const GalleryDetail = () => {
         <div className="detail-text">
           <p>{list.gbPostContent}</p>
         </div>
-        
+        <div className="comment-container">
+        <div className="comment-view">
+            {filteredComments.map(comment => (
+              <div key={comment.gbCommentNo} className="comment-item">
+                <p className="comment-writer">
+                  <strong>{comment.memberName}</strong>
+                </p>
+                <div className="comment-content">
+                  {comment.gbCommentImages && (
+                    comment.gbCommentImages.split(",").map(image => (
+                      <img key={image} src={`http://localhost:9000/images/${image}`} alt={comment.gbCommentNo} />
+                    ))
+                  )}
+                  <p>{comment.gbCommentContent}</p> 
+                </div>
+                <div className="comment-date">
+                  <p>{comment.gbCommentCreateDate}
+                    <button>답글쓰기</button>
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="comment-write">
+          <p>{loginMember ? loginMember.memberName : "익명"}</p>
+            <input type="text" placeholder="댓글을 남겨보세요" value={content} onChange={(e) => setContent(e.target.value)} />
+            <input type="file" multiple onChange={handleFileChange} />
+            <button onClick={commentWrite}>등록</button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import b2o4.dto.GalleryBoard;
+import b2o4.dto.GalleryComment;
 import b2o4.service.GalleryService;
 
 @RestController
@@ -60,5 +61,29 @@ public class GalleryController {
 	public int deleteGallery(@PathVariable("gbPostNo") int gbPostNo) {
 		return galleryService.deleteGallery(gbPostNo);
 	}
+	
+	// 갤러리 댓글 작성
+	@PostMapping("/comment")
+	public ResponseEntity<String> uploadCommentImages(
+	        @RequestParam(value = "files", required = false) MultipartFile[] files,
+	        @RequestParam("content") String content,
+	        @RequestParam("gbPostNo") int gbPostNo,
+	        @RequestParam("memberNo") int memberNo,
+	        @RequestParam("memberName") String memberName) {
+	    try {
+	        galleryService.uploadCommentImages(files != null ? files : new MultipartFile[]{}, content, gbPostNo, memberNo, memberName);
+	        return ResponseEntity.ok("댓글 작성 성공");
+	    } catch (Exception e) {
+	        return ResponseEntity.badRequest().body(e.getMessage());
+	    }
+	}
+	
+
+	// 갤러리 댓글보기
+    @GetMapping("/comment")
+    public ResponseEntity<List<GalleryComment>> getAllComments() {
+    	System.out.println(galleryService.AllGalleryComment());
+        return ResponseEntity.ok(galleryService.AllGalleryComment());
+    }
 	
 }

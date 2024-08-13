@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import b2o4.dto.GalleryBoard;
+import b2o4.dto.GalleryComment;
 import b2o4.mapper.GalleryMapper;
 
 @Service
@@ -34,6 +36,7 @@ public class GalleryServiceImpl implements GalleryService{
     	galleryMapper.GalleryUpload(galleryBoard);
     }
 
+    // 갤러기 목록보기
     @Override
     public List<GalleryBoard> AllGalleryBoards() {
         return galleryMapper.AllGalleryBoard();
@@ -94,4 +97,62 @@ public class GalleryServiceImpl implements GalleryService{
 	public int deleteGallery(int gbPostNo) {
 		return galleryMapper.deleteGallery(gbPostNo);
 	}
+	
+	// 갤러리 댓글 작성
+	@Override
+	public void createGalleryComment(GalleryComment galleryComment) {
+		galleryMapper.CommentUpload(galleryComment);
+	}
+	
+	@Override
+	public void uploadCommentImages(MultipartFile[] files, String content, int gbPostNo, int memberNo, String memberName) {
+	    List<String> fileNames = new ArrayList<>();
+
+	    if (files != null && files.length > 0) {
+	        // 디렉토리 존재 확인 및 생성
+	        File uploadDirFile = new File(uploadDir);
+	        if (!uploadDirFile.exists()) {
+	            if (!uploadDirFile.mkdirs()) {
+	                throw new RuntimeException("디렉토리 생성에 실패하였습니다.");
+	            }
+	        }
+
+	        try {
+	            fileNames = List.of(files).stream().map(file -> {
+	                String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+	                File destinationFile = new File(uploadDir + File.separator + fileName);
+	                try {
+	                    file.transferTo(destinationFile);
+	                } catch (IOException e) {
+	                    throw new RuntimeException("파일 업로드 실패", e);
+	                }
+	                return fileName;
+	            }).collect(Collectors.toList());
+	        } catch (RuntimeException e) {
+	            e.printStackTrace();
+	            throw new RuntimeException("파일 업로드 실패", e);
+	        }
+	    }
+
+	    try {
+	        GalleryComment galleryComment = new GalleryComment();
+	        galleryComment.setGbCommentContent(content);
+	        galleryComment.setGbCommentImages(String.join(",", fileNames));
+	        galleryComment.setGbPostNo(gbPostNo);
+	        galleryComment.setMemberNo(memberNo);
+	        galleryComment.setMemberName(memberName);
+	        createGalleryComment(galleryComment);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        throw new RuntimeException("댓글 저장 실패", e);
+	    }
+	}
+	
+	
+	// 갤러리 댓글 보기
+	@Override
+	public List<GalleryComment> AllGalleryComment() {
+		return galleryMapper.AllGalleryComment();
+	}
+	
 }

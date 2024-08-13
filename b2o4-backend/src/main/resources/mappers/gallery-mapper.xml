@@ -43,4 +43,19 @@
 		galleryBoard
 		WHERE GBPostNO = ${gbPostNo}
 	</delete>
+	
+	
+	<!-- 게시판 댓글 -->
+	<insert id="CommentUpload" parameterType="b2o4.dto.GalleryComment"
+		useGeneratedKeys="true" keyProperty="gbCommentNo">
+		INSERT INTO GalleryComment (memberNo, GBPostNo, GBCommentContent, GBCommentClass, GBCommentImages, memberName)
+		VALUES (#{memberNo}, #{gbPostNo}, #{gbCommentContent}, #{gbCommentClass}, #{gbCommentImages}, #{memberName})
+	</insert>
+	
+	<!-- 댓글 보기 -->
+	<select id="AllGalleryComment" resultType='b2o4.dto.GalleryComment'>
+		select * from
+		GalleryComment
+	</select>
+	
 </mapper>
