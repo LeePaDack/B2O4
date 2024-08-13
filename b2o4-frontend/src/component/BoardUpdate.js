@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate, useLocation } from "react-router-dom";
+import '../css/BoardUpdate.css';
 
 const BoardUpdate = () => {
     const location = useLocation();
@@ -42,13 +43,20 @@ const BoardUpdate = () => {
         navigate("/boardMain");
     }
 
+    const handleBackClick = () => {
+        navigate(`/boardContent/${board.boardNo}`, { state: { board: board } });
+    };
+
     return (
-        <div>
-            <h1>고객센터</h1>
-            <form onSubmit={UpdatePost}>
-                <div>
-                    <label>제목: </label>
+        <div className="board-update-table">
+            <button onClick={handleBackClick} className="back-content-button">돌아가기</button>
+            <button type="submit" className="update-success-button" onClick={UpdatePost}>글 수정 완료</button>
+            <button type="button" className="delete-post" onClick={deletePost}>글 삭제 하기</button>
+
+            <form className="update-form">
+                <div className="update-top">
                     <input 
+                        className="board-update-title"
                         type="text" 
                         value={boardTitle} 
                         onChange={(e) => setBoardTitle(e.target.value)} 
@@ -56,16 +64,13 @@ const BoardUpdate = () => {
                     />
                 </div>
                 <div>
-                    <label>내용: </label>
-                    <input 
-                        type="text" 
+                    <textarea 
+                        className="board-update-content"
                         value={boardContent} 
                         onChange={(e) => setBoardContent(e.target.value)} 
                         required
                     />
                 </div>
-                <button type="submit">글 수정 완료</button>
-                <button type="button" onClick={deletePost}>글 삭제 하기</button>
             </form>
         </div>
     )

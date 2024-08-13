@@ -1,0 +1,40 @@
+.stadiumImg-stadiumName {
+    border: 2px solid #ccc;
+    box-shadow: 0 0 1.5px;
+    cursor: pointer;
+}
+
+.stadium-list-name {
+    text-align: center;
+}
+
+
+
+.stadium-list-img {
+    text-align: center;
+}
+
+.stadium-list-block{
+    display: flex;
+}
+
+.stadium-search-input {
+    width: 80%;
+    border-radius: 5px 0 0 5px;
+    background-color: #ebebeb;
+}
+
+.stadium-search-input-button {
+    margin-left: 10%;
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 40px;
+}
+
+.stadium-search-button {
+    border-radius: 0 5px 5px 0;
+}
+
+.stadium-search-input:hover {
+    
+}

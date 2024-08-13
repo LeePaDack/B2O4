@@ -30,7 +30,7 @@ const BoardContent = () => {
     };
 
     return (
-        <div>
+        <div className="board-content-table">
             <button onClick={handleUpdateClick} className="update-button">수정하기</button> {/* 이 글의 수정하기로 가야함 */}
             {/* 로그인 세션으로 본인 글일 경우에만 뜨게 하기 */}
             <button onClick={handleBackClick} className="back-button">돌아가기</button>
