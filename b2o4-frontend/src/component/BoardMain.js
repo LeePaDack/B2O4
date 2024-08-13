@@ -48,6 +48,7 @@ const BoardMain = ({}) => {
                 </Table>
             </table>
             <button className="posting-button" onClick={() => navigate('/boardPosting')}>문의하기</button> {/* 클릭시 글쓰기로 이동 BoardPosting.js */}
+            <h1>페이지네이션 들어가야함...</h1>
         </div>
 
 
