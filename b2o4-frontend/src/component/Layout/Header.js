@@ -68,23 +68,23 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center">
                         <Nav className="d-flex">
-                            <Nav.Link href="galleryBoard" className="item" style={{ marginLeft: "140px" }}>갤러리</Nav.Link>
+                            <Nav.Link href="/galleryBoard" className="item" style={{ marginLeft: "140px" }}>갤러리</Nav.Link>
                             <NavDropdown title="용품 장터" id="basic-nav-dropdown" className="item">
                                 <NavDropdown.Item onClick={() => afterLoginNavigate(1)}>메인 장터</NavDropdown.Item>
-                                <NavDropdown.Item href="usedMarket">중고 장터</NavDropdown.Item>
+                                <NavDropdown.Item href="/usedMarket">중고 장터</NavDropdown.Item>
                                 <NavDropdown.Item onClick={() => afterLoginNavigate(2)}>장바구니</NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown title="구장 모음" id="basic-nav-dropdown" className="item">
-                                <NavDropdown.Item href="StadiumList">구장 목록</NavDropdown.Item>
-                                <NavDropdown.Item href="StadiumSearch">구장 찾기</NavDropdown.Item>
+                                <NavDropdown.Item href="/StadiumList">구장 목록</NavDropdown.Item>
+                                <NavDropdown.Item href="/StadiumSearch">구장 찾기</NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown title="라이브" id="basic-nav-dropdown" className="item">
                                 <NavDropdown.Item onClick={() => afterLoginNavigate(3)}>라이브 경기 보러 가기</NavDropdown.Item>
                             </NavDropdown>
-                            <Nav.Link href="boardMain" className="item" >고객센터</Nav.Link>
+                            <Nav.Link href="/boardMain" className="item" >고객센터</Nav.Link>
                             <NavDropdown title="마이페이지" id="basic-nav-dropdown" className="item">
                                 <NavDropdown.Item onClick={() => afterLoginNavigate(5)}>내 정보 수정</NavDropdown.Item>
-                                <NavDropdown.Item href="stadiumInfo">평가하기</NavDropdown.Item>
+                                <NavDropdown.Item href="/stadiumInfo">평가하기</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>

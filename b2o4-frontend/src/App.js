@@ -49,11 +49,6 @@ function App() {
         </Routes>
         <Footer/>
       </Router>
-      {loginMember && (
-          <div className="input-login">
-            <p>{loginMember.memberId}님 환영합니다.</p>
-          </div>
-          )}
       </MyPageContext.Provider>
     </div>
   );
