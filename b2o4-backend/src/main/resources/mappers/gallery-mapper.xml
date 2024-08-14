@@ -30,9 +30,9 @@
 	<!-- 게시판 수정하기 -->
 	<update id="updateGallery">
 		UPDATE GalleryBoard
-		SET GBPostTitle = #{title},
-			GBPostContent = #{content},
-			GBImages = #{images}
+		SET GBPostTitle = #{gbPostTitle},
+			GBPostContent = #{gbPostContent},
+			GBImages = #{gbImages}
 		WHERE GBPostNo = #{gbPostNo}
 	</update>
 
@@ -57,5 +57,12 @@
 		select * from
 		GalleryComment
 	</select>
+	
+	<!-- 게시판 삭제하기 -->
+	<delete id="deleteComment" parameterType="int">
+		DELETE FROM
+		GalleryComment
+		WHERE gbCommentNo = #{gbCommentNo}
+	</delete>
 	
 </mapper>

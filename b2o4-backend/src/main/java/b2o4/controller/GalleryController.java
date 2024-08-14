@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,13 +30,13 @@ public class GalleryController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadImages(@RequestParam("files") MultipartFile[] files,
+    public ResponseEntity<String> uploadImages(@RequestParam(value = "files", required = false) MultipartFile[] files,
                                                @RequestParam("title") String title,
                                                @RequestParam("content") String content,
                                                @RequestParam("memberNo") int memberNo,
                                                @RequestParam("memberName") String memberName) {
         try {
-        	galleryService.uploadImages(files, title, content, memberNo, memberName);
+        	galleryService.uploadImages(files != null ? files : new MultipartFile[]{}, title, content, memberNo, memberName);
             return ResponseEntity.ok("이미지 업로드 성공");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -55,6 +56,23 @@ public class GalleryController {
 	public GalleryBoard GalleryDetail(@PathVariable("gbPostNo") int gbPostNo) {
 		return galleryService.GalleryDetail(gbPostNo);
 	}
+	
+	// 게시판 수정하기
+	@PutMapping("/{gbPostNo}")
+    public ResponseEntity<String> updateImages(@PathVariable("gbPostNo") int gbPostNo,
+    										   @RequestParam(value = "files", required = false) MultipartFile[] files,
+                                               @RequestParam("title") String title,
+                                               @RequestParam("content") String content,
+                                               @RequestParam("memberNo") int memberNo,
+                                               @RequestParam("memberName") String memberName) {
+        try {
+        	galleryService.updateImages(gbPostNo, files != null ? files : new MultipartFile[]{}, title, content, memberNo, memberName);
+            return ResponseEntity.ok("이미지 수정 성공");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+      
+    }
 	
 	// 갤러리 삭제하기
 	@DeleteMapping("/{gbPostNo}")
@@ -86,4 +104,10 @@ public class GalleryController {
         return ResponseEntity.ok(galleryService.AllGalleryComment());
     }
 	
+ 	// 댓글 삭제하기
+ 	@DeleteMapping("/comment/{gbCommentNo}")
+ 	public int deleteComment(@PathVariable("gbCommentNo") int gbCommentNo) {
+ 		System.out.println("뭔데?"+gbCommentNo);
+ 		return galleryService.deleteComment(gbCommentNo);
+ 	}
 }

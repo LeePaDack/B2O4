@@ -17,19 +17,13 @@ const FindId = () => {
       return;
     }
 
-    axios
-      .post(
-        "/findId",
-        {
+    axios.post("/findId", {
           memberName: memberName,
           memberPhone: memberPhone,
         },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+          headers: {"Content-Type": "application/json"},
+      })
       .then((response) => {
         if (response.data) {
           setFindResultId(response.data);

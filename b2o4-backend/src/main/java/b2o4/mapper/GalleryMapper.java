@@ -20,7 +20,7 @@ public interface GalleryMapper {
 	GalleryBoard GalleryDetail(int gbPostNo);
 	
 	// 갤러리 수정하기
-	int updateGallery(int gbPostNo);
+	void updateGallery(GalleryBoard galleryBoard);
 	
 	// 갤러리 삭제하기
 	int deleteGallery(int gbPostNo);
@@ -30,4 +30,7 @@ public interface GalleryMapper {
 	
 	// 갤러리 댓글 보기
 	List<GalleryComment> AllGalleryComment();
+	
+	// 댓글 삭제하기
+	int deleteComment(int gbCommentNo);
 }

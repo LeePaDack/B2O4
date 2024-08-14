@@ -36,27 +36,21 @@ public class GalleryServiceImpl implements GalleryService{
     	galleryMapper.GalleryUpload(galleryBoard);
     }
 
-    // 갤러기 목록보기
-    @Override
-    public List<GalleryBoard> AllGalleryBoards() {
-        return galleryMapper.AllGalleryBoard();
-    }
-
     @Override
     public void uploadImages(MultipartFile[] files, String title, String content, int memberNo, String memberName) {
-        if (files.length == 0) {
-            throw new IllegalArgumentException("파일이 없습니다.");
-        }
+        
+        List<String> fileNames = new ArrayList<>();
 
-        // 디렉토리 존재 확인 및 생성
-        File uploadDirFile = new File(uploadDir);
-        if (!uploadDirFile.exists()) {
-            if (!uploadDirFile.mkdirs()) {
-                throw new RuntimeException("디렉토리 생성에 실패하였습니다.");
-            }
-        }
+	    if (files != null && files.length > 0) {
+	        // 디렉토리 존재 확인 및 생성
+	        File uploadDirFile = new File(uploadDir);
+	        if (!uploadDirFile.exists()) {
+	            if (!uploadDirFile.mkdirs()) {
+	                throw new RuntimeException("디렉토리 생성에 실패하였습니다.");
+	            }
+	        }
 
-        List<String> fileNames = null;
+	    }
         try {
             fileNames = List.of(files).stream().map(file -> {
                 String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
@@ -86,11 +80,70 @@ public class GalleryServiceImpl implements GalleryService{
             throw new RuntimeException("파일 저장 실패 ", e);
         }
     }
+    
+    // 갤러기 목록보기
+    @Override
+    public List<GalleryBoard> AllGalleryBoards() {
+        return galleryMapper.AllGalleryBoard();
+    }
 
 	// 갤러리 상세보기
 	public GalleryBoard GalleryDetail(int GBPostNo) {
 		return galleryMapper.GalleryDetail(GBPostNo);
 	}
+	
+	// 갤러리 수정하기
+	@Override
+	public void updateGallery(GalleryBoard galleryBoard) {
+	    galleryMapper.updateGallery(galleryBoard);
+	}
+	
+	@Override
+	public void updateImages(int gbPostNo, MultipartFile[] files, String title, String content, int memberNo, String memberName) {
+        
+        List<String> fileNames = new ArrayList<>();
+
+	    if (files != null && files.length > 0) {
+	        // 디렉토리 존재 확인 및 생성
+	        File uploadDirFile = new File(uploadDir);
+	        if (!uploadDirFile.exists()) {
+	            if (!uploadDirFile.mkdirs()) {
+	                throw new RuntimeException("디렉토리 생성에 실패하였습니다.");
+	            }
+	        }
+
+	    }
+        try {
+            fileNames = List.of(files).stream().map(file -> {
+                String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+                File destinationFile = new File(uploadDir + File.separator + fileName);
+                try {
+                    file.transferTo(destinationFile);
+                } catch (IOException e) {
+                    throw new RuntimeException("파일 업로드 실패", e);
+                }
+                return fileName;
+            }).collect(Collectors.toList());
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw new RuntimeException("파일 업로드 실패", e);
+        }
+
+        try {
+            GalleryBoard galleryBoard = new GalleryBoard();
+            galleryBoard.setGbPostNo(gbPostNo);
+            galleryBoard.setGbPostTitle(title);
+            galleryBoard.setGbPostContent(content);
+            galleryBoard.setGbImages(String.join(",", fileNames));
+            galleryBoard.setMemberNo(memberNo);
+            galleryBoard.setMemberName(memberName);
+            System.out.println(galleryBoard);
+            updateGallery(galleryBoard);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("파일 저장 실패 ", e);
+        }
+    }
 	
 	// 갤러리 삭제하기
 	@Override
@@ -153,6 +206,12 @@ public class GalleryServiceImpl implements GalleryService{
 	@Override
 	public List<GalleryComment> AllGalleryComment() {
 		return galleryMapper.AllGalleryComment();
+	}
+	
+	// 댓글 삭제하기
+	@Override
+	public int deleteComment(int gbCommentNo) {
+		return galleryMapper.deleteComment(gbCommentNo);
 	}
 	
 }

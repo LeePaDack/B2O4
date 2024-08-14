@@ -19,6 +19,10 @@ public interface GalleryService {
     // 갤러리 상세보기
 	GalleryBoard GalleryDetail(int gbPostNo);
 	
+	// 갤러리 수정하기
+	void updateGallery(GalleryBoard galleryBoard);
+	void updateImages(int gbPostNo, MultipartFile[] files, String title, String content, int memberNo, String memberName);
+	
 	// 갤러리 삭제하기
 	int deleteGallery(int gbPostNo);
 	
@@ -26,6 +30,9 @@ public interface GalleryService {
 	void createGalleryComment(GalleryComment galleryComment);
     void uploadCommentImages(MultipartFile[] files, String content, int gbPostNo, int memberNo, String memberName);
     
- // 갤러리 댓글 보기
+    // 갤러리 댓글 보기
  	List<GalleryComment> AllGalleryComment();
+ 	
+ 	// 댓글 삭제하기
+ 	int deleteComment(int gbCommentNo);
 }

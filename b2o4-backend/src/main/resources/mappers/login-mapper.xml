@@ -21,7 +21,7 @@
 	<select id="findPw" parameterType="Member">
 		SELECT * FROM member
 		WHERE memberId = #{memberId} 
-		AND memberName = #{memberName}
+		AND memberEmail = #{memberEmail}
 		AND memberPhone = #{memberPhone}
 	</select>
 	

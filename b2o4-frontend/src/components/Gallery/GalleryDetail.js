@@ -10,16 +10,15 @@ const GalleryDetail = () => {
   
   const location = useLocation();
   const list = location.state.list;
-  
+
   const navigate = useNavigate();
 
   const [files, setFiles] = useState([]);
   const [content, setContent] = useState('');
-  const [comment, setComment] = useState([]);
   const [commentList, setCommentList] = useState([]);
 
   
-  /* 삭제하고 싶은 번호를 가지고 삭제 */
+  // 갤러리 삭제
   const deleteGallery = async (gbPostNo) => {
     try{
       const response = await axios.delete(`/gallery/${gbPostNo}`);
@@ -32,20 +31,21 @@ const GalleryDetail = () => {
 
 
   /****** 코멘트 *******/
-  useEffect(() => {
-    fetchComment();
-  }, []);
-
+  // 댓글 목록 가져오기
   const fetchComment = async () => {
     try {
       const response = await axios.get('/gallery/comment');
-      console.log("response.data : " + response.data);
-      setComment(response.data);
+      setCommentList(response.data);
     } catch (error) {
       console.error("게시물을 가져오는 데 실패했습니다.", error);
     }
   };
 
+  useEffect(() => {
+    fetchComment();
+  }, []);
+
+  // 댓글 작성하기
   const commentWrite = async () => {
     const formData = new FormData();
     
@@ -67,24 +67,30 @@ const GalleryDetail = () => {
         }
       });
       alert("댓글 작성이 완료되었습니다..");
+      setContent('');
+      setFiles([]);
       fetchComment();
     } catch (error) {
       console.error("댓글 작성에 실패했습니다.", error);
     }
   }
 
+  // 댓글삭제
+  const commentDelete = async(gbCommentNo) => {
+    try{
+      await axios.delete(`/gallery/comment/${gbCommentNo}`);
+      alert("삭제되었습니다.");
+      fetchComment();
+    } catch(error) {
+      console.log("s" + gbCommentNo);
+      alert("댓글 삭제에 실패했습니다.");
+    }
+  }
+
+  // 사진파일 선택핸들
   const handleFileChange = (e) => {
     setFiles(Array.from(e.target.files));
   };
-
-  const CoList = async () => {
-    const response = await axios.get("/gallery/comment");
-    setCommentList(response.data);
-  };
-
-  useEffect(() => {
-    CoList();
-  }, []);
 
    // 게시물에 해당하는 댓글만 필터링
   const filteredComments = commentList.filter(comment => comment.gbPostNo === list.gbPostNo);
@@ -94,7 +100,7 @@ const GalleryDetail = () => {
       <div className="button-container">
         {loginMember && list && loginMember.memberNo === list.memberNo && (
           <>
-          <Link to="/galleryUpdate" >
+          <Link to={`/galleryUpdate/${list.gbPostNo}`} >
             <Button variant="secondary">수정</Button>
           </Link>
           <Button variant="secondary" onClick={() => deleteGallery(list.gbPostNo)}>삭제</Button>
@@ -141,6 +147,7 @@ const GalleryDetail = () => {
                 <div className="comment-date">
                   <p>{comment.gbCommentCreateDate}
                     <button>답글쓰기</button>
+                    <button onClick={() => commentDelete(comment.gbCommentNo)}>삭제</button>
                   </p>
                 </div>
               </div>

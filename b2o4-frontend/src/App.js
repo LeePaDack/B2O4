@@ -40,7 +40,7 @@ function App() {
           <Route path='/galleryUpload' element={<GalleryUpload />} />
           <Route path='/findId' element={<FindId />} />
           <Route path='/findPw' element={<FindPw />} />
-          <Route path='/galleryUpdate' element={<GalleryUpdate />} />
+          <Route path='/galleryUpdate/:gbPostNo' element={<GalleryUpdate />} />
         </Routes>
         <Footer />
       </Router>
