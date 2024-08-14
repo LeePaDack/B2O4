@@ -10,10 +10,12 @@ const Login = () => {
 
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
-  const [profile, setProfile] = useState("");
 
   const login = () => {
-    axios.post("/login", { memberId: id, memberPw: pw, memberProfile: profile }).then((response) => {
+    axios.post("/login", { 
+      memberId: id, 
+      memberPw: pw, 
+     }).then((response) => {
       const { data } = response;
       console.log("로그인 정보 : ", data);
 
@@ -34,7 +36,6 @@ const Login = () => {
   const logout = () => {
     setId("");
     setPw("");
-    setProfile("");
     setLoginMember(null);
     localStorage.removeItem("loginMember");
     console.log("로그인 멤버 : " + id);

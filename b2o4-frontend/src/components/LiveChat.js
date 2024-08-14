@@ -8,7 +8,7 @@ import MyPageContext from './MyPageContext';
 import moment from 'moment';
 
 const LiveChat = () => {
-  const {loginMember} = useContext(MyPageContext);
+  const { loginMember } = useContext(MyPageContext);
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
   const [stompClient, setStompClient] = useState(null);
@@ -17,7 +17,6 @@ const LiveChat = () => {
   const [freezeChat, setFreezeChat] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(null);
   const messagesContainerRef = useRef(null);
-  //const [allMessages, setAllMessages] = useState([]);
 
   // 서버에 요청 보내서 일반 사용자들에게 기능시행 후 결과를 전파하는 기능
   useEffect(() => {
@@ -48,9 +47,9 @@ const LiveChat = () => {
 
         //현재 채팅창 동결 여부를 서버에서 가져오기
         axios.get('http://localhost:9001/chat/freezeChat')
-        .then(res => {
+          .then(res => {
             setFreezeChat(res.data);
-        })
+          })
       },
       onStompError: function (frame) {
         console.error('STOMP Error:', frame);
@@ -70,9 +69,9 @@ const LiveChat = () => {
     };
   }, [freezeChat]);
 
+  //실제 메시지 삭제 필터
   useEffect(() => {
     console.log("deleteMessage 값", deleteMessage);
-
     if (deleteMessage) {
       setMessages((prevMessages) =>
         prevMessages.filter(message =>
@@ -80,7 +79,7 @@ const LiveChat = () => {
         )
       );
       setDeleteMessage(null); // 삭제 후 deleteMessage 비우기
-      
+
     }
   }, [deleteMessage]);
 
@@ -94,15 +93,14 @@ const LiveChat = () => {
   // 메시지 보내기
   const sendMessage = () => {
     if (stompClient && connected && message) {
-      const memberProfile = loginMember.memberProfile;
       stompClient.publish({
         destination: '/app/chat.send', //java 쪽의 컨트롤러(@MessageMapping)와 맞춰서 작성
         body: JSON.stringify({
-          profile: memberProfile,
+          profile: loginMember.memberProfile,
           sender: loginMember.memberId,
           content: message,
-          viewedTime: moment().format("hh:mm a"),          
-          formattedTime : moment().format("YYYY-MM-DD HH:mm:ss")
+          viewedTime: moment().format("hh:mm a"),
+          formattedTime: moment().format("YYYY-MM-DD HH:mm:ss")
         })
       });
       setMessage('');
@@ -131,13 +129,13 @@ const LiveChat = () => {
 
   }
 
-  //채팅 메시지 삭제
+  //채팅 메시지 요청 서버랑 주고 받기
   const handleDeleteMessage = async ({ msgContent, msgAt }) => {
-  
+
     await axios.delete('/chat/delete', {
-      params: { 
-        msgContent: msgContent, 
-        msgAt: msgAt 
+      params: {
+        msgContent: msgContent,
+        msgAt: msgAt
       }
     });
 
@@ -149,6 +147,7 @@ const LiveChat = () => {
     }
   };
 
+
   //채팅창 전체 동결
   const handleFreezeChat = () => {
     if (stompClient) {
@@ -158,7 +157,13 @@ const LiveChat = () => {
     }
   }
 
+  if(!loginMember){
+    return;
+  }
+
+  console.log("로그인 멤버 정보 : ", loginMember);
   console.log(messages);
+
   return (
     <div className='chat-container'>
       <div className='messages' ref={messagesContainerRef}>
@@ -169,9 +174,12 @@ const LiveChat = () => {
               <strong>{msg.sender}</strong>
               <p>{msg.content} <span className='time-text'>{msg.viewedTime}</span></p>
             </div>
-            <button className='deleteBtn' onClick={() => handleDeleteMessage({ msgContent: msg.content, msgAt: msg.formattedTime })}>
-              X
-            </button>
+            {loginMember.memberType === 'A' &&
+              <button className='deleteBtn' onClick={() => handleDeleteMessage({ msgContent: msg.content, msgAt: msg.formattedTime })}>
+                X
+              </button>
+            }
+
           </div>
         ))}
       </div>
@@ -200,9 +208,11 @@ const LiveChat = () => {
           </svg>
         </div>
       </div>
-      <button onClick={handleFreezeChat} className='btn btn-outline-success'>
-        {freezeChat ? 'Release Chat' : 'Freeze Chat'}
-      </button>
+      {loginMember.memberType === 'A' &&
+        <button onClick={handleFreezeChat} className='btn btn-outline-success'>
+          {freezeChat ? 'Release Chat' : 'Freeze Chat'}
+        </button>
+      }
       {!connected && <p>서버 연결중...</p>}
     </div>
   );
