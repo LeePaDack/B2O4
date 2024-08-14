@@ -135,16 +135,7 @@ const MemberReviewUpload = () => {
             작성하기
           </button>
         </section>
-        <section>
-          {reviewList
-            .filter((review) => review.memberNo === memberNo) // 평가 대상에 대한 리뷰만 필터링
-            .map((review, index) => (
-              <div key={index}>
-                <p>{review.memberComment}</p>
-                <p>👍 {review.likeCount} 👎 {review.dislikeCount}</p>
-              </div>
-            ))}
-        </section>
+        
       </main>
     </div>
   );

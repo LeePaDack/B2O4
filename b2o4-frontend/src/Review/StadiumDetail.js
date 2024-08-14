@@ -9,11 +9,9 @@ const StadiumDetail = () => {
     const [contentBoxView, setContentBoxView] = useState(false);
     const [reviews, setReviews] = useState([]);
 
-    // stadiumNo를 가져오기 위해 useParams 사용
     const { stadiumNo } = useParams();
 
     useEffect(() => {
-        // stadiumNo에 해당하는 리뷰를 가져옵니다.
         axios.get(`/api/stadiumReview/${stadiumNo}`)
             .then(response => {
                 setReviews(response.data);
@@ -41,16 +39,17 @@ const StadiumDetail = () => {
 
                 {/* 구장 리뷰들 보여줘야 함 */}
                 <div className="reviews">
-                    <h2>리뷰</h2>
+                    <h2>평가</h2>
                     {reviews.length > 0 ? (
                         reviews.map(review => (
                             <div key={review.stadiumReviewNo} className="review">
+                                
                                 <p>{review.stadiumComment}</p>
                                 <p>작성 날짜 : {review.stadiumCommentDate}</p>
                             </div>
                         ))
                     ) : (
-                        <p>리뷰가 없습니다.</p>
+                        <p>평가 글이 없습니다.</p>
                     )}
                 </div>
             </div>

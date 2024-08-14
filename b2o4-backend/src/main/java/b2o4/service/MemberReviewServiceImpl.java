@@ -21,6 +21,11 @@ public class MemberReviewServiceImpl implements MemberReviewService {
 	public List<MemberReview> memberGetList() {
 		return memberReviewMapper.memberGetList();
 	}
+	
+	// 참가자 평가 리스트 보기
+	public List<MemberReview> getMemberReviewList(int memberNo) {
+		return memberReviewMapper.getMemberReviewList(memberNo);
+	}
 
 	// 참가자 평가 업로드
 	@Override

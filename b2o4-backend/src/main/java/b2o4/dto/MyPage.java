@@ -24,10 +24,10 @@ public class MyPage {
 	private String memberAddress;
 	private String signUpDate;
 	private String memberRank;
-	private int matchCount;
+	private String matchCount;
 	private char memberType;
 	private String memberPay;
-	private String memberProfil;
+	private String memberProfile;
 	
 	
 }

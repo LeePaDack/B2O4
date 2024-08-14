@@ -9,7 +9,13 @@ import b2o4.dto.MyPage;
 @Mapper
 public interface MyPageMapper {
 
-	MyPage myPageMemberInfo(String memberId);
+	// 로그인한 member 정보 보여주기
+	MyPage getMemberInfo(String memberId);
 	
+	// 회원 정보 업데이트
+	void updateMemberInfo(MyPage myPage);
+	
+	// 회원 탈퇴
+	void deleteMember(int memberNo);
 	
 }

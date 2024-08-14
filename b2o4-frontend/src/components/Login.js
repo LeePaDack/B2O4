@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import MyPageContext from "../MyPage/MyPageContext";
 
-
 const Login = () => {
   const { loginMember, setLoginMember } = useContext(MyPageContext);
 
@@ -19,8 +18,6 @@ const Login = () => {
         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
         return;
       }
-      // 저장된 토큰을 로컬 스토리지에 저장
-      localStorage.setItem("authToken", data.token);
 
       setLoginMember(data.loginMember);
       setId("");
@@ -31,19 +28,21 @@ const Login = () => {
   };
 
   const logout = () => {
-    localStorage.removeItem("authToken");
     setId("");
     setPw("");
     setLoginMember(null);
+    localStorage.removeItem("loginMember");
     console.log("로그인 멤버 : " + id);
   };
 
   return (
     <div className="wrapper">
       <div className="login-container">
-        <h2>Login</h2>
         {!loginMember && (
           <>
+            <h2>
+              L <img src="soccer.jpg" /> g i n
+            </h2>
             <div className="input-login">
               <div className="input-fields">
                 <input
@@ -61,28 +60,46 @@ const Login = () => {
               </div>
               <button onClick={login}>로그인</button>
             </div>
+
+            <ul className="login-list">
+              <li className="login-item">
+                <Link to="/findId" className="login-link">
+                  <img src="soccer.jpg" />
+                  아이디 찾기
+                </Link>
+              </li>
+              <pre> | </pre>
+              <li className="login-item">
+                <Link to="/findPw" className="login-link">
+                  <img src="soccer.jpg" />
+                  비밀번호 찾기
+                </Link>
+              </li>
+              <pre> | </pre>
+              <li className="login-item">
+                <Link to="/register" className="login-link">
+                  <img src="soccer.jpg" />
+                  회원가입
+                </Link>
+              </li>
+            </ul>
           </>
         )}
         {loginMember && (
           <div className="login-complete">
-            <p>{loginMember.memberId}님 환영합니다.</p>
-            <button>
-              <Link to="/">Home</Link>
-            </button>
-            <button onClick={logout}>로그아웃</button>
+            <h1>{loginMember.memberId}님 환영합니다</h1>
+            <div>
+              <button>
+                <Link to="/">Home</Link>
+              </button>
+              <button onClick={logout}>
+                <img src="" />
+              </button>
+            </div>
           </div>
         )}
-        <ul>
-          <li>
-            <Link to="/">아이디ㆍ비밀번호 찾기</Link>
-          </li>
-          <li>
-            <Link to="/">회원가입</Link>
-          </li>
-        </ul>
       </div>
     </div>
   );
 };
-
 export default Login;

@@ -1,35 +1,94 @@
-/* MyPage Profile Css */
 .mypage-container {
-    text-align: center;
-    margin-top: 50px;
-  }
-  .updateProFileInput {
-    margin: 20px;
-    display: none;
-  }
-  .updateProFileBtn {
-    background-color: rgb(24, 24, 23);
-    padding: 6px 12px;
-    color: white;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 20px;
-    cursor: pointer;
-    width: 50px;
-  }
-  
-  .updateProFileBtn:hover {
-    background-color: rgb(105, 105, 104);
-    color: black;
-  }
-  
-  .proFileImg {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 2px solid #ddd;
-    padding: 5px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
-  
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mypage-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.mypage-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.user-info, .user-profile {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-info label, .user-profile label {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.input-field, .file-input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* 프로필 이미지 미리보기 가운데 정렬 */
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 자식 요소를 가로축에서 가운데 정렬 */
+}
+
+.profile-preview {
+  display: block;
+  margin: 10px auto; /* 수직으로 상하 여백 부여 및 가로축 가운데 정렬 */
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column; /* 버튼들을 세로로 정렬 */
+  align-items: center; /* 버튼들을 가로축에서 가운데 정렬 */
+  margin-top: 20px;
+}
+
+.submit-button, .delete-button, .home-button {
+  width: 100%; /* 버튼의 넓이를 전체로 설정 */
+  max-width: 300px; /* 버튼의 최대 넓이 설정 (선택 사항) */
+  padding: 10px;
+  margin: 5px 0; /* 버튼 간의 간격 설정 */
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.submit-button {
+  background-color: #28a745;
+}
+
+.delete-button {
+  background-color: #dc3545;
+}
+
+.home-button {
+  background-color: #007bff;
+}
+
+.submit-button:hover, .delete-button:hover, .home-button:hover {
+  opacity: 0.9;
+}

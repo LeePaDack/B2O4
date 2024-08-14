@@ -11,6 +11,9 @@ import b2o4.dto.MemberReview;
 public interface MemberReviewMapper {
 	// 참가자 리스트 보기
 	List<MemberReview> memberGetList();
+	
+	// 참가자 평가 리스트 보기
+	List<MemberReview> getMemberReviewList(int stadiumNo);
 
 	// 참가자 평가 업로드
 	int memberReviewUpload(MemberReview memeberReview);

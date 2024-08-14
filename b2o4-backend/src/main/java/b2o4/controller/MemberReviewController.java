@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,12 @@ public class MemberReviewController {
 	public List<MemberReview> memberGetList() {
 		return memberReviewService.memberGetList();
 	}
+	
+	// 참가자 평가 리스트 보기
+	@GetMapping("/memberReview/{memberNo}")
+	public List<MemberReview> getMemberReviewList(@PathVariable("memberNo") int memberNo) {
+		return memberReviewService.getMemberReviewList(memberNo);
+	}
 
 	// 참가자 평가하기
 	@PostMapping("/memberinputreview")
@@ -37,6 +44,7 @@ public class MemberReviewController {
 		return response;
 	}
 
+	// 좋아요 카운트
 	@PostMapping("/updateMemberLikeCount")
 	public Map<String, Object> updateLikeCount(@RequestBody MemberReview memberReview) {
 		boolean success = memberReviewService.updateMemberLikeCount(memberReview);
@@ -45,6 +53,7 @@ public class MemberReviewController {
 		return result;
 	}
 
+	// 싫어요 카운트
 	@PostMapping("/updateMeberDislikeCount")
 	public Map<String, Object> updateDislikeCount(@RequestBody MemberReview memberReview) {
 		boolean success = memberReviewService.updateMemberDislikeCount(memberReview);
