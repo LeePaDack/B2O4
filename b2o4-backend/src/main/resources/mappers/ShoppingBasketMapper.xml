@@ -6,7 +6,7 @@
 <mapper namespace="b2o4.mapper.ShoppingBasketMapper">
 	<!-- 특정 회원의 장바구니 목록 조회 -->
 	<select id="findBasketByMemberNo" parameterType="int" resultType="b2o4.dto.ShoppingBasket">
-		SELECT sb.basketNo, sb.memberNo, sb.goodsNo, sb.goodsQuantity, sb.basketTotal, gs.goodsName, gs.goodsPrice, gs.goodsImage
+		SELECT sb.basketNo, sb.memberNo, sb.goodsNo, sb.goodsQuantity, sb.basketTotal, sb.goodsSize, gs.goodsName, gs.goodsPrice, gs.goodsImage
 		FROM ShoppingBasket sb
 				 INNER JOIN GoodsShop gs ON sb.goodsNo = gs.goodsNo
 		WHERE sb.memberNo = #{memberNo}

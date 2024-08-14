@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import b2o4.dto.Member;
 import b2o4.dto.ShoppingBasket;
 import b2o4.service.ShoppingBasketService;
 
@@ -17,11 +18,21 @@ public class ShoppingBasketController {
 	private ShoppingBasketService shoppingBasketService;
 	
 	
-	@GetMapping("/all")
-	public ResponseEntity<List<ShoppingBasket>> ShoppingBasketFindAll() {
-		return ResponseEntity.ok(shoppingBasketService.ShoppingBasketFindAll());
+	/*
+	@GetMapping("/all/{memberNo}")
+	public ResponseEntity<List<ShoppingBasket>> findBasketByMemberNo(@RequestParam("memberNo") int memberNo) {
+		System.out.println("memberNo" + memberNo);  //
+		return ResponseEntity.ok(shoppingBasketService.findBasketByMemberNo(memberNo));
 	}
-
+	 */
+	
+	@GetMapping("/all/{memberNo}")
+	public ResponseEntity<List<ShoppingBasket>> findBasketByMemberNo(@PathVariable("memberNo") int memberNo) {
+	    System.out.println("memberNo: " + memberNo); //
+	    List<ShoppingBasket> basketList = shoppingBasketService.findBasketByMemberNo(memberNo);
+	    return ResponseEntity.ok(basketList);
+	}
+	
 	@PostMapping("/add")
 	public void addGoodsToBasket(@RequestBody ShoppingBasket basket) {
 		shoppingBasketService.insertBasket(basket);

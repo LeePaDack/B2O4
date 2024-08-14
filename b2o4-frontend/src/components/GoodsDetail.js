@@ -13,7 +13,7 @@ const GoodsDetail = ({ loginMember, userBasketItem, checkLogin }) => {
 
   //샵으로 돌아가기
   const returnToGoodsShop = () => {
-    navigate("/");
+    navigate("/goodsShop");
   };
 
   
@@ -31,10 +31,20 @@ const GoodsDetail = ({ loginMember, userBasketItem, checkLogin }) => {
   console.log(imgSrc1);
   const imgSrc2 = `${process.env.PUBLIC_URL}/images/goodsImage2/${good.goodsImage2}`;   //이미지2
   console.log(imgSrc2);
+  
 
 
   // 장바구니에 추가
   const addToShoppingBasket = () => {
+
+    //로그인하지 않았으면 로그인해주세요
+    if(!loginMember) { 
+      if(window.confirm("로그인이 필요합니다!")){ //window.confirm alert창 확인/취소
+        navigate("/login") //확인누르면 로그인화면으로
+      }
+      return;
+    }
+
     const basketItem = {
       memberNo: loginMember.memberNo,
       goodsNo: good.goodsNo,
@@ -82,7 +92,8 @@ const GoodsDetail = ({ loginMember, userBasketItem, checkLogin }) => {
 
 
       <div className="buttons">
-        <button className="basketAdd-button" onClick={() => ShoppingBasket(good, loginMember, userBasketItem, checkLogin)}>장바구니에 추가</button>
+        <button className="basketAdd-button" onClick={addToShoppingBasket}>장바구니에 추가</button>
+        {/*<button className="basketAdd-button" onClick={() => ShoppingBasket(good, loginMember, userBasketItem, checkLogin)}>장바구니에 추가</button>*/}
         <button className="back-button" onClick={returnToGoodsShop} >샵으로 돌아가기</button>
       </div>
     </div>

@@ -1,18 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
-import './Layout.css';
-import { Link } from "react-router-dom";
+import '../css/Layout.css';
+import { Link, useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/esm/Button";
+import MyPageContext from "../MyPageContext";
 
 const Header = () => {
+    const {loginMember, setLoginMember} = useContext(MyPageContext);
 
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        setLoginMember(null);
+        localStorage.removeItem("loginMember");
+        navigate('/');
+    };
     return (
         <header>
             <div className="header-top">
                 <Link to="/" className="d-flex align-items-center">
-                    <img src="/images/pngwing.com.png" className="brand-logo" alt="Brand Logo" />
+                    <img src="/pngwing.com.png" className="brand-logo" alt="Brand Logo" />
                 </Link>
                 <div className="search-bar">
                     <Form className="d-flex">
@@ -27,22 +36,16 @@ const Header = () => {
                     </Form>
                 </div>
                 <div className="login-session">
-                {/* 
-                {isLogin ?
+                {loginMember ?
                 <div>
-                    <p>{memberName}님 환영합니다.</p>
-                    <a href="#">로그아웃</a>  
+                    <p className="login-hypertext">{loginMember.memberId}님 환영합니다.</p>
+                    <a href="/" className="login-hypertext" onClick={handleLogout}>로그아웃</a>  
                 </div>  
                 :
-                    <a className="login-hypertext">로그인</a>
+                <Button className="login-hypertext" href="/login">로그인</Button>
                 }
-                */}
-                <a className="login-hypertext">로그인</a>
-                <div>
-                    <p className="login-hypertext">님 환영합니다.</p>
-                    <a href="#" className="login-hypertext">로그아웃</a>  
-                </div>  
                 </div>
+                
             </div>
 
             <div className="navbar-container">
@@ -50,11 +53,11 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center">
                         <Nav className="d-flex">
-                            <Nav.Link href="#link" className="item" style={{ marginLeft: "140px" }}>갤러리</Nav.Link>
+                            <Nav.Link href="/galleryBoard" className="item" style={{ marginLeft: "140px" }}>갤러리</Nav.Link>
                             <NavDropdown title="용품 장터" id="basic-nav-dropdown" className="item">
-                                <NavDropdown.Item href="#action/3.1">메인 장터</NavDropdown.Item>
+                                <NavDropdown.Item href="/goodsShop">메인 장터</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">중고 장터</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">장바구니</NavDropdown.Item>
+                                <NavDropdown.Item href="/shoppingBasket">장바구니</NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown title="구장 모음" id="basic-nav-dropdown" className="item">
                                 <NavDropdown.Item href="#action/3.1">구장 목록</NavDropdown.Item>

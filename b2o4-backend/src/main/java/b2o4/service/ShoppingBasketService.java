@@ -6,7 +6,7 @@ import b2o4.dto.ShoppingBasket;
 
 public interface ShoppingBasketService {
 
-	List<ShoppingBasket> ShoppingBasketFindAll();
+	List<ShoppingBasket> findBasketByMemberNo(int memberNo);
 	
 	void insertBasket (ShoppingBasket shoppingBasket);
 	

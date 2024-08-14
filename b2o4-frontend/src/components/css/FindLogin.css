@@ -1,0 +1,96 @@
+.findIdPw-container{
+    display: flex;
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    align-items: center; /* 수평 가운데 정렬 */
+    justify-content: center; /* 수직 가운데 정렬 */
+}
+
+.find-Id-Pw{
+    width: 100%;
+    background-color: rgb(124, 182, 38);
+    padding: 20px;
+    text-align: center;
+}
+
+.Link-list{
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    margin: 0px 100px;
+}
+
+.Link-list:hover{
+    background-color: greenyellow;
+    padding: 21px;
+    color: black;
+}
+
+.findId-container{
+    width: 40%;
+    padding: 20px;
+}
+
+.findId-title{
+    border-bottom: 2px solid gray;
+    margin-top: 50px;
+}
+
+.findId{
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-top: 70px;
+    height: 400px;
+}
+
+.findId-input{
+   margin-top: 50px;
+   margin-left: 30px;
+   display: flex;
+   width: 100%;
+   align-items: center; /* 수평 가운데 정렬 */
+   justify-content: flex-start; /* 수직 가운데 정렬 */
+}
+
+
+.findId-input input{
+    
+    width: 90%;
+    border: none;
+    background-color: gainsboro;
+    padding: 10px;
+}
+
+.findId-input > div:nth-child(1) {
+	width: 20%;
+}
+
+.findId-input  > div:nth-child(2) {
+	width: 80%;
+}
+
+
+.error-message{
+    color: red;
+}
+
+
+.findId-buttons{
+    display: flex;
+    margin: 15px;
+    justify-content: center;
+}
+
+.findId-buttons button{
+    border: none;
+    padding: 20px;
+    margin: 20px;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(124, 182, 38);
+}
+
+.findResult{
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
