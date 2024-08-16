@@ -236,7 +236,7 @@ const Signup = () => {
           {member.profileImage && (
             <div>
               <img
-                src={member.profileImage}
+                src={member.memberProfile}
                 alt="Profile Preview"
                 style={{ width: '100px', height: '100px', marginTop: '10px' }}
               />

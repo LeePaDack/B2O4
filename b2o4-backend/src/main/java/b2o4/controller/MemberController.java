@@ -20,8 +20,8 @@ public class MemberController {
     }
 
     @PostMapping("/members")
-    public void insertMember(Member member,
-                             @RequestParam("memberProfile") MultipartFile memberProfile) {
+    public void insertMember(@RequestBody Member member,
+                              MultipartFile memberProfile) {
         if (!memberProfile.isEmpty()) {
             // 파일을 저장하고 파일 경로를 member 객체에 설정
             String fileName = memberProfile.getOriginalFilename();
@@ -36,8 +36,4 @@ public class MemberController {
         return memberService.idCheck(id);
     }
 
-    @PostMapping("/Signup")
-    public int signup(@RequestBody Member member) {
-        return memberService.signup(member);
-    }
 }
