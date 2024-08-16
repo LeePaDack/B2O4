@@ -37,7 +37,7 @@ const StadiumList = () => {
                             </div>
                         </div>
                         <div className="stadium-list-name">
-                                {stadium.stadiumName}
+                                {stadium.stadiumName}({stadium.stadiumLocation})
                             </div>
                     </div>
                 ))}
