@@ -3,6 +3,7 @@ package b2o4.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import b2o4.dto.Member;
 import b2o4.mapper.MemberMapper;
@@ -18,7 +19,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void insertMember(Member member) {
+    public void insertMember(Member member, MultipartFile memberProfile) {
         memberMapper.insertMember(member);
     }
 

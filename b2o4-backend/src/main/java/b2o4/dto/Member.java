@@ -4,9 +4,9 @@ import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Member {
 	private int memberNo;
 	private String memberId;
@@ -15,8 +15,6 @@ public class Member {
 	private String memberPhone;
 	private String memberEmail;
 	private String memberAddress;
-	private String memberAddressDetail;
-	private String memberPost;
-	private String memberTeamCode;
-	private String memberImg;
+	private String memberBirth;
+	private String memberProfile;
 }

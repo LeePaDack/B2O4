@@ -4,23 +4,20 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="b2o4.mapper.MemberMapper">
-
+	<select id="idCheck" resultType="int">
+		SELECT COUNT(*)
+		FROM member
+		WHERE member_id = #{memberId}
+	</select>
+	
     <select id="findAllMember" resultType="b2o4.dto.Member">
-        SELECT * FROM members
+        SELECT * FROM member
     </select>
 
     <insert id="insertMember">
-        INSERT INTO members (memberId, memberPw, memberEmail, memberName, memberBirth, memberPhone, memberAddress, memberProfile)
+        INSERT INTO member (memberId, memberPw, memberEmail, memberName, memberBirth, memberPhone, memberAddress, memberProfile)
         VALUES (#{memberId}, #{memberPw}, #{memberEmail}, #{memberName}, #{memberBirth}, #{memberPhone}, #{memberAddress}, #{memberProfile})
     </insert>
 
-    <select id="idCheck" resultType="int">
-        SELECT COUNT(*) FROM members WHERE memberId = #{memberId}
-    </select>
-
-    <insert id="signup">
-        INSERT INTO members (memberId, memberPw, memberEmail, memberName, memberBirth, memberPhone, memberAddress, memberProfile)
-        VALUES (#{memberId}, #{memberPw}, #{memberEmail}, #{memberName}, #{memberBirth}, #{memberPhone}, #{memberAddress}, #{memberProfile})
-    </insert>
 
 </mapper>
