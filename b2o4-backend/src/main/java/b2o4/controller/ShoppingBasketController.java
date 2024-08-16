@@ -33,16 +33,23 @@ public class ShoppingBasketController {
 	    return ResponseEntity.ok(basketList);
 	}
 	
+	
+	
 	@PostMapping("/add")
 	public void addGoodsToBasket(@RequestBody ShoppingBasket basket) {
 		shoppingBasketService.insertBasket(basket);
 	}
 
+	
+	
 	@PutMapping("/update")
 	public void updateBasketQuantity(@RequestBody ShoppingBasket basket) {
 		shoppingBasketService.updateBasketQuantity(basket);
 	}
-
+	
+	
+	
+	
 	@DeleteMapping("/delete/{basketNo}")
 	public void deleteBasketItem(@PathVariable("basketNo") int basketNo) {
 		shoppingBasketService.deleteBasketItem(basketNo);

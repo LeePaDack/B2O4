@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import './css/GoodsDetail.css';
-import ShoppingBasket from "./ShoppingBasket";
 import axios from "axios";
 
 // 디테일
@@ -93,7 +92,7 @@ const GoodsDetail = ({ loginMember, userBasketItem, checkLogin }) => {
 
       <div className="buttons">
         <button className="basketAdd-button" onClick={addToShoppingBasket}>장바구니에 추가</button>
-        {/*<button className="basketAdd-button" onClick={() => ShoppingBasket(good, loginMember, userBasketItem, checkLogin)}>장바구니에 추가</button>*/}
+        {/* 쓰레기 <button className="basketAdd-button" onClick={() => ShoppingBasket(good, loginMember, userBasketItem, checkLogin)}>장바구니에 추가</button>*/}
         <button className="back-button" onClick={returnToGoodsShop} >샵으로 돌아가기</button>
       </div>
     </div>

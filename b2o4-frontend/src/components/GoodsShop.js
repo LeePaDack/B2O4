@@ -18,6 +18,7 @@ const GoodsShop = () => {
     }, []);
 
 
+
   //장바구니에 상품추가
   const addToShoppingBasket = (good) => {
     const basketItem = {
@@ -59,7 +60,6 @@ const GoodsShop = () => {
                         <p>사이즈 : {good.goodsSize}</p>
                         <p>판매상태 : {good.goodsSellNow ? "판매중" : "판매중지"}</p>
                       </Link>
-                      
                       <button onClick={() => addToShoppingBasket(good)}>장바구니에 추가</button>
                     </div>
                   );

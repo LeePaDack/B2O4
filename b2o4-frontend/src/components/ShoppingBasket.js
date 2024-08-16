@@ -34,7 +34,7 @@ const ShoppingBasket = () => {
   }, [loginMember, basketList]);
   console.log("basketGoods", basketGoods);
 
-/*
+/* 쓰레기들
 useEffect(() => {
     if (loginMember) {
         axios.get(`http://localhost:9000/basket/all/${loginMember.memberNo}`)
@@ -63,10 +63,33 @@ useEffect(() => {
 
 
 
+  // 수량변경 핸들러
+  const handleQuantityChange = (basketNo, newQuantity) => {
+    const updatedGoods = basketGoods.map((good) =>
+      good.basketNo === basketNo ? { ...good, goodsQuantity: newQuantity } : good
+    );
+    setBasketGoods(updatedGoods);
+  };
+
+
+
+  // 장바구니 수량변경
+  const updateQuantity = (basketNo, newQuantity) => {
+    axios.put(`http://localhost:9000/basket/update`, {
+      basketNo,
+      goodsQuantity: newQuantity,
+    })
+    .then(() => {
+      alert("수량 변경되었습니다.");
+    })
+    .catch((error) => {
+      alert("관리자에게 문의하세요", error);
+    });
+  };
+
   // 장바구니 항목 삭제
   const handleDelete = (basketNo) => {
-    axios
-      .delete(`http://localhost:9000/basket/delete/${basketNo}`)
+    axios.delete(`http://localhost:9000/basket/delete/${basketNo}`)
       .then(() => {
         setBasketGoods(
           basketGoods.filter((good) => good.basketNo !== basketNo)
@@ -78,35 +101,70 @@ useEffect(() => {
   };
 
 
+  //샵으로 돌아가기
+  const returnToGoodsShop = () => {
+    navigate("/goodsShop")
+  }
+
+
 
 
 
   return (
     <div className="basket-container">
       <h2>장바구니</h2>
-      {basketGoods.length > 0 ? (
-        <ul>
-          {basketGoods.map((good) => (
-            <li key={good.basketNo}>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/goodsImage1/${good.goodsImage}`}
-                alt={good.goodsImage}
-              />
-              <div className="good-detail">
-                <h3>{good.goodsName}</h3>
-                <p>사이즈: {good.goodsSize}</p>
-                <p>가격: ₩{good.goodsPrice.toLocaleString()}</p>
-                <p>수량: {good.goodsQuantity}</p>
-                <p>합계: ₩{good.basketTotal.toLocaleString()}</p>
-                <button onClick={() => handleDelete(good.basketNo)}> 삭제 </button>
-                
-              </div>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>장바구니가 비어 있습니다.</p>
-      )}
+      <hr />
+      <button className="back-button" onClick={returnToGoodsShop}>샵으로 돌아가기</button>
+      <table className="basket-table">
+        <caption><button className="payment-button" onClick={"/tosspay"}>결제하기</button></caption>
+        <thead>
+          <tr>
+            <th>상품 이미지</th>
+            <th>상품 정보</th>
+            <th>결제 / 수량변경</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {basketGoods.length > 0 ? (
+            basketGoods.map((good) => (
+              <tr key={good.basketNo}>
+                <td>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/images/goodsImage1/${good.goodsImage}`}
+                    alt={good.goodsImage}
+                  />
+                </td>
+                <td>
+                  <div className="good-detail">
+                    <h3>{good.goodsName}</h3>
+                    <p>사이즈: {good.goodsSize}</p>
+                    <p>가격: ₩{good.goodsPrice.toLocaleString()}</p>
+                    {/*<p>수량: {good.goodsQuantity}</p>  수량변경을 해야 한다... input type=number?? */}
+                    <p>수량 :
+                      <input type="number" min={1} max={9}
+                      value={good.goodsQuantity}
+                      onChange={(e) => {
+                        const newQuantity = parseInt(e.target.value, 10);
+                        handleQuantityChange(good.basketNo, newQuantity); 
+                        updateQuantity(good.basketNo, newQuantity);
+                      }} />
+                      </p>
+                  </div>
+                </td>
+                <td>
+                  <p>합계: ₩{good.basketTotal.toLocaleString()}</p>
+                  <button className="delete-button" onClick={() => handleDelete(good.basketNo)}>삭제</button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="3">장바구니가 비어 있습니다.</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };

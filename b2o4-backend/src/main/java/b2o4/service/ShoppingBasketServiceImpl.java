@@ -52,11 +52,15 @@ public class ShoppingBasketServiceImpl implements ShoppingBasketService {
 		
 	}
 
+	
+	
 	@Override
 	public void updateBasketQuantity(ShoppingBasket basket) {
 		shoppingBasketMapper.updateBasketQuantity(basket);
 	}
 
+	
+	
 	@Override
 	public void deleteBasketItem(int basketNo) {
 		shoppingBasketMapper.deleteBasketItem(basketNo);

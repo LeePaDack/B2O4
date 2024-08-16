@@ -4,6 +4,10 @@
     justify-content: center;
 }
 
+.detail-container .payment-button button{
+    width: 100%;
+}
+
 .detail-container img {
     margin: 15px 35% 0 35%;
     width: 30%;
@@ -21,6 +25,7 @@
     display: flex;
     gap: 20px;
     justify-content: center;
+    background-color: #f9f9f991;
 }
 
 .detail-container .detail-text p {
