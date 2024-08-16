@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import MyPageContext from "../MyPage/MyPageContext";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const MemberReviewUpload = () => {
+  const memberInputReview = "http://localhost:9000/api/memberinputreview";
+
   const { reviewList, setReviewList, loginMember } = useContext(MyPageContext);
-  
+
   const [inputReview, setInputReview] = useState("");
   const [likeCount, setLikeCount] = useState(0);
   const [dislikeCount, setDislikeCount] = useState(0);
@@ -51,19 +54,16 @@ const MemberReviewUpload = () => {
       return;
     }
 
-    fetch("http://localhost:9000/api/memberinputreview", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    axios
+      .post(memberInputReview, {
         memberNo,
         likeCount: liked ? 1 : 0,
         dislikeCount: disliked ? 1 : 0,
         memberComment: inputReview,
         reviewMemberNo: loginMember.memberNo, // 평가하는 사람의 번호
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
+      })
+      .then((response) => {
+        const data = response.data;
         if (data.success) {
           const newReview = {
             memberReviewNo: data.memberReviewNo,
@@ -130,12 +130,11 @@ const MemberReviewUpload = () => {
               onChange={(e) => setInputReview(e.target.value)}
               value={inputReview}
             ></textarea>
-          </label>
+          </label><br/>
           <button onClick={addReview} disabled={hasReviewed}>
             작성하기
           </button>
         </section>
-        
       </main>
     </div>
   );

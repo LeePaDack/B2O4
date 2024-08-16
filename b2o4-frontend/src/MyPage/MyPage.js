@@ -15,6 +15,7 @@ const MyPage = () => {
     memberAddress: "",
     memberProfile: "",
   });
+  const [defaultName, setDefaultName] = useState("");
   const [profileImage, setProfileImage] = useState(null);
   const [profileImagePreview, setProfileImagePreview] = useState(""); // 프로필 이미지 미리보기 상태
 
@@ -26,6 +27,7 @@ const MyPage = () => {
         .get(`/api/mypage/${loginMember.memberId}`)
         .then((response) => {
           setMemberInfo(response.data);
+          setDefaultName(response.data.memberName);
           if (response.data.memberProfile) {
             setProfileImagePreview(
               `/images/userProfile/${response.data.memberProfile}`
@@ -113,11 +115,11 @@ const MyPage = () => {
 
   return (
     <div className="mypage-container">
-      <h1 className="mypage-title">{memberInfo.memberName}님의 마이페이지</h1>
+      <h1 className="mypage-title">⚽{defaultName}님의 마이페이지⚽</h1>
       <div className="mypage-content">
         <div className="user-info">
           <label>
-            이름 
+            이름
             <input
               type="text"
               name="memberName"
@@ -127,7 +129,7 @@ const MyPage = () => {
             />
           </label>
           <label>
-            이메일 
+            이메일
             <input
               type="email"
               name="memberEmail"
@@ -137,7 +139,7 @@ const MyPage = () => {
             />
           </label>
           <label>
-            주소 
+            주소
             <input
               type="text"
               name="memberAddress"
@@ -147,7 +149,7 @@ const MyPage = () => {
             />
           </label>
           <label>
-            핸드폰 번호 
+            핸드폰 번호
             <input
               type="text"
               name="memberPhone"
@@ -160,9 +162,13 @@ const MyPage = () => {
         <div className="user-profile">
           <label>
             프로필 이미지
-            {profileImagePreview && (
-              <img src={profileImagePreview} className="profile-preview" />
-            )}
+            <div className="profile-thumbnail">
+              {profileImagePreview && (
+                <div className="profile-img">
+                  <img src={profileImagePreview} className="profile-preview" />
+                </div>
+              )}
+            </div>
             <input
               type="file"
               name="memberProfile"
@@ -172,7 +178,7 @@ const MyPage = () => {
             />
           </label>
           <label>
-            I D 
+            I D
             <input
               type="text"
               name="memberId"
@@ -182,7 +188,7 @@ const MyPage = () => {
             />
           </label>
           <label>
-            P W 
+            P W
             <input
               type="password"
               name="memberPw"

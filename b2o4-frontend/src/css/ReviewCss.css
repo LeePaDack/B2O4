@@ -1,52 +1,157 @@
 /* member, stadium mainReview  */
 .stadiumReviewMain-container, .memberReviewMain-container {
   text-align: center;
+  padding: 20px 0;
 }
 
 .stadiumReviewMain-content, .memberReviewMain-content {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 20px;
 }
 
 .stadiumReview, .memberReview {
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 8px;
   margin: 10px;
-  padding: 10px;
-  width: 200px;
-  box-shadow: 0 4px 8px #ddd;
-  background-color: rgb(244, 248, 206);
-  
+  padding: 15px;
+  width: 220px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa;
 }
 
 .stadiumReview-img, .memberReview-img {
   width: 100%;
-  border-radius: 10px;
+  max-width: 200px; /* 최대 너비 설정 */
+  max-height: 150px; /* 최대 높이 설정 */
+  border-radius: 8px;
   border: 1px solid #ddd;
   background-color: white;
+  object-fit: contain; /* 이미지가 자르지 않고 비율을 유지하면서 맞추도록 설정 */
 }
 
 .stadiumReview h2 , .memberReview h2 {
-  font-size: 16px;
+  font-size: 18px;
   margin: 10px 0;
+  font-weight: 600;
 }
 
 .stadiumReview p, .memberReview p {
   margin: 5px 0;
+  font-size: 14px;
+  color: #555;
 }
 
 .stadiumReview-textline, .memberReview-textline {
-  border-radius: 10px;
-  border: 1px solid aliceblue;
-  background-color: aliceblue;
+  border-radius: 8px;
+  border: 1px solid #e3e9ef;
+  background-color: #f0f4f8;
   margin-top: 20px;
+  padding: 8px;
 }
 
-.stadiumReview-link, .stadiumReview-link:link, .stadiumReview-link:visited, .stadiumReview-link:active, .stadiumReview-link:hover 
+.stadiumReview-link, .stadiumReview-link:link, .stadiumReview-link:visited, .stadiumReview-link:active, .stadiumReview-link:hover, 
 .memberReview-link, .memberReview-link:link, .memberReview-link:visited, .memberReview-link:active, .memberReview-link:hover {
   text-decoration: none;
-  color: rgb(41, 41, 41);
+  color: #292929;
+  font-weight: 500;
 }
 
-/* MemberDetail, StadiumDetail Css */
+
+/* Stadium Detail css */
+.stadiumdetail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+}
+
+
+.stadiumdetail-content {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 600px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+
+.stadiumdetail-content img {
+  width: 40%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+
+.stadiumdetail-content p {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #333;
+}
+
+
+.stadiumreview {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.stadiumreview button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.stadiumreview button:hover {
+  background-color: #0056b3;
+}
+
+.contentBoxView-wrapper {
+  margin-bottom: 20px;
+}
+
+
+.reviews {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: left;
+}
+
+.reviews h2 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.review {
+  padding: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.review:last-child {
+  border-bottom: none;
+}
+
+.review p {
+  font-size: 14px;
+  margin: 5px 0;
+  color: #555;
+}
+

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import MemberReviewUpload from "./MemberReviewUpload";
 import axios from "axios";
 
@@ -9,7 +9,7 @@ const MemberDetail = () => {
   const [contentBoxView, setContentBoxView] = useState(false);
   const [reviews, setReviews] = useState([]);
 
-  const {memberNo} = useParams();
+  const { memberNo } = useParams();
 
   useEffect(() => {
     axios
@@ -31,6 +31,7 @@ const MemberDetail = () => {
         <p>랭크 : {list.memberRank}</p>
       </div>
       <div className="memberreview">
+        
         <button
           onClick={() => {
             setContentBoxView(!contentBoxView);
@@ -38,6 +39,7 @@ const MemberDetail = () => {
         >
           {contentBoxView ? "닫기" : "작성하기"}
         </button>
+
         <div className="contentBoxView-wrapper">
           {contentBoxView && <MemberReviewUpload />}
         </div>
@@ -46,9 +48,12 @@ const MemberDetail = () => {
           {reviews.length > 0 ? (
             reviews.map((review) => (
               <div key={review.memberReviewNo} className="review">
-                
                 <p>{review.memberComment}</p>
                 <p>작성 날짜 : {review.memberCommentDate}</p>
+                <p>
+                  {review.likeCount > 0 && <span>👍</span>}
+                  {review.dislikeCount > 0 && <span>👎</span>}
+                </p>
               </div>
             ))
           ) : (

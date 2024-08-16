@@ -42,16 +42,16 @@
   box-sizing: border-box;
 }
 
-/* 프로필 이미지 미리보기 가운데 정렬 */
+
 .user-profile {
   display: flex;
   flex-direction: column;
-  align-items: center; /* 자식 요소를 가로축에서 가운데 정렬 */
+
 }
 
 .profile-preview {
   display: block;
-  margin: 10px auto; /* 수직으로 상하 여백 부여 및 가로축 가운데 정렬 */
+  margin: 10px auto;
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -61,16 +61,16 @@
 
 .button-group {
   display: flex;
-  flex-direction: column; /* 버튼들을 세로로 정렬 */
-  align-items: center; /* 버튼들을 가로축에서 가운데 정렬 */
+  flex-direction: column;
+  align-items: center;
   margin-top: 20px;
 }
 
 .submit-button, .delete-button, .home-button {
-  width: 100%; /* 버튼의 넓이를 전체로 설정 */
-  max-width: 300px; /* 버튼의 최대 넓이 설정 (선택 사항) */
+  width: 100%;
+  max-width: 300px;
   padding: 10px;
-  margin: 5px 0; /* 버튼 간의 간격 설정 */
+  margin: 5px 0;
   border: none;
   border-radius: 4px;
   color: #fff;
@@ -92,3 +92,9 @@
 .submit-button:hover, .delete-button:hover, .home-button:hover {
   opacity: 0.9;
 }
+
+.user-info label , .user-profile label {
+  text-align: center;
+  font-weight: bold;
+}
+
