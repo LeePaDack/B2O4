@@ -90,6 +90,7 @@ const WebCam = () => {
         }
     }
 
+    //로그인 정보 null일때 ui 불러오기 막기
     if(!loginMember){
         return;
     }

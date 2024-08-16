@@ -4,34 +4,49 @@
     height: 25%;
     background-color: rgb(192, 192, 192);
 }
-.carousel-item{
-    width: 100%;
+
+.carousel-item {
+    position: relative; 
+    width: 70%;
     height: 100%;
     margin: 0;
     padding: 10px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
-}
-.carousel-item img{
+.carousel-item img {
     border-radius: 20px;
-    width: 100%;
-    height: 600px;
-    
+    width: 70%; 
+    height: 600px; 
+    object-fit: cover; 
+    position: relative;
 }
+
 .carousel-item::after {
     content: ""; 
     position: absolute; 
-    bottom: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 84.6%;
+    height: 600px; 
     background: linear-gradient(to left, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 40%);
     pointer-events: none; 
+    border-radius: 20px; 
 }
-.carousel-caption-left{
+
+.carousel-caption-text {
     text-align: right !important;
-    right : 40px !important;
+    margin-right: 20px;
     padding: 15px !important;
     position: absolute; 
     z-index: 1000;
     font-size: large;
+}
+.famous-stadium-list-container{
+    
+}
+.card-body{
+    display: flex;
 }
