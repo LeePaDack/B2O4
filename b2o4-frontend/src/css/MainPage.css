@@ -44,9 +44,75 @@
     z-index: 1000;
     font-size: large;
 }
-.famous-stadium-list-container{
-    
+
+.section-title{
+    font-weight: bold;
+    padding: 20px;
+    margin-top: 20px;
+    align-items: center;
 }
-.card-body{
+
+.card-container{
     display: flex;
+    justify-content: center;
+}
+
+.card-body{
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin: 10px;
+    max-width: 400px;
+    text-align: center;
+}
+
+.feature-weather {
+    flex: 1 0 0;
+    text-align: center;
+}
+
+.feature-weather img {
+    width: 70%;
+}
+
+.feature-weather span {
+    display: block;
+    padding: 0.5rem;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.feature-weather h2 {
+    font-size: clamp(1rem, 3vw, 2vw);
+}
+
+.a11y-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.forecast-list{
+    background-color: #04337450;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+    border-radius:  1.25rem;
+    padding: 1.5rem;
+    display: flex;
+    width: 100%;
+    list-style: none;
+}
+
+.weather-background-img{
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.main-weather-img{
+    width: 150px;
 }

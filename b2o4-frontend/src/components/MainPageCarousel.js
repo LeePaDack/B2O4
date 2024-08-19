@@ -11,7 +11,7 @@ const MainPageCarousel = () => {
     };
 
     return (
-        <Carousel activeIndex={index} onSelect={handleSelect}>
+        <Carousel activeIndex={index} onSelect={handleSelect} interval={1500}>
             <Carousel.Item className='carousel-item'>
                 <Link to="/galleryBoard">
                     <img src="/images/p1065618386918309_213_thum.jpg" alt='캐러셀 이미지 1' />

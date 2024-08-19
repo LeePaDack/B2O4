@@ -92,6 +92,8 @@ const LiveChat = () => {
 
   // 메시지 보내기
   const sendMessage = () => {
+
+
     if (stompClient && connected && message) {
       stompClient.publish({
         destination: '/app/chat.send', //java 쪽의 컨트롤러(@MessageMapping)와 맞춰서 작성
@@ -129,7 +131,7 @@ const LiveChat = () => {
 
   }
 
-  //채팅 메시지 요청 서버랑 주고 받기
+  //채팅 메시지 삭제 요청 서버랑 주고 받기
   const handleDeleteMessage = async ({ msgContent, msgAt }) => {
 
     await axios.delete('/chat/delete', {
@@ -147,7 +149,9 @@ const LiveChat = () => {
     }
   };
 
-
+  //채팅창 재정렬
+  //const sortedMessages = [...messages].sort((a, b) => new Date(b.formattedTime) - new Date(a.formattedTime));
+  
   //채팅창 전체 동결
   const handleFreezeChat = () => {
     if (stompClient) {
@@ -162,8 +166,12 @@ const LiveChat = () => {
     return;
   }
 
+  const handleInputChange = (e) => {
+    setMessage(e.target.value);
+  }
+
   console.log("로그인 멤버 정보 : ", loginMember);
-  console.log(messages);
+  console.log("정렬된 메시지 : ", messages);
 
   return (
     <div className='chat-container'>
@@ -190,7 +198,7 @@ const LiveChat = () => {
           <input
             type="text"
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={handleInputChange}
             disabled={!connected || freezeChat}
             onKeyDown={enterKey}
             className='message-input'

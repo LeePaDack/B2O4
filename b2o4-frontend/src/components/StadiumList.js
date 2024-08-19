@@ -20,11 +20,12 @@ const StadiumList = () => {
         <div className='famous-stadium-list-container'>
             <div className='section-title'>
                 <h1>Stadium of the month</h1>
+                <hr/>
             </div>
             <div className='famous-stadium'>
-                <div className='card-body' >
+                <div className='card-container' >
                     {stadiumList && stadiumList.map(stadium => (
-                        <div key={stadium.stadiumName}>
+                        <div key={stadium.stadiumName} className="card-body">
                             <img src={stadium.stadiumImage} alt='스타디움 사진' />
                             <p>{stadium.stadiumName}</p>
                             <p>인기도 : {stadium.totalLike}</p>

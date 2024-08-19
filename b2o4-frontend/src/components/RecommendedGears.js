@@ -20,11 +20,12 @@ const RecommendedGears = () => {
         <div className='recommended-goods-container'>
             <div className='section-title'>
                 <h1>Recommended Gears</h1>
+                <hr/>
             </div>
             <div className='random-goods-item'>
-                <div className='card-body'>
+                <div className='card-container'>
                     {goods && goods.map(gear => (
-                        <div key={gear.goodsNo}>
+                        <div key={gear.goodsNo} className="card-body">
                             <img src={gear.goodsImage} alt='기어 사진'/>
                             <p>{gear.goodsName}</p>
                             <p>{gear.goodsPrice}</p>

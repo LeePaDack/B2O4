@@ -42,7 +42,7 @@ public class ChatController {
     	chatLog.setMsgAt(msgAt);
 
     	System.out.println("리액트에서 들어온 메시지 : " + message.getContent());
-    	System.out.println("채팅입력한 멤버 아이디 : " + chatLog.getMemberId());
+    	System.out.println("채팅 입력한 멤버 아이디 : " + chatLog.getMemberId());
     	System.out.println("로그로 들어온 메시지 : " + chatLog.getMsgContent());
     	
     	chatService.recordChatMessage(chatLog);

@@ -24,11 +24,12 @@ const GalleryList = () => {
         <div className='gallery-list-container'>
             <div className='section-title'>
                 <h1>Gallery</h1>
+                <hr/>
             </div>
             <div className='random-gallery-item'>
-                <div className='card-body'>
+                <div className='card-container'>
                     {galleryItem && galleryItem.map(gallery => (
-                        <div key={gallery.gbpostNo}>
+                        <div key={gallery.gbpostNo} className="card-body">
                             <img src={gallery.gbiamges} alt='갤러리 사진' />
                             <p>{gallery.gbpostTitle}</p>
                             <Link to="/"><button>보러가기</button></Link>
