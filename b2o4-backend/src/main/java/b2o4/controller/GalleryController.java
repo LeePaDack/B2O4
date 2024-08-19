@@ -3,6 +3,7 @@ package b2o4.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,9 +77,18 @@ public class GalleryController {
 	
 	// 갤러리 삭제하기
 	@DeleteMapping("/{gbPostNo}")
-	public int deleteGallery(@PathVariable("gbPostNo") int gbPostNo) {
-		return galleryService.deleteGallery(gbPostNo);
+	public ResponseEntity<String> deleteGallery(@PathVariable("gbPostNo") int gbPostNo){
+		try {
+			galleryService.allDelete(gbPostNo);
+			
+			galleryService.deleteGallery(gbPostNo);
+			
+			return ResponseEntity.ok("게시글이 삭제되었습니다.");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제에 실패했습니다.");
+		}
 	}
+	
 	
 	// 갤러리 댓글 작성
 	@PostMapping("/comment")
@@ -107,7 +117,12 @@ public class GalleryController {
  	// 댓글 삭제하기
  	@DeleteMapping("/comment/{gbCommentNo}")
  	public int deleteComment(@PathVariable("gbCommentNo") int gbCommentNo) {
- 		System.out.println("뭔데?"+gbCommentNo);
  		return galleryService.deleteComment(gbCommentNo);
+ 	}
+ 	
+ 	// 갤러리 댓글 작성
+ 	@PostMapping("/recomment")
+ 	public ResponseEntity<String> reComment(GalleryComment galleryComment){
+ 		return ResponseEntity.ok("댓글 작성이 완료되었습니다.");
  	}
 }

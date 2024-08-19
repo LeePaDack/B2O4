@@ -26,6 +26,9 @@ public interface GalleryService {
 	// 갤러리 삭제하기
 	int deleteGallery(int gbPostNo);
 	
+	// 갤러리 삭제시 댓글도 같이 삭제하기
+	int allDelete(int gbPostNo);
+	
 	// 갤러리 댓글 작성
 	void createGalleryComment(GalleryComment galleryComment);
     void uploadCommentImages(MultipartFile[] files, String content, int gbPostNo, int memberNo, String memberName);
@@ -35,4 +38,7 @@ public interface GalleryService {
  	
  	// 댓글 삭제하기
  	int deleteComment(int gbCommentNo);
+ 	
+ 	// 갤러리 답글 작성
+ 	void reComment(GalleryComment galleryComment);
 }

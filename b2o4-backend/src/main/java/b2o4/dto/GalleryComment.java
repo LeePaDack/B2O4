@@ -19,7 +19,6 @@ public class GalleryComment {
 	private String gbCommentContent;
 	private String gbCommentCreateDate;
 	private int gbCommentClass;
-	private int gbCommentOrder;
-	private int gbCommentGroup;
+	private int parentCommentNo;
 	private String gbCommentImages;
 }

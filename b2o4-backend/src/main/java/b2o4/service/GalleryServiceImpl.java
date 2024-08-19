@@ -151,6 +151,13 @@ public class GalleryServiceImpl implements GalleryService{
 		return galleryMapper.deleteGallery(gbPostNo);
 	}
 	
+	// 갤러리 삭제시 댓글도 같이 삭제하기
+	@Override
+	public int allDelete(int gbPostNo) {
+		return galleryMapper.allDelete(gbPostNo);
+	}
+	
+	
 	// 갤러리 댓글 작성
 	@Override
 	public void createGalleryComment(GalleryComment galleryComment) {
@@ -212,6 +219,13 @@ public class GalleryServiceImpl implements GalleryService{
 	@Override
 	public int deleteComment(int gbCommentNo) {
 		return galleryMapper.deleteComment(gbCommentNo);
+	}
+	
+	// 답글 작성하기
+	@Override
+	public void reComment(GalleryComment galleryComment) {
+		System.out.println("gC : " + galleryComment);
+		galleryMapper.reComment(galleryComment);
 	}
 	
 }

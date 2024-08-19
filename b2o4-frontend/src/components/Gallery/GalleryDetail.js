@@ -16,6 +16,13 @@ const GalleryDetail = () => {
   const [files, setFiles] = useState([]);
   const [content, setContent] = useState('');
   const [commentList, setCommentList] = useState([]);
+  const [anonymousCount, setAnonymousCount] = useState(() => {
+    // 로컬 스토리지에서 익명 번호를 읽어오기 없으면 기본값 1
+    const storedCount = localStorage.getItem(`anonymousCount_${list.gbPostNo}`);
+    return storedCount ? parseInt(storedCount, 10) : 1;
+  });
+
+  const [replyInput, setReplyInput] = useState(false); 
 
   
   // 갤러리 삭제
@@ -30,7 +37,8 @@ const GalleryDetail = () => {
   }
 
 
-  /****** 코멘트 *******/
+  /************* 코멘트 *******************/
+
   // 댓글 목록 가져오기
   const fetchComment = async () => {
     try {
@@ -58,7 +66,7 @@ const GalleryDetail = () => {
     formData.append("content", content);
     formData.append("gbPostNo", list.gbPostNo);
     formData.append("memberNo", loginMember ? loginMember.memberNo : 0);
-    formData.append("memberName", loginMember ? loginMember.memberName : "익명"); // 익명으로 설정
+    formData.append("memberName", loginMember ? loginMember.memberName : `익명${anonymousCount}`); // 익명으로 설정
 
     try {
       await axios.post('/gallery/comment', formData, {
@@ -70,6 +78,13 @@ const GalleryDetail = () => {
       setContent('');
       setFiles([]);
       fetchComment();
+
+      if(!loginMember){
+        const newCount = anonymousCount + 1;
+        setAnonymousCount(newCount);
+        localStorage.setItem(`anonymousCount_${list.gbPostNo}`, newCount);
+      }
+
     } catch (error) {
       console.error("댓글 작성에 실패했습니다.", error);
     }
@@ -86,6 +101,7 @@ const GalleryDetail = () => {
       alert("댓글 삭제에 실패했습니다.");
     }
   }
+
 
   // 사진파일 선택핸들
   const handleFileChange = (e) => {
@@ -146,15 +162,22 @@ const GalleryDetail = () => {
                 </div>
                 <div className="comment-date">
                   <p>{comment.gbCommentCreateDate}
-                    <button>답글쓰기</button>
-                    <button onClick={() => commentDelete(comment.gbCommentNo)}>삭제</button>
+                    <button onClick={() => {setReplyInput(!replyInput)}}>
+                      {replyInput ? ('답글달기 취소') : ('답글달기')}
+                    </button>
+                    {loginMember && list &&
+                     (
+                      (loginMember.memberNo === list.memberNo && 
+                      (loginMember.memberNo === comment.memberNo || comment.memberName.startsWith('익명'))) || (loginMember.memberNo === comment.memberNo) ) && (
+                        <button onClick={() => commentDelete(comment.gbCommentNo)}>삭제</button>
+                      )}
                   </p>
                 </div>
               </div>
             ))}
           </div>
           <div className="comment-write">
-          <p>{loginMember ? loginMember.memberName : "익명"}</p>
+          <p>{loginMember ? loginMember.memberName : `익명${anonymousCount}`}</p>
             <input type="text" placeholder="댓글을 남겨보세요" value={content} onChange={(e) => setContent(e.target.value)} />
             <input type="file" multiple onChange={handleFileChange} />
             <button onClick={commentWrite}>등록</button>
