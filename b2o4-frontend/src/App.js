@@ -17,6 +17,7 @@ import ShoppingBasket from "./components/ShoppingBasket.js";
 
 import Footer from './components/Layout/Footer.js';
 import GalleryUpdate from './components/Gallery/GalleryUpdate.js'
+import GoodsPurchase from './components/GoodsPurchase.js';
 
 function App() {
 
@@ -52,6 +53,7 @@ function App() {
           <Route path="/goodsShop" element={<GoodsShop />} /> 
           <Route path="/goodsDetail/:goodsNo" element={<GoodsDetail  loginMember={loginMember}/>} />
           <Route path="/shoppingBasket/" element={<ShoppingBasket  loginMember={loginMember}/>} />
+          <Route path="/GoodsPurchase/" element={<GoodsPurchase  loginMember={loginMember} /> } />
 
         </Routes>
         <Footer />

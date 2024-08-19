@@ -44,6 +44,9 @@ const GoodsDetail = ({ loginMember, userBasketItem, checkLogin }) => {
       return;
     }
 
+
+
+
     const basketItem = {
       memberNo: loginMember.memberNo,
       goodsNo: good.goodsNo,
@@ -54,13 +57,14 @@ const GoodsDetail = ({ loginMember, userBasketItem, checkLogin }) => {
 
     axios.post('http://localhost:9000/basket/add', basketItem)
       .then(() => {
-        alert("장바구니에 추가되었습니다.");
+        if(window.confirm('장바구니에 추가되었습니다. 이동하시겠습니까?')) {
+          navigate("/shoppingBasket");
+        }
       })
       .catch(err => {
         console.error("Error: ", err);
       });
   };
-
 
 
 

@@ -16,6 +16,7 @@ public class ShoppingBasket {
 	private int basketNo;
 	private int memberNo;
 	private int goodsNo;
+	private String goodsName;
 	private int goodsQuantity;
 	private int goodsPrice;
 	private String goodsImage;

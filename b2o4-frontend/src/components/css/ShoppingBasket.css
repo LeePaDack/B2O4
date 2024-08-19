@@ -35,6 +35,14 @@
     text-align: center;
 }
 
+/*총액*/
+.basket-container .basket-table .totalPrise {
+    text-align: center;
+    font-size: 25px;
+    text-decoration: black;
+}
+
+
 /*결제버튼*/
 .basket-container .basket-table .payment-button {
     width: 40%;

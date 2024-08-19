@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 const GoodsShop = () => {
     const [goods, setGoods] = useState([]); 
+    
 
     //  useEffect -> 자바에서 데이터를 맨 처음 가져오고 마는 코드
     useEffect(() => {
@@ -19,6 +20,7 @@ const GoodsShop = () => {
 
 
 
+
   //장바구니에 상품추가
   const addToShoppingBasket = (good) => {
     const basketItem = {
@@ -27,7 +29,6 @@ const GoodsShop = () => {
       goodsQuantity: 1,
       basketTotal: good.goodsPrice
     };
-
     axios.post('http://localhost:9000/basket/add', basketItem)
       .then(() => {
         alert("장바구니에 추가되었습니다.");
@@ -37,9 +38,15 @@ const GoodsShop = () => {
       });
   };
 
+
+
+
     //축구화 - 풋살화 필터
     const soccerShoes = goods.filter(good => good.goodsKind === "축구화");
     const futsalShoes = goods.filter(good => good.goodsKind === "풋살화");
+
+
+
 
     return (
         <div className='goods-container'>
@@ -57,6 +64,7 @@ const GoodsShop = () => {
                         <h2>{good.goodsName}</h2>
                         <p>상품종류 : {good.goodsKind}</p>
                         <p>상품가격 : {good.goodsPrice.toLocaleString()}</p>
+                        <p>설명 : {good.goodsComment}</p>
                         <p>사이즈 : {good.goodsSize}</p>
                         <p>판매상태 : {good.goodsSellNow ? "판매중" : "판매중지"}</p>
                       </Link>
@@ -81,6 +89,7 @@ const GoodsShop = () => {
                         <h2>{good.goodsName}</h2>
                         <p>상품종류 : {good.goodsKind}</p>
                         <p>상품가격 : {good.goodsPrice.toLocaleString()}</p>
+                        <p>설명 : {good.goodsComment}</p>
                         <p>사이즈 : {good.goodsSize}</p>
                         <p>판매상태 : {good.goodsSellNow ? "판매중" : "판매중지"}</p>
                       </Link>

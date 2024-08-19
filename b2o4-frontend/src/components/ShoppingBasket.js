@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import "./css/ShoppingBasket.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import MyPageContext from "./MyPageContext";
 
 
@@ -19,20 +19,20 @@ const ShoppingBasket = () => {
   useEffect(() => {
     if (loginMember) {
       axios.get(`http://localhost:9000/basket/all/${loginMember.memberNo}`)
-        .then((response) => {
-          console.log("RRRRRRRRRRRRRRRREspose ");
-          console.log(response);
-          setBasketGoods( response.data.filter(
-              (good) => good.memberNo === loginMember.memberNo
-            )
-          );
-        })
-        .catch((err) => {
-          console.error("Error: ", err);
-        });
-    }
-  }, [loginMember, basketList]);
-  console.log("basketGoods", basketGoods);
+      .then((response) => {
+        console.log("RRRRRRRRRRRRRRRREspose ");
+        console.log(response);
+        setBasketGoods( response.data.filter(
+          (good) => good.memberNo === loginMember.memberNo
+        )
+      );
+    })
+    .catch((err) => {
+      console.error("Error: ", err);
+    });
+  }
+}, [loginMember, basketList]);
+console.log("basketGoods", basketGoods);
 
 /* 쓰레기들
 useEffect(() => {
@@ -60,6 +60,15 @@ useEffect(() => {
         });
     }, [memberNo]);
 */
+
+
+
+
+
+  //샵으로 돌아가기
+  const returnToGoodsShop = () => {
+    navigate("/goodsShop")
+  };
 
 
 
@@ -100,28 +109,51 @@ useEffect(() => {
   // 장바구니 항목 삭제
   const handleDelete = (basketNo) => {
     axios.delete(`http://localhost:9000/basket/delete/${basketNo}`)
-      .then(() => {
-        setBasketGoods(
-          basketGoods.filter((good) => good.basketNo !== basketNo)
-        );
-      })
-      .catch((err) => {
-        console.error("Error: ", err);
-      });
+    .then(() => {
+      setBasketGoods(
+        basketGoods.filter((good) => good.basketNo !== basketNo)
+      );
+    })
+    .catch((err) => {
+      alert("관리자에게 문의하세요")
+    });
+  };
+  
+  
+  
+  
+  //상품 합계
+  const goodsPriceXgoodsQuantity = (good) => {
+    return (good.goodsPrice * good.goodsQuantity);
+  }
+  
+  
+  
+  // 체크박스 클릭 핸들러
+  const checkboxOff = (basketNo, isChecked) => {
+    // 장바구니 항목의 수량을 0으로 설정하거나 원래 수량으로 되돌리기
+    const updatedGoods = basketGoods.map((good) =>
+      good.basketNo === basketNo
+    ? { ...good, goodsQuantity: isChecked ? good.goodsQuantity : 0 }
+    : good
+  );
+    setBasketGoods(updatedGoods); // 상태 업데이트
+    alert("수량을 변경하시면 자동선택됩니다.");
+
+    // 서버에 수량 업데이트 요청
+    updateQuantity(basketNo, isChecked ? updatedGoods.find(good => good.basketNo === basketNo).goodsQuantity : 0);
   };
 
 
-  //샵으로 돌아가기
-  const returnToGoodsShop = () => {
-    navigate("/goodsShop")
-  }
 
 
+    // 총액 계산
+    const basketTotalTotal = () => {
+      return basketGoods
+        .filter(good => good.goodsQuantity > 0) // 수량이 0보다 큰 항목만 포함
+        .reduce((total, good) => total + goodsPriceXgoodsQuantity(good) ,0) .toLocaleString();
+    };
 
-  //상품 합계
-  const goodsPriceXgoodsQuantity = () => {
-    
-  }
 
 
 
@@ -133,11 +165,14 @@ useEffect(() => {
       <button className="back-button" onClick={returnToGoodsShop}>샵으로 돌아가기</button>
       <table className="basket-table">
         <caption>
-          <button className="payment-button" onClick={"/tosspay"}>결제하기</button>
-          <p>총액 : ().</p>        
+          <p className="totalPrise">총액 : ₩ {basketTotalTotal()} </p>   
+          <Link to={`/GoodsPurchase`} >     
+          <button className="payment-button" >결제하기</button>
+          </Link>
         </caption>
         <thead>
           <tr>
+            <th>선택</th>
             <th>상품 이미지</th>
             <th>상품 정보</th>
             <th>결제 / 수량변경</th>
@@ -148,19 +183,29 @@ useEffect(() => {
           {basketGoods.length > 0 ? (
             basketGoods.map((good) => (
               <tr key={good.basketNo}>
+
+                <td>
+                <input
+                    type="checkbox"
+                    checked={good.goodsQuantity > 0} // 수량이 0보다 크면 체크
+                    onChange={(e) => checkboxOff(good.basketNo, e.target.checked)}
+                  />
+                </td>
+
                 <td>
                   <img
                     src={`${process.env.PUBLIC_URL}/images/goodsImage1/${good.goodsImage}`}
                     alt={good.goodsImage}
                   />
                 </td>
+
                 <td>
                   <div className="good-detail">
-                    <h3>{good.goodsName}</h3>
-                    <p>가격: ₩{good.goodsPrice.toLocaleString()}</p>
-                    <p>사이즈: {good.goodsSize}</p>
+                    <h5>{good.goodsName}</h5>
+                    <p>가격 : ₩{good.goodsPrice.toLocaleString()}</p>
+                    <p>사이즈 : {good.goodsSize}</p>
                     {/*<p>수량: {good.goodsQuantity}</p>  수량변경을 해야 한다... input type=number?? */}
-                    <p>수량 :
+                    <p>수량 : &nbsp;
                       <input type="number" min={1} max={9}
                       value={good.goodsQuantity}
                       onChange={(e) => {
@@ -171,15 +216,17 @@ useEffect(() => {
                       </p>
                   </div>
                 </td>
+
                 <td>
-                  <p>합계: ₩{(good.goodsPrice * good.goodsQuantity).toLocaleString()}</p>                  
-                  <button className="delete-button" onClick={() => handleDelete(good.basketNo)}>삭제</button>
+                  <p>합계: ₩ {goodsPriceXgoodsQuantity(good).toLocaleString()}</p>     
+                  <button className="delete-button" onClick={() => handleDelete(good.basketNo)}>삭제</button>                  
                 </td>
+
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="3">장바구니가 비어 있습니다.</td>
+              <td colSpan="4">장바구니가 비어 있습니다.</td>
             </tr>
           )}
         </tbody>
@@ -189,3 +236,5 @@ useEffect(() => {
 };
 
 export default ShoppingBasket;
+
+
