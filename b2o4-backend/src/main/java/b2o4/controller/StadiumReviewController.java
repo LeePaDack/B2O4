@@ -63,6 +63,16 @@ public class StadiumReviewController {
 		return result;
 	}
 	
+	// 좋아요 카운트 합계 보기
+	@GetMapping("/stadiumReview/{stadiumNo}/likeCount")
+	public int getlikeCount(@PathVariable("stadiumNo") int stadiumNo) {
+		return stadiumReviewService.getlikeCount(stadiumNo);
+	}
 	
 
+	// 싫어요 카운트 합계 보기
+	@GetMapping("/stadiumReview/{stadiumNo}/dislikeCount")
+	public int getdislikeCount(@PathVariable("stadiumNo") int stadiumNo) {
+		return stadiumReviewService.getdislikeCount(stadiumNo);
+	}
 }

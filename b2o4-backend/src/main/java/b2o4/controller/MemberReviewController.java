@@ -61,4 +61,16 @@ public class MemberReviewController {
 		result.put("success", success);
 		return result;
 	}
+	
+	// 좋아요 합계
+	@GetMapping("/memberReview/{memberNo}/likeCount")
+	public int getMemberLikeCount(@PathVariable("memberNo") int memberNo) {
+		return memberReviewService.getMemberLikeCount(memberNo);
+	}
+	
+	// 싫어요 합계
+	@GetMapping("/memberReview/{memberNo}/dislikeCount")
+	public int getMemberDislikeCount(@PathVariable("memberNo") int memberNo) {
+		return memberReviewService.getMemberDislikeCount(memberNo);
+	}
 }

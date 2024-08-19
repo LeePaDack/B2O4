@@ -43,17 +43,28 @@ public class StadiumReviewServiceImpl implements StadiumReviewService {
 		return result;
 	}
 
+	// 좋아요 누르기 기능
 	@Override
 	public boolean updateLikeCount(StadiumReview stadiumReview) {
 
 		return stadiumReviewMapper.updateLikeCount(stadiumReview) > 0;
 	}
-
+	
+	// 싫어요 누르기 기능
 	@Override
 	public boolean updateDislikeCount(StadiumReview stadiumReview) {
 		return stadiumReviewMapper.updateDislikeCount(stadiumReview) > 0;
 	}
 
-	
+	// 좋아요 카운트 합계 보기
+	@Override
+	public int getlikeCount(int stadiumNo) {
+		return stadiumReviewMapper.getlikeCount(stadiumNo);
+	}
 
+	// 싫어요 카운트 합계 보기
+	@Override
+	public int getdislikeCount(int stadiumNo) {
+		return stadiumReviewMapper.getdislikeCount(stadiumNo);
+	}
 }

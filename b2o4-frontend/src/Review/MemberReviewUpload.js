@@ -54,6 +54,11 @@ const MemberReviewUpload = () => {
       return;
     }
 
+    if (!liked && !disliked) {
+      alert("좋아요 또는 싫어요를 선택해주세요.");
+      return;
+    }
+
     axios
       .post(memberInputReview, {
         memberNo,
@@ -71,7 +76,7 @@ const MemberReviewUpload = () => {
             likeCount: liked ? 1 : 0,
             dislikeCount: disliked ? 1 : 0,
             memberComment: inputReview,
-            reviewMemberNo: loginMember.memberNo, // 평가하는 사람의 번호
+            reviewMemberNo: loginMember.memberNo,
           };
 
           const newReviewList = Array.isArray(reviewList)
@@ -88,17 +93,31 @@ const MemberReviewUpload = () => {
       .catch((err) => console.error("Error:", err));
   };
 
-  const handleLike = () => {
-    if (!liked && !disliked) {
+  const likeBtn = () => {
+    if (!liked) {
+      if (disliked) {
+        setDisliked(false);
+        setDislikeCount(dislikeCount - 1);
+      }
       setLiked(true);
       setLikeCount(likeCount + 1);
+    } else {
+      setLiked(false);
+      setLikeCount(likeCount - 1);
     }
   };
 
-  const handleDislike = () => {
-    if (!liked && !disliked) {
+  const disLikeBtn = () => {
+    if (!disliked) {
+      if (liked) {
+        setLiked(false);
+        setLikeCount(likeCount - 1);
+      }
       setDisliked(true);
       setDislikeCount(dislikeCount + 1);
+    } else {
+      setDisliked(false);
+      setDislikeCount(dislikeCount - 1);
     }
   };
 
@@ -106,14 +125,14 @@ const MemberReviewUpload = () => {
     <div>
       <main>
         <div>
-          <button onClick={handleLike} disabled={liked || disliked}>
+          <button onClick={likeBtn} disabled={hasReviewed}>
             👍 {likeCount}
           </button>
-          <button onClick={handleDislike} disabled={liked || disliked}>
+          <button onClick={disLikeBtn} disabled={hasReviewed}>
             👎 {dislikeCount}
           </button>
         </div>
-        <section>
+        <section className="review-content">
           <label style={{ display: "none" }}>
             평가 대상 번호:
             <input
@@ -124,13 +143,16 @@ const MemberReviewUpload = () => {
             />
           </label>
           <label>
-            내용:
+            내용
             <textarea
               type="text"
               onChange={(e) => setInputReview(e.target.value)}
+              placeholder="평가 내용을 입력해 주세요."
               value={inputReview}
-            ></textarea>
-          </label><br/>
+              className="review-text"
+            />
+          </label>
+          <br />
           <button onClick={addReview} disabled={hasReviewed}>
             작성하기
           </button>

@@ -20,6 +20,10 @@ public interface StadiumReviewService {
 
 	boolean updateDislikeCount(StadiumReview stadiumReview);
 
-	// 구장 평가 삭제
-	
+	// 좋아요 합계 보기
+	int getlikeCount(int stadiumNo);
+
+	// 싫어요 합계 보기
+	int getdislikeCount(int stadiumNo);
+
 }

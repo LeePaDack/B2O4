@@ -10,18 +10,17 @@ import org.springframework.stereotype.Service;
 import b2o4.dto.MemberReview;
 import b2o4.mapper.MemberReviewMapper;
 
-
 @Service
 public class MemberReviewServiceImpl implements MemberReviewService {
 	@Autowired
 	private MemberReviewMapper memberReviewMapper;
-	
+
 	// 참가자 리스트 보기
 	@Override
 	public List<MemberReview> memberGetList() {
 		return memberReviewMapper.memberGetList();
 	}
-	
+
 	// 참가자 평가 리스트 보기
 	public List<MemberReview> getMemberReviewList(int memberNo) {
 		return memberReviewMapper.getMemberReviewList(memberNo);
@@ -42,15 +41,29 @@ public class MemberReviewServiceImpl implements MemberReviewService {
 		}
 		return result;
 	}
-
+	
+	// 좋아요 카운트
 	@Override
 	public boolean updateMemberLikeCount(MemberReview memberReview) {
 
 		return memberReviewMapper.updateMemeberLikeCount(memberReview) > 0;
 	}
-
+	
+	// 싫어요 카운트
 	@Override
 	public boolean updateMemberDislikeCount(MemberReview memberReview) {
 		return memberReviewMapper.updateMemberDislikeCount(memberReview) > 0;
+	}
+
+	// 좋아요 합계
+	@Override
+	public int getMemberLikeCount(int memberNo) {
+		return memberReviewMapper.getMemberLikeCount(memberNo);
+	}
+
+	// 싫어요 합계
+	@Override
+	public int getMemberDislikeCount(int memberNo) {
+		return memberReviewMapper.getMemberDislikeCount(memberNo);
 	}
 }

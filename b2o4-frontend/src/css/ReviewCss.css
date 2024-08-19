@@ -1,17 +1,20 @@
 /* member, stadium mainReview  */
-.stadiumReviewMain-container, .memberReviewMain-container {
+.stadiumReviewMain-container,
+.memberReviewMain-container {
   text-align: center;
   padding: 20px 0;
 }
 
-.stadiumReviewMain-content, .memberReviewMain-content {
+.stadiumReviewMain-content,
+.memberReviewMain-content {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
 }
 
-.stadiumReview, .memberReview {
+.stadiumReview,
+.memberReview {
   border: 1px solid #ddd;
   border-radius: 8px;
   margin: 10px;
@@ -21,29 +24,33 @@
   background-color: #f8f9fa;
 }
 
-.stadiumReview-img, .memberReview-img {
+.stadiumReview-img,
+.memberReview-img {
   width: 100%;
-  max-width: 200px; /* 최대 너비 설정 */
-  max-height: 150px; /* 최대 높이 설정 */
+  max-width: 200px;
+  max-height: 150px;
   border-radius: 8px;
   border: 1px solid #ddd;
   background-color: white;
-  object-fit: contain; /* 이미지가 자르지 않고 비율을 유지하면서 맞추도록 설정 */
+  object-fit: contain;
 }
 
-.stadiumReview h2 , .memberReview h2 {
+.stadiumReview h2,
+.memberReview h2 {
   font-size: 18px;
   margin: 10px 0;
   font-weight: 600;
 }
 
-.stadiumReview p, .memberReview p {
+.stadiumReview p,
+.memberReview p {
   margin: 5px 0;
   font-size: 14px;
   color: #555;
 }
 
-.stadiumReview-textline, .memberReview-textline {
+.stadiumReview-textline,
+.memberReview-textline {
   border-radius: 8px;
   border: 1px solid #e3e9ef;
   background-color: #f0f4f8;
@@ -51,16 +58,24 @@
   padding: 8px;
 }
 
-.stadiumReview-link, .stadiumReview-link:link, .stadiumReview-link:visited, .stadiumReview-link:active, .stadiumReview-link:hover, 
-.memberReview-link, .memberReview-link:link, .memberReview-link:visited, .memberReview-link:active, .memberReview-link:hover {
+.stadiumReview-link,
+.stadiumReview-link:link,
+.stadiumReview-link:visited,
+.stadiumReview-link:active,
+.stadiumReview-link:hover,
+.memberReview-link,
+.memberReview-link:link,
+.memberReview-link:visited,
+.memberReview-link:active,
+.memberReview-link:hover {
   text-decoration: none;
   color: #292929;
   font-weight: 500;
 }
 
-
 /* Stadium Detail css */
-.stadiumdetail-container {
+.stadiumdetail-container,
+.memberdetail-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,43 +83,45 @@
   margin: 30px;
 }
 
-
-.stadiumdetail-content {
+.stadiumdetail-content,
+.memberdetail-content {
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
   margin-bottom: 20px;
   width: 100%;
-  max-width: 600px;
+  max-width: 500px;
   background-color: #f9f9f9;
   text-align: center;
 }
 
-
-.stadiumdetail-content img {
+.stadiumdetail-content img,
+.memberdetail-content img {
   width: 40%;
   height: auto;
   border-radius: 8px;
   margin-bottom: 20px;
 }
 
-
-.stadiumdetail-content p {
+.stadiumdetail-content p,
+.memberdetail-content p {
   font-size: 16px;
   margin: 10px 0;
   color: #333;
+  border-bottom: 1px dotted seagreen; /* 색 바꿔야함 */
 }
 
-
-.stadiumreview {
+.stadiumreview,
+.member-review {
   width: 100%;
   max-width: 600px;
   text-align: center;
 }
 
-.stadiumreview button {
-  background-color: #007bff;
+.stadiumreview button,
+.member-review button {
+  background-color: yellowgreen;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -112,17 +129,18 @@
   cursor: pointer;
   font-size: 16px;
   margin-bottom: 20px;
+  margin: 10px;
   transition: background-color 0.3s ease;
 }
 
-.stadiumreview button:hover {
-  background-color: #0056b3;
+.stadiumreview button:hover,
+.member-review button:hover {
+  background-color: rgb(126, 161, 55);
 }
 
 .contentBoxView-wrapper {
   margin-bottom: 20px;
 }
-
 
 .reviews {
   background-color: #f9f9f9;
@@ -154,4 +172,59 @@
   margin: 5px 0;
   color: #555;
 }
+.review-comment {
+  border-bottom: 1px solid black;
+}
 
+.review-content .review-text {
+  resize: none;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px; /* 아이콘과 텍스트 사이 간격 */
+  margin: 20px 0;
+}
+
+.icon-container img {
+  width: 100px; /* 아이콘의 크기 설정 */
+  height: 100px;
+  object-fit: contain;
+}
+
+.icon-container label {
+  font-weight: bolder;
+}
+
+/* pagination css */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.pagination button {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #333;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0 5px;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #ddd;
+}
+
+.pagination button.active {
+  background-color: yellowgreen;
+  color: white;
+  border-color: yellowgreen;
+}

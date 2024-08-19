@@ -23,4 +23,10 @@ public interface MemberReviewMapper {
 
 	// 싫어요 카운트
 	int updateMemberDislikeCount(MemberReview memeberReview);
+	
+	// 좋아요 합계
+	int getMemberLikeCount(int memberNo);
+	
+	// 싫어요 합계
+	int getMemberDislikeCount(int memberNo);
 }

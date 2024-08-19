@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const StadiumReviewUpload = () => {
-
   const stadiumInputReviewAPI = "http://localhost:9000/api/stadiuminputreview";
 
   const { reviewList, setReviewList, loginMember } = useContext(MyPageContext);
@@ -15,7 +14,7 @@ const StadiumReviewUpload = () => {
   const [hasReviewed, setHasReviewed] = useState(false);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-  const { stadiumNo } = useParams(); // URL에서 stadiumNo 파라미터 추출 -> 경기장번호 가져옴
+  const { stadiumNo } = useParams();
 
   useEffect(() => {
     if (loginMember) {
@@ -28,6 +27,8 @@ const StadiumReviewUpload = () => {
         setHasReviewed(true);
         setLiked(existingReview.likeCount > 0);
         setDisliked(existingReview.dislikeCount > 0);
+        setLikeCount(existingReview.likeCount);
+        setDislikeCount(existingReview.dislikeCount);
       }
     }
   }, [reviewList, loginMember, stadiumNo]);
@@ -53,7 +54,13 @@ const StadiumReviewUpload = () => {
       return;
     }
 
-    axios.post(stadiumInputReviewAPI, {
+    if (!liked && !disliked) {
+      alert("좋아요 또는 싫어요를 선택해주세요.");
+      return;
+    }
+
+    axios
+      .post(stadiumInputReviewAPI, {
         stadiumNo,
         likeCount: liked ? 1 : 0,
         dislikeCount: disliked ? 1 : 0,
@@ -71,7 +78,6 @@ const StadiumReviewUpload = () => {
             stadiumComment: inputReview,
             reviewMemberNo: loginMember.memberNo,
           };
-
           const newReviewList = Array.isArray(reviewList)
             ? [...reviewList, newReview]
             : [newReview];
@@ -79,6 +85,7 @@ const StadiumReviewUpload = () => {
           setReviewList(newReviewList);
           setInputReview("");
           setHasReviewed(true);
+          
         } else {
           alert("리뷰 업로드에 실패했습니다.");
         }
@@ -86,46 +93,72 @@ const StadiumReviewUpload = () => {
       .catch((err) => console.error("Error:", err));
   };
 
-  const handleLike = () => {
-    if (!liked && !disliked) {
+  const likeBtn = () => {
+    if (!liked) {
+      if (disliked) {
+        setDisliked(false);
+        setDislikeCount(dislikeCount - 1);
+      }
       setLiked(true);
       setLikeCount(likeCount + 1);
+    } else {
+      setLiked(false);
+      setLikeCount(likeCount - 1);
     }
   };
 
-  const handleDislike = () => {
-    if (!liked && !disliked) {
+  const disLikeBtn = () => {
+    if (!disliked) {
+      if (liked) {
+        setLiked(false);
+        setLikeCount(likeCount - 1);
+      }
       setDisliked(true);
       setDislikeCount(dislikeCount + 1);
+    } else {
+      setDisliked(false);
+      setDislikeCount(dislikeCount - 1);
     }
   };
 
   return (
     <div>
-        <main>
-            <div>
-                <button onClick={handleLike} disabled={liked || disliked}>👍 {likeCount}</button>
-                <button onClick={handleDislike} disabled={liked || disliked}>👎 {dislikeCount}</button>
-            </div>
-            <section>
-                <label style={{ display: 'none' }}>경기장 번호:
-                    <input type="text" value={stadiumNo} readOnly style={{ display: 'none' }} />
-                </label>
-                <label>내용:
-                    <textarea type="text" onChange={e => setInputReview(e.target.value)} value={inputReview}></textarea>
-                </label>
-                <button onClick={addReview} disabled={hasReviewed}>작성하기</button>
-            </section>
-            <section>
-                {reviewList.map((review, index) => (
-                    <div key={index}>
-                        <p>{review.stadiumComment}</p>
-                    </div>
-                ))}
-            </section>
-        </main>
+      <main>
+        <div>
+          <button onClick={likeBtn} disabled={hasReviewed}>
+            👍 {likeCount}
+          </button>
+          <button onClick={disLikeBtn} disabled={hasReviewed}>
+            👎 {dislikeCount}
+          </button>
+        </div>
+        <section className="review-content">
+          <label style={{ display: "none" }}>
+            경기장 번호:
+            <input
+              type="text"
+              value={stadiumNo}
+              readOnly
+              style={{ display: "none" }}
+            />
+          </label>
+          <label>
+            내용 
+            <textarea
+              type="text"
+              onChange={(e) => setInputReview(e.target.value)}
+              placeholder="평가 내용을 입력해 주세요."
+              value={inputReview}
+              className="review-text"
+            />
+          </label><br/>
+          <button onClick={addReview} disabled={hasReviewed}>
+            작성하기
+          </button>
+        </section>
+      </main>
     </div>
-);
+  );
 };
 
 export default StadiumReviewUpload;

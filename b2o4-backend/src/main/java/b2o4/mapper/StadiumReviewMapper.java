@@ -14,6 +14,12 @@ public interface StadiumReviewMapper {
 
 	// 구장 평가 리스트 보기
 	List<StadiumReview> getStadiumReviewList(int stadiumNo);
+	
+	// 좋아요 합계 보기
+	int getlikeCount(int stadiumNo);
+	
+	// 싫어요 합계 보기
+	int getdislikeCount(int stadiumNo);
 
 	// 구장 평가 업로드
 	int stadiumReviewUpload(StadiumReview stadiumReview);

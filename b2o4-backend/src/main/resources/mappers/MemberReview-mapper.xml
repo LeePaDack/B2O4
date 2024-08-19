@@ -11,6 +11,19 @@
 	<select id="getMemberReviewList">
 		select * from memberReview
 		where memberNo = #{memberNo}
+		order by memberReviewNo desc;
+	</select>
+	
+	<!-- 좋아요 합계 -->
+	<select id="getMemberLikeCount">
+		select sum(likeCount) from memberReview
+		where memberNo = #{memberNo}
+	</select>
+	
+	<!-- 싫어요 합계 -->
+	<select id="getMemberDislikeCount">
+		select sum(dislikeCount) from memberReview
+		where memberNo = #{memberNo}
 	</select>
 	
 	<!-- 참가자 평가하기 insert -->

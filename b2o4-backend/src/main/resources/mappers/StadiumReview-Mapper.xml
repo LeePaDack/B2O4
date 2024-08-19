@@ -13,15 +13,25 @@
 		order by stadiumReviewNo desc;
 	</select>
 
+	<!-- 좋아요 합계 -->
+	<select id="getlikeCount">
+		select sum(likeCount) from stadiumReview
+		where stadiumNo = #{stadiumNo}
+	</select>
+	
+	<!-- 싫어요 합계 -->
+	<select id="getdislikeCount">
+		select sum(dislikeCount) from stadiumReview
+		where stadiumNo = #{stadiumNo}
+	</select>
 
 	<!-- 구장 평가하기 insert -->
 	<insert id="stadiumReviewUpload"
 		parameterType="b2o4.dto.StadiumReview">
 		insert into stadiumReview (stadiumNo, likeCount,
-		dislikeCount,
-		stadiumComment)
+		dislikeCount, stadiumComment, memberNo)
 		values(#{stadiumNo}, #{likeCount},
-		#{dislikeCount}, #{stadiumComment})
+		#{dislikeCount}, #{stadiumComment}, #{memberNo})
 	</insert>
 	
 	<!-- 구장 평가 삭제하기 -->
