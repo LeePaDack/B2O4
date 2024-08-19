@@ -75,17 +75,27 @@ useEffect(() => {
 
   // 장바구니 수량변경
   const updateQuantity = (basketNo, newQuantity) => {
+    const updatedGoods = basketGoods.find((good) => good.basketNo === basketNo);
+    const newTotal = updatedGoods.goodsPrice * newQuantity;
+
     axios.put(`http://localhost:9000/basket/update`, {
       basketNo,
       goodsQuantity: newQuantity,
+      basketTotal: newTotal,
     })
     .then(() => {
-      alert("수량 변경되었습니다.");
+      setBasketGoods((response) => 
+        response.map((good) =>
+          good.basketNo === basketNo ? { ...good, goodsQuantity: newQuantity, basketTotal: newTotal } : good
+        )
+      );
     })
     .catch((error) => {
       alert("관리자에게 문의하세요", error);
     });
   };
+
+
 
   // 장바구니 항목 삭제
   const handleDelete = (basketNo) => {
@@ -108,6 +118,12 @@ useEffect(() => {
 
 
 
+  //상품 합계
+  const goodsPriceXgoodsQuantity = () => {
+    
+  }
+
+
 
 
   return (
@@ -116,7 +132,10 @@ useEffect(() => {
       <hr />
       <button className="back-button" onClick={returnToGoodsShop}>샵으로 돌아가기</button>
       <table className="basket-table">
-        <caption><button className="payment-button" onClick={"/tosspay"}>결제하기</button></caption>
+        <caption>
+          <button className="payment-button" onClick={"/tosspay"}>결제하기</button>
+          <p>총액 : ().</p>        
+        </caption>
         <thead>
           <tr>
             <th>상품 이미지</th>
@@ -138,8 +157,8 @@ useEffect(() => {
                 <td>
                   <div className="good-detail">
                     <h3>{good.goodsName}</h3>
-                    <p>사이즈: {good.goodsSize}</p>
                     <p>가격: ₩{good.goodsPrice.toLocaleString()}</p>
+                    <p>사이즈: {good.goodsSize}</p>
                     {/*<p>수량: {good.goodsQuantity}</p>  수량변경을 해야 한다... input type=number?? */}
                     <p>수량 :
                       <input type="number" min={1} max={9}
@@ -153,7 +172,7 @@ useEffect(() => {
                   </div>
                 </td>
                 <td>
-                  <p>합계: ₩{good.basketTotal.toLocaleString()}</p>
+                  <p>합계: ₩{(good.goodsPrice * good.goodsQuantity).toLocaleString()}</p>                  
                   <button className="delete-button" onClick={() => handleDelete(good.basketNo)}>삭제</button>
                 </td>
               </tr>

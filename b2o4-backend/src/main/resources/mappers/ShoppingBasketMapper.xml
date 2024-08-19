@@ -12,18 +12,25 @@
 		WHERE sb.memberNo = #{memberNo}
 	</select>
 
+
 	<!-- 장바구니에 상품 추가 -->
 	<insert id="insertBasket" parameterType="b2o4.dto.ShoppingBasket">
 		INSERT INTO ShoppingBasket (memberNo, goodsNo, goodsQuantity, basketTotal, goodsSize)
 		VALUES (#{memberNo}, #{goodsNo}, #{goodsQuantity}, #{basketTotal}, #{goodsSize})
 	</insert>
 
+
 	<!-- 장바구니의 상품 수량 업데이트 -->
 	<update id="updateBasketQuantity" parameterType="b2o4.dto.ShoppingBasket">
-		UPDATE ShoppingBasket
+		<!-- UPDATE ShoppingBasket
 		SET goodsQuantity = #{goodsQuantity}, basketTotal = #{basketTotal}, goodsSize = #{goodsSize}
-		WHERE basketNo = #{basketNo}
+		WHERE basketNo = #{basketNo}  -->
+		UPDATE ShoppingBasket
+    	SET goodsQuantity = #{goodsQuantity},
+        basketTotal = #{basketTotal}  <!-- 총액 업데이트 -->
+    	WHERE basketNo = #{basketNo}
 	</update>
+
 
 	<!-- 장바구니에서 상품 삭제 -->
 	<delete id="deleteBasketItem" parameterType="int">
