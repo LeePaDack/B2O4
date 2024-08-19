@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/MainPage.css'; 
 
 const DisplayWeather = (props) => {
@@ -8,7 +8,7 @@ const DisplayWeather = (props) => {
     const [weatherValue, setWeatherValue] = useState(null);
     const [forecastValue, setForecastValue] = useState([]);
 
-    const currentLocation = useCallback(() => {
+    const currentLocation = () => {
         return new Promise((resolve, reject) => {
             navigator.geolocation.getCurrentPosition(
                 position => {
@@ -17,57 +17,60 @@ const DisplayWeather = (props) => {
                     resolve({ latitude, longitude });
                 },
                 error => {
-                    reject('error');
-                },
+                    reject(error);
+                }
             );
         });
-    }, []);
-
-    const getWeather = useCallback(async () => {
-        try {
-            const { latitude, longitude } = await currentLocation();
-
-            const responseCurrent = await fetch(
-                `https://api.openweathermap.org/data/2.5/weather?${cityValue ? 'q=' + cityValue : 'lat=' + latitude + '&lon=' + longitude
-                }&appid=${key}&units=metric&lang=KR`,
-            );
-
-            const responseForecast = await fetch(
-                `https://api.openweathermap.org/data/2.5/forecast?${cityValue ? 'q=' + cityValue : 'lat=' + latitude + '&lon=' + longitude
-                }&appid=${key}&units=metric&lang=KR`,
-            );
-
-            const [dataCurrent, dataForecast] = await Promise.all([responseCurrent, responseForecast]);
-            const resultCurrent = await dataCurrent.json();
-            const resultForecast = await dataForecast.json();
-
-            const oneDay = 1000 * 60 * 60 * 24;
-            const offset = 1000 * 60 * 60 * 9;
-            const current = new Date().getTime() + offset;
-            const DesiredTime = ' 21:00:00';
-            const oneDaysLater = new Date(current + oneDay).toISOString().slice(0, 10) + DesiredTime;
-            const twoDaysLater = new Date(current + oneDay * 2).toISOString().slice(0, 10) + DesiredTime;
-            const threeDaysLater = new Date(current + oneDay * 3).toISOString().slice(0, 10) + DesiredTime;
-
-            const weatherData = resultForecast.list.filter(item => {
-                return item.dt_txt === oneDaysLater || item.dt_txt === twoDaysLater || item.dt_txt === threeDaysLater;
-            });
-
-            setWeatherValue(resultCurrent);
-            setForecastValue(weatherData);
-
-            console.log(resultCurrent);
-            console.log(weatherData);
-
-        } catch (error) {
-            console.error('Error: ', error);
-            alert('⚠️ 위치를 받아올 수 없습니다. 영문으로 입력해주세요.');
-        }
-    }, [cityValue, key, currentLocation]);
+    };
 
     useEffect(() => {
+        const getWeather = async () => {
+            try {
+                const { latitude, longitude } = await currentLocation();
+
+                const responseCurrent = await fetch(
+                    `https://api.openweathermap.org/data/2.5/weather?${cityValue ? 'q=' + cityValue : 'lat=' + latitude + '&lon=' + longitude
+                    }&appid=${key}&units=metric&lang=KR`,
+                );
+
+                const responseForecast = await fetch(
+                    `https://api.openweathermap.org/data/2.5/forecast?${cityValue ? 'q=' + cityValue : 'lat=' + latitude + '&lon=' + longitude
+                    }&appid=${key}&units=metric&lang=KR`,
+                );
+
+                if (!responseCurrent.ok || !responseForecast.ok) {
+                    throw new Error('네트워크 응답이 좋지 않습니다.');
+                }
+
+                const resultCurrent = await responseCurrent.json();
+                const resultForecast = await responseForecast.json();
+
+                const oneDay = 1000 * 60 * 60 * 24;
+                const offset = 1000 * 60 * 60 * 9;
+                const current = new Date().getTime() + offset;
+                const DesiredTime = ' 21:00:00';
+                const oneDaysLater = new Date(current + oneDay).toISOString().slice(0, 10) + DesiredTime;
+                const twoDaysLater = new Date(current + oneDay * 2).toISOString().slice(0, 10) + DesiredTime;
+                const threeDaysLater = new Date(current + oneDay * 3).toISOString().slice(0, 10) + DesiredTime;
+
+                const weatherData = resultForecast.list.filter(item => {
+                    return item.dt_txt === oneDaysLater || item.dt_txt === twoDaysLater || item.dt_txt === threeDaysLater;
+                });
+
+                setWeatherValue(resultCurrent);
+                setForecastValue(weatherData);
+
+                console.log(resultCurrent);
+                console.log(weatherData);
+
+            } catch (error) {
+                console.error('Error: ', error);
+                alert('⚠️ 위치를 받아올 수 없습니다. 잠시만 기다려주세요.');
+            }
+        };
+
         getWeather();
-    }, [getWeather]);
+    }, [cityValue, key]); // `getWeather` 함수는 내부에서 정의되므로 의존성 배열에 포함될 필요 없음
 
     return (
         <>

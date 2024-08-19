@@ -4,7 +4,7 @@ import MainPageCarousel from "./MainPageCarousel";
 import StadiumList from "./StadiumList";
 import GalleryList from "./GalleryList";
 import RecommendedGears from "./RecommendedGears";
-import DisplayWeather from "./DisplayWeather";
+import Weather from "./Weather";
 
 const Main = () => {
 
@@ -20,7 +20,7 @@ const Main = () => {
                     <RecommendedGears />
                 </div>
                 <div className="weather-container col-3">
-                    <DisplayWeather/>
+                    <Weather/>
                 </div>
             </div>
         </div>
