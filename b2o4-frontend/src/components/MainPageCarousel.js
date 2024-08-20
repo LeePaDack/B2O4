@@ -14,7 +14,7 @@ const MainPageCarousel = () => {
         <Carousel activeIndex={index} onSelect={handleSelect} interval={1500}>
             <Carousel.Item className='carousel-item'>
                 <Link to="/galleryBoard">
-                    <img src="/images/p1065618386918309_213_thum.jpg" alt='캐러셀 이미지 1' />
+                    <img src="/images/tothegallery.jpg" alt='캐러셀 이미지 1' />
                 </Link>
                 <Carousel.Caption className='carousel-caption-text'>
                     <h3>갤러리 게시판</h3>
@@ -23,7 +23,7 @@ const MainPageCarousel = () => {
             </Carousel.Item>
             <Carousel.Item className='carousel-item'>
                 <Link to="/GoodsShop">
-                    <img src="/images/79496227.3.jpg" alt='캐러셀 이미지 2' />
+                    <img src="/images/totheshop.jpg" alt='캐러셀 이미지 2' />
                 </Link>
                 <Carousel.Caption className='carousel-caption-text'>
                     <h3>스포츠 용품</h3>
@@ -32,7 +32,7 @@ const MainPageCarousel = () => {
             </Carousel.Item>
             <Carousel.Item className='carousel-item'>
                 <Link to="/LiveStreamingPage">
-                    <img src="/images/AKR20230619077100007_01_i_P4.jpg" alt='캐러셀 이미지 3' />
+                    <img src="/images/tothelive.jpg" alt='캐러셀 이미지 3' />
                 </Link>
                 <Carousel.Caption className='carousel-caption-text'>
                     <h3>이벤트 라이브 중계</h3>
@@ -41,7 +41,7 @@ const MainPageCarousel = () => {
             </Carousel.Item>
             <Carousel.Item className='carousel-item'>
                 <Link to="/StadiumList">
-                    <img src="/images/s4_01_soccer_img5.jpg" alt='캐러셀 이미지 4' />
+                    <img src="/images/tothestadiumlist.jpg" alt='캐러셀 이미지 4' />
                 </Link>
                 <Carousel.Caption className='carousel-caption-text'>
                     <h3>구장 보러가기</h3>

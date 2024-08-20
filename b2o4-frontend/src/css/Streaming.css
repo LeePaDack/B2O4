@@ -50,7 +50,7 @@
 
 .messages {
   flex: 1;
-  flex-direction: column;
+  flex-direction: column-reverse;
   display: flex;
   overflow: auto;
   padding: 10px 0;

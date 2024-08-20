@@ -14,4 +14,5 @@ public class Member {
 	private String memberName;
 	private String memberProfile;
 	private char memberType;
+	private String memberAddress;
 }

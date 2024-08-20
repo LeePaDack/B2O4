@@ -14,7 +14,7 @@ const Header = () => {
     const logout = () => {
         setLoginMember(null);
         localStorage.removeItem("loginMember");
-        navigate('/MainPage');
+        navigate('/');
     };
 
     const afterLoginNavigate = (number) => {
@@ -44,7 +44,7 @@ const Header = () => {
         <header>
             <div className="header-top">
                 <Link to="/" className="d-flex align-items-center">
-                    <img src="/images/pngwing.com.png" className="brand-logo" alt="Brand Logo" />
+                    <img src="/images/logo.png" className="brand-logo" alt="Brand Logo" />
                 </Link>
                 <div className="search-bar">
                     <Form className="d-flex">

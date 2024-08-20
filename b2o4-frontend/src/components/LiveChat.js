@@ -92,8 +92,6 @@ const LiveChat = () => {
 
   // 메시지 보내기
   const sendMessage = () => {
-
-
     if (stompClient && connected && message) {
       stompClient.publish({
         destination: '/app/chat.send', //java 쪽의 컨트롤러(@MessageMapping)와 맞춰서 작성
@@ -150,7 +148,7 @@ const LiveChat = () => {
   };
 
   //채팅창 재정렬
-  //const sortedMessages = [...messages].sort((a, b) => new Date(b.formattedTime) - new Date(a.formattedTime));
+  const sortedMessages = [...messages].sort((a, b) => new Date(b.formattedTime) - new Date(a.formattedTime));
   
   //채팅창 전체 동결
   const handleFreezeChat = () => {
@@ -176,7 +174,7 @@ const LiveChat = () => {
   return (
     <div className='chat-container'>
       <div className='messages' ref={messagesContainerRef}>
-        {messages.map((msg, msgNo) => (
+        {sortedMessages.map((msg, msgNo) => (
           <div key={msgNo} className='message'>
             <img src={msg.profile} alt="profileImage" className='profile-image' />
             <div className='message-content'>
