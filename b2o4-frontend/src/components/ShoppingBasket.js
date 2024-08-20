@@ -165,7 +165,7 @@ useEffect(() => {
       <button className="back-button" onClick={returnToGoodsShop}>샵으로 돌아가기</button>
       <table className="basket-table">
         <caption>
-          <p className="totalPrise">총액 : ₩ {basketTotalTotal()} </p>   
+          <p className="totalPrise"><strong>총액 : ₩ </strong>{basketTotalTotal()} </p>   
           <Link to={`/GoodsPurchase`} >     
           <button className="payment-button" >결제하기</button>
           </Link>
@@ -218,7 +218,7 @@ useEffect(() => {
                 </td>
 
                 <td>
-                  <p>합계: ₩ {goodsPriceXgoodsQuantity(good).toLocaleString()}</p>     
+                  <p><strong>합계: ₩ </strong>{goodsPriceXgoodsQuantity(good).toLocaleString()}</p>     
                   <button className="delete-button" onClick={() => handleDelete(good.basketNo)}>삭제</button>                  
                 </td>
 

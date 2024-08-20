@@ -30,6 +30,7 @@ public class ShoppingBasketController {
 	public ResponseEntity<List<ShoppingBasket>> findBasketByMemberNo(@PathVariable("memberNo") int memberNo) {
 	    System.out.println("memberNo: " + memberNo); //
 	    List<ShoppingBasket> basketList = shoppingBasketService.findBasketByMemberNo(memberNo);
+	    System.out.println("basketList : " + basketList);
 	    return ResponseEntity.ok(basketList);
 	}
 	
