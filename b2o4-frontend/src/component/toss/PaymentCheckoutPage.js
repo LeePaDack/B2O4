@@ -1,11 +1,14 @@
 import { loadTossPayments } from "@tosspayments/tosspayments-sdk";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import '../../css/PaymentCheckoutPage.css';
+import MyPageContext from "../MyPageContext";
 
 const clientKey = "test_ck_AQ92ymxN34YkyXwdXe2PVajRKXvd";
 const generateRandomString = () => window.btoa(Math.random().toString()).slice(0, 20);
 const customerKey = generateRandomString();
+
+
 
 export function PaymentCheckoutPage() {
   const [payment, setPayment] = useState(null);
@@ -13,7 +16,8 @@ export function PaymentCheckoutPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-
+  const { loginMember } = useContext(MyPageContext);
+  console.log("로그인정보 : " , loginMember)
   const { stadium, personCount, reservationDate, reservationTime, totalPrice } = location.state;
 
   const selectPaymentMethod = (method) => {
@@ -47,11 +51,11 @@ export function PaymentCheckoutPage() {
         },
         orderId,
         orderName: `${stadium.stadiumName} 예약 (${reservationDate}, ${reservationTime} 시간대, ${personCount}명)`,
-        successUrl: window.location.origin + "/success",
+        successUrl: window.location.origin + "/payment/success",
         failUrl: window.location.origin + "/fail",
-        customerEmail: "customer123@gmail.com",
-        customerName: "김토스",
-        customerMobilePhone: "01012341234",
+        customerEmail: loginMember.memberEmail,
+        customerName: loginMember.memberName,
+        customerMobilePhone: loginMember.memberPhone,
       });
       console.log(response);
     } catch (error) {

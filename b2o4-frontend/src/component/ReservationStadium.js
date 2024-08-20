@@ -70,7 +70,7 @@ const ReservationStadium = () => {
   };
 
   const handlePayment = () => {
-    navigate('/payment/checkout', {
+    navigate('/checkout', {
       state: {
         stadium: stadium,
         personCount: personCount,
@@ -105,7 +105,8 @@ const ReservationStadium = () => {
           min={minDate}
           max={maxDate}
           value={reservationDate}
-          onChange={handleDateChange}
+          onChange={handleDateChange} 
+          required
         />
         &nbsp; &nbsp; &nbsp;
         <select className="reservationTime" value={reservationTime} onChange={handleTimeChange}>

@@ -50,8 +50,8 @@ function App() {
           <Route path='/boardContent/:boardNo' element={<BoardContent/>}/>
           <Route path='/reservationStadium/:stadiumNo' element={<ReservationStadium/>}/>
 
-          <Route path="/checkout" element={<PaymentCheckoutPage />} />
-          <Route path="/success" element={<PaymentSuccessPage />} />
+          <Route path="/payment/checkout" element={<PaymentCheckoutPage />} />
+          <Route path="/payment/success" element={<PaymentSuccessPage />} />
           <Route path="/fail" element={<PaymentFailPage />} />
         </Routes>
         <Footer/>

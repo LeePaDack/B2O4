@@ -88,43 +88,6 @@ public class PaymentController {
 		
 
 	}
-	
-	/*****
-	Entity
-	HttpEntity : Http 요청 또는 응답의 본문(body)과 헤더(headers)를 포함하는 객체
-	Http 요청을 보낼 때 본문과 헤더를 설정하고자 할 때 보냄
-	본문(body) : 실제 전송될 데이트 Ex) 아이디 비밀번호 작성한글 등
-	헤더(header) : Http 헤더 정보를 포함 Ex) 글자인지 이미지인지 동성상인지 어떤 파일의 것인가? 누가보내나?
-	HttpEntity<문자열이면 문자열, 숫자면 숫자, 모르겠으면 비워두기> abc = new Http<비워져있어도 상관없음>("요청본문")
-	
-	ResponseEntity (Response = 응답 / Http 를 상속받아서 Http 기능 응답에 대한 기능을 추가로 설정한 Entity) 
-			: HttpEntity 를 상속받아, Http 응답에 대한 추가적인 정보를 제공 상태코드를 포함하고 있어서
-			  클라이언트(사용자)에게 응답을 보낼 때 사용
-	ReponseEntitiy<String 이면 String, Integer 이면 Integer  어려값이면 ?, 모르겠으면 비워두기?> res = new ResponseEntity<>("응답본문",headers); 
-		
-	ReQuestEntity (Request = 요청 / Http 를 상속받아서 Http 기능 요청에 대한 기능을 추가로 설정한 Entity) 
-			: HttpEntity 를 상속해, Http 요청에 대한 추가적인 정보를 제공
-			URI 와 HTTP 메서드 (GET, POST, PUT, DELETE) 를 포함하고 있어, 서버로 요청을 보낼 때 주로 사용
-	ReQuestEntity<String이면String, Integer 이면 Integer, 여러값이면 ?, 모르겠으면 비워두기> req = new RequestEntity<>("요청본문",headers);
-	ReQuestEntity<String> req = new RequestEntity<>("요청본문",headers, HttpMethod.Post, url);
-	
-	차이점 요약
-	  클래스 						상속관계 					주요 사용 목적					추가 정보
-	HttpEntity					기본 클래스			HTTP 요청/응답 본문과 헤더 포함		상태 코드 없음(성공여부)
-	ResponseEntity				HttpEntity상속		HTTP 응답 반환						상태 코드 포함(성공여부)
-	RequestEntity				HttpEntity상속		HTTP 요청 전송 					URI 와 HTTP 메서드 포함
 
-	HTTP : 웹에서 데이터를 전송하기 위한 전송수단
-	
-	
-	
-	
-	URI 와 URL 차이
-	URI = 주소값과 식별값이 들어있음, 이 안에 URL 이 들어있음
-	URL = URI 의 한 종류로 주소이름
-	+
-	URN = 고유한 이름
-	
-	 */
 }
 
