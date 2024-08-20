@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import '../css/StadiumDetail.css';
+import MyPageContext from "./MyPageContext";
 
 const StadiumDetail = () => {
     
@@ -25,10 +26,19 @@ const StadiumDetail = () => {
         navigate("/stadiumList");
     };
 
-    const makeReservation = () => {
-        navigate(`/reservationStadium/${stadium.stadiumNo}`, { state: { stadium } });
-    };
 
+    const { loginMember } = useContext(MyPageContext);
+
+    const makeReservation = () => {
+
+        if(loginMember){
+            navigate(`/reservationStadium/${stadium.stadiumNo}`, { state: { stadium } });
+        } else {
+            navigate('/login')
+        }
+    
+    };
+        
 
     return (
         <div> 
@@ -50,7 +60,7 @@ const StadiumDetail = () => {
                             <br/>
                             <td>신발렌트 : {stadium.shoesRent == 'Y' ? "가능" : "불가능"}</td>
                             <br/>
-                            <td>인당가격 : \{stadium.stadiumPrice.toLocaleString()}</td>
+                            <td>인당가격 : \ {stadium.stadiumPrice.toLocaleString()}</td>
                         </div>
                 </div>
             

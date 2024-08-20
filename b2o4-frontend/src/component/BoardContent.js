@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import '../css/BoardContent.css';
+import MyPageContext from "./MyPageContext";
 
 const BoardContent = () => {
     
@@ -21,17 +22,28 @@ const BoardContent = () => {
         setBoards(res.data);
     };
 
+    const { loginMember } = useContext(MyPageContext);
+
     const handleUpdateClick = () => {
-        navigate(`/boardUpdate/${board.boardNo}`, { state: { board: board } });
+        if(board.memberNo == loginMember.memberNo){
+            navigate(`/boardUpdate/${board.boardNo}`, { state: { board: board } });
+        } else {
+            alert("ASD");
+        }
+        
     };
 
     const handleBackClick = () => {
         navigate("/boardMain");
     };
 
+    if(!loginMember){
+        return;
+    }
     return (
         <div className="board-content-table">
-            <button onClick={handleUpdateClick} className="update-button">수정하기</button> {/* 이 글의 수정하기로 가야함 */}
+            {loginMember.memberNo === board.memberNo &&
+            <button onClick={handleUpdateClick} className="update-button">수정하기</button>}
             {/* 로그인 세션으로 본인 글일 경우에만 뜨게 하기 */}
             <button onClick={handleBackClick} className="back-button">돌아가기</button>
             <table className="boardContent-table">
