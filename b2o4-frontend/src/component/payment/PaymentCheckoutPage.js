@@ -5,6 +5,7 @@ import '../../css/PaymentCheckoutPage.css';
 import MyPageContext from "../MyPageContext";
 
 const clientKey = "test_ck_AQ92ymxN34YkyXwdXe2PVajRKXvd";
+
 const generateRandomString = () => window.btoa(Math.random().toString()).slice(0, 20);
 const customerKey = generateRandomString();
 
@@ -17,8 +18,9 @@ export function PaymentCheckoutPage() {
   const location = useLocation();
 
   const { loginMember } = useContext(MyPageContext);
-  console.log("로그인정보 : " , loginMember)
+  console.log("!!!!!!!로그인정보 : " , loginMember)
   const { stadium, personCount, reservationDate, reservationTime, totalPrice } = location.state;
+  console.log("!!!!!!totalPrice", totalPrice);
 
   const selectPaymentMethod = (method) => {
     setSelectedPaymentMethod(method);
@@ -42,6 +44,7 @@ export function PaymentCheckoutPage() {
 
   const requestPayment = async () => {
     try {
+      console.log("window.location", window.location)
       const orderId = generateRandomString();
       const response = await payment.requestPayment({
         method: selectedPaymentMethod,
@@ -52,7 +55,7 @@ export function PaymentCheckoutPage() {
         orderId,
         orderName: `${stadium.stadiumName} 예약 (${reservationDate}, ${reservationTime} 시간대, ${personCount}명)`,
         successUrl: window.location.origin + "/payment/success",
-        failUrl: window.location.origin + "/fail",
+        failUrl: window.location.origin + "/payment/fail",
         customerEmail: loginMember.memberEmail,
         customerName: loginMember.memberName,
         customerMobilePhone: loginMember.memberPhone,

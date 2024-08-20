@@ -12,9 +12,9 @@ import Header from './component/Layout/Header.js';
 import Footer from './component/Layout/Footer.js';
 import Login from './component/Login.js';
 import MyPageContext from './component/MyPageContext.js';
-import { PaymentCheckoutPage } from './component/toss/PaymentCheckoutPage.js';
-import { PaymentSuccessPage } from './component/toss/PaymentSuccessPage.js';
-import { PaymentFailPage } from './component/toss/PaymentFailPage.js';
+import { PaymentCheckoutPage } from './component/payment/PaymentCheckoutPage.js';
+import { PaymentSuccessPage } from './component/payment/PaymentSuccessPage.js';
+import { PaymentFailPage } from './component/payment/PaymentFailPage.js';
 
 function App() {
   const [loginMember, setLoginMember] = useState(null);
@@ -52,7 +52,7 @@ function App() {
 
           <Route path="/payment/checkout" element={<PaymentCheckoutPage />} />
           <Route path="/payment/success" element={<PaymentSuccessPage />} />
-          <Route path="/fail" element={<PaymentFailPage />} />
+          <Route path="/payment/fail" element={<PaymentFailPage />} />
         </Routes>
         <Footer/>
       </Router>

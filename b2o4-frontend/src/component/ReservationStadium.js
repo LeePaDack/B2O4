@@ -70,7 +70,7 @@ const ReservationStadium = () => {
   };
 
   const handlePayment = () => {
-    navigate('/checkout', {
+    navigate('/payment/checkout', {
       state: {
         stadium: stadium,
         personCount: personCount,
