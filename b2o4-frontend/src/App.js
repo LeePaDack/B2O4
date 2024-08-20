@@ -1,4 +1,5 @@
 import './App.css';
+import { useEffect, useState } from 'react';
 import BoardMain from './component/BoardMain.js';
 import BoardPosting from './component/BoardPosting.js';
 import {BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
@@ -10,8 +11,10 @@ import ReservationStadium from './component/ReservationStadium.js';
 import Header from './component/Layout/Header.js';
 import Footer from './component/Layout/Footer.js';
 import Login from './component/Login.js';
-import { useEffect, useState } from 'react';
 import MyPageContext from './component/MyPageContext.js';
+import { PaymentCheckoutPage } from './component/toss/PaymentCheckoutPage.js';
+import { PaymentSuccessPage } from './component/toss/PaymentSuccessPage.js';
+import { PaymentFailPage } from './component/toss/PaymentFailPage.js';
 
 function App() {
   const [loginMember, setLoginMember] = useState(null);
@@ -46,6 +49,10 @@ function App() {
           <Route path='/boardMain' element={<BoardMain/>}/>
           <Route path='/boardContent/:boardNo' element={<BoardContent/>}/>
           <Route path='/reservationStadium/:stadiumNo' element={<ReservationStadium/>}/>
+
+          <Route path="/payment/checkout" element={<PaymentCheckoutPage />} />
+          <Route path="/payment/success" element={<PaymentSuccessPage />} />
+          <Route path="/payment/fail" element={<PaymentFailPage />} />
         </Routes>
         <Footer/>
       </Router>

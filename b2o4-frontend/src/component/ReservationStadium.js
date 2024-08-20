@@ -9,28 +9,24 @@ const ReservationStadium = () => {
   const [maxDate, setMaxDate] = useState("");
   const [reservationDate, setReservationDate] = useState("");
   const [reservationTime, setReservationTime] = useState("");
-  const [stadiumCapacity, setStadiumCapacity] = useState(1); // 기본값
+  const [stadiumCapacity, setStadiumCapacity] = useState(1); 
   const [error, setError] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
-  const [stadiums, setStadiums] = useState([]);
   const stadium = location.state?.stadium;
 
   useEffect(() => {
     if (!stadium) {
       setError('구장 데이터가 없습니다. 홈 페이지로 돌아갑니다...');
-      setTimeout(() => navigate('/'), 3000); // 3초 후에 홈으로 리디렉션
+      setTimeout(() => navigate('/'), 3000);
       return;
     }
     fetchStadiumDetails();
   }, [stadium, navigate]);
 
-  // 구장 세부 정보를 가져오는 함수
-  const fetchStadiumDetails = async() => {
+  const fetchStadiumDetails = async () => {
     try {
       const res = await axios.get(`http://localhost:9000/stadiums/stadiumDetail/${stadium.stadiumNo}`);
-      setStadiums(res.data);
-
       if (res.data && res.data.stadiumCapacity) {
         setStadiumCapacity(res.data.stadiumCapacity);
       }
@@ -40,7 +36,6 @@ const ReservationStadium = () => {
     }
   };
 
-  // 날짜 설정 함수
   useEffect(() => {
     const getKSTDateString = (date) => {
       const offset = 9 * 60;
@@ -58,38 +53,38 @@ const ReservationStadium = () => {
     setMaxDate(max);
   }, []);
 
-  // 인원수 변경 핸들러
   const handlePersonCountChange = (event) => {
     setPersonCount(parseInt(event.target.value));
   };
 
-  // 예약 날짜 변경 핸들러
   const handleDateChange = (event) => {
     setReservationDate(event.target.value);
   };
 
-  // 예약 시간 변경 핸들러
   const handleTimeChange = (event) => {
     setReservationTime(event.target.value);
   };
 
-  // 총액 계산 함수
   const calculateTotalPrice = () => {
     return stadium.stadiumPrice * personCount;
   };
 
-  // 결제 핸들러
   const handlePayment = () => {
-    navigate('/payment/checkout');
-    
+    navigate('/payment/checkout', {
+      state: {
+        stadium: stadium,
+        personCount: personCount,
+        reservationDate: reservationDate,
+        reservationTime: reservationTime,
+        totalPrice: calculateTotalPrice(),
+      }
+    });
   };
 
-  // 에러가 있을 경우 에러 메시지 출력
   if (error) {
     return <div>{error}</div>;
   }
 
-  // 구장 데이터가 없을 경우 로딩 메시지 출력
   if (!stadium) {
     return <div>로딩 중...</div>;
   }
@@ -97,8 +92,6 @@ const ReservationStadium = () => {
   const handleBackClick = () => {
     navigate("/StadiumList");
   };
-
-  console.log("예약날짜", reservationDate); // 날짜 정보 잘 들어오나 확인용
 
   return (
     <div className="stadium-reservation-container">
@@ -137,10 +130,9 @@ const ReservationStadium = () => {
         <tr>
           <td className="reservation-stadium-total-price">총액 : <span id="totalPrice">{calculateTotalPrice().toLocaleString()}</span></td>
         </tr>
-        <button className="reservation-button" onClick={handlePayment} state={{stadium: stadium}}>결제하기</button>
+        <button className="reservation-button" onClick={handlePayment}>결제하기</button>
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>
-      
     </div>
   );
 };
