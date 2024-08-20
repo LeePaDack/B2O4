@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import StadiumReviewUpload from "./StadiumReviewUpload";
 
 const StadiumDetail = () => {
@@ -61,6 +61,7 @@ const StadiumDetail = () => {
   return (
     <div className="stadiumdetail-container">
       <div className="stadiumdetail-content">
+      <h3 className="headers">🥅 {list.stadiumName} 의 정보 🥅</h3>
         <img src={list.stadiumImage} alt={list.stadiumName} />
         <p>풋살장 이름 : {list.stadiumName}</p>
         <p>매칭 인원 수 : {list.stadiumCapacity} 명</p>
@@ -81,6 +82,7 @@ const StadiumDetail = () => {
         </div>
       </div>
       <div className="stadiumreview">
+        <Link to="/stadiumInfo"><button>돌아가기</button></Link>
         <button onClick={() => setContentBoxView(!contentBoxView)}>
           {contentBoxView ? "닫기" : "작성하기"}
         </button>
@@ -90,7 +92,7 @@ const StadiumDetail = () => {
 
         {/* 구장 리뷰들 보여줘야 함 */}
         <div className="reviews">
-          <h2>평가</h2>
+          <h2 className="headers">✍️평가</h2>
           {currentReviews.length > 0 ? (
             currentReviews.map((review) => (
               <div key={review.stadiumReviewNo} className="review">

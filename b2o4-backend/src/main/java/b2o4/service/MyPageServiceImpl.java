@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,4 +56,14 @@ public class MyPageServiceImpl implements MyPageService {
         myPageMapper.updateMemberInfo(myPage);
     }
 
+	// 비밀번호 모달 확인
+	@Override
+	public boolean checkPassword(String memberId, String memberPw) {
+	    Map<String, Object> params = new HashMap();
+	    params.put("memberId", memberId);
+	    params.put("memberPw", memberPw);
+
+	    MyPage myPage = myPageMapper.getPasswordMemberId(params);
+	    return myPage != null;
+	}
 }

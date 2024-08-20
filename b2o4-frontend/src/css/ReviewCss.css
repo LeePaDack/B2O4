@@ -13,6 +13,28 @@
   gap: 20px;
 }
 
+.memberchange-btn {
+  border: none;
+  background-color: lightblue;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.headers {
+  padding: 20px;
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+
+.stadiumchange-btn {
+  border: none;
+  background-color: yellowgreen;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin: 20px;
+}
+
 .stadiumReview,
 .memberReview {
   border: 1px solid #ddd;
@@ -152,7 +174,7 @@
 }
 
 .reviews h2 {
-  font-size: 18px;
+  
   margin-bottom: 20px;
   color: #333;
 }
@@ -186,12 +208,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 25px; /* 아이콘과 텍스트 사이 간격 */
+  gap: 25px; 
   margin: 20px 0;
 }
 
 .icon-container img {
-  width: 100px; /* 아이콘의 크기 설정 */
+  width: 100px; 
   height: 100px;
   object-fit: contain;
 }

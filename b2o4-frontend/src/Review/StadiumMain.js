@@ -20,8 +20,8 @@ const StadiumsMain = () => {
     },[]);
   return (
     <div className="stadiumReviewMain-container">
-        <h1>구장 평가</h1>
-        <Link to="/memberInfo"><button>참가자 평가</button></Link>
+        <h1 className="headers">⚽구장 평가⚽</h1>
+        <Link to="/memberInfo"><button className="memberchange-btn">참가자 평가</button></Link>
       <div className="stadiumReviewMain-content">
         {stadiumList.map(list => (
           <Link key={list.stadiumNo} to={`/stadiumdetail/${list.stadiumNo}`} state={{list : list}} className="stadiumReview-link">

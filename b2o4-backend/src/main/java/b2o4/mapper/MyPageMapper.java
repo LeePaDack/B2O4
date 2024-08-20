@@ -1,8 +1,10 @@
 package b2o4.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.data.repository.query.Param;
 
 import b2o4.dto.MyPage;
 
@@ -17,5 +19,7 @@ public interface MyPageMapper {
 	
 	// 회원 탈퇴
 	void deleteMember(int memberNo);
+	
+	MyPage getPasswordMemberId(Map<String, Object> params);
 	
 }

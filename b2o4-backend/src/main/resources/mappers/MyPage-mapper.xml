@@ -6,6 +6,12 @@
 		SELECT * FROM member WHERE memberId = #{memberId}
 	</select>
 	
+	<!-- Modal 비밀번호 입력 확인 받기 -->
+	<select id="getPasswordMemberId">
+		SELECT * FROM member
+		WHERE memberId = #{memberId} 
+		AND memberPw = #{memberPw}
+	</select>
 
 	<!-- 마이페이지 수정 하기 -->
 	<update id="updateMemberInfo" parameterType="b2o4.dto.MyPage">

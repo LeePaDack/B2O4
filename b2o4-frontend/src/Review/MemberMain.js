@@ -19,9 +19,9 @@ const MemberMain = () => {
 
   return (
     <div className="memberReviewMain-container">
-      <h1>참가자 평가</h1>
+      <h1 className="headers">😎참가자 평가😎</h1>
       <Link to="/stadiumInfo">
-        <button>구장 평가</button>
+        <button className="stadiumchange-btn">구장 평가</button>
       </Link>
       <div className="memberReviewMain-content">
         {memberList.map((list) => (

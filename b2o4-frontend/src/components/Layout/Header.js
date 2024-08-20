@@ -1,22 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
-import '../../css/LayoutCss.css';
-import { Link } from "react-router-dom";
-
+import "../../css/LayoutCss.css";
+import { Link, useNavigate } from "react-router-dom";
+import MyPageModal from "../../MyPage/MyPageModal";
 
 const Header = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
+  const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 사용
+
+  const openModal = () => {
+    setIsModalOpen(true); // 모달 열기
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); // 모달 닫기
+  };
+
+  const handlePasswordCorrect = () => {
+    setIsModalOpen(false); // 모달 닫기
+    navigate("/mypage"); // 비밀번호가 맞으면 mypage로 이동
+  };
+
   return (
     <header>
       <div className="header-top">
         <Link to="/" className="d-flex align-items-center">
-          <img
-            src="/pngwing.com.png"
-            className="brand-logo"
-            alt="Brand Logo"
-          />
+          <img src="/pngwing.com.png" className="brand-logo" alt="Brand Logo" />
         </Link>
         <div className="search-bar">
           <Form className="d-flex">
@@ -124,15 +136,20 @@ const Header = () => {
                 id="basic-nav-dropdown"
                 className="item"
               >
-                <NavDropdown.Item href="/mypage">
-                  내 정보 수정
+                <NavDropdown.Item onClick={openModal}>내 정보 수정</NavDropdown.Item>
+                <NavDropdown.Item href="/stadiumInfo">
+                  평가하기
                 </NavDropdown.Item>
-                <NavDropdown.Item href="/stadiumInfo">평가하기</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
       </div>
+      <MyPageModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onPasswordCorrect={handlePasswordCorrect}
+      />
     </header>
   );
 };

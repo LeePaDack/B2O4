@@ -63,6 +63,7 @@ const MemberDetail = () => {
   return (
     <div className="memberdetail-container">
       <div className="memberdetail-content">
+        <h3 className="headers">🏃‍♂️ {list.memberName} 님의 정보 🏃‍♀️</h3>
         <img src={`/images/userProfile/${list.memberProfile}`} alt="Profile" />
         <p>참가자 이름 : {list.memberName}</p>
         <p>참가 매치 수 : {list.matchCount}</p>
@@ -83,6 +84,7 @@ const MemberDetail = () => {
         </div>
       </div>
       <div className="member-review">
+      <Link to="/memberInfo"><button>돌아가기</button></Link>
         <button
           onClick={() => {
             setContentBoxView(!contentBoxView);
@@ -94,7 +96,7 @@ const MemberDetail = () => {
           {contentBoxView && <MemberReviewUpload />}
         </div>
         <div className="reviews">
-          <h2>평가</h2>
+          <h2 className="headers">✍️평가</h2>
           {currentReviews.length > 0 ? (
             currentReviews.map((review) => (
               <div key={review.memberReviewNo} className="review">
