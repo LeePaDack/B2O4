@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Signup.css'; // CSS 파일을 별도로 분리하여 불러옵니다.
+import './Signup.css'; // CSS 파일을 별도로 분리
 
 const Signup = () => {
   const [member, setMember] = useState({
@@ -10,7 +10,7 @@ const Signup = () => {
     memberEmail: '',
     memberAddress: '',
     memberbirth: '',
-    profileImage: '',
+    profileImage: '', // 미리보기를 위한 URL을 저장
     memberProfile: null, // 이미지 파일을 저장할 상태 추가
   });
 
@@ -85,19 +85,28 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // 폼이 제출되기 전에 모든 필드에 대해 유효성 검사를 수행
+
+    // 모든 필드에 대한 유효성 검사 수행
     Object.keys(member).forEach((name) => validateField(name, member[name]));
-    
-    // 오류가 있는 경우 제출을 중지
+
+    // 이미지 파일이 선택되지 않은 경우 에러 처리
+    if (!member.memberProfile) {
+        setErrors({
+            ...errors,
+            memberProfile: '프로필 이미지를 선택해주세요.'
+        });
+        return;
+    }
+
+    // 오류가 있는 경우 제출 중지
     if (Object.values(errors).some((error) => error !== '')) {
-      console.log('유효성 검사 오류:', errors);
-      return;
+        console.log('유효성 검사 오류:', errors);
+        return;
     }
 
     console.log('Member Data:', member);
 
-    // FormData를 사용하여 파일과 데이터를 함께 전송
+    // FormData를 생성하고 필드를 추가
     const formData = new FormData();
     formData.append('memberId', member.memberId);
     formData.append('memberPw', member.memberPw);
@@ -105,25 +114,24 @@ const Signup = () => {
     formData.append('memberPhone', member.memberPhone);
     formData.append('memberEmail', member.memberEmail);
     formData.append('memberAddress', member.memberAddress);
-    formData.append('memberbirth', member.memberbirth);
-    if (member.profileImage) {
-      formData.append('profileImage', member.memberProfile);
-    }
+    formData.append('memberBirth', member.memberbirth);
+    formData.append('profileImage', member.memberProfile);
 
     fetch('http://localhost:9000/api/members', {
-      method: 'POST',
-      headers: {'Content-Type' : "multipart/form-data"},
-      body: formData, // FormData를 직접 전송
+        method: 'POST',
+        body: formData,
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Success:', data);
-        // 추가적으로 성공 시 처리할 작업
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        // 추가적으로 에러 시 처리할 작업
-      });
+        .then((response) => response.text())
+        .then((fileName) => {
+            console.log('성공:', fileName);
+            setMember({
+                ...member,
+                memberProfile: fileName
+            });
+        })
+        .catch((error) => {
+            console.error('오류 발생:', error);
+        });
   };
 
   return (
@@ -139,7 +147,7 @@ const Signup = () => {
                 value={member.memberId}
                 onChange={handleChange}
               />
-              <button type="button">중복확인</button> {/* 중복확인 버튼 */}
+              <button type="button">중복확인</button> 
             </div>
             {errors.memberId && errors.memberId !== '' && (
               <div style={{ color: 'red' }}>{errors.memberId}</div>
@@ -236,7 +244,7 @@ const Signup = () => {
           {member.profileImage && (
             <div>
               <img
-                src={member.memberProfile}
+                src={member.profileImage} 
                 alt="Profile Preview"
                 style={{ width: '100px', height: '100px', marginTop: '10px' }}
               />

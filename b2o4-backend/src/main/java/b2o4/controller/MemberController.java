@@ -20,16 +20,17 @@ public class MemberController {
     }
 
     @PostMapping("/members")
-    public void insertMember(@RequestBody Member member,
-                              MultipartFile memberProfile) {
-        if (!memberProfile.isEmpty()) {
-            // 파일을 저장하고 파일 경로를 member 객체에 설정
-            String fileName = memberProfile.getOriginalFilename();
-            // 예시: 파일을 특정 디렉토리에 저장하는 코드 추가
-            // member.setMemberProfile(fileName);
-        }
+    public void insertMember(@ModelAttribute Member member,
+                             @RequestParam("profileImage") MultipartFile memberProfile) {
+        
+        System.out.println("member: " + member);
+        System.out.println("member: " + member);
+        System.out.println("memberProfile: " + memberProfile);
+        // 프로필 이미지 파일 및 기타 처리 로직
         memberService.insertMember(member, memberProfile);
     }
+
+
 
     @GetMapping("/idCheck")
     public int idCheck(@RequestParam String id) {
