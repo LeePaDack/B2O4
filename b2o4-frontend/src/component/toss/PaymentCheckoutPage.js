@@ -47,7 +47,7 @@ export function PaymentCheckoutPage() {
         },
         orderId,
         orderName: `${stadium.stadiumName} 예약 (${reservationDate}, ${reservationTime} 시간대, ${personCount}명)`,
-        successUrl: window.location.origin + "/payment/success",
+        successUrl: window.location.origin + "/success",
         failUrl: window.location.origin + "/fail",
         customerEmail: "customer123@gmail.com",
         customerName: "김토스",
