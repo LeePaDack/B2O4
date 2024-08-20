@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
-import boardMainPagination from './BoardMainPagiNation';
 import '../css/BoardMain.css';
 import Table from 'react-bootstrap/Table';
+import Pagination from "./PagiNation";
+import MyPageContext from "./MyPageContext";
 
 const BoardMain = ({}) => {
     const navigate = useNavigate();
@@ -22,6 +23,31 @@ const BoardMain = ({}) => {
         navigate(`/boardContent/${board.boardNo}`, { state: { board: board } });
       };
 
+      const [data, setData] = useState([]);
+      const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+      const [itemPerPage] = useState(8); // 한 페이지에서 게시글 10 개 씩 보여줌
+
+
+          // 현재페이지에서 첫번째 항목과 마지막 항목을 체크
+    const lastItem = currentPage * itemPerPage;
+    const firstItem = lastItem - itemPerPage;
+    const itemList = boards.slice(firstItem, lastItem);
+
+    // 이동할 페이지를 클릭할 때 사용할 핸들러
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    const { loginMember } = useContext(MyPageContext);
+
+    const BoardPosting = () => {
+
+        if(loginMember){
+            navigate('/boardPosting');
+        } else {
+            navigate('/login')
+        }
+    
+    };
+
     return (
         <div>
             <table className="board-table">
@@ -36,7 +62,7 @@ const BoardMain = ({}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {boards.map(board => (
+                    {itemList.map(board => (
                     <tr key={board.boardNo} onClick={ () => handleRowClick(board)} className="content-table">
                         <td style={{padding: "10px"}}>{board.boardNo}</td>
                         <td>{board.boardTitle}</td> {/* 클릭시 글로 이동 BoardContent.js */}
@@ -47,8 +73,12 @@ const BoardMain = ({}) => {
                 </tbody>
                 </Table>
             </table>
-            <button className="posting-button" onClick={() => navigate('/boardPosting')}>문의하기</button> {/* 클릭시 글쓰기로 이동 BoardPosting.js */}
-            <h1>페이지네이션 들어가야함...</h1>
+            <button className="posting-button" onClick={BoardPosting}>문의하기</button> {/* 클릭시 글쓰기로 이동 BoardPosting.js */}
+            <Pagination
+                itemPerPage={itemPerPage}
+                totalItems={boards.length}
+                paginate={paginate}
+                currentPage={currentPage} />
         </div>
 
 

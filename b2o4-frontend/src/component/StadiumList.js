@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import '../css/StadiumList.css';
+import Pagination from "./PagiNation";
 
 const StadiumList = () => {
     const [stadiums, setStadiums] = useState([]);
@@ -20,6 +21,17 @@ const StadiumList = () => {
         navigate(`/stadiumDetail/${stadium.stadiumNo}`, { state: { stadium } });
     };
 
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    const [data, setData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+    const [itemPerPage] = useState(6); // 한 페이지에서 게시글 10 개 씩 보여줌
+
+    const lastItem = currentPage * itemPerPage;
+    const firstItem = lastItem - itemPerPage;
+    const itemList = stadiums.slice(firstItem, lastItem);
+    
+
     console.log("스타디움 정보 DB에서 불러오기", stadiums);
 
     return (
@@ -29,7 +41,7 @@ const StadiumList = () => {
                 <button className="stadium-search-button">🔍</button>
             </div>
             <div className="row stadium-list-block">
-                {stadiums.map(stadium => (
+                {itemList.map(stadium => (
                     <div className="col-4 stadium-item" key={stadium.stadiumNo} onClick={() => handleRowClick(stadium)}>
                         <div className="stadiumImg-stadiumName">
                             <div className="stadium-list-img">
@@ -42,7 +54,11 @@ const StadiumList = () => {
                     </div>
                 ))}
             </div>
-            <h1>페이지네이션 들어가야함...</h1>
+            <Pagination
+                itemPerPage={itemPerPage}
+                totalItems={stadiums.length}
+                paginate={paginate}
+                currentPage={currentPage} />
         </div>
     );
 }
