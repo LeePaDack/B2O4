@@ -13,4 +13,7 @@ public interface LoginService {
 	
 	// 비밀번호 찾기
 	Member findPw(Member member);
+	
+	// 비밀번호 변경
+	void updatePassword(Member member);
 }

@@ -76,7 +76,7 @@
 	<insert id="reComment" parameterType="b2o4.dto.GalleryComment"
 		useGeneratedKeys="true" keyProperty="gbCommentNo">
 		INSERT INTO GalleryComment (memberNo, GBPostNo, GBCommentContent, GBCommentClass, memberName, parentCommentNo)
-		VALUES (#{memberNo}, #{gbPostNo}, #{gbCommentContent}, #{memberName}, #{parentCommentNo})
+		VALUES (#{memberNo}, #{gbPostNo}, #{gbCommentContent}, #{gbCommentClass}, #{memberName}, #{parentCommentNo})
 	</insert>
 	
 </mapper>

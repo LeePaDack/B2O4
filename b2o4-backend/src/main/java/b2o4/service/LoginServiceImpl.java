@@ -38,4 +38,10 @@ public class LoginServiceImpl implements LoginService{
 	public Member findPw(Member member) {
 		return loginMapper.findPw(member);
 	}
+	
+	// 비밀번호 변경
+	@Override
+	public void updatePassword(Member member) {
+		loginMapper.updatePassword(member);
+	}
 }

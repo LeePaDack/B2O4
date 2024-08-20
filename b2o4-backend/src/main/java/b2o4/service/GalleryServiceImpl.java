@@ -165,7 +165,7 @@ public class GalleryServiceImpl implements GalleryService{
 	}
 	
 	@Override
-	public void uploadCommentImages(MultipartFile[] files, String content, int gbPostNo, int memberNo, String memberName) {
+	public void uploadCommentImages(MultipartFile[] files, String gbCommentContent, int gbPostNo, int memberNo, String memberName) {
 	    List<String> fileNames = new ArrayList<>();
 
 	    if (files != null && files.length > 0) {
@@ -196,12 +196,13 @@ public class GalleryServiceImpl implements GalleryService{
 
 	    try {
 	        GalleryComment galleryComment = new GalleryComment();
-	        galleryComment.setGbCommentContent(content);
+	        galleryComment.setGbCommentContent(gbCommentContent);
 	        galleryComment.setGbCommentImages(String.join(",", fileNames));
 	        galleryComment.setGbPostNo(gbPostNo);
 	        galleryComment.setMemberNo(memberNo);
 	        galleryComment.setMemberName(memberName);
 	        createGalleryComment(galleryComment);
+	        System.out.println("gC : " + galleryComment);
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        throw new RuntimeException("댓글 저장 실패", e);
@@ -224,7 +225,7 @@ public class GalleryServiceImpl implements GalleryService{
 	// 답글 작성하기
 	@Override
 	public void reComment(GalleryComment galleryComment) {
-		System.out.println("gC : " + galleryComment);
+		System.out.println("rC : " + galleryComment);
 		galleryMapper.reComment(galleryComment);
 	}
 	

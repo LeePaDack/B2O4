@@ -59,7 +59,7 @@ const FindId = () => {
         <div className="findId">
           <div className="findId-input">
             <div>
-              <label>이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 름</label>
+              <label>이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 름</label>
             </div>
             <div>
               <input
@@ -73,19 +73,18 @@ const FindId = () => {
           </div>
           <div className="findId-input">
             <div>
-              <label>전화번호</label>
+              <label>전 화 번 호</label>
             </div>
             <div>
               <input
                 type="text"
-                placeholder="전화번호를 입력하세요."
+                placeholder="'-'를 제외한 전화번호 11자리를 입력하세요."
                 value={memberPhone}
                 onChange={(e) => setMemberPhone(e.target.value)}
                 required
               />
             </div>
           </div>
-          <div className="findId-buttons">
             <div>
               <button onClick={findResult}>아이디 찾기</button>
             </div>
@@ -94,7 +93,6 @@ const FindId = () => {
               <button>로그인</button>
               </Link>
             </div>
-          </div>
           <div className="findResult">
           {errorMessage && (
             <div className="error-message">

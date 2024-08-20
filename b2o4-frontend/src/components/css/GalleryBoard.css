@@ -29,6 +29,10 @@
   width: 100%;
   height: 200px;
   border: 0.5px solid #dad0d0;
+  transition: transform 0.3s ease;
+}
+.gallery-item-img:hover{
+  transform: scale(1.05); 
 }
 
 .gallery-list {
@@ -90,7 +94,7 @@
 
 .detail-content {
   border: 1px solid gainsboro;
-  border-radius: 5px;
+  
 }
 
 .detail-text p{
@@ -136,6 +140,22 @@
   margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
+}
+
+/************** comment *****************/
+.comment-container{
+  border: 1px solid gainsboro;
+}
+
+.comment-title{
+  background-color: rgb(235, 234, 234);
+  padding: 1px;
+}
+
+.comment-title p {
+  font-weight: bold;
+  font-size: 20px;
+  margin: 5px;
 }
 
 .comment-write{

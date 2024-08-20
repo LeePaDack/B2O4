@@ -71,13 +71,16 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
+  background-color: black;
+  color: white;
 }
 
 .login-list {
   list-style: none;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 25px;
   padding: 0;
 }
 

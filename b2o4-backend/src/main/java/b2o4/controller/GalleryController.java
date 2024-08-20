@@ -94,12 +94,12 @@ public class GalleryController {
 	@PostMapping("/comment")
 	public ResponseEntity<String> uploadCommentImages(
 	        @RequestParam(value = "files", required = false) MultipartFile[] files,
-	        @RequestParam("content") String content,
+	        @RequestParam("gbCommentContent") String gbCommentContent,
 	        @RequestParam("gbPostNo") int gbPostNo,
 	        @RequestParam("memberNo") int memberNo,
 	        @RequestParam("memberName") String memberName) {
 	    try {
-	        galleryService.uploadCommentImages(files != null ? files : new MultipartFile[]{}, content, gbPostNo, memberNo, memberName);
+	        galleryService.uploadCommentImages(files != null ? files : new MultipartFile[]{}, gbCommentContent, gbPostNo, memberNo, memberName);
 	        return ResponseEntity.ok("댓글 작성 성공");
 	    } catch (Exception e) {
 	        return ResponseEntity.badRequest().body(e.getMessage());
@@ -120,9 +120,10 @@ public class GalleryController {
  		return galleryService.deleteComment(gbCommentNo);
  	}
  	
- 	// 갤러리 댓글 작성
- 	@PostMapping("/recomment")
+ 	// 갤러리 답글 작성
+ 	@PostMapping("/comment/reply")
  	public ResponseEntity<String> reComment(GalleryComment galleryComment){
+ 		galleryService.reComment(galleryComment);
  		return ResponseEntity.ok("댓글 작성이 완료되었습니다.");
  	}
 }

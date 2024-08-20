@@ -31,7 +31,7 @@ public interface GalleryService {
 	
 	// 갤러리 댓글 작성
 	void createGalleryComment(GalleryComment galleryComment);
-    void uploadCommentImages(MultipartFile[] files, String content, int gbPostNo, int memberNo, String memberName);
+    void uploadCommentImages(MultipartFile[] files, String gbCommentContent, int gbPostNo, int memberNo, String memberName);
     
     // 갤러리 댓글 보기
  	List<GalleryComment> AllGalleryComment();

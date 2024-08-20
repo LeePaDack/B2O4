@@ -2,21 +2,20 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/FindLogin.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import Modal from "../Layout/Modal";
+import PasswordChange from "./PasswordChange";
 
 const FindPw = () => {
   const [memberId, setMemberId] = useState("");
   const [memberName, setMemberName] = useState("");
   const [memberPhone, setMemberPhone] = useState("");
-  const [operationKey, setOperationKey] = useState(false); // true가 되면 비밀번호 수정화면으로 넘어감
-
-  const navigate = useNavigate();
-
+  const [operationKey, setOperationKey] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
   const [securityCode, setSecurityCode] = useState("");
   const [userInfo, setUserInfo] = useState(null);
   const [change, setChange] = useState(false);
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const findResult = async () => {
     if (!memberId || !memberName || !memberPhone) {
@@ -27,9 +26,9 @@ const FindPw = () => {
       const response = await axios.post(
         "/findPw",
         {
-          memberId: memberId,
-          memberName: memberName,
-          memberPhone: memberPhone,
+          memberId,
+          memberName,
+          memberPhone,
         },
         {
           headers: {
@@ -52,37 +51,29 @@ const FindPw = () => {
     }
   };
 
-  // 유저가 입력한 이메일로 인증 코드를 보내기 위해 컨트롤러로 사용자 이메일을 보냄
   const sendCode = async () => {
     try {
-      console.log(userInfo.memberEmail);
-  
-      // URLSearchParams를 사용하여 body를 생성
       const params = new URLSearchParams();
       params.append('email', userInfo.memberEmail);
-  
-      // axios를 사용하여 POST 요청 보내기
+
       const response = await axios.post('/auth/send-code', params.toString(), {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded', // URL 인코딩된 데이터 타입
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
       });
-  
-      // 응답 처리
+
       if (response.data.status === 'success') {
         alert('인증 코드가 발송되었습니다.');
-        setOperationKey(true); // 상태 업데이트
+        setOperationKey(true);
       } else {
         alert('인증 코드 발송에 실패하였습니다.');
       }
     } catch (error) {
-      // 에러 처리
       console.error('Axios error:', error);
       alert('Axios error: ' + error.message);
     }
   };
 
-  // 인증코드 제출버튼 비어있다면 출력
   const submitSuccess = async () => {
     if (!securityCode) {
       alert("인증 코드를 입력해 주세요.");
@@ -105,7 +96,7 @@ const FindPw = () => {
 
       if (response.data.status === "success") {
         alert("인증이 완료되었습니다.");
-        navigate("/passwordChange", { state: { data: response.data } });
+        setIsModalOpen(true);
       } else {
         alert("인증 코드가 유효하지 않습니다.");
       }
@@ -114,6 +105,8 @@ const FindPw = () => {
       alert("인증 코드 검증에 실패하였습니다.");
     }
   };
+
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div className="findIdPw-container">
@@ -134,7 +127,7 @@ const FindPw = () => {
           <div className="findPw">
             <div className="findPw-input">
               <div>
-                <label>아이디</label>
+                <label>아&nbsp;&nbsp;&nbsp;이&nbsp;&nbsp;&nbsp;디</label>
               </div>
               <div>
                 <input
@@ -148,7 +141,7 @@ const FindPw = () => {
             </div>
             <div className="findPw-input">
               <div>
-                <label>이름</label>
+                <label>이 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 름</label>
               </div>
               <div>
                 <input
@@ -162,7 +155,7 @@ const FindPw = () => {
             </div>
             <div className="findPw-input">
               <div>
-                <label>전화번호</label>
+                <label>전 화 번 호</label>
               </div>
               <div>
                 <input
@@ -209,15 +202,18 @@ const FindPw = () => {
                     placeholder="인증코드를 입력해주세요."
                   />
                   <br />
-                  <button className="btn btn-dark" onClick={submitSuccess}>
-                    인증코드 제출하기
-                  </button>
+                  <button className="btn btn-dark" onClick={submitSuccess}>인증코드 제출하기</button>
                 </div>
               )}
             </div>
           </div>
         )}
       </div>
+
+      {/* 모달 추가 */}
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <PasswordChange userInfo={userInfo} />
+      </Modal>
     </div>
   );
 };

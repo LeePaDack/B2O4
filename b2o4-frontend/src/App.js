@@ -12,6 +12,7 @@ import FindId from './components/Login/FindId.js';
 import FindPw from './components/Login/FindPw.js';
 import Footer from './components/Layout/Footer.js';
 import GalleryUpdate from './components/Gallery/GalleryUpdate.js'
+import PasswordChange from './components/Login/PasswordChange.js';
 function App() {
 
   const [loginMember, setLoginMember] = useState(null);
@@ -41,6 +42,7 @@ function App() {
           <Route path='/findId' element={<FindId />} />
           <Route path='/findPw' element={<FindPw />} />
           <Route path='/galleryUpdate/:gbPostNo' element={<GalleryUpdate />} />
+          <Route path='/passwordChange' element={<PasswordChange />} />
         </Routes>
         <Footer />
       </Router>
