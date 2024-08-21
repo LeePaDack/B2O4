@@ -108,6 +108,24 @@ body {
   margin-bottom: 5px;
 }
 
+.login-api{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-top: -10px;
+  padding: 0;
+}
+
+.api-item{
+  margin: 0 40px 0 40px;
+}
+
+.api-item img{
+  width: 50px;
+  height: auto;
+  margin-bottom: 5px;
+}
+
 
 /* 로그인 시 CSS*/
 .login-complete{

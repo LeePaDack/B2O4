@@ -32,5 +32,6 @@
 		WHERE memberEmail = #{memberEmail}
 	</update>
 
+	
 		
 </mapper>

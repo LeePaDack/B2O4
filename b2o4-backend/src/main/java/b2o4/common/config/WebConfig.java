@@ -13,7 +13,8 @@ public class WebConfig implements WebMvcConfigurer{
 		registry.addMapping("/**")
 				.allowedOrigins("http://localhost:3000") //본인 포트
 				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-				.allowedHeaders("*");
+				.allowedHeaders("*")
+				.allowCredentials(true); // 쿠키나 세션과 같은 자격을 허용
 	}
 	
 	// 이미지 저장 경로 접근 허용
