@@ -49,7 +49,6 @@ function App() {
           <Route path='/boardMain' element={<BoardMain/>}/>
           <Route path='/boardContent/:boardNo' element={<BoardContent/>}/>
           <Route path='/reservationStadium/:stadiumNo' element={<ReservationStadium/>}/>
-
           <Route path="/payment/checkout" element={<PaymentCheckoutPage />} />
           <Route path="/payment/success" element={<PaymentSuccessPage />} />
           <Route path="/payment/fail" element={<PaymentFailPage />} />
