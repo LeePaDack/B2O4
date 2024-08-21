@@ -1,6 +1,8 @@
 package b2o4.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +35,11 @@ public class MemberController {
 
 
     @GetMapping("/idCheck")
-    public int idCheck(@RequestParam String id) {
-        return memberService.idCheck(id);
+    public Map<String, Boolean> idCheck(@RequestParam("id") String id) {
+        boolean isAvailable = memberService.idCheck(id) == 0;
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("isAvailable", isAvailable);
+        return response;
     }
 
 }
