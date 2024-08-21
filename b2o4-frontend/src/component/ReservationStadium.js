@@ -100,6 +100,7 @@ const ReservationStadium = () => {
         <td className="reservation-stadium-name"><span id="stadiumName">{stadium.stadiumName}({stadium.stadiumLocation})</span></td>
         <input
           type="date"
+          data-placeholder="예약 날짜 선택"
           className="reservationDate"
           name="closingDate"
           min={minDate}
