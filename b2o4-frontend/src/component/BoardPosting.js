@@ -47,17 +47,20 @@ const BoardPosting = () => {
     }
 
     return (
-        <div className="board-post-table">
-            <button onClick={handleBackClick} className="post-back-button">돌아가기</button>
-            <button onClick={handleSubmit} type="submit" className="post-button">글 작성 완료</button>
-            <form className="post-table">
-                <div>
-                    <input type="text" className="posting-title" value={boardTitle} placeholder="제목을 입력하세요." onChange={(e) => setBoardTitle(e.target.value)} required />
-                </div>
-                <div>
-                    <textarea className="posting-content" value={boardContent} placeholder="내용을 입력하세요." onChange={(e) => setBoardContent(e.target.value)} required />
-                </div>
-            </form>
+        <div>
+            <img className="board-top-img" src="../images/5346ae379c2ae.png"/>
+            <div className="board-post-table">
+                <button onClick={handleBackClick} className="post-back-button">돌아가기</button>
+                <button onClick={handleSubmit} type="submit" className="post-button">글 작성 완료</button>
+                <form className="post-table">
+                    <div>
+                        <input type="text" className="posting-title" value={boardTitle} placeholder="제목을 입력하세요." onChange={(e) => setBoardTitle(e.target.value)} required />
+                    </div>
+                    <div>
+                        <textarea className="posting-content" value={boardContent} placeholder="내용을 입력하세요." onChange={(e) => setBoardContent(e.target.value)} required />
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

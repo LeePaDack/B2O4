@@ -50,6 +50,7 @@ const BoardMain = ({}) => {
 
     return (
         <div>
+            <img className="board-top-img" src="../images/5346ae379c2ae.png"/>
             <table className="board-table">
                 <h2>고객센터</h2>
                 <Table striped bordered hover size="sm" className="board-Table">
@@ -65,15 +66,15 @@ const BoardMain = ({}) => {
                     {itemList.map(board => (
                     <tr key={board.boardNo} onClick={ () => handleRowClick(board)} className="content-table">
                         <td style={{padding: "10px"}}>{board.boardNo}</td>
-                        <td>{board.boardTitle}</td> {/* 클릭시 글로 이동 BoardContent.js */}
-                        <td>{board.memberName || 'No name available'}</td>
+                        <td>{board.boardTitle}</td>
+                        <td>{board.memberName}</td>
                         <td>{board.boardCreateDate}</td>
                     </tr>
                     ))}
                 </tbody>
                 </Table>
             </table>
-            <button className="posting-button" onClick={BoardPosting}>문의하기</button> {/* 클릭시 글쓰기로 이동 BoardPosting.js */}
+            <button className="posting-button" onClick={BoardPosting}>문의하기</button>
             <Pagination
                 itemPerPage={itemPerPage}
                 totalItems={boards.length}
