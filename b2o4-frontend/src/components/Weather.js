@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../css/MainPage.css';
+import '../css/Weather.css';
 import weatherDescKo from './WeatherDescKo'; // 
 
 const DisplayWeather = () => {
@@ -7,7 +7,7 @@ const DisplayWeather = () => {
     const [weatherValue, setWeatherValue] = useState(null);
     const [forecastValue, setForecastValue] = useState([]);
     const key = 'fe9dd46de2db8b19d96bf53f5dd11283';
-    
+
     //기상정보 번역 가져오기
     const getWeatherDescKo = (code) => {
         const desc = weatherDescKo.find(item => item[code]);
@@ -24,16 +24,20 @@ const DisplayWeather = () => {
     //위치 정보 허용했을 때 위치 정보 가져옴
     const currentLocation = () => {
         return new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(
-                position => {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-                    resolve({ latitude, longitude });                 
-                },
-                error => {
-                    reject(error);
-                }
-            );
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        resolve({ latitude, longitude });
+                    },
+                    (error) => {
+                        reject(error);
+                    }
+                );
+            }
+            else {
+                reject("위치 정보에 오류가 발생했습니다.");
+            }
         });
     };
 
@@ -41,13 +45,23 @@ const DisplayWeather = () => {
         const getWeather = async () => {
             try {
                 const { latitude, longitude } = await currentLocation();
-                
+
+                const getCityStateName = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`, {
+                    headers: {
+                        'Accept-Language': 'en'
+                    }
+                })
+                const cityOrState = await getCityStateName.json();
+                const locationName = cityOrState.address.city || cityOrState.address.state;
+
                 const responseCurrent = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}&units=metric&lang=KR`,
+                    `https://api.openweathermap.org/data/2.5/weather?q=${locationName}&appid=${key}&units=metric&lang=KR`,
+
                 );
-                
+                console.log(`https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=${key}&units=metric&lang=KR`);
+
                 const responseForecast = await fetch(
-                    `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${key}&units=metric&lang=KR`,
+                    `https://api.openweathermap.org/data/2.5/forecast?q=${locationName}&appid=${key}&units=metric&lang=KR`,
                 );
 
                 if (!responseCurrent.ok || !responseForecast.ok) {
@@ -83,58 +97,91 @@ const DisplayWeather = () => {
         getWeather();
     }, [key]);
 
-    return (
-        <div className='weather-widget'>
-            <div className='today-weather-container'>
-                {weatherValue && (
-                    <div>
-                        <h2>{weatherValue.name}</h2>
-                        <div className='today-weather row'>
-                            <div className='col-6'>
-                                <img
-                                    src={`${process.env.PUBLIC_URL}/images/${weatherValue.weather[0].icon}.png`}
-                                    alt={`${weatherValue.weather[0].description}`}
+    // 날씨 상태에 따라 배경 이미지 선택하기
+    const getBackgroundImage = (weather) => {
+        if (!weather) return '';
+        const mainWeather = weather.weather[0].main;
+        switch (mainWeather) {
+            case 'Clear':
+                return 'sunny.jpg';
+            case 'Clouds':
+                return 'cloudy.jpg';
+            case 'Rain':
+                return 'rainy.jpg';
+            case 'Snow':
+                return 'snowy.jpg';
+            case 'Thunderstorm':
+                return 'thunderstorm.jpg';
+            case 'Fog':
+                return 'foggy.jpg';
+            case 'Breeze':
+                return 'windy.jpg';
+            case 'Hail':
+                return 'hail.webp';
+            default:
+                return 'sunny.jpg';
+        }
+    };
 
-                                />
-                            </div>
-                            <div className='col-6'>
-                                <ul>
-                                    <li>
-                                        <h3>
-                                            {parseInt(weatherValue.main.temp)}°C
-                                        </h3>
-                                    </li>
-                                    <li>
-                                        <img src='/images/humidity.png' alt='습도' />
-                                        {weatherValue.main.humidity} %
-                                    </li>
-                                    <li>
-                                        <img src="/images/wind.png" alt='풍속' />
-                                        {weatherValue.wind.speed} m/s
-                                    </li>
-                                </ul>
+    // 배경 이미지 URL
+    const backgroundImageUrl = weatherValue
+        ? `${process.env.PUBLIC_URL}/images/${getBackgroundImage(weatherValue)}`
+        : '';
+    console.log(`${process.env.PUBLIC_URL}/images/${getBackgroundImage(weatherValue)}`);
+
+
+    return (
+        <div className='weather-widget'
+            style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
+            <div className='weather-view'>
+                <div className='today-weather-container'>
+                    {weatherValue && (
+                        <div>
+                            <h2>{weatherValue.name}</h2>
+                            <div className='today-weather row'>
+                                <div className='col-5'>
+                                    <img
+                                        src={`${process.env.PUBLIC_URL}/images/${weatherValue.weather[0].icon}.png`}
+                                        alt={`${weatherValue.weather[0].description}`}
+                                    />
+                                </div>
+                                <div className='col-7'>
+                                    <ul>
+                                        <li>
+                                            <h3>{parseInt(weatherValue.main.temp)}°C</h3>
+                                        </li>
+                                        <li>
+                                            <img src='/images/humidity.png' alt='습도' />
+                                            {weatherValue.main.humidity} %
+                                        </li>
+                                        <li>
+                                            <img src="/images/wind.png" alt='풍속' />
+                                            {weatherValue.wind.speed} m/s
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                )}
-            </div>
-
-            <div className='forecast-container'>
-                {forecastValue.length > 0 && (
-                    <ul className='forecast-list'>
-                        {forecastValue.map((item, index) => (
-                            <li className='feature-weather' key={index}>
-                                <p>{getDayOfWeek(item.dt_txt)}</p>
-                                <img
-                                    src={`${process.env.PUBLIC_URL}/images/${item.weather[0].icon}.png`}
-                                    alt=''
-                                />
-                                <p>{parseInt(item.main.temp)}°C</p>
-                                <span>{getWeatherDescKo(item.weather[0].id)}</span>
-                            </li>
-                        ))}
-                    </ul>
-                )}
+                    )}
+                </div>
+                <hr style={{padding:0,marginBottom:10, margin:0, border: '1px solid white', width:'100%'}}/>
+                <div className='forecast-container'>
+                    {forecastValue.length > 0 && (
+                        <ul className='forecast-list'>
+                            {forecastValue.map((item, index) => (
+                                <li className='feature-weather' key={index}>
+                                    <p style={{ fontWeight: "bold" }}>{getDayOfWeek(item.dt_txt)}</p>
+                                    <img
+                                        src={`${process.env.PUBLIC_URL}/images/${item.weather[0].icon}.png`}
+                                        alt=''
+                                    />
+                                    <p style={{ fontWeight: "bold" }}>{parseInt(item.main.temp)}°C</p>
+                                    <span>{getWeatherDescKo(item.weather[0].id)}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
             </div>
         </div>
     );
