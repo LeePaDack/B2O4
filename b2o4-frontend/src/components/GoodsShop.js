@@ -69,6 +69,7 @@ const GoodsShop = () => {
                         <p>판매상태 : {good.goodsSellNow ? "판매중" : "판매중지"}</p>
                       </Link>
                       <button onClick={() => addToShoppingBasket(good)}>장바구니에 추가</button>
+                      {/*<button>상세정보 보기</button>*/}
                     </div>
                   );
                 })}
@@ -94,6 +95,8 @@ const GoodsShop = () => {
                         <p>판매상태 : {good.goodsSellNow ? "판매중" : "판매중지"}</p>
                       </Link>
                       <button onClick={() => addToShoppingBasket(good)}>장바구니에 추가</button>
+                      {/*<button>상세정보 보기</button>*/}
+                      
                     </div>
                   );
                 })}
