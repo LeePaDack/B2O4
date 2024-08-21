@@ -76,3 +76,11 @@
 .stadium-search-button:hover {
     background-color: #ebebeb;
 }
+
+.stadium-item {
+    transition: transform 0.3s;
+}
+
+.stadium-item:hover {
+    transform: scale(1.08);
+}

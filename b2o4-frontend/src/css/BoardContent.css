@@ -61,3 +61,13 @@
     width: 80%;
     margin: 0 10%;
 }
+
+.admin-board-comment {
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    float: left;
+    margin-top: 20px;
+    width: 100%;
+    height: 50px;
+    padding: 7px;
+}
