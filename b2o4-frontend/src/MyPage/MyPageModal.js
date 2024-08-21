@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import MyPageContext from "./MyPageContext";
+import '../css/MyPageCss.css';
 
 const MyPageModal = ({ isOpen, onClose, onPasswordCorrect }) => {
   const { loginMember } = useContext(MyPageContext);
@@ -16,15 +17,14 @@ const MyPageModal = ({ isOpen, onClose, onPasswordCorrect }) => {
         memberId: loginMember.memberId,
         memberPw: password,
       });
-
-      if (response.status === 200) {
-        onPasswordCorrect();
-      } else {
-        alert("비밀번호가 일치하지 않습니다.");
-      }
+      onPasswordCorrect();
     } catch (error) {
-      console.error("비밀번호 확인 중 오류가 발생했습니다:", error);
-      alert("비밀번호 확인 중 오류가 발생했습니다.");
+      if (error.response && error.response.status === 401) {
+        alert("비밀번호가 일치하지 않습니다.");
+      } else {
+        console.error("비밀번호 확인 중 오류가 발생했습니다:", error);
+        alert("비밀번호 확인 중 오류가 발생했습니다.");
+      }
     }
   };
 

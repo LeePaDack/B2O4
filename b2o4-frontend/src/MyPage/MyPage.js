@@ -17,7 +17,13 @@ const MyPage = () => {
   });
   const [defaultName, setDefaultName] = useState("");
   const [profileImage, setProfileImage] = useState(null);
-  const [profileImagePreview, setProfileImagePreview] = useState(""); // 프로필 이미지 미리보기 상태
+  const [profileImagePreview, setProfileImagePreview] = useState("");
+
+  // 에러 메시지 상태
+  const [idDefindMessage, setidDefindMessage] = useState("");
+  const [pwDefindMessage, setpwDefindMessage] = useState("");
+  const [phoneDefindMessage, setphoneDefindMessage] = useState("");
+  const [nameDefindMessage, setnameDefindMessage] = useState(""); // 추가된 상태
 
   const mainNavigate = useNavigate();
 
@@ -40,23 +46,68 @@ const MyPage = () => {
     }
   }, [loginMember]);
 
+  // 입력 값 변경 시 실시간 유효성 검사
+  const checkDataInput = (name, value) => {
+    const idCheck = /^[a-zA-Z0-9]{4,12}$/;
+    const pwCheck = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const phoneCheck = /^\d{10,11}$/;
+    const nameCheck = /^[가-힣a-zA-Z\s]{2,30}$/; // 이름 정규식
+
+    switch (name) {
+      case "memberId":
+        if (!idCheck.test(value)) {
+          setidDefindMessage(
+            "아이디는 4~12자의 영문 대소문자와 숫자로만 구성되어야 합니다."
+          );
+        } else {
+          setidDefindMessage("");
+        }
+        break;
+      case "memberPw":
+        if (!pwCheck.test(value)) {
+          setpwDefindMessage(
+            "비밀번호는 8자 이상이어야 하며, 문자와 숫자를 포함해야 합니다."
+          );
+        } else {
+          setpwDefindMessage("");
+        }
+        break;
+      case "memberPhone":
+        if (!phoneCheck.test(value)) {
+          setphoneDefindMessage("전화번호는 10~11자의 숫자만 입력해야 합니다.");
+        } else {
+          setphoneDefindMessage("");
+        }
+        break;
+      case "memberName":
+        if (!nameCheck.test(value)) {
+          setnameDefindMessage(
+            "이름은 2~30자의 한글, 영문 또는 공백으로 구성되어야 합니다."
+          );
+        } else {
+          setnameDefindMessage("");
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
   const userInfoChange = (e) => {
     const { name, value } = e.target;
     setMemberInfo((prevState) => ({
       ...prevState,
       [name]: value,
     }));
+    checkDataInput(name, value); // 입력 값 변경 시 실시간 유효성 검사
   };
 
   const profileChange = (e) => {
     const file = e.target.files[0];
     setProfileImage(file);
     if (file) {
-      // 파일 URL 생성 및 미리보기 상태 업데이트
       const fileURL = URL.createObjectURL(file);
       setProfileImagePreview(fileURL);
-
-      // 이미지 로드 후 URL을 해제
       return () => URL.revokeObjectURL(fileURL);
     }
   };
@@ -80,12 +131,10 @@ const MyPage = () => {
         })
         .then((response) => {
           alert("회원 정보 업데이트 성공");
-          // 기존 상태 유지 및 업데이트
           setLoginMember((prevMember) => ({
             ...prevMember,
             ...response.data,
           }));
-
           mainNavigate("/");
         })
         .catch((error) => {
@@ -127,6 +176,15 @@ const MyPage = () => {
               onChange={userInfoChange}
               className="input-field"
             />
+            {nameDefindMessage && (
+              <div
+                className={`error-message ${
+                  nameDefindMessage.includes("유효") ? "valid" : "invalid"
+                }`}
+              >
+                {nameDefindMessage}
+              </div>
+            )}
           </label>
           <label>
             이메일
@@ -157,6 +215,15 @@ const MyPage = () => {
               onChange={userInfoChange}
               className="input-field"
             />
+            {phoneDefindMessage && (
+              <div
+                className={`error-message ${
+                  phoneDefindMessage.includes("유효") ? "valid" : "invalid"
+                }`}
+              >
+                {phoneDefindMessage}
+              </div>
+            )}
           </label>
         </div>
         <div className="user-profile">
@@ -186,6 +253,15 @@ const MyPage = () => {
               onChange={userInfoChange}
               className="input-field"
             />
+            {idDefindMessage && (
+              <div
+                className={`error-message ${
+                  idDefindMessage.includes("유효") ? "valid" : "invalid"
+                }`}
+              >
+                {idDefindMessage}
+              </div>
+            )}
           </label>
           <label>
             P W
@@ -196,6 +272,15 @@ const MyPage = () => {
               onChange={userInfoChange}
               className="input-field"
             />
+            {pwDefindMessage && (
+              <div
+                className={`error-message ${
+                  pwDefindMessage.includes("유효") ? "valid" : "invalid"
+                }`}
+              >
+                {pwDefindMessage}
+              </div>
+            )}
           </label>
         </div>
       </div>

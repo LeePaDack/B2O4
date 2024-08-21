@@ -20,7 +20,8 @@
   gap: 20px;
 }
 
-.user-info, .user-profile {
+.user-info,
+.user-profile {
   flex: 1;
   background-color: #ffffff;
   padding: 20px;
@@ -28,12 +29,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.user-info label, .user-profile label {
+.user-info label,
+.user-profile label {
   display: block;
   margin-bottom: 15px;
 }
 
-.input-field, .file-input {
+.input-field,
+.file-input {
   width: 100%;
   padding: 8px;
   margin-top: 5px;
@@ -42,11 +45,9 @@
   box-sizing: border-box;
 }
 
-
 .user-profile {
   display: flex;
   flex-direction: column;
-
 }
 
 .profile-preview {
@@ -66,7 +67,9 @@
   margin-top: 20px;
 }
 
-.submit-button, .delete-button, .home-button {
+.submit-button,
+.delete-button,
+.home-button {
   width: 100%;
   max-width: 300px;
   padding: 10px;
@@ -89,12 +92,29 @@
   background-color: #007bff;
 }
 
-.submit-button:hover, .delete-button:hover, .home-button:hover {
+.submit-button:hover,
+.delete-button:hover,
+.home-button:hover {
   opacity: 0.9;
 }
 
-.user-info label , .user-profile label {
+.user-info label,
+.user-profile label {
   text-align: center;
   font-weight: bold;
 }
+
+.error-message {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.error-message.valid {
+  color: green;
+}
+
+.error-message.invalid {
+  color: red;
+}
+
 

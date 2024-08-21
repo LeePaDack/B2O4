@@ -112,7 +112,7 @@ const MemberDetail = () => {
               </div>
             ))
           ) : (
-            <p>평가 글이 없습니다.</p>
+            <p className="review-defind">평가 글이 없습니다.</p>
           )}
           <div className="pagination">
             {pageNumbers.map((number) => (

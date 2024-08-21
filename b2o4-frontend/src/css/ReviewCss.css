@@ -7,11 +7,12 @@
 
 .stadiumReviewMain-content,
 .memberReviewMain-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
   gap: 20px;
 }
+
 
 .memberchange-btn {
   border: none;
@@ -93,6 +94,19 @@
   text-decoration: none;
   color: #292929;
   font-weight: 500;
+}
+
+.loading-spinner {
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  background-color: rgba(255, 255, 255, 0.8); 
+  z-index: 1000; 
 }
 
 /* Stadium Detail css */
@@ -249,4 +263,17 @@
   background-color: yellowgreen;
   color: white;
   border-color: yellowgreen;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  width: 400px;
+  max-width: 100%;
+}
+
+.review-defind {
+  text-align: center;
 }

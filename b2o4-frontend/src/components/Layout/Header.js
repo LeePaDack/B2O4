@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import "../../css/LayoutCss.css";
 import { Link, useNavigate } from "react-router-dom";
 import MyPageModal from "../../MyPage/MyPageModal";
+import '../../css/PasswordModalCss.css';
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
