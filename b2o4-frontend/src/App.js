@@ -5,7 +5,7 @@ import Signup from "./component/Signup";
 import Footer from "./component/Footer";
 import Header from "./component/Header";
 
-import RealTimeLocationMap from './component/RealTimeLocationMap';
+import GoogleMap from './component/GoogleMap';
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         <Route path="/" element={<Signup />}></Route>
         <Route path="/members/signup" element={<Signup />}></Route>
 
-        <Route path='/members/RealTimeLocationMap' element={<RealTimeLocationMap />} />
+        <Route path='/members/GoogleMap' element={<GoogleMap />} />
 
 
       </Routes>
