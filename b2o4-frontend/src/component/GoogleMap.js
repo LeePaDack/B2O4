@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "../css/GoogleMap.css"; // 스타일 시트를 불러옴
+import "../css/GoogleMap.css"; // CSS 파일을 가져와서 스타일링을 적용
 
 const Map = () => {
   // mapRef는 지도를 렌더링할 DOM 요소를 참조하기 위한 useRef 훅
@@ -10,7 +10,7 @@ const Map = () => {
   const [marker, setMarker] = useState(null);
 
   useEffect(() => {
-    // Google Maps API 스크립트를 로드하는 함수
+    // Google Maps API 스크립트를 동적으로 로드하는 함수
     const loadGoogleMapsScript = () => {
       // window 객체에 google 객체가 없다면 (Google Maps API가 로드되지 않았다면)
       if (!window.google) {
