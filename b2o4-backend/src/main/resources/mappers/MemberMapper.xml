@@ -4,10 +4,10 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="b2o4.mapper.MemberMapper">
-	<select id="idCheck" resultType="int">
+	<select id="idCheck" >
 		SELECT COUNT(*)
 		FROM member
-		WHERE member_id = #{memberId}
+		WHERE memberId = #{memberId}
 	</select>
 	
     <select id="findAllMember" resultType="b2o4.dto.Member">
