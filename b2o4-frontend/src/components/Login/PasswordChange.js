@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import '../css/Modal.css';
 
 const PasswordChange = ({ userInfo }) => {
   const [newPassword, setNewPassword] = useState('');
@@ -54,10 +55,10 @@ const PasswordChange = ({ userInfo }) => {
   return (
     <div>
       <h2>비밀번호 변경</h2>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+      
       {success && <div style={{ color: 'green' }}>{success}</div>}
       {!success ? (
-        <div>
+        <div className='password-container'>
           <div>
             <label>새 비밀번호:</label>
             <input
@@ -74,7 +75,8 @@ const PasswordChange = ({ userInfo }) => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
-          <button onClick={handlePasswordChange}>비밀번호 변경</button>
+          {error && <div style={{ color: 'red' }}>{error}</div>}
+          <button className='btn btn-dark' onClick={handlePasswordChange}>비밀번호 변경</button>
         </div>
       ) : (
         <button onClick={handleLoginRedirect}>로그인 하러 가기</button>

@@ -1,20 +1,21 @@
 import React, {useContext, useEffect, useState} from "react";
 import axios from 'axios';
-import { useLocation } from "react-router-dom"; 
+import { useLocation, useNavigate } from "react-router-dom";
+import '../css/NaverSignup.css'
 
 function NaverSignup() {
     const [userInfo, setUserInfo] = useState(null);
-    const [password, setPassword] = useState(""); 
     const location = useLocation('');
     const [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate();
 
     const [member, setMember] = useState({
         memberId: '',
         memberPw: '',
         memberPhone: '',
         memberAddress: '',
-        memberbirth: '',
-        profileImage: '', // 미리보기를 위한 URL을 저장
+        memberbirth: ''
       });
     
       const [errors, setErrors] = useState({
@@ -31,7 +32,7 @@ function NaverSignup() {
         console.log("토큰 확인 : " + accessToken);
     
         if(accessToken) {
-            axios.get(`/naver/userInfo?access_token=${accessToken}`)
+            axios.get(`/signup/naver?access_token=${accessToken}`)
             .then(response => {
                 setUserInfo(response.data);
                 setLoading(false);
@@ -95,31 +96,12 @@ function NaverSignup() {
         });
       };
     
-      const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          setMember({
-            ...member,
-            profileImage: URL.createObjectURL(file), // 미리보기를 위한 URL 생성
-            memberProfile: file // 실제 업로드할 파일을 상태에 저장
-          });
-        }
-      };
-    
       const handleSubmit = (e) => {
         e.preventDefault();
     
         // 모든 필드에 대한 유효성 검사 수행
         Object.keys(member).forEach((name) => validateField(name, member[name]));
     
-        // 이미지 파일이 선택되지 않은 경우 에러 처리
-        if (!member.memberProfile) {
-            setErrors({
-                ...errors,
-                memberProfile: '프로필 이미지를 선택해주세요.'
-            });
-            return;
-        }
     
         // 오류가 있는 경우 제출 중지
         if (Object.values(errors).some((error) => error !== '')) {
@@ -127,24 +109,26 @@ function NaverSignup() {
             return;
         }
     
-        // FormData를 생성하고 필드를 추가
-        const formData = new FormData();
-        formData.append('memberId', member.memberId);
-        formData.append('memberPw', member.memberPw);
-        formData.append('memberName', userInfo.response.name);
-        formData.append('memberPhone', member.memberPhone);
-        formData.append('memberEmail', userInfo.response.email);
-        formData.append('memberAddress', member.memberAddress);
-        formData.append('memberBirth', member.memberbirth);
+       
+       const memberData = {
+        memberId: member.memberId,
+        memberPw: member.memberPw,
+        memberName: userInfo.response.name,
+        memberPhone: member.memberPhone,
+        memberEmail: userInfo.response.email,
+        memberAddress: member.memberAddress,
+        memberBirth: member.memberbirth
+    };
     
-        axios.post('/naverAPI/register', formData, {
+        axios.post('/naverAPI/register', memberData, {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             }
         })
         .then(response => {
             console.log(response.data); 
             alert("회원가입이 완료되었습니다.");
+            navigate("/login");
         })
         .catch(e => {
             console.error("개발자가 에러 확인하는 공간 : ", e);

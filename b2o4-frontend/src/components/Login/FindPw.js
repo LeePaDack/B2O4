@@ -43,7 +43,7 @@ const FindPw = () => {
         setErrorMessage("");
         setChange(true);
       } else {
-        setErrorMessage("일치하는 정보가 없습니다.");
+        setErrorMessage("일치하는 정보가 없습니다. 다시 입력해주세요");
       }
     } catch (error) {
       console.error("Axios error:", error);
@@ -125,10 +125,6 @@ const FindPw = () => {
         </div>
         {!change ? (
           <div className="findPw">
-            <div className="findPw-input">
-              <div>
-                <label>아&nbsp;&nbsp;&nbsp;이&nbsp;&nbsp;&nbsp;디</label>
-              </div>
               <div>
                 <input
                   type="text"
@@ -137,11 +133,6 @@ const FindPw = () => {
                   onChange={(e) => setMemberId(e.target.value)}
                   required
                 />
-              </div>
-            </div>
-            <div className="findPw-input">
-              <div>
-                <label>이 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 름</label>
               </div>
               <div>
                 <input
@@ -152,11 +143,6 @@ const FindPw = () => {
                   required
                 />
               </div>
-            </div>
-            <div className="findPw-input">
-              <div>
-                <label>전 화 번 호</label>
-              </div>
               <div>
                 <input
                   type="text"
@@ -166,25 +152,38 @@ const FindPw = () => {
                   required
                 />
               </div>
-            </div>
-            <div>
-              <button onClick={findResult}>비밀번호 찾기</button>
-            </div>
-            {errorMessage && (
+              {errorMessage && (
               <div className="error-message">
                 <p>{errorMessage}</p>
               </div>
             )}
+            <div className="findPw-button">
+              <button onClick={findResult}>비 밀 번 호 &nbsp; 찾 기</button>
+            </div>
+ 
+            <ul className="login-list">
+              <li className="login-item">
+                <Link to="/login" className="login-link">
+                  <img src="soccer.jpg" />
+                  &nbsp; 로그인
+                </Link>
+              </li>
+              <li className="login-item">
+                <Link to="/register" className="login-link">
+                  <img src="soccer.jpg" />
+                  &nbsp;회원가입
+                </Link>
+              </li>
+            </ul>
           </div>
+          
         ) : (
-          <div>
             <div className="findPw">
-              <h3>등록된 정보를 통한 이메일로 임시 비밀번호를 발송합니다.</h3>
-              <div className="email-Auth">
-                <h3>{userInfo.memberName}님!</h3>
-                <h6>인증받을 본인의 이메일을 확인해주세요.</h6>
+              <div className="email-auth">
+              <div className="email-Auth-content">
+                <h4>인증받을 본인의 이메일을 확인해주세요.</h4>
                 <div className="email-Auth">
-                  <h3>{userInfo.memberEmail}</h3>
+                  <p>"{userInfo.memberEmail}"</p>
                 </div>
               </div>
               {!operationKey ? (
@@ -205,8 +204,22 @@ const FindPw = () => {
                   <button className="btn btn-dark" onClick={submitSuccess}>인증코드 제출하기</button>
                 </div>
               )}
+              </div>
+              <ul className="login-list">
+              <li className="login-item">
+                <Link to="/login" className="login-link">
+                  <img src="soccer.jpg" />
+                  &nbsp; 로그인
+                </Link>
+              </li>
+              <li className="login-item">
+                <Link to="/register" className="login-link">
+                  <img src="soccer.jpg" />
+                  &nbsp;회원가입
+                </Link>
+              </li>
+            </ul>
             </div>
-          </div>
         )}
       </div>
 

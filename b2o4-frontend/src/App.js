@@ -44,8 +44,7 @@ function App() {
           <Route path='/findId' element={<FindId />} />
           <Route path='/findPw' element={<FindPw />} />
           <Route path='/galleryUpdate/:gbPostNo' element={<GalleryUpdate />} />
-          <Route path='/passwordChange' element={<PasswordChange />} />
-          <Route path='/api/naver' element={<NaverApi />} />
+          <Route path='/passwordChange' element={<PasswordChange />} />       
           <Route path='/signup/naver' element={<NaverSignup />} />
         </Routes>
         <Footer />

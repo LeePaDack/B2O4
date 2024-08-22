@@ -1,5 +1,8 @@
 package b2o4.controller;
 
+import java.net.URI;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +20,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -35,12 +39,13 @@ public class NaverAPIController {
 	@Value("${naver.state}") 
 	private String state;
 
-	@GetMapping("/naverLogin")
-	public String naverLogin() {
-		String api_url = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=" + clientId + "&redirect_uri=" + redirectUri + "&state=" + state;
-		return "<a href='"+ api_url + "'><img height='50' src='http://static.nid.naver.com/oauth/small_g_in.PNG'/></a>";
-	}
-
+	 @GetMapping("/naverLogin")
+	    public ResponseEntity<Void> naverLogin() {
+	        String api_url = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=" + clientId + "&redirect_uri=" + redirectUri + "&state=" + state;
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.setLocation(URI.create(api_url));
+	        return new ResponseEntity<>(headers, HttpStatus.FOUND);
+	    }
 
 	@GetMapping("/callback")
 	public  ResponseEntity<String> callback(@RequestParam("code") String code, @RequestParam("state") String state) {
@@ -58,6 +63,8 @@ public class NaverAPIController {
 		header.add("Location", redirectUrl);
 		return new ResponseEntity<>(header, HttpStatus.FOUND); //프론트에 제대로 전달했는지 체크
 	}
+	
+	
 	
 	// 보호 개인적으로 인증받은 토큰 가지고 전달 하는 기능
 	private String getToken(String res) { //extractAccessToken 기능이름 설정해주는 것이 좋음
@@ -103,5 +110,5 @@ public class NaverAPIController {
 		
 		return res;
 	}
-
+	
 }

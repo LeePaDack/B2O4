@@ -6,7 +6,7 @@ const NaverApi = () => {
       <a href="http://localhost:9000/naverLogin">
         <img
           height="50"
-          src="http://static.nid.naver.com/oauth/small_g_in.PNG"
+          src="btnW_icon_circle.PNG"
           alt="Naver Login"
         />
       </a>
