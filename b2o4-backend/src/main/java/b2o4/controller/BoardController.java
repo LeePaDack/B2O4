@@ -49,6 +49,7 @@ public class BoardController {
 	}
 	
 	
+	
 	/*
 	@GetMapping("/boardContent/{boardNo}")
 	public String getBoardById(Model model, @PathVariable int boardNo) {
@@ -78,4 +79,5 @@ public class BoardController {
     public void updateBoard(@RequestBody Board board) {
     	boardService.updateBoard(board);
     }
+    
 }
