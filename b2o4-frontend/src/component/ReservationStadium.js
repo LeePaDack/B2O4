@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import '../css/ReservationStadium.css';
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
 
 const ReservationStadium = () => {
   const [personCount, setPersonCount] = useState(1); 
@@ -15,6 +17,14 @@ const ReservationStadium = () => {
   const navigate = useNavigate();
   const stadium = location.state?.stadium;
 
+  useEffect(() => {
+    flatpickr(".reservationDate", {
+      dateFormat: "Y-m-d",
+      minDate: "today",
+      maxDate: new Date().fp_incr(14),
+    });
+  }, []);
+  
   useEffect(() => {
     if (!stadium) {
       setError('구장 데이터가 없습니다. 홈 페이지로 돌아갑니다...');
@@ -45,6 +55,8 @@ const ReservationStadium = () => {
 
     const today = new Date();
     const min = getKSTDateString(today);
+    
+    console.log("today" , today);
 
     const twoWeeksLater = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000);
     const max = getKSTDateString(twoWeeksLater);
@@ -93,6 +105,8 @@ const ReservationStadium = () => {
     navigate("/StadiumList");
   };
 
+  console.log("reservationDate", reservationDate)
+
   return (
     <div className="stadium-reservation-container">
       <button onClick={handleBackClick} className="go-stadiumList-button-res">돌아가기</button>
@@ -100,13 +114,13 @@ const ReservationStadium = () => {
         <td className="reservation-stadium-name"><span id="stadiumName">{stadium.stadiumName}({stadium.stadiumLocation})</span></td>
         <input
           type="date"
-          data-placeholder="예약 날짜 선택"
           className="reservationDate"
           name="closingDate"
           min={minDate}
           max={maxDate}
           value={reservationDate}
           onChange={handleDateChange} 
+          placeholder="날짜 선택하기"
           required
         />
         &nbsp; &nbsp; &nbsp;
