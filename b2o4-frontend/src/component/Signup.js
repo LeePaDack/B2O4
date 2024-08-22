@@ -98,12 +98,12 @@ const Signup = () => {
       setIsIdAvailable(false);
       return;
     }
-
+  
     try {
       const response = await axios.get('http://localhost:9000/api/idCheck', {
         params: { id: member.memberId },
       });
-
+  
       if (response.data.isAvailable) {
         setIsIdAvailable(true);
         setErrors((prevErrors) => ({
