@@ -21,7 +21,7 @@ export function PaymentCheckoutPage() {
   console.log("!!!!!!!로그인정보 : " , loginMember)
   const { stadium, personCount, reservationDate, reservationTime, totalPrice } = location.state;
   console.log("!!!!!!totalPrice", totalPrice);
-
+  sessionStorage.setItem('paymentInfo', JSON.stringify(/* 결제 정보가 담긴 변수 넣기 */));
   const selectPaymentMethod = (method) => {
     setSelectedPaymentMethod(method);
   };
@@ -46,6 +46,7 @@ export function PaymentCheckoutPage() {
     try {
       console.log("window.location", window.location)
       const orderId = generateRandomString();
+
       const response = await payment.requestPayment({
         method: selectedPaymentMethod,
         amount: {
@@ -55,12 +56,14 @@ export function PaymentCheckoutPage() {
         orderId,
         orderName: `${stadium.stadiumName} 예약 (${reservationDate}, ${reservationTime} 시간대, ${personCount}명)`,
         successUrl: window.location.origin + "/payment/success",
-        failUrl: window.location.origin + "/payment/fail",
+        failUrl: window.location.origin + "/fail",
         customerEmail: loginMember.memberEmail,
         customerName: loginMember.memberName,
         customerMobilePhone: loginMember.memberPhone,
       });
+
       console.log(response);
+      
     } catch (error) {
       console.error("결제 요청 중 오류가 발생했습니다:", error);
     }

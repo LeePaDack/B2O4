@@ -5,6 +5,7 @@ export function PaymentSuccessPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [responseData, setResponseData] = useState(null);
+  const paymentInfo = JSON.parse(sessionStorage.getItem('paymentInfo'));
 
   useEffect(() => {
     async function confirm() {
