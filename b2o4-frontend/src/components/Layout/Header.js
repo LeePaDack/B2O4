@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import "../../css/LayoutCss.css";
 import { Link, useNavigate } from "react-router-dom";
 import MyPageModal from "../../MyPage/MyPageModal";
-import '../../css/PasswordModalCss.css';
+
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
@@ -138,6 +138,9 @@ const Header = () => {
                 className="item"
               >
                 <NavDropdown.Item onClick={openModal}>내 정보 수정</NavDropdown.Item>
+                <NavDropdown.Item href="/paymentDetails/:memberNo">
+                  내 결재 내역보기
+                </NavDropdown.Item>
                 <NavDropdown.Item href="/stadiumInfo">
                   평가하기
                 </NavDropdown.Item>

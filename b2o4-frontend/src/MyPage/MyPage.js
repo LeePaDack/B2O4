@@ -15,6 +15,7 @@ const MyPage = () => {
     memberAddress: "",
     memberProfile: "",
   });
+  console.log(loginMember);
   const [defaultName, setDefaultName] = useState("");
   const [profileImage, setProfileImage] = useState(null);
   const [profileImagePreview, setProfileImagePreview] = useState("");

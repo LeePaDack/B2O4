@@ -45,6 +45,12 @@
   width: 220px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background-color: #f8f9fa;
+  transition: transform 0.3s;
+}
+
+.stadiumReview:hover,
+.memberReview:hover {
+  transform: translateY(-20px);
 }
 
 .stadiumReview-img,
@@ -263,15 +269,6 @@
   background-color: yellowgreen;
   color: white;
   border-color: yellowgreen;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  position: relative;
-  width: 400px;
-  max-width: 100%;
 }
 
 .review-defind {

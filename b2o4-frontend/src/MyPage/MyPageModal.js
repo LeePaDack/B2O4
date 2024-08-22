@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import MyPageContext from "./MyPageContext";
-import '../css/MyPageCss.css';
+import '../css/PasswordModalCss.css';
 
 const MyPageModal = ({ isOpen, onClose, onPasswordCorrect }) => {
   const { loginMember } = useContext(MyPageContext);
@@ -17,8 +17,11 @@ const MyPageModal = ({ isOpen, onClose, onPasswordCorrect }) => {
         memberId: loginMember.memberId,
         memberPw: password,
       });
+      setPassword('');
       onPasswordCorrect();
+      
     } catch (error) {
+      setPassword('');
       if (error.response && error.response.status === 401) {
         alert("비밀번호가 일치하지 않습니다.");
       } else {
@@ -28,12 +31,17 @@ const MyPageModal = ({ isOpen, onClose, onPasswordCorrect }) => {
     }
   };
 
+  const modalClose = () => {
+    setPassword("");
+    onClose();
+  }
+
   if (!isOpen) return null;
 
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <h2>비밀번호 확인</h2>
+        <h2 className="modal-header">비밀번호 확인</h2>
         <input
           type="password"
           value={password}
@@ -45,7 +53,7 @@ const MyPageModal = ({ isOpen, onClose, onPasswordCorrect }) => {
           <button onClick={passwordCheck} className="confirm-button">
             확인
           </button>
-          <button onClick={onClose} className="cancel-button">
+          <button onClick={modalClose} className="cancel-button">
             취소
           </button>
         </div>

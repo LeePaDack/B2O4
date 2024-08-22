@@ -14,7 +14,8 @@ import Footer from "./components/Layout/Footer";
 import 'bootstrap/dist/css/bootstrap.css';
 import MemberReviewUpload from "./Review/MemberReviewUpload";
 import StadiumsMain from "./Review/StadiumMain";
-import './css/PasswordModalCss.css';
+import PaymentDetails from "./MyPage/PaymentDetails";
+
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
           <Route path="/memberdetail/:memberNo" element={<MemberDetail/>}/>
           <Route path="/stadiumReviewUpload" element={<StadiumReviewUpload/>}/>
           <Route path="/memberReviewUpload" element={<MemberReviewUpload/>}/>
+          <Route path="/paymentDetails/:memberNo" element={<PaymentDetails/>}/>
         </Routes>
       </Router>
       <Footer/>
