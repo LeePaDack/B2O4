@@ -1,6 +1,9 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,6 +12,11 @@
       name="description"
       content="Web site created using create-react-app"
     />
+    import React from "react";
+import ReactDOM from "react-dom";
+import RealTimeLocationMap from "./RealTimeLocationMap";
+
+ReactDOM.render(<RealTimeLocationMap />, document.getElementById("root"));
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a

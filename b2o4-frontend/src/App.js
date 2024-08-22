@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./component/Signup";
 import Footer from "./component/Footer";
 import Header from "./component/Header";
-import UserInfo from './component/Userlnfo';
-import Login from './component/Login';
+
+import RealTimeLocationMap from './component/RealTimeLocationMap';
 
 
 function App() {
@@ -15,8 +15,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Signup />}></Route>
         <Route path="/members/signup" element={<Signup />}></Route>
-        <Route path='/members/Login' element={<Login />} />
-        <Route path='/members/userinfo' element={<UserInfo />} />
+
+        <Route path='/members/RealTimeLocationMap' element={<RealTimeLocationMap />} />
+
 
       </Routes>
       <Footer />
