@@ -1,18 +1,15 @@
-.weather-container {
-    padding: 20px;
-    border-radius: 10px;
-}
-
 .weather-widget {
-    overflow: hidden; 
+    overflow: hidden;
     border-radius: 10px;
     height: 400px; 
-    width: 100%; 
+    width: 350px; 
     padding: 20px;
-    position: relative;
+    position: sticky; 
+    top: 20px; /* 상단에서 20px 떨어진 위치에 고정*/
     color: white;
     background-size: cover; 
     background-position: center;
+    z-index: 1000;
 }
 
 .weather-view {

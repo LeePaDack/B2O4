@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import '../css/Weather.css';
-import weatherDescKo from './WeatherDescKo'; // 
 
 const DisplayWeather = () => {
 
     const [weatherValue, setWeatherValue] = useState(null);
     const [forecastValue, setForecastValue] = useState([]);
     const key = 'fe9dd46de2db8b19d96bf53f5dd11283';
-
-    //기상정보 번역 가져오기
-    const getWeatherDescKo = (code) => {
-        const desc = weatherDescKo.find(item => item[code]);
-        return desc ? desc[code] : '정보 없음';
-    };
 
     //요일 계산
     const getDayOfWeek = (dateStr) => {
@@ -103,36 +96,29 @@ const DisplayWeather = () => {
         const mainWeather = weather.weather[0].main;
         switch (mainWeather) {
             case 'Clear':
-                return 'sunny.jpg';
+                return 'weatherBackground_sunny.jpg';
             case 'Clouds':
-                return 'cloudy.jpg';
+                return 'weatherBackground_cloudy.jpg';
             case 'Rain':
-                return 'rainy.jpg';
+                return 'weatherBackground_rainy.jpg';
             case 'Snow':
-                return 'snowy.jpg';
+                return 'weatherBackground_snowy.jpg';
             case 'Thunderstorm':
-                return 'thunderstorm.jpg';
+                return 'weatherBackground_thunderstorm.jpg';
             case 'Fog':
-                return 'foggy.jpg';
+                return 'weatherBackground_foggy.jpg';
             case 'Breeze':
-                return 'windy.jpg';
+                return 'weatherBackground_windy.jpg';
             case 'Hail':
-                return 'hail.webp';
+                return 'weatherBackground_hail.webp';
             default:
-                return 'sunny.jpg';
+                return 'weatherBackground_sunny.jpg';
         }
     };
 
-    // 배경 이미지 URL
-    const backgroundImageUrl = weatherValue
-        ? `${process.env.PUBLIC_URL}/images/${getBackgroundImage(weatherValue)}`
-        : '';
-    console.log(`${process.env.PUBLIC_URL}/images/${getBackgroundImage(weatherValue)}`);
-
-
     return (
-        <div className='weather-widget'
-            style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
+        <div className='weather-widget' 
+            style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/${getBackgroundImage(weatherValue)})`}}>
             <div className='weather-view'>
                 <div className='today-weather-container'>
                     {weatherValue && (
@@ -155,7 +141,7 @@ const DisplayWeather = () => {
                                             {weatherValue.main.humidity} %
                                         </li>
                                         <li>
-                                            <img src="/images/wind.png" alt='풍속' />
+                                            <img src="/images/windSpeed.png" alt='풍속' />
                                             {weatherValue.wind.speed} m/s
                                         </li>
                                     </ul>
@@ -176,7 +162,6 @@ const DisplayWeather = () => {
                                         alt=''
                                     />
                                     <p style={{ fontWeight: "bold" }}>{parseInt(item.main.temp)}°C</p>
-                                    <span>{getWeatherDescKo(item.weather[0].id)}</span>
                                 </li>
                             ))}
                         </ul>

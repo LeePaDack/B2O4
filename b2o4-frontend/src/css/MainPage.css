@@ -58,9 +58,105 @@
 }
 
 .card-body{
-    border: 2px solid #ccc;
+    position: relative; 
+    border: 3px solid #ccc;
     border-radius: 4px;
     margin: 10px;
     max-width: 400px;
+    padding: 20px;
+    transition: transform 0.3s;
     text-align: center;
+}
+
+.card-body:hover {
+    transform: scale(1.03); 
+}
+
+.hot{
+    position: absolute;
+    top: -5px;
+    left: 15px ; 
+    width: 75px !important;
+    z-index: 10 ; 
+}
+
+.card-body img {
+    width: 100%; 
+    height: auto; 
+    max-height: 300px; 
+    display: block; 
+    margin: 0 auto; 
+}
+
+.highlight {
+    border: 7px solid gold; 
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6); 
+}
+
+
+.card-body p {
+    margin-top: 20px;
+}
+
+.card-body button{
+    padding: 8px 16px;
+    margin-bottom: 10px;
+    width: 95%;
+}
+
+.stadium-desc{
+    padding: 20px;
+    line-height: 0.5;
+    text-align: left;
+}
+
+.stadiumName{
+    font-size: 18px;
+    font-weight: bold;
+    color: #4f4b4b;
+}
+
+.stadiumAddress, .stadiumCapacity{
+    font-size: 13px;
+    font-weight: bold;
+    color: #5f5f5f;
+}
+
+.stadiumPrice{
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+.totalLike{
+    font-weight: bold;
+    font-size: 15px;
+    color:#5f5f5f;
+}
+
+.card-body svg{
+    width: 15px;
+}
+
+.gallery-desc{
+    text-align: left;
+    padding: 20px;
+}
+
+.gbpostTitle{
+    font-size: 18px;
+    font-weight: bold;
+    color: #4f4b4b;
+}
+
+.memberName{
+    font-size: 13px;
+    font-weight: bold;
+    color: #5f5f5f;
+}
+
+.weather-container {
+    padding: 20px;
+    position: relative;
+    height: 155vh;
 }

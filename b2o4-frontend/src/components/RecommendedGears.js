@@ -28,8 +28,8 @@ const RecommendedGears = () => {
                         <div key={gear.goodsNo} className="card-body">
                             <img src={gear.goodsImage} alt='기어 사진'/>
                             <p>{gear.goodsName}</p>
-                            <p>{gear.goodsPrice}</p>
-                            <button>보러가기</button>
+                            <p>{gear.goodsPrice.toLocaleString()}원</p>
+                            <button className="btn btn-outline-success">보러가기</button>
                         </div>
                     ))}
                 </div>

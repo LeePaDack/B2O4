@@ -13,4 +13,3 @@ public class ChatMessage {
     private String formattedTime;
     
 }
-

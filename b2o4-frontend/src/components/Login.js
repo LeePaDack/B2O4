@@ -7,7 +7,6 @@ import '../css/Login.css'
 
 const Login = () => {
   const {loginMember, setLoginMember} = useContext(MyPageContext);
-
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
 

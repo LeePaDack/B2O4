@@ -16,15 +16,20 @@ public class MainPage {
 	//스타디움
 	private String stadiumName;
 	private String stadiumImage;
+	private String stadiumAddress;
+	private int stadiumPrice;
+	private int stadiumCapacity;
 	private int totalLike;
 	
 	//갤러리 
 	private int GBPostNo;
 	private String GBPostTitle;
 	private String GBImages;
+	private String memberName;
 	
 	//기어샵
 	private int goodsNo;
 	private String goodsName;
 	private String goodsImage;
+	private int goodsPrice;
 }
