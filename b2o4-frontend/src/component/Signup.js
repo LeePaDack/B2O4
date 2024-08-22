@@ -138,13 +138,13 @@ const Signup = () => {
         return;
     }
 
-        // 오류가 있는 경우 제출 중지
-        if (Object.values(errors).some((error) => error !== '')) {
-          console.log('유효성 검사 오류:', errors);
-          return;
-      }
+    // 오류가 있는 경우 제출 중지
+    if (Object.values(errors).some((error) => error !== '')) {
+      console.log('유효성 검사 오류:', errors);
+      return;
+    }
 
-      console.log('Member Data:', member);
+    console.log('Member Data:', member);
 
     const formData = new FormData();
     formData.append('memberId', member.memberId);
@@ -159,19 +159,36 @@ const Signup = () => {
     fetch('http://localhost:9000/api/members', {
       method: 'POST',
       body: formData,
-  })
-      .then((response) => response.text())
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.text(); // 서버에서 받은 응답 텍스트를 반환
+        } else {
+          throw new Error('회원가입 실패');
+        }
+      })
       .then((fileName) => {
-          console.log('성공:', fileName);
-          setMember({
-              ...member,
-              memberProfile: fileName
-          });
+        console.log('성공:', fileName);
+        alert('회원가입 성공하였습니다!'); // 성공 메시지
+        setMember({
+          memberId: '',
+          memberPw: '',
+          memberPwConfirm: '', 
+          memberName: '',
+          memberPhone: '',
+          memberEmail: '',
+          memberAddress: '',
+          memberBirth: '',
+          profileImage: '', 
+          memberProfile: null,
+        });
       })
       .catch((error) => {
-          console.error('오류 발생:', error);
+        console.error('오류 발생:', error);
+        alert('회원가입 실패하였습니다!'); // 실패 메시지
       });
-};
+  };
+
   const handleAddressSearch = () => {
     new window.daum.Postcode({
       oncomplete: function(data) {
@@ -321,8 +338,8 @@ const Signup = () => {
           )}
         </div>
         <div className="button-container">
-    <button type="submit">가입하기</button>
-  </div>
+          <button type="submit">가입하기</button>
+        </div>
       </form>
     </div>
   );
