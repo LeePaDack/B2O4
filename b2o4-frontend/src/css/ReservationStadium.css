@@ -101,3 +101,21 @@ input[type='date']::before {
 .reservation-button:hover {
     background-color: rgb(182, 182, 182);
 }
+
+.flatpickr-calendar {
+    background: #fff;
+    border: 2px solid #ff69b4;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+  }
+  
+  .flatpickr-month {
+    background-color: #ff69b4; 
+    color: #fff;
+  }
+  
+  .flatpickr-day.selected {
+    background-color: #ff69b4;
+    color: #fff;
+  }
+

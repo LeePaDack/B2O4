@@ -39,6 +39,7 @@ const StadiumDetail = () => {
     
     };
         
+    console.log(typeof stadium.stadiumPrice);
 
     return (
         <div> 
