@@ -167,7 +167,7 @@ useEffect(() => {
         <caption>
           <p className="totalPrise"><strong>총액 : ₩ </strong>{basketTotalTotal()} </p>   
           <Link to={`/DeliveryInfo`} >     
-          <button className="payment-button" >결제하기</button>
+          <button className="payment-button" >주문하기</button>
           </Link>
         </caption>
         <thead>

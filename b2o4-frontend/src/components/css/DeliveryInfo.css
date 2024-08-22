@@ -1,0 +1,96 @@
+.purchase-container {
+    max-width: 1000px;
+    max-height: 1200px;
+    background-color: #f9f9f9;
+    justify-content: center;
+    margin: auto;
+    margin-top: 2px;
+    border: 1px solid #333;
+    border-radius: 5px;
+}
+
+.purchase-container h2 {
+    padding: 5px;
+    font-size: 24px;
+}
+
+.purchase-info {
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.purchase-info ul {
+    list-style-type: none;
+    padding: 10px;
+}
+
+.purchase-info li {
+    flex-wrap: wrap;
+}
+
+.purchase-info input, select {
+    border-radius: 5px;
+    padding: 0 10px 0 10px;
+    border: 1px solid #ccc;
+    width: 35%;
+}
+
+.purchase-info input:focus, select:focus {
+    border-color:  rgb(26, 102, 208); /* #007bff */
+    outline: none;
+}
+
+.payment-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: rgb(26, 102, 208);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.payment-button:hover {
+    background-color: #145DA0;
+}
+
+.payment-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.each-goods {
+    padding-bottom: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.payment-fianl {
+    text-align: right;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+.payment-fianl p {
+    font-size: 30px;
+}

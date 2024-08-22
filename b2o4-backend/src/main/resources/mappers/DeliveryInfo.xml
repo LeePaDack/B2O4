@@ -5,7 +5,7 @@
         
 <mapper namespace="b2o4.mapper.DeliveryInfoMapper">
 	<insert id="insertDeliveryInfo" parameterType="b2o4.dto.DeliveryInfo">
-	 INSERT INTO DeliveryInfo (memberNo, basketNo, deliveryAddress,recipientName, recipientPhone,deliveryRequest, createdDate) 
+	 INSERT INTO deliveryInfo (memberNo, basketNo, deliveryAddress,recipientName, recipientPhone,deliveryRequest, createdDate) 
 	 VALUES (
             #{memberNo},                    
             #{basketNo},                     
@@ -16,4 +16,5 @@
             NOW()
         );
 	</insert>
+
 </mapper>

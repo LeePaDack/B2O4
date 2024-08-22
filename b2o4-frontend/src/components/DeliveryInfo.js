@@ -10,13 +10,13 @@ const GoodsPurchase = () => {
 
     const { loginMember, basketList, setBasketList  } = useContext(MyPageContext);
     const navigate = useNavigate();
-    console.log("난 실패작이야" , basketList);
+
+    
 
     
     const [deliveryAddress, setdeliveryAddress] = useState('');
     const [recipientName, setRecipientName] = useState('');
     const [recipientPhone, setRecipientPhone] = useState('');
-    
 
 
     //멤버주소 불러오기 -> 배송지주소
@@ -40,7 +40,7 @@ const GoodsPurchase = () => {
         }
     }, [loginMember]);
 
-    //배송요청사항은 어떻게...?
+    //배송요청사항
     const [deliveryRequest, setDeliveryRequset] = useState('');
 
 
@@ -63,12 +63,6 @@ const GoodsPurchase = () => {
     }, [loginMember, setBasketList])
     console.log("BRRRRRRRRRRRRRRRRRRRRRRRR")
 
-/*
-    const handlePayment = () => {
-        //결제부분 코드
-        navigate("/토스결제페이지");
-    }
-*/
 
 
     // 결제 총액 계산
@@ -76,12 +70,13 @@ const GoodsPurchase = () => {
         return total + (item.goodsQuantity * item.goodsPrice);
     }, 0);
 
-    // 배송 요청 사항 옵션
+
+    // 배송 요청사항 옵션
     const deliveryRequestOptions = [
         "문앞에 놔주세요.",
         "택배함에 넣어주세요.",
         "경비실에 맡겨주세요.",
-        "도착 전 연락바랍니다",
+        "도착 전 연락바랍니다.",
         "직접입력따윈 없다 크킄ㅋ"
     ];
 
@@ -92,16 +87,73 @@ const GoodsPurchase = () => {
     }
 
 
+    //DeliveryInfo insert
+    /*
+    const basketItem = {
+        memberNo: loginMember.memberNo,
+        goodsNo: good.goodsNo,
+        goodsQuantity: 1,
+        basketTotal: good.goodsPrice,
+        goodsSize: selectSize
+      };
+  
+      axios.post('http://localhost:9000/basket/add', basketItem)
+        .then(() => {
+          if(window.confirm('장바구니에 추가되었습니다. 이동하시겠습니까?')) {
+            navigate("/shoppingBasket");
+          }
+        })
+        .catch(err => {
+          console.error("Error: ", err);
+        });
+    };
+    */
+
+    
+    //최종주문 정보들
+    const submitData = {
+        memberNo: loginMember.memberNo,
+        //basketNo: basketList[0]?.basketNo,
+        basketNos: basketList.map(item => item.basketNo), // 장바구니 번호 리스트로 변경
+        deliveryAddress: deliveryAddress,
+        recipientName: recipientName,
+        recipientPhone: recipientPhone,
+        deliveryRequest: deliveryRequest,
+    };
+    
+    
+    //최종주문
+    const finalOrder = () => {
+
+        console.log(submitData);
+        axios.post('http://localhost:9000/delivery/add', submitData)
+        .then((response) => {
+            alert("된다 된다 된다 된다" + response);
+        })
+        .catch((error) => {
+            alert("안된다 응애" + error)
+        })
+    }
+         
+        
     
 
+
+    
+/*
+    const handlePayment = () => {
+        //결제부분 코드
+        navigate("/토스결제페이지");
+    }
+*/
 
 
     return (
         <div className="purchase-container">
-            <h2>주문서</h2>
+            <h2>주문정보 입력</h2>
             <div className="purchase-info">
                 <ul>
-                <li><strong>회원 ID:</strong> {loginMember ? loginMember.memberId : "정보 없음"}</li>
+                <li><strong>회원 ID : </strong> {loginMember ? loginMember.memberId : "정보 없음"}</li>
 
                 <li><strong>수령인 이름 : </strong></li>
                     <input type="text" value={recipientName} onChange={ (e) => setRecipientName(e.target.value)}></input>
@@ -113,8 +165,8 @@ const GoodsPurchase = () => {
                     <input type="text" value={recipientPhone} onChange={ (e) => setRecipientPhone(e.target.value)}></input>
 
                 <li><strong>배송 요청 사항:</strong></li>
-                    <select value={deliveryRequest} onChange={(e) => setDeliveryRequset(e.target.value)}>
-                        <option value="">선택하세요</option>
+                    <select value={deliveryRequest} onChange={ (e) => setDeliveryRequset(e.target.value)}>
+                        <option value="">선택하세요.</option>
                         {deliveryRequestOptions.map((option, index) => (
                             <option key={index} value={option}>{option}</option>
                         ))}
@@ -135,10 +187,10 @@ const GoodsPurchase = () => {
                 {/* map for each */}
                {basketList && basketList.length > 0 ? (
                 <div>
-                    <h3>주문상품</h3>
+                    <h3>주문 내역</h3>
                     <ul>
                         {basketList.map((item) => (
-                            <li key={item.basketNo}>
+                            <li key={item.basketNo} className="each-goods">
                                 <p><strong>상품명 : {item.goodsName}</strong></p>
                                 <p><strong>사이즈 : {item.goodsSize}</strong></p>
                                 <p><strong>상품개수 : {item.goodsQuantity}</strong></p>
@@ -148,13 +200,13 @@ const GoodsPurchase = () => {
                     </ul>
                     </div>
                ) : (
-                <p> 장바구니에 상품이 없습니다. </p>
+                <p> 주문정보가 없습니다. </p>
                )}
             </div>
+            <div className="payment-fianl">
             <p><strong>결제 총액: {totalAmount.toLocaleString()} 원</strong></p>
-            <button className="payment-button" >
-                결제하기
-            </button>
+            <button className="payment-button" onClick={finalOrder}>결제하기</button>
+            </div>
         </div>
     );
 };
