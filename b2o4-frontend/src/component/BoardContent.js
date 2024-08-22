@@ -8,10 +8,23 @@ const BoardContent = () => {
     
     const location = useLocation();
     const [boards, setBoards] = useState([]);
+    const [comment, setComment] = useState('');
     const board = location.state.board;
     const navigate = useNavigate();
 
     console.log("location",location);
+
+    useEffect(() => {
+        BoardComment();
+      }, []);
+
+    // boardComment 정보 가져오기
+    const BoardComment = async() => {
+        const res = await axios.get('/boards/comment');
+        setComment(res.data);
+    };
+    console.log("comment 불러오기" , comment);
+
 
     useEffect(() => {
         BoardPostList();
@@ -37,6 +50,19 @@ const BoardContent = () => {
         navigate("/boardMain");
     };
 
+    // 댓글 작성하기
+    const adminBoardComment = () => {
+        axios.post(`http://localhost:9000/`)
+    };
+
+    // 작성되어있다면 그 댓글 불러오기
+    const getAdminComment = () => {
+
+    }
+
+    console.log("loginMember", loginMember);
+    console.log("board", board);
+
     if(!loginMember){
         return;
     }
@@ -46,12 +72,8 @@ const BoardContent = () => {
             <div className="board-content-table">
                 {loginMember.memberNo === board.memberNo &&
                 <button onClick={handleUpdateClick} className="update-button">수정하기</button>}
-                {/* 로그인 세션으로 본인 글일 경우에만 뜨게 하기 */}
                 <button onClick={handleBackClick} className="back-button">돌아가기</button>
                 <table className="boardContent-table">
-                    <thead>
-                        {/* <tr>댓글</tr> 나중에 구현 */} 
-                    </thead>
                     <tbody className="board-tbody">
                             <tr>
                                 <div className="content-top">
@@ -62,7 +84,15 @@ const BoardContent = () => {
                             <td className="board-content">
                                 {board.boardContent}
                             </td>
-                            <input className="admin-board-comment" type="text" disabled placeholder="문의 답변"></input>
+                            <input 
+                                className="admin-board-comment" 
+                                type="text" 
+                                disabled={loginMember.memberType !== 'A'}
+                                placeholder="문의 답변"
+                                value={comment.commentContent}
+                            />
+                
+                            <button className="admin-post-board-comment" onClick={adminBoardComment}>작성하기</button>
                     </tbody>    
                 </table>
             </div>

@@ -13,11 +13,13 @@ const BoardMain = ({}) => {
         BoardPostList();
       }, []);
     
+      // boards 정보 가져오기
       const BoardPostList = async() => {
         const res = await axios.get('/boards');
         setBoards(res.data);
       };
       console.log("board DB 정보 불러오기" , boards);
+
 
       const handleRowClick = (board) => {
         navigate(`/boardContent/${board.boardNo}`, { state: { board: board } });
