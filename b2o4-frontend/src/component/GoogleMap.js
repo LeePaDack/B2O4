@@ -1,28 +1,33 @@
 import React, { useEffect, useRef, useState } from "react";
-import '../css/GoogleMap.css';
 
-const GoogleMap = () => {
+const Map = () => {
   const mapRef = useRef(null);
   const [map, setMap] = useState(null);
   const [marker, setMarker] = useState(null);
-  const searchBoxRef = useRef(null);
 
   useEffect(() => {
+    // Google Maps 스크립트 로드
     const loadGoogleMapsScript = () => {
-      const script = document.createElement("script");
-      script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap`;
-      script.async = true;
-      script.defer = true;
-      document.head.appendChild(script);
+      if (!window.google) {
+        const script = document.createElement("script");
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyA0upEXkG-mdcVzsV8dJ2yVYma-YuHkYG8&callback=initMap`;
+        script.async = true;
+        script.defer = true;
+        window.initMap = initMap;
+        document.head.appendChild(script);
+      } else {
+        initMap();
+      }
     };
 
+    // 지도 초기화 함수
     const initMap = () => {
-      if (!window.google || !window.google.maps || !window.google.maps.places) {
+      if (!window.google || !window.google.maps) {
         console.error("Google Maps API가 로드되지 않았습니다.");
         return;
       }
 
-      const initialPosition = { lat: 0, lng: 0 };
+      const initialPosition = { lat: 0, lng: 0 }; // 초기 위치 (0,0)
 
       const mapInstance = new window.google.maps.Map(mapRef.current, {
         zoom: 15,
@@ -36,44 +41,10 @@ const GoogleMap = () => {
 
       setMap(mapInstance);
       setMarker(markerInstance);
-
-      const input = searchBoxRef.current;
-      const searchBox = new window.google.maps.places.SearchBox(input);
-
-      mapInstance.controls[window.google.maps.ControlPosition.TOP_LEFT].push(input);
-
-      searchBox.addListener("places_changed", () => {
-        const places = searchBox.getPlaces();
-
-        if (places.length === 0) {
-          return;
-        }
-
-        const place = places[0];
-        if (place.geometry) {
-          const newPosition = {
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
-          };
-          markerInstance.setPosition(newPosition);
-          mapInstance.setCenter(newPosition);
-        }
-      });
     };
 
-    if (!window.google || !window.google.maps) {
-      window.initMap = initMap;
-      loadGoogleMapsScript();
-    } else {
-      initMap();
-    }
-
-    // Cleanup Google Maps instances on component unmount
-    return () => {
-      if (map) {
-        window.google.maps.event.clearInstanceListeners(map);
-      }
-    };
+    // Google Maps API 스크립트 로드
+    loadGoogleMapsScript();
   }, []);
 
   useEffect(() => {
@@ -84,7 +55,9 @@ const GoogleMap = () => {
             const { latitude, longitude } = position.coords;
             const newPosition = { lat: latitude, lng: longitude };
 
+            // 마커 위치 업데이트
             marker.setPosition(newPosition);
+            // 지도 중심 업데이트
             map.setCenter(newPosition);
           },
           (error) => {
@@ -92,7 +65,10 @@ const GoogleMap = () => {
           }
         );
 
-        return () => navigator.geolocation.clearWatch(watchId);
+        // 컴포넌트 언마운트 시 위치 추적 정리
+        return () => {
+          navigator.geolocation.clearWatch(watchId);
+        };
       } else {
         alert("이 브라우저는 위치 정보를 지원하지 않습니다.");
       }
@@ -100,21 +76,14 @@ const GoogleMap = () => {
   }, [map, marker]);
 
   return (
-    <div className="map-container-wrapper">
-      <div className="map-header">
-        <h3 className="map-title">현재 위치</h3>
-        <input
-          ref={searchBoxRef}
-          type="text"
-          placeholder="장소 검색..."
-          className="map-search-box"
-        />
-      </div>
-      <div className="map-container">
-        <div ref={mapRef} style={{ width: "100%", height: "100%" }} />
-      </div>
+    <div>
+      <h3>현재 위치</h3>
+      <div
+        ref={mapRef}
+        style={{ width: "100%", height: "100vh", border: "1px solid black" }}
+      />
     </div>
   );
 };
 
-export default GoogleMap;
+export default Map;
