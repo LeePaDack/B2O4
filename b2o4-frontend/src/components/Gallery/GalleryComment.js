@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import MyPageContext from "../MyPageContext";
 import axios from "axios";
+import '../css/GalleryComment.css';
 
 const GalleryComment = () => {
   const { loginMember } = useContext(MyPageContext);
@@ -15,9 +16,9 @@ const GalleryComment = () => {
     const storedCount = localStorage.getItem(`anonymousCount_${list.gbPostNo}`);
     return storedCount ? parseInt(storedCount, 10) : 1;
   });
-  const [replyInput, setReplyInput] = useState(null); // 현재 답글을 달고 있는 댓글의 gbCommentNo
-  const [replyContent, setReplyContent] = useState(''); // 답글 내용
-  const [showReplies, setShowReplies] = useState(false);
+  const [activeCommentId, setActiveCommentId] = useState(null); // 현재 활성화된 댓글 ID
+  const [replyContent, setReplyContent] = useState('');
+  const [showReplies, setShowReplies] = useState({});
 
   // 댓글 목록 가져오기
   const fetchComment = async () => {
@@ -42,6 +43,14 @@ const GalleryComment = () => {
           topLevelComments.push(commentMap.get(comment.gbCommentNo));
         }
       });
+
+      // 답글을 작성 시간 기준으로 정렬
+      topLevelComments.forEach(comment => {
+        comment.replies.sort((a, b) => new Date(b.gbCommentCreateDate) - new Date(a.gbCommentCreateDate));
+      });
+
+      // 댓글을 작성 시간 기준으로 정렬
+      topLevelComments.sort((a, b) => new Date(b.gbCommentCreateDate) - new Date(a.gbCommentCreateDate));
 
       setCommentList(topLevelComments);
     } catch (error) {
@@ -99,13 +108,13 @@ const GalleryComment = () => {
 
   // 답글 작성하기
   const replyWrite = async () => {
-    if (replyInput === null) return;
+    if (activeCommentId === null) return;
   
     const formData = new FormData();
     
     formData.append("gbCommentContent", replyContent);
     formData.append("gbPostNo", list.gbPostNo);
-    formData.append("parentCommentNo", replyInput);
+    formData.append("parentCommentNo", activeCommentId);
     formData.append("gbCommentClass", 1);
     formData.append("memberNo", loginMember ? loginMember.memberNo : 0);
     formData.append("memberName", loginMember ? loginMember.memberName : `익명${anonymousCount}`);
@@ -115,8 +124,8 @@ const GalleryComment = () => {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       alert("답글 작성이 완료되었습니다.");
-      setReplyContent('');
-      setReplyInput([]);
+      setReplyContent(''); // 입력 내용만 초기화
+      setActiveCommentId(null); // 답글 입력창을 숨깁니다.
       fetchComment();
 
       if (!loginMember) {
@@ -138,9 +147,14 @@ const GalleryComment = () => {
   const renderComments = (comments) => {
     return comments.map(comment => (
       <div key={comment.gbCommentNo} className="comment-item">
-        <p className="comment-writer">
-          <strong>{comment.memberName}</strong>
-        </p>
+        <div className="name-date">
+          <div>
+            <p className="comment-writer"><strong>{comment.memberName}</strong></p>
+          </div>
+          <div className="comment-date">
+           <p>{comment.gbCommentCreateDate}</p>
+          </div>
+        </div>
         <div className="comment-content">
           {comment.gbCommentImages && (
             comment.gbCommentImages.split(",").map(image => (
@@ -149,31 +163,36 @@ const GalleryComment = () => {
           )}
           <p>{comment.gbCommentContent}</p>
         </div>
-        <div className="comment-date">
-          <p>{comment.gbCommentCreateDate}
+        <div className="comment-reply">
           {comment.gbCommentClass === 0 && (
-            <button onClick={() => setReplyInput(replyInput === comment.gbCommentNo ? null : comment.gbCommentNo)}>
-              {replyInput === comment.gbCommentNo ? '답글달기 취소' : '답글달기'}
+            <button onClick={() => {
+              // 현재 댓글 ID가 이미 활성화된 상태이면, 비활성화 (숨기기)
+              if (activeCommentId === comment.gbCommentNo) {
+                setActiveCommentId(null);
+                setShowReplies(prev => ({ ...prev, [comment.gbCommentNo]: false }));
+              } else {
+                // 다른 댓글의 입력창을 숨기고 현재 댓글의 입력창과 답글 목록을 활성화
+                setActiveCommentId(comment.gbCommentNo);
+                setShowReplies(prev => ({ ...prev, [comment.gbCommentNo]: true }));
+              }
+            }}>
+              {activeCommentId === comment.gbCommentNo ? '답글 숨기기' : '답글'}
             </button>
           )}
-            {loginMember && list &&
-             (
-              (loginMember.memberNo === list.memberNo && 
-              (loginMember.memberNo === comment.memberNo || comment.memberName.startsWith('익명'))) || (loginMember.memberNo === comment.memberNo) ) && (
-                <button onClick={() => commentDelete(comment.gbCommentNo)}>삭제</button>
-              )}
-              {comment.replies && comment.replies.length > 0 && (
-            <button onClick={() => setShowReplies(prev => ({ ...prev, [comment.gbCommentNo]: !prev[comment.gbCommentNo] }))}>
-              {showReplies[comment.gbCommentNo] ? '답글 숨기기' : '답글 보기'}
-            </button>
-          )}
-          </p>
+          {loginMember && list &&
+           (
+            (loginMember.memberNo === list.memberNo && 
+            (loginMember.memberNo === comment.memberNo || comment.memberName.startsWith('익명'))) || (loginMember.memberNo === comment.memberNo)) && (
+              <button onClick={() => commentDelete(comment.gbCommentNo)}>삭제</button>
+            )}
         </div>
-        {replyInput === comment.gbCommentNo && (
+        {activeCommentId === comment.gbCommentNo && (
           <div className="reply-write">
             <p>{loginMember ? loginMember.memberName : `익명${anonymousCount}`}</p>
-            <textarea placeholder="답글을 남겨보세요" value={replyContent} onChange={(e) => setReplyContent(e.target.value)} />
-            <button onClick={replyWrite}>등록</button>
+            <div className="content-submit">
+              <input type="text" placeholder="답글을 남겨보세요" value={replyContent} onChange={(e) => setReplyContent(e.target.value)} />
+              <button onClick={replyWrite}>등록</button>
+            </div>
           </div>
         )}
         {showReplies[comment.gbCommentNo] && comment.replies.length > 0 && (
@@ -194,10 +213,15 @@ const GalleryComment = () => {
         {renderComments(commentList)}
       </div>
       <div className="comment-write">
-        <p>{loginMember ? loginMember.memberName : `익명${anonymousCount}`}</p>
-        <input type="text" placeholder="댓글을 남겨보세요" value={content} onChange={(e) => setContent(e.target.value)} />
-        <input type="file" multiple onChange={handleFileChange} />
-        <button onClick={commentWrite}>등록</button>
+        <div className="name-file">
+          <p>{loginMember ? loginMember.memberName : `익명${anonymousCount}`}</p>
+          <label htmlFor='imageUpload'><img src='/camera.jpg' alt="카메라 아이콘" /></label>
+          <input type="file" id="imageUpload" multiple onChange={handleFileChange} />
+        </div>
+        <div className="content-submit">
+          <input type="text" placeholder="댓글을 남겨보세요" value={content} onChange={(e) => setContent(e.target.value)} />
+          <button onClick={commentWrite}>등록</button>
+        </div>
       </div>
     </div>
   );

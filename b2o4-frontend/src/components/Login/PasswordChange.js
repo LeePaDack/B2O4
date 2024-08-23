@@ -79,7 +79,7 @@ const PasswordChange = ({ userInfo }) => {
           <button className='btn btn-dark' onClick={handlePasswordChange}>비밀번호 변경</button>
         </div>
       ) : (
-        <button onClick={handleLoginRedirect}>로그인 하러 가기</button>
+        <button className='btn btn-success login-page-button' onClick={handleLoginRedirect}>로그인 하러 가기</button>
       )}
     </div>
   );

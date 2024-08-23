@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "../css/Login.css";
 import Button from "react-bootstrap/esm/Button";
 import NaverApi from "./NaverApi";
+import KakaoApi from "./KakaoApi";
 
 const Login = () => {
   const { loginMember, setLoginMember } = useContext(MyPageContext);
@@ -91,15 +92,13 @@ const Login = () => {
                 <NaverApi />
               </li>
               <li className="api-item">
-                <Link to="/findPw" className="api-link">
+                <Link to="/login" className="api-link">
                   <img src="IOS_Google_icon.png" />
      
                 </Link>
               </li>
               <li className="api-item">
-                <Link to="/register" className="api-link">
-                  <img src="kakao.png" />
-                </Link>
+                <KakaoApi />
               </li>
             </ul>
           </>

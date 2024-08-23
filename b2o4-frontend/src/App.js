@@ -13,8 +13,9 @@ import FindPw from './components/Login/FindPw.js';
 import Footer from './components/Layout/Footer.js';
 import GalleryUpdate from './components/Gallery/GalleryUpdate.js'
 import PasswordChange from './components/Login/PasswordChange.js';
-import NaverApi from './components/Login/NaverApi.js';
 import NaverSignup from './components/Login/NaverSignup.js';
+import KakaoRedirectPage from './components/Login/KakaoRedirectPage.js'; 
+
 function App() {
 
   const [loginMember, setLoginMember] = useState(null);
@@ -46,6 +47,7 @@ function App() {
           <Route path='/galleryUpdate/:gbPostNo' element={<GalleryUpdate />} />
           <Route path='/passwordChange' element={<PasswordChange />} />       
           <Route path='/signup/naver' element={<NaverSignup />} />
+          <Route path='/oauth/redirected/kakao' element={<KakaoRedirectPage />} />
         </Routes>
         <Footer />
       </Router>
