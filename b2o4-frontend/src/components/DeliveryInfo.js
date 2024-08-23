@@ -128,10 +128,11 @@ const GoodsPurchase = () => {
         console.log(submitData);
         axios.post('http://localhost:9000/delivery/add', submitData)
         .then((response) => {
-            alert("된다 된다 된다 된다" + response);
+            alert("주문이 완료되었습니다.");
+            //navigate("/마이페이지 확인")
         })
         .catch((error) => {
-            alert("안된다 응애" + error)
+            alert("다시 시도해주세요")
         })
     }
          

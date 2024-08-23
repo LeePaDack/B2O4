@@ -7,12 +7,17 @@ import b2o4.mapper.DeliveryInfoMapper;
 
 @Service
 public class DeliveryInfoServiceImpl implements DeliveryInfoService {
-    
+
     @Autowired
     private DeliveryInfoMapper deliveryInfoMapper;
-    
+
     @Override
     public void insertDeliveryInfo(DeliveryInfo deliveryInfo) {
-        deliveryInfoMapper.insertDeliveryInfo(deliveryInfo);
+        if (deliveryInfo.getBasketNos() != null && !deliveryInfo.getBasketNos().isEmpty()) {
+            deliveryInfoMapper.insertDeliveryInfo(deliveryInfo);
+        } else {
+            throw new IllegalArgumentException("BasketNos must not be null or empty");
+        }
     }
+
 }
