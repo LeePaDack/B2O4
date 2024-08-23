@@ -9,8 +9,6 @@ const clientKey = "test_ck_AQ92ymxN34YkyXwdXe2PVajRKXvd";
 const generateRandomString = () => window.btoa(Math.random().toString()).slice(0, 20);
 const customerKey = generateRandomString();
 
-
-
 export function PaymentCheckoutPage() {
   const [payment, setPayment] = useState(null);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
@@ -21,7 +19,8 @@ export function PaymentCheckoutPage() {
   console.log("!!!!!!!로그인정보 : " , loginMember)
   const { stadium, personCount, reservationDate, reservationTime, totalPrice } = location.state;
   console.log("!!!!!!totalPrice", totalPrice);
-  sessionStorage.setItem('paymentInfo', JSON.stringify(/* 결제 정보가 담긴 변수 넣기 */));
+  console.log("location.state", location.state);
+  sessionStorage.setItem('paymentInfo', JSON.stringify(location.state));
   const selectPaymentMethod = (method) => {
     setSelectedPaymentMethod(method);
   };

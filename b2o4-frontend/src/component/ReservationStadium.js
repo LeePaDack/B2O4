@@ -22,6 +22,13 @@ const ReservationStadium = () => {
       dateFormat: "Y-m-d",
       minDate: "today",
       maxDate: new Date().fp_incr(14),
+      onChange: (selectedDates) => {
+        const selectedDate = selectedDates[0];
+        const nextDay = new Date(selectedDate);
+        nextDay.setDate(nextDay.getDate() + 1);  // ********** 날짜에 하루를 더함  값이 0 이기 때문?
+        setReservationDate(nextDay.toISOString().split("T")[0]);
+        console.log("Selected Date: ", nextDay);
+      },
     });
   }, []);
   
@@ -105,7 +112,12 @@ const ReservationStadium = () => {
     navigate("/StadiumList");
   };
 
-  console.log("reservationDate", reservationDate)
+  console.log("reservationDate 값 ", reservationDate);
+  console.log("stadium 값 ", stadium);
+  console.log("reservationTime 값 ", reservationTime);
+  console.log("personCount 값 ", personCount);
+  console.log("calculateTotalPrice 값 ", calculateTotalPrice());
+
 
   return (
     <div className="stadium-reservation-container">
@@ -126,16 +138,16 @@ const ReservationStadium = () => {
         &nbsp; &nbsp; &nbsp;
         <select className="reservationTime" value={reservationTime} onChange={handleTimeChange}>
           <option>예약 시간</option>
-          <option value="1">06:00 ~ 08:00</option>
-          <option value="2">08:00 ~ 10:00</option>
-          <option value="3">10:00 ~ 12:00</option>
-          <option value="4">12:00 ~ 14:00</option>
-          <option value="5">14:00 ~ 16:00</option>
-          <option value="6">16:00 ~ 18:00</option>
-          <option value="7">18:00 ~ 20:00</option>
-          <option value="8">20:00 ~ 22:00</option>
-          <option value="9">22:00 ~ 00:00</option>
-          <option value="10">00:00 ~ 02:00</option>
+          <option value="06:00 ~ 08:00">06:00 ~ 08:00</option>
+          <option value="08:00 ~ 10:00">08:00 ~ 10:00</option>
+          <option value="10:00 ~ 12:00">10:00 ~ 12:00</option>
+          <option value="12:00 ~ 14:00">12:00 ~ 14:00</option>
+          <option value="14:00 ~ 16:00">14:00 ~ 16:00</option>
+          <option value="16:00 ~ 18:00">16:00 ~ 18:00</option>
+          <option value="18:00 ~ 20:00">18:00 ~ 20:00</option>
+          <option value="20:00 ~ 22:00">20:00 ~ 22:00</option>
+          <option value="22:00 ~ 00:00">22:00 ~ 00:00</option>
+          <option value="00:00 ~ 02:00">00:00 ~ 02:00</option>
         </select>
         &nbsp; &nbsp; &nbsp;
         <select className="reservationPersonCount" value={personCount} onChange={handlePersonCountChange}>

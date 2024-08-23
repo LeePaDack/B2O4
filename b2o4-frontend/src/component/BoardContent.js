@@ -84,14 +84,13 @@ const BoardContent = () => {
                             <td className="board-content">
                                 {board.boardContent}
                             </td>
+                            
                             <input 
                                 className="admin-board-comment" 
                                 type="text" 
                                 disabled={loginMember.memberType !== 'A'}
                                 placeholder="문의 답변"
-                                value={comment.commentContent}
                             />
-                
                             <button className="admin-post-board-comment" onClick={adminBoardComment}>작성하기</button>
                     </tbody>    
                 </table>

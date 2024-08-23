@@ -5,7 +5,7 @@
         
 <mapper namespace="b2o4.mapper.ReservationStadiumMapper">
 	<insert id="reservationStadiumDetail" parameterType="reservationStadium" useGeneratedKeys="true" keyProperty="reservationNo">
-		INSERT INTO reservation (stadiumNo, reservationTotal, reservationDate, matchDate, matchTime, reserveCount)
-		VALUES (#{stadiumNo}, #{reservationTotal}, #{reservationDate}, #{matchDate}, #{reserveCount})
+		INSERT INTO reservation (memberNo, stadiumNo, reservationTotal, matchDate, matchTime, reserveCount)
+		VALUES (#{memberNo}, #{stadiumNo}, #{reservationTotal}, #{matchDate}, #{matchTime}, #{reserveCount})
 	</insert>
 </mapper>

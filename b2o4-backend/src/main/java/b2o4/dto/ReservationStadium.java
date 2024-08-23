@@ -18,8 +18,8 @@ public class ReservationStadium {
 	private int memberNo;
 	private int stadiumNo;
 	private int reservationTotal;
-	private Date reservationDate;
-	private Date matchDate;
+	private String reservationDate;
+	private String matchDate;
 	private String matchTime;
 	private int reserveCount;
 }

@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import axios from "axios";
+import MyPageContext from "../MyPageContext";
 
 export function PaymentSuccessPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [responseData, setResponseData] = useState(null);
+  const { loginMember } = useContext(MyPageContext);
   const paymentInfo = JSON.parse(sessionStorage.getItem('paymentInfo'));
 
   useEffect(() => {
@@ -15,31 +18,45 @@ export function PaymentSuccessPage() {
         paymentKey: searchParams.get("paymentKey"),
       };
 
-      const response = await fetch("/api/confirm/payment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestData),
-      });
+      try {
+        // 결제 확인 요청
+        const response = await axios.post("http://localhost:9000/confirm/payment", requestData, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-      const json = await response.json();
+        if (response.status !== 200) {
+          throw { message: response.data.message, code: response.data.code };
+        }
 
-      if (!response.ok) {
-        throw { message: json.message, code: json.code };
+        // 결제 성공 시 예약 정보를 서버로 전송
+        const reservationData = {
+          memberNo: loginMember.memberNo,
+          stadiumNo: paymentInfo.stadium.stadiumNo,
+          reservationTotal: paymentInfo.totalPrice,
+          matchDate: paymentInfo.reservationDate,
+          matchTime: paymentInfo.reservationTime,
+          reserveCount: paymentInfo.personCount,
+        };
+
+        await axios.post("http://localhost:9000/reservationStadium", reservationData, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        setResponseData(response.data); // 응답 데이터 저장
+        // 성공 화면으로 리다이렉트
+        navigate(`/payment/success`, { replace: true });
+      } catch (error) {
+        console.error("결제 확인 및 예약 처리 중 오류 발생:", error);
+        navigate(`/fail?code=${error.code}&message=${error.message}`, { replace: true });
       }
-
-      return json;
     }
 
-    confirm()
-      .then((data) => {
-        setResponseData(data);
-      })
-      .catch((error) => {
-        navigate(`/fail?code=${error.code}&message=${error.message}`);
-      });
-  }, [searchParams]);
+    confirm();
+  }, [searchParams, loginMember, navigate]);
 
   return (
     <div className="box_section" style={{ width: "600px" }}>
@@ -78,3 +95,5 @@ export function PaymentSuccessPage() {
     </div>
   );
 }
+
+export default PaymentSuccessPage;
