@@ -1,6 +1,6 @@
 package b2o4.controller;
 
-<<<<<<< HEAD
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,18 +8,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-=======
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RestController;
 
->>>>>>> 2d67df7a0ce3af9babe310a0891221ef3bd63003
 import b2o4.dto.Member;
 import b2o4.service.MemberService;
 
+
 @RestController
-<<<<<<< HEAD
 @RequestMapping("/api")
 public class MemberController {
     @Autowired
@@ -50,18 +46,14 @@ public class MemberController {
         response.put("isAvailable", isAvailable);
         return response;
     }
-
-=======
-public class MemberController {
-
-	@Autowired
-	private MemberService memberService;
-	
-	@PostMapping("/naverAPI/register")
+    
+    
+    @PostMapping("/naverAPI/register")
     public String NaverRegister(@RequestBody Member member) {
         memberService.NaverRegister(member);
 
         return "회원가입 성공!!!!";
     }
->>>>>>> 2d67df7a0ce3af9babe310a0891221ef3bd63003
+
+
 }
