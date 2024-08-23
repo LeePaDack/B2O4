@@ -3,12 +3,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="b2o4.mapper.LoginMapper">
+<<<<<<< HEAD
 	<!-- 로그인하기 -->
+=======
+>>>>>>> leegyejun-board
 	<select id="login">
 		SELECT * FROM member
 		WHERE memberId = #{memberId}
 		AND memberPw = #{memberPw}
 	</select>
+<<<<<<< HEAD
 	
 	<!-- 아이디 찾기 -->
 	<select id="findId" parameterType="Member">
@@ -34,4 +38,6 @@
 
 	
 		
+=======
+>>>>>>> leegyejun-board
 </mapper>

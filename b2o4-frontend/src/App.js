@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
@@ -32,6 +33,30 @@ function App() {
 
   const [loginMember, setLoginMember] = useState(null);
 
+=======
+import './App.css';
+import { useEffect, useState } from 'react';
+import BoardMain from './component/BoardMain.js';
+import BoardPosting from './component/BoardPosting.js';
+import {BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import BoardContent from './component/BoardContent.js';
+import StadiumList from './component/StadiumList.js';
+import BoardUpdate from './component/BoardUpdate.js';
+import StadiumDetail from './component/StadiumDetail.js';
+import ReservationStadium from './component/ReservationStadium.js';
+import Header from './component/Layout/Header.js';
+import Footer from './component/Layout/Footer.js';
+import Login from './component/Login.js';
+import MyPageContext from './component/MyPageContext.js';
+import { PaymentCheckoutPage } from './component/payment/PaymentCheckoutPage.js';
+import { PaymentSuccessPage } from './component/payment/PaymentSuccessPage.js';
+import { PaymentFailPage } from './component/payment/PaymentFailPage.js';
+
+function App() {
+  const [loginMember, setLoginMember] = useState(null);
+
+
+>>>>>>> leegyejun-board
   useEffect(() => {
     const savedMember = localStorage.getItem("loginMember");
     if(savedMember) {
@@ -44,6 +69,7 @@ function App() {
       localStorage.setItem("loginMember", JSON.stringify(loginMember));
     }
   }, [loginMember]);
+<<<<<<< HEAD
   
   return (
 <<<<<<< HEAD
@@ -79,6 +105,33 @@ function App() {
       </Router>
     </MyPageContext.Provider>
 >>>>>>> 2d67df7a0ce3af9babe310a0891221ef3bd63003
+=======
+
+  return (
+    <div>
+
+
+      <MyPageContext.Provider value={{loginMember, setLoginMember}}>
+      <Router>
+      <Header/>
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='stadiumList' element={<StadiumList/>}/>
+          <Route path='/stadiumDetail/:stadiumNo' element={<StadiumDetail/>}/>
+          <Route path='/boardPosting' element={<BoardPosting/>}/>
+          <Route path='/boardUpdate/:boardNo' element={<BoardUpdate/>}/>
+          <Route path='/boardMain' element={<BoardMain/>}/>
+          <Route path='/boardContent/:boardNo' element={<BoardContent/>}/>
+          <Route path='/reservationStadium/:stadiumNo' element={<ReservationStadium/>}/>
+          <Route path="/payment/checkout" element={<PaymentCheckoutPage />} />
+          <Route path="/payment/success" element={<PaymentSuccessPage />} />
+          <Route path="/fail" element={<PaymentFailPage />} />
+        </Routes>
+        <Footer/>
+      </Router>
+      </MyPageContext.Provider>
+    </div>
+>>>>>>> leegyejun-board
   );
 }
 

@@ -1,5 +1,6 @@
 package b2o4.controller;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+=======
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+>>>>>>> leegyejun-board
 
 import b2o4.dto.Member;
 import b2o4.service.LoginService;
@@ -22,11 +31,15 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
+<<<<<<< HEAD
 	// 로그인하기
+=======
+>>>>>>> leegyejun-board
 	@PostMapping("/login")
 	public Map<String, Object> login(@RequestBody Member member) {
 		return loginService.login(member);
 	}
+<<<<<<< HEAD
 	
 	// 아이디 찾기
 	@PostMapping("/findId")
@@ -51,3 +64,6 @@ public class LoginController {
         }
 	}
 }
+=======
+}
+>>>>>>> leegyejun-board

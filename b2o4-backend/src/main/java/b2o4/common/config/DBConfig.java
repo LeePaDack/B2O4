@@ -1,13 +1,19 @@
 package b2o4.common.config;
 
+<<<<<<< HEAD
 import java.io.IOException;
+=======
+>>>>>>> leegyejun-board
 
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+<<<<<<< HEAD
 //import org.apache.catalina.core.ApplicationContext;
+=======
+>>>>>>> leegyejun-board
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationContext;
@@ -19,12 +25,16 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+<<<<<<< HEAD
 // classpath = src/main/resources 줄임말
+=======
+>>>>>>> leegyejun-board
 @Configuration
 @PropertySource("classpath:/config.properties")
 public class DBConfig {
 
 	@Autowired
+<<<<<<< HEAD
 	//import org.springframework.context.ApplicationContext;
 	private ApplicationContext applicationContext; // 연결되는 주소 관리자 나중에 xml과 같은 경로를 보유하고 관리
 	
@@ -40,6 +50,10 @@ public class DBConfig {
 	
 	@Bean // 객체생성 DataBase연결을 해주겠다.
 =======
+=======
+	private ApplicationContext applicationContext;
+	
+>>>>>>> leegyejun-board
 	@Bean 
 	@ConfigurationProperties(prefix = "spring.datasource.hikari")
 	public HikariConfig hikariConfig() {
@@ -47,7 +61,10 @@ public class DBConfig {
 	}
 	
 	@Bean
+<<<<<<< HEAD
 >>>>>>> 2d67df7a0ce3af9babe310a0891221ef3bd63003
+=======
+>>>>>>> leegyejun-board
 	public DataSource dataSource(HikariConfig config) {
 		DataSource dataSource = new HikariDataSource(config);
 		return dataSource;
@@ -56,6 +73,7 @@ public class DBConfig {
 	@Bean
 	public SqlSessionFactory sessionFactory(DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean sfb = new SqlSessionFactoryBean();
+<<<<<<< HEAD
 <<<<<<< HEAD
 		sfb.setDataSource(dataSource); //HikariConfig에서 받은 정보로 연결한 DataBase 연결 경로를 가져와서 사용
 		sfb.setMapperLocations(applicationContext.getResources("classpath:/mappers/**.xml"));
@@ -70,6 +88,8 @@ public class DBConfig {
 	
 	@Bean //sql 작성한 select insert delete update 이용한 dataBase 작업을 관리
 =======
+=======
+>>>>>>> leegyejun-board
 		sfb.setDataSource(dataSource); 
 		sfb.setMapperLocations(applicationContext.getResources("classpath:/mappers/**.xml"));
 		sfb.setTypeAliasesPackage("b2o4.dto");
@@ -77,11 +97,15 @@ public class DBConfig {
 	}
 	
 	@Bean 
+<<<<<<< HEAD
 >>>>>>> 2d67df7a0ce3af9babe310a0891221ef3bd63003
+=======
+>>>>>>> leegyejun-board
 	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sf) {
 		return new SqlSessionTemplate(sf);
 	}
 	
+<<<<<<< HEAD
 	@Bean // commit rollback 과 같은 수정하거나 삭제하거나 추가했을 때 완전하게 DB에 저장하거나 되돌릴 수 있도록 도와줌
 	public DataSourceTransactionManager dataSourceTransactionManager(DataSource ds) {
 		return new DataSourceTransactionManager(ds);
@@ -106,3 +130,11 @@ public class DBConfig {
 	
 }
 >>>>>>> 2d67df7a0ce3af9babe310a0891221ef3bd63003
+=======
+	@Bean
+	public DataSourceTransactionManager dataSourceTransactionManager(DataSource ds) {
+		return new DataSourceTransactionManager(ds);
+	}
+	
+}
+>>>>>>> leegyejun-board
