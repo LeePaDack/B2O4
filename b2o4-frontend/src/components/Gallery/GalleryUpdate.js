@@ -2,48 +2,57 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import MyPageContext from '../MyPageContext';
 import Button from "react-bootstrap/esm/Button";
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const GalleryUadate = () => {
-  const{gbPostNo} = useParams();
+const GalleryUpload = () => {
   const [files, setFiles] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [GBList, setGBList] = useState([]);
+  const [posts, setPosts] = useState([]);
   
   const navigate = useNavigate();
 
   const {loginMember} = useContext(MyPageContext);
 
 
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const fetchPosts = async () => {
+    try {
+      const response = await axios.get('/gallery/posts');
+      console.log("response.data : " + response.data);
+      setPosts(response.data);
+    } catch (error) {
+      console.error("게시물을 가져오는 데 실패했습니다.", error);
+    }
+  };
+
   const handleFileChange = (e) => {
     setFiles(Array.from(e.target.files));
   };
 
-  const handleModify = async() => {
+  const handleUpload = async () => {
     const formData = new FormData();
-    
-    if(files.length > 0) {
-      Array.from(files).forEach(file => {
-        formData.append("files", file);
-      });
-    }
-    formData.append("gbPostNo", gbPostNo);
+    Array.from(files).forEach(file => {
+      formData.append("files", file);
+    });
     formData.append("title", title);
     formData.append("content", content);
     formData.append("memberNo", loginMember.memberNo);
-    formData.append("memberName", loginMember.memberName);
 
     try {
-      await axios.put(`/gallery/${gbPostNo}`, formData, {
+      await axios.post('/gallery/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-      alert("게시글 수정이 완료되었습니다..");
+      alert("게시글 작성이 완료되었습니다..");
+      fetchPosts();
       navigate('/galleryBoard');
     } catch (error) {
-      console.error("게시글 수정에 실패했습니다.", error);
+      console.error("게시글 작성에 실패했습니다.", error);
     }
   };
 
@@ -57,7 +66,7 @@ const GalleryUadate = () => {
           <input type="text" placeholder="제목을 입력하세요." value={title} onChange={(e) => setTitle(e.target.value)} required/>
         </div>
           <div className='input-file'>
-            <label htmlFor='imageUpload'><img src='/camera.jpg' /></label>
+            <label htmlFor='imageUpload'><img src='camera.jpg'/></label>
             <input type="file" id='imageUpload' multiple onChange={handleFileChange} />
           </div>
           <div className='input-text'>
@@ -68,10 +77,10 @@ const GalleryUadate = () => {
              ))}
             <input type="text" placeholder="내용을 입력하세요." value={content} onChange={(e) => setContent(e.target.value)} />
           </div>
-        <Button variant="success" onClick={handleModify}>수정</Button>
+        <Button variant="success" onClick={handleUpload}>업로드하기</Button>
       </div>
     </div>
   );
 }
 
-export default GalleryUadate;
+export default GalleryUpload;

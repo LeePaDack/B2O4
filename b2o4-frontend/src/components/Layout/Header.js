@@ -55,9 +55,9 @@ const Header = () => {
                         <Nav className="d-flex">
                             <Nav.Link href="/galleryBoard" className="item" style={{ marginLeft: "140px" }}>갤러리</Nav.Link>
                             <NavDropdown title="용품 장터" id="basic-nav-dropdown" className="item">
-                                <NavDropdown.Item href="#action/3.1">메인 장터</NavDropdown.Item>
+                                <NavDropdown.Item href="/goodsShop">메인 장터</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">중고 장터</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">장바구니</NavDropdown.Item>
+                                <NavDropdown.Item href="/shoppingBasket">장바구니</NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown title="구장 모음" id="basic-nav-dropdown" className="item">
                                 <NavDropdown.Item href="#action/3.1">구장 목록</NavDropdown.Item>

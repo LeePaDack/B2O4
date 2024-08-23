@@ -2,10 +2,8 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import MyPageContext from "../MyPageContext";
 import { Link } from "react-router-dom";
-import "../css/Login.css";
+import "../../components/css/Login.css";
 import Button from "react-bootstrap/esm/Button";
-import NaverApi from "./NaverApi";
-import KakaoApi from "./KakaoApi";
 
 const Login = () => {
   const { loginMember, setLoginMember } = useContext(MyPageContext);
@@ -69,36 +67,22 @@ const Login = () => {
               <li className="login-item">
                 <Link to="/findId" className="login-link">
                   <img src="soccer.jpg" />
-                  &nbsp;아이디 찾기
+                  아이디 찾기
                 </Link>
               </li>
-              <pre>|</pre>
+              <pre> | </pre>
               <li className="login-item">
                 <Link to="/findPw" className="login-link">
                   <img src="soccer.jpg" />
-                  &nbsp;비밀번호 찾기
+                  비밀번호 찾기
                 </Link>
               </li>
-              <pre>|</pre>
+              <pre> | </pre>
               <li className="login-item">
                 <Link to="/register" className="login-link">
                   <img src="soccer.jpg" />
-                  &nbsp;회원가입
+                  회원가입
                 </Link>
-              </li>
-            </ul>
-            <ul className="login-api">
-              <li className="api-item">
-                <NaverApi />
-              </li>
-              <li className="api-item">
-                <Link to="/login" className="api-link">
-                  <img src="IOS_Google_icon.png" />
-     
-                </Link>
-              </li>
-              <li className="api-item">
-                <KakaoApi />
               </li>
             </ul>
           </>
