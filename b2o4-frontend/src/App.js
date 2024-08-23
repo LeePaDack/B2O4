@@ -15,6 +15,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import MemberReviewUpload from "./Review/MemberReviewUpload";
 import StadiumsMain from "./Review/StadiumMain";
 import PaymentDetails from "./MyPage/PaymentDetails";
+import DeliveryInfo from "./MyPage/UserDeliveryInfo";
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
           <Route path="/stadiumReviewUpload" element={<StadiumReviewUpload/>}/>
           <Route path="/memberReviewUpload" element={<MemberReviewUpload/>}/>
           <Route path="/paymentDetails/:memberNo" element={<PaymentDetails/>}/>
+          <Route path="/userDeliveryInfo/:memberNo" element={<DeliveryInfo/>}/>
         </Routes>
       </Router>
       <Footer/>

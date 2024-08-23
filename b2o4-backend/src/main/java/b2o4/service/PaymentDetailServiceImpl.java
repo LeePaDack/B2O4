@@ -13,9 +13,16 @@ public class PaymentDetailServiceImpl implements PaymentDetailService {
 
 	@Autowired
 	private PaymentMapper paymentMapper;
-	
+
+	// 예약 정보 보기
 	@Override
-	public List<PaymentDetail> getPaymentsByUserId(int memberNo) {
-		return paymentMapper.findPaymentsByUserId(memberNo);
+	public List<PaymentDetail> findPaymentDetailsByMemberNo(int memberNo) {
+		return paymentMapper.findPaymentDetailsByMemberNo(memberNo);
+	}
+
+	// 상품 결재 정보 보기
+	@Override
+	public List<PaymentDetail> getDeliveryInfoByMemberNo(int memberNo) {
+		return paymentMapper.getDeliveryInfoByMemberNo(memberNo);
 	}
 }

@@ -9,6 +9,9 @@ import b2o4.dto.PaymentDetail;
 @Mapper
 public interface PaymentMapper {
 
-	// 결재 내역 조회
-	List<PaymentDetail> findPaymentsByUserId(int memberNo);
+	// 예약 정보 조회
+	List<PaymentDetail> findPaymentDetailsByMemberNo(int memberNo);
+	
+	// 상품 결재 정보 보기
+	List<PaymentDetail> getDeliveryInfoByMemberNo(int memberNo);
 }

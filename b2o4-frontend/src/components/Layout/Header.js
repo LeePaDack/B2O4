@@ -139,7 +139,10 @@ const Header = () => {
               >
                 <NavDropdown.Item onClick={openModal}>내 정보 수정</NavDropdown.Item>
                 <NavDropdown.Item href="/paymentDetails/:memberNo">
-                  내 결재 내역보기
+                  내 예약 정보보기
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/userDeliveryInfo/:memberNo">
+                  내 상품 결재 내역보기
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/stadiumInfo">
                   평가하기

@@ -45,7 +45,7 @@ const MemberMain = () => {
               <div className="memberReview">
                 {/* 클릭한 참가자 리뷰 페이지로 넘어가야 함 */}
                 <img
-                  src={`/images/userProfile/${list.memberProfile}`}
+                  src={`/images/${list.memberProfile}`}
                   className="memberReview-img"
                   alt={`${list.memberName} 프로필`}
                 />

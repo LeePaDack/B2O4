@@ -6,5 +6,9 @@ import b2o4.dto.PaymentDetail;
 
 public interface PaymentDetailService {
 
-	List<PaymentDetail> getPaymentsByUserId(int memberNo);
+	// 예약 정보 보기
+	List<PaymentDetail> findPaymentDetailsByMemberNo(int memberNo);
+	
+	// 상품 결재 정보 보기
+	List<PaymentDetail> getDeliveryInfoByMemberNo(int memberNo);
 }
