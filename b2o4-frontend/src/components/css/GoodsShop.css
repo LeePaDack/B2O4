@@ -5,7 +5,6 @@
     font-family: Arial, sans-serif;
 }
 
-/* 제목 */
 .goods-container h1 {
     text-align: center;
     margin-bottom: 40px;
@@ -14,7 +13,6 @@
     padding-top: 20px;
 }
 
-/* 상품 컨텐츠 */
 .goods-content {
     display: flex;
     flex-wrap: wrap;
@@ -22,46 +20,36 @@
     justify-content: center;
 }
 
-/* 각 상품 */
 .goods {
     display: flex;
     flex-direction: column;
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 20px;
-    width: 300px;
+    width: 320px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
 }
-/*
-.goods:hover {
-    transform: translateY(-10px);
-}
-*/
-/* 이미지 */
+
 .goods img {
     width: 100%;
     height: 350px;
-    /* border-radius: 10px; */ 
     margin-bottom: 10px;
 }
 
-/* 상품 제목 */
 .goods h2 {
     font-size: 25px;
     color: #000000;
 }
 
-/* 상품 정보*/
 .goods p {
     margin: 5px;
     color: #555;
-    word-break:break-word; /*강제 줄바꿈*/
+    word-break: break-word;
 }
 
-/* 장바구니 추가버튼*/
-.goods button {
-    margin-top: auto;
+.add-to-basket-btn {
+    margin-top: 10px;
     display: block;
     width: 100%;
     padding: 10px;
@@ -71,13 +59,17 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    
 }
 
-.goods button:hover {
+.add-to-basket-btn:hover {
     background-color: #e65b50;
 }
 
 .GoodsDetail-link {
     text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
 }

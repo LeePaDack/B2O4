@@ -194,7 +194,7 @@ useEffect(() => {
 
                 <td>
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/goodsImage1/${good.goodsImage}`}
+                    src={`${process.env.PUBLIC_URL}/images/${good.goodsImage}`}
                     alt={good.goodsImage}
                   />
                 </td>

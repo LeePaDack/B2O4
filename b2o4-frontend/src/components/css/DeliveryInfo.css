@@ -1,18 +1,13 @@
 .purchase-container {
-    max-width: 1000px;
-    max-height: 1200px;
-    background-color: #f9f9f9;
-    justify-content: center;
-    margin: auto;
-    margin-top: 2px;
-    border: 1px solid #333;
-    border-radius: 5px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
 }
 
 .purchase-container h2 {
-    padding: 5px;
-    margin: 0px;
-    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .purchase-info {
@@ -22,76 +17,86 @@
 
 .purchase-info ul {
     list-style-type: none;
-    padding: 10px;
+    padding: 0;
 }
 
 .purchase-info li {
-    flex-wrap: wrap;
+    margin-bottom: 10px;
 }
 
 .purchase-info input, select {
     border-radius: 5px;
-    padding: 0 10px 0 10px;
+    padding: 10px;
     border: 1px solid #ccc;
-    width: 35%;
+    width: 100%;
+    max-width: 400px; /* 최대 너비 설정 */
 }
 
 .purchase-info input:focus, select:focus {
-    border-color:  rgb(26, 102, 208); /* #007bff */
+    border-color: rgb(26, 102, 208); /* 포커스 시 테두리 색상 */
     outline: none;
 }
 
 .payment-button {
-    display: inline-block;
+    display: block;
     padding: 10px 20px;
     font-size: 16px;
     color: #fff;
     background-color: rgb(26, 102, 208);
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: 20px auto; /* 중앙 정렬 */
 }
-
 
 .payment-button:hover {
     background-color: #145DA0;
 }
 
-.payment-button:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
+.table-container {
+    margin: 20px 0;
 }
 
-.each-goods {
-    padding-bottom: 20px;
+.basket-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
 }
 
-h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
+.basket-table th, .basket-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
 }
 
-h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
+.basket-table th {
+    background-color: #f4f4f4;
 }
 
-p {
-    margin: 5px 0;
-    font-size: 16px;
+.basket-table img {
+    width: 100px; /* 이미지 크기 조정 */
+    height: auto; /* 비율 유지 */
 }
 
-strong {
-    font-weight: bold;
-}
-
-.payment-fianl {
+.totalPrise {
     text-align: right;
-    padding-right: 20px;
-    padding-bottom: 20px;
+    font-size: 20px;
 }
 
-.payment-fianl p {
-    font-size: 30px;
+.delete-button {
+    background-color: #ff6f61;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #e65b50;
+}
+
+.payment-final {
+    margin: 0 0 0 89%;
 }

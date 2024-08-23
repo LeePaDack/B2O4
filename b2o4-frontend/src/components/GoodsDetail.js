@@ -26,9 +26,9 @@ const GoodsDetail = ({ loginMember, userBasketItem, checkLogin }) => {
 
 
   //각 이미지 출력
-  const imgSrc1 = `${process.env.PUBLIC_URL}/images/goodsImage1/${good.goodsImage}`;     //이미지1
+  const imgSrc1 = `${process.env.PUBLIC_URL}/images/${good.goodsImage}`;    //이미지1
   console.log(imgSrc1);
-  const imgSrc2 = `${process.env.PUBLIC_URL}/images/goodsImage2/${good.goodsImage2}`;   //이미지2
+  const imgSrc2 = `${process.env.PUBLIC_URL}/images/${good.goodsImage2}`;   //이미지2
   console.log(imgSrc2);
   
 
