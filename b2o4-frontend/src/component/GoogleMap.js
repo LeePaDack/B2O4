@@ -95,7 +95,7 @@ const Map = () => {
 
   return (
     <div>
-      <h3>현재 위치</h3>
+      <h3>풋살장 검색하세요</h3>
       <input
         ref={searchBoxRef}
         type="text"
