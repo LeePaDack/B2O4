@@ -17,13 +17,19 @@ const FindId = () => {
       return;
     }
 
-    axios.post("/findId", {
+    axios
+      .post(
+        "/findId",
+        {
           memberName: memberName,
           memberPhone: memberPhone,
         },
         {
-          headers: {"Content-Type": "application/json"},
-      })
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         if (response.data) {
           setFindResultId(response.data);
@@ -51,45 +57,56 @@ const FindId = () => {
           비밀번호 찾기
         </Link>
       </div>
+
       <div className="findId-container">
         <div className="findId-title">
           <h1>아이디 찾기</h1>
         </div>
         <div className="findId">
+          <div className="findId-input">
             <div>
-              <input type="text" placeholder="이름을 입력하세요."
-                value={memberName} onChange={(e) => setMemberName(e.target.value)}
-                required/>
+              <label>이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 름</label>
             </div>
             <div>
-              <input type="text" placeholder="'-'를 제외한 전화번호 11자리를 입력하세요."
-                value={memberPhone} onChange={(e) => setMemberPhone(e.target.value)}
-                required />
+              <input
+                type="text"
+                placeholder="이름을 입력하세요."
+                value={memberName}
+                onChange={(e) => setMemberName(e.target.value)}
+                required
+              />
             </div>
-            {errorMessage && (
+          </div>
+          <div className="findId-input">
+            <div>
+              <label>전화번호</label>
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="전화번호를 입력하세요."
+                value={memberPhone}
+                onChange={(e) => setMemberPhone(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+          <div className="findId-buttons">
+            <div>
+              <button onClick={findResult}>아이디 찾기</button>
+            </div>
+            <div>
+              <Link to="/login">
+              <button>로그인</button>
+              </Link>
+            </div>
+          </div>
+          <div className="findResult">
+          {errorMessage && (
             <div className="error-message">
               <p>{errorMessage}</p>
             </div>
           )}
-          <div className="findId-button">
-              <button onClick={findResult}>아 이 디 &nbsp; 찾 기</button>
-          </div>
-          <ul className="login-list">
-              <li className="login-item">
-                <Link to="/login" className="login-link">
-                  <img src="soccer.jpg" />
-                  &nbsp; 로그인
-                </Link>
-              </li>
-              <li className="login-item">
-                <Link to="/register" className="login-link">
-                  <img src="soccer.jpg" />
-                  &nbsp;회원가입
-                </Link>
-              </li>
-            </ul>
-          <div className="findResult">
-          
           {findResultId &&
             <div>
              <p>고객님의 아이디는 "{findResultId.memberId}" 입니다.</p>

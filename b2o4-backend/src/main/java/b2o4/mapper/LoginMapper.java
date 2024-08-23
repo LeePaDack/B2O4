@@ -1,22 +1,15 @@
 package b2o4.mapper;
 
-<<<<<<< HEAD
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import b2o4.dto.GalleryBoard;
-=======
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
->>>>>>> leegyejun-board
 import b2o4.dto.Member;
 
 @Mapper
 public interface LoginMapper {
-<<<<<<< HEAD
 	
 	// 로그인하기
 	Member login(Member member);
@@ -26,11 +19,4 @@ public interface LoginMapper {
 
 	// 비밀번호 찾기
 	Member findPw(Member member);
-	
-	// 비밀번호 변경
-	void updatePassword(Member member);
 }
-=======
-	Member login(Member member);
-}
->>>>>>> leegyejun-board

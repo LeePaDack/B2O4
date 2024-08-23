@@ -14,6 +14,7 @@ const GalleryUpload = () => {
 
   const {loginMember} = useContext(MyPageContext);
 
+
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -34,12 +35,9 @@ const GalleryUpload = () => {
 
   const handleUpload = async () => {
     const formData = new FormData();
-
-    if(files.length > 0) {
-      Array.from(files).forEach(file => {
-        formData.append("files", file);
-      });
-    }
+    Array.from(files).forEach(file => {
+      formData.append("files", file);
+    });
     formData.append("title", title);
     formData.append("content", content);
     formData.append("memberNo", loginMember.memberNo);
