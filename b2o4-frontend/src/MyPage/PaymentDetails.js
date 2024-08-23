@@ -28,8 +28,8 @@ const PaymentHistory = () => {
         <table className="payment-history-table">
           <thead>
             <tr>
-              <th>이미지</th>
-              <th>스타디움 이름</th>
+              <th>구장 이미지</th>
+              <th>구장 이름</th>
               <th>위치</th>
               <th>주소</th>
               <th>수용 인원</th>
