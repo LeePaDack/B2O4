@@ -17,16 +17,16 @@ const WebCam = () => {
         navigator.mediaDevices.getUserMedia({
             video: true
         })
-            .then((stream) => {
-                let video = videoRef.current;
-                video.srcObject = stream;
-                video.onloadedmetadata = () => {
-                    video.play();
-                };
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+        .then((stream) => {
+            let video = videoRef.current;
+            video.srcObject = stream;
+            video.onloadedmetadata = () => {
+                video.play();
+            };
+        })
+        .catch((error) => {
+            console.log(error);
+        })
     }
 
     // 스트리밍 시작 버튼 활성화/비활성화 다른 사용자들에게 공유 시키기

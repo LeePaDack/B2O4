@@ -104,11 +104,12 @@ header {
     padding: 0 20px;
 }
 
-.footer a{
-    color: #fff;
-    margin: 0 10px;
-    text-decoration: none;
+.footerLink{
+    color: #fff !important;
+    margin: 0 10px !important;
+    text-decoration: none !important;
 }
+
 .footer-links a:hover{
     text-decoration: underline;
 }

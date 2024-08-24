@@ -183,7 +183,7 @@ const LiveChat = () => {
             </div>
             {loginMember.memberType === 'A' &&
               <button className='deleteBtn' onClick={() => handleDeleteMessage({ msgContent: msg.content, msgAt: msg.formattedTime })}>
-                X
+                &times;
               </button>
             }
 

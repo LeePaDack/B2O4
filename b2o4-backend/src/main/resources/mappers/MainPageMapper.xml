@@ -14,7 +14,7 @@
 	
 	<!-- 갤러리 게시판에서 게시물 3개 랜덤으로 가져오기 -->
 	<select id="getGalleryList" resultType="b2o4.dto.MainPage">
-		SELECT * FROM galleryboard ORDER BY RAND() LIMIT 3
+		SELECT * FROM galleryboard ORDER BY RAND() LIMIT 6
 	</select>
 	
 	<!-- 용품 장터에서 용품 3개 랜덤으로 가져오기 -->

@@ -52,6 +52,11 @@
     align-items: center;
 }
 
+.section-title a {
+    text-decoration: none;
+    color : #333;
+}
+
 .card-container{
     display: flex;
     justify-content: center;
@@ -92,7 +97,6 @@
     border: 7px solid gold; 
     box-shadow: 0 0 10px rgba(255, 215, 0, 0.6); 
 }
-
 
 .card-body p {
     margin-top: 20px;
@@ -136,6 +140,79 @@
 
 .card-body svg{
     width: 15px;
+}
+
+.gallery-list-container {
+    width: 100%;
+}
+.slider-container a {
+    text-decoration: none !important;
+    color: inherit !important; 
+    display: block !important; 
+}
+
+.slider-container {
+    position: relative;
+}
+
+.slick-prev, .slick-next {
+    font-size: 0 !important;
+    color: #000 !important;
+    background-color: rgba(0,0,0,0.1)  !important;
+    border: none !important;
+    border-radius: 10px;
+    width: 40px !important;
+    height: 80px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: absolute !important;
+    top: 50% !important;
+    cursor: pointer !important;
+    z-index: 1000 !important;
+}
+
+.slick-prev {
+    left: 10px !important;
+}
+
+.slick-next {
+    right: 10px !important;
+}
+
+.slider-container .slick-prev::before, 
+.slider-container .slick-next::before {
+    content: none !important;
+}
+
+.gallery-card-body {
+    position: relative; 
+    border-radius: 4px;
+    margin: 0 10px; 
+    width: 300px; 
+    height: 300px;
+    padding: 20px;
+    box-sizing: border-box; 
+    transition: transform 0.3s;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.gallery-card-body:hover {
+    transform: scale(1.03); 
+}
+
+.gallery-card-body img {
+    width: 100%; 
+    height: auto; 
+    max-height: 100px; 
+    display: block; 
+    margin: 0 auto; 
+}
+
+.gallery-card-body button{
+    padding: 8px 16px;
+    width: 95%;
 }
 
 .gallery-desc{
