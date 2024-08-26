@@ -175,7 +175,7 @@ const LiveChat = () => {
     <div className='chat-container'>
       <div className='messages' ref={messagesContainerRef}>
         {sortedMessages.map((msg, msgNo) => (
-          <div key={msgNo} className='message'>
+          <div key={msgNo} className={`message ${loginMember.memberType === 'A' ? 'admin' : ''}`}>
             <img src={msg.profile} alt="profileImage" className='profile-image' />
             <div className='message-content'>
               <strong>{msg.sender}</strong>

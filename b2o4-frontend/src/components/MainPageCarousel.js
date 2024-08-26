@@ -12,7 +12,7 @@ const MainPageCarousel = () => {
 
     return (
         <Carousel activeIndex={index} onSelect={handleSelect} interval={1500}>
-            <Carousel.Item className='carousel-item'>
+            <Carousel.Item className='carousel-items'>
                 <Link to="/galleryBoard">
                     <img src="/images/tothegallery.jpg" alt='캐러셀 이미지 1' />
                 </Link>
@@ -21,7 +21,7 @@ const MainPageCarousel = () => {
                     <p>멋진 순간들을 공유하세요</p>
                 </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item className='carousel-item'>
+            <Carousel.Item className='carousel-items'>
                 <Link to="/GoodsShop">
                     <img src="/images/totheshop.jpg" alt='캐러셀 이미지 2' />
                 </Link>
@@ -30,7 +30,7 @@ const MainPageCarousel = () => {
                     <p>경기에 나설 준비, 여기서 시작해보세요</p>
                 </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item className='carousel-item'>
+            <Carousel.Item className='carousel-items'>
                 <Link to="/LiveStreamingPage">
                     <img src="/images/tothelive.jpg" alt='캐러셀 이미지 3' />
                 </Link>
@@ -39,7 +39,7 @@ const MainPageCarousel = () => {
                     <p>지금 진행 중인 경기 실황을 놓치지 마세요</p>
                 </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item className='carousel-item'>
+            <Carousel.Item className='carousel-items'>
                 <Link to="/StadiumList">
                     <img src="/images/tothestadiumlist.jpg" alt='캐러셀 이미지 4' />
                 </Link>

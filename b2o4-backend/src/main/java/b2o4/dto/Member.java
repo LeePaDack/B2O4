@@ -16,4 +16,6 @@ public class Member {
 	private String membereBirth;
 	private String memberPhone;
 	private String memberAddress;
+	private String memberProfile;
+	private char memberType;
 }

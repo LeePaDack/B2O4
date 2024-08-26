@@ -72,17 +72,17 @@
     display: flex; 
     justify-content: center; 
     align-items: center;
-    flex: 1; /* 남은 공간을 차지하도록 설정 */
+    flex: 1; 
 }
 
 .forecast-list {
     display: flex;
-    justify-content: center; /* 수평으로 중앙 정렬 */
-    align-items: center; /* 수직으로 중앙 정렬 */
+    justify-content: center; 
+    align-items: center; 
     width: 100%;
     list-style: none;
     padding: 0;
-    margin: 0; /* 여백을 제거하여 정렬이 깨지지 않도록 함 */
+    margin: 0; 
 }
 
 .feature-weather {

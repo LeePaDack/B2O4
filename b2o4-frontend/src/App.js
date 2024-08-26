@@ -19,6 +19,11 @@ import Footer from './components/Layout/Footer.js';
 import GalleryUpdate from './components/Gallery/GalleryUpdate.js'
 import DeliveryInfo from './components/DeliveryInfo.js';
 
+import MainPage from "./components/MainPage";
+import LiveStreamingPage from './components/LiveStreamingPage.js';
+import StadiumList from './component/StadiumList.js';
+import StadiumDetail from './component/StadiumDetail.js';
+
 function App() {
 
   const [loginMember, setLoginMember] = useState(null);
@@ -49,12 +54,14 @@ function App() {
           <Route path='/findId' element={<FindId />} />
           <Route path='/findPw' element={<FindPw />} />
           <Route path='/galleryUpdate' element={<GalleryUpdate />} />
-
+          <Route path='/stadiumList' element={<StadiumList/>}/>
+          <Route path='/stadiumDetail/:stadiumNo' element={<StadiumDetail/>}/>
           <Route path="/goodsShop" element={<GoodsShop />} /> 
           <Route path="/goodsDetail/:goodsNo" element={<GoodsDetail  loginMember={loginMember}/>} />
           <Route path="/shoppingBasket/" element={<ShoppingBasket  loginMember={loginMember}/>} />
           <Route path="/DeliveryInfo/" element={<DeliveryInfo  loginMember={loginMember} /> } />
-
+          <Route path="/" element={<MainPage/>}/>
+          <Route path='/LiveStreamingPage' element={<LiveStreamingPage/>}/>
         </Routes>
         <Footer />
       </Router>

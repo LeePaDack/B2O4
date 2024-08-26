@@ -105,7 +105,7 @@ const WebCam = () => {
                 </span>
             }
             {loginMember.memberType === 'A' &&
-                <div className="button-container">
+                <div className="streaming-start-btn">
                     <button onClick={handleBeginStreaming} className='btn btn-outline-success'>
                         {webCamView ? 'Quit Streaming' : 'Begin Streaming'}
                     </button>

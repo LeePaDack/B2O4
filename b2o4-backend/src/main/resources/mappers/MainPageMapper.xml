@@ -4,7 +4,7 @@
 
 	<!-- 가장 인기 높은 스타디움 3개 가져오기 -->
 	<select id="getStadiumList" resultType="b2o4.dto.MainPage">
-		SELECT og.stadiumName, og.stadiumAddress, og.stadiumPrice, og.stadiumCapacity, og.stadiumImage, (SUM(rv.likeCount) - SUM(rv.dislikeCount)) as totalLike
+		SELECT og.stadiumNo, og.stadiumName, og.stadiumAddress, og.stadiumPrice, og.stadiumCapacity, og.stadiumImage, (SUM(rv.likeCount) - SUM(rv.dislikeCount)) as totalLike
 		FROM stadium og
 		JOIN stadiumreview rv ON og.stadiumNo = rv.stadiumNo
 		GROUP BY og.stadiumNo, og.stadiumName, og.stadiumImage

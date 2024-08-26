@@ -35,7 +35,7 @@
   border-radius: 10px;
 }
 
-.button-container {
+.streaming-start-btn {
   margin-top: 10px;
   position: absolute; 
   bottom: -20px;
@@ -64,6 +64,11 @@
   align-items: flex-start;
   padding: 0 8px;
   position: relative; 
+}
+
+.message.admin {
+  border: 1px solid red; 
+  background-color: #fff5f5; 
 }
 
 .time-text{

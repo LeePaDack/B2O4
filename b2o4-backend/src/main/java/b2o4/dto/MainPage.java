@@ -14,6 +14,7 @@ import lombok.ToString;
 public class MainPage {
 
 	//스타디움
+	private int stadiumNo;
 	private String stadiumName;
 	private String stadiumImage;
 	private String stadiumAddress;

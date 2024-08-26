@@ -50,11 +50,21 @@ const GalleryBoard = () => {
               state={{ list: list }}
               className="gallery-link"
             >
-              <img
-                className="gallery-item-img"
-                src={`http://localhost:9000/images/${list.gbImages.split(",")[0]}`}
-                alt={list.gbPostTitle}
-              />
+              {list.gbImages ? (
+                <img
+                  className="gallery-item-img"
+                  src={`http://localhost:9000/images/${
+                    list.gbImages.split(",")[0]
+                  }`}
+                  alt={list.gbPostTitle}
+                />
+              ) : (
+                <img
+                  className="gallery-item-img"
+                  src="./default-image.png"
+                  alt="Default"
+                />
+              )}
               <div className="gallery-body">
                 <h5 className="gallery-title">{list.gbPostTitle}</h5>
                 <div className="gallery-text">

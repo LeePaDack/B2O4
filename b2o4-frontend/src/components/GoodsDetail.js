@@ -17,13 +17,13 @@ const GoodsDetail = ({ loginMember, userBasketItem, checkLogin }) => {
 
   
   // 선택한 사이즈
-  const [selectSize, setSelectSize] = useState(good.goodsSize.split(",")[0]);
+  const [selectSize, setSelectSize] = useState(good.goodsSize ? good.goodsSize.split(",")[0] : "");
 
   // 사이즈 선택
   const handleSizeChange = (e) => {
     setSelectSize(e.target.value);
   };
-
+  const sizes = good.goodsSize ? good.goodsSize.split(",") : [];
 
   //각 이미지 출력
   const imgSrc1 = `${process.env.PUBLIC_URL}/images/${good.goodsImage}`;    //이미지1
@@ -87,7 +87,7 @@ const GoodsDetail = ({ loginMember, userBasketItem, checkLogin }) => {
       <div className="detail-sizeSelect">
         <label htmlFor="size-select">사이즈 선택 : </label>
         <select id="size-select" value={selectSize} onChange={handleSizeChange}>
-          {good.goodsSize.split(",").map((size, index) => (
+          {sizes.map((size, index) => (
             <option key={index} value={size}> {size} </option>
           ))}
       </select>
