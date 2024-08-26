@@ -31,14 +31,12 @@ const GalleryBoard = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleClick = () => {
-    if(loginMember) {
+    if (loginMember) {
       navigate("/galleryUpload"); // 로그인 되어 있으면 업로드 페이지로 이동
     } else {
       navigate("/login"); // 로그인 되어 있지 않으면 로그인 페이지로 이동
     }
   };
-
-
 
   return (
     <div className="galleryBoard-container">
@@ -50,15 +48,27 @@ const GalleryBoard = () => {
               state={{ list: list }}
               className="gallery-link"
             >
-              <img
-                className="gallery-item-img"
-                src={`http://localhost:9000/images/${list.gbImages.split(",")[0]}`}
-                alt={list.gbPostTitle}
-              />
+              {list.gbImages ? (
+                <img
+                  className="gallery-item-img"
+                  src={`http://localhost:9000/images/${
+                    list.gbImages.split(",")[0]
+                  }`}
+                  alt={list.gbPostTitle}
+                />
+              ) : (
+                <img
+                  className="gallery-item-img"
+                  src="./default-image.png"
+                  alt="Default"
+                />
+              )}
               <div className="gallery-body">
                 <h5 className="gallery-title">{list.gbPostTitle}</h5>
                 <div className="gallery-text">
-                <p>{list.memberName} &nbsp; | &nbsp; {list.gbPostCreateDate}</p>
+                  <p>
+                    {list.memberName} &nbsp; | &nbsp; {list.gbPostCreateDate}
+                  </p>
                 </div>
               </div>
             </Link>
@@ -72,10 +82,10 @@ const GalleryBoard = () => {
         paginate={paginate}
         currentPage={currentPage}
       />
-      <div className="write-button">   
-          <Button variant="secondary" onClick={handleClick}>
-            글쓰기
-          </Button>
+      <div className="write-button">
+        <Button variant="secondary" onClick={handleClick}>
+          글쓰기
+        </Button>
       </div>
     </div>
   );

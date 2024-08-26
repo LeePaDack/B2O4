@@ -19,6 +19,10 @@ import Footer from './components/Layout/Footer.js';
 import GalleryUpdate from './components/Gallery/GalleryUpdate.js'
 import DeliveryInfo from './components/DeliveryInfo.js';
 
+import PasswordChange from './components/Login/PasswordChange.js';
+import NaverSignup from './components/Login/NaverSignup.js';
+import KakaoRedirectPage from './components/Login/KakaoRedirectPage.js';
+
 function App() {
 
   const [loginMember, setLoginMember] = useState(null);
@@ -49,6 +53,9 @@ function App() {
           <Route path='/findId' element={<FindId />} />
           <Route path='/findPw' element={<FindPw />} />
           <Route path='/galleryUpdate' element={<GalleryUpdate />} />
+          <Route path='/passwordChange' element={<PasswordChange />} />       
+          <Route path='/signup/naver' element={<NaverSignup />} />
+          <Route path='/oauth/redirected/kakao' element={<KakaoRedirectPage />} />
 
           <Route path="/goodsShop" element={<GoodsShop />} /> 
           <Route path="/goodsDetail/:goodsNo" element={<GoodsDetail  loginMember={loginMember}/>} />

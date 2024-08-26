@@ -33,7 +33,7 @@ body {
 }
 
 .login-container h2 {
-  margin-top: 50px;
+  margin-top: 40px;
   padding: 0;
   text-align: center;
   font-weight: bold;
@@ -48,7 +48,7 @@ body {
   display: flex; /* 자식 요소들을 수평으로 배치 */
   justify-content: center; /* 자식 요소들을 가로로 가운데 정렬 */
   gap: 20px; /* 입력 필드와 버튼 사이의 간격 */
-  margin-top: 50px;
+  margin-top: 45px;
 }
 
 .input-fields {
@@ -71,13 +71,24 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
+  background-color: black;
+  color: white;
+  transition: padding 1s;
 }
+.input-login button:hover{
+  background: url('../../../public/soccer-player.gif') no-repeat center center;
+  background-size: cover;
+  color: #212121;
+  padding: 40px 50px;
+}
+
 
 .login-list {
   list-style: none;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 25px;
   padding: 0;
 }
 
@@ -96,11 +107,29 @@ body {
 }
 
 .login-item {
-  margin: 0 10px;
+  margin: 0 20px;
 }
 
 .login-item img{
   width: 20px;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+.login-api{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-top: -10px;
+  padding: 0;
+}
+
+.api-item{
+  margin: 0 40px 0 40px;
+}
+
+.api-item img{
+  width: 50px;
   height: auto;
   margin-bottom: 5px;
 }

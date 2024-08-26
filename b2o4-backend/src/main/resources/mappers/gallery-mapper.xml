@@ -30,9 +30,9 @@
 	<!-- 게시판 수정하기 -->
 	<update id="updateGallery">
 		UPDATE GalleryBoard
-		SET GBPostTitle = #{title},
-			GBPostContent = #{content},
-			GBImages = #{images}
+		SET GBPostTitle = #{gbPostTitle},
+			GBPostContent = #{gbPostContent},
+			GBImages = #{gbImages}
 		WHERE GBPostNo = #{gbPostNo}
 	</update>
 
@@ -41,6 +41,42 @@
 	<delete id="deleteGallery" parameterType="int">
 		DELETE FROM
 		galleryBoard
-		WHERE GBPostNO =#{gbPostNo}
+		WHERE GBPostNO = ${gbPostNo}
 	</delete>
+	
+	<!-- 게시판 삭제 시 댓글 삭제하기 -->
+	<delete id="allDelete" parameterType="int">
+		DELETE FROM
+		GalleryComment
+		WHERE gbPostNo = #{gbPostNo}
+	</delete>
+	
+	
+	<!-- 게시판 댓글 -->
+	<insert id="CommentUpload" parameterType="b2o4.dto.GalleryComment"
+		useGeneratedKeys="true" keyProperty="gbCommentNo">
+		INSERT INTO GalleryComment (memberNo, GBPostNo, GBCommentContent, GBCommentClass, GBCommentImages, memberName)
+		VALUES (#{memberNo}, #{gbPostNo}, #{gbCommentContent}, #{gbCommentClass}, #{gbCommentImages}, #{memberName})
+	</insert>
+	
+	<!-- 댓글 보기 -->
+	<select id="AllGalleryComment" resultType='b2o4.dto.GalleryComment'>
+		select * from
+		GalleryComment
+	</select>
+	
+	<!-- 댓글 삭제하기 -->
+	<delete id="deleteComment" parameterType="int">
+		DELETE FROM
+		GalleryComment
+		WHERE gbCommentNo = #{gbCommentNo}
+	</delete>
+	
+	<!-- 게시판 답글 달기 -->
+	<insert id="reComment" parameterType="b2o4.dto.GalleryComment"
+		useGeneratedKeys="true" keyProperty="gbCommentNo">
+		INSERT INTO GalleryComment (memberNo, GBPostNo, GBCommentContent, GBCommentClass, memberName, parentCommentNo)
+		VALUES (#{memberNo}, #{gbPostNo}, #{gbCommentContent}, #{gbCommentClass}, #{memberName}, #{parentCommentNo})
+	</insert>
+	
 </mapper>

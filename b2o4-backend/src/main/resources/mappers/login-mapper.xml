@@ -25,4 +25,18 @@
 		AND memberPhone = #{memberPhone}
 	</select>
 	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePassword">
+		UPDATE member
+		SET memberPw = #{memberPw}
+		WHERE memberEmail = #{memberEmail}
+	</update>
+
+	<!-- 네이버 회원가입 -->
+	<insert id="NaverRegister">
+		INSERT INTO member(memberId, memberPw, memberEmail, memberName, memberBirth, memberPhone, memberAddress)
+		VALUES(#{memberId}, #{memberPw}, #{memberEmail}, #{memberName}, #{memberBirth}, #{memberPhone}, #{memberAddress})
+	</insert>
+	
+		
 </mapper>

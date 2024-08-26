@@ -19,4 +19,10 @@ public interface LoginMapper {
 
 	// 비밀번호 찾기
 	Member findPw(Member member);
+	
+	// 비밀번호 변경
+	void updatePassword(Member member);
+	
+	// 네이버 로그인 회원가입
+	void NaverRegister(Member member);
 }

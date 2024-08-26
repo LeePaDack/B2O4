@@ -16,6 +16,7 @@ public class LoginServiceImpl implements LoginService{
 	@Autowired
 	private LoginMapper loginMapper;
 	
+	
 	// 로그인하기
 	@Override
 	public Map<String, Object> login(Member member) {
@@ -37,5 +38,16 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public Member findPw(Member member) {
 		return loginMapper.findPw(member);
+	}
+	
+	// 비밀번호 변경
+	@Override
+	public void updatePassword(Member member) {
+		loginMapper.updatePassword(member);
+	}
+	
+	@Override
+	public void NaverRegister(Member member) {
+		loginMapper.NaverRegister(member);
 	}
 }

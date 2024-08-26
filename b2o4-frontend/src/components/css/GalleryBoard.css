@@ -1,6 +1,5 @@
 /* GalleryBoard.css */
 
-/* 전체 갤러리 컨테이너 스타일 */
 .galleryBoard-container {
   width: 75%;
   padding: 20px;
@@ -8,19 +7,17 @@
   position: relative; /* 버튼 위치 기준을 위한 상대 위치 설정 */
 }
 
-/* 갤러리 그리드 스타일 */
 .gallery-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px; /* 사진 사이의 간격 */
+  gap: 15px;
   justify-content: center;
 }
 
-/* 개별 갤러리 아이템 스타일 */
 .gallery-item {
-  flex: 1 1 calc(20% - 15px); /* 4열 레이아웃, 간격을 제외한 너비 */
+  flex: 1 1 calc(20% - 15px);
   transition: box-shadow 0.5s ease;
-  max-width: calc(20% - 15px); /* 최대 너비 설정 */
+  max-width: calc(20% - 15px);
   margin: 20px;
 }
 
@@ -29,6 +26,10 @@
   width: 100%;
   height: 200px;
   border: 0.5px solid #dad0d0;
+  transition: transform 0.3s ease;
+}
+.gallery-item-img:hover{
+  transform: scale(1.05); 
 }
 
 .gallery-list {
@@ -72,7 +73,7 @@
 /* GalleryDetail.css */
 
 .detail-container {
-  width: 55%;
+  width: 50%;
   padding: 20px;
   margin: 0 auto;
   position: relative; /* 버튼 위치 기준을 위한 상대 위치 설정 */
@@ -89,8 +90,8 @@
 }
 
 .detail-content {
-  border: 1px solid gainsboro;
-  border-radius: 5px;
+  border: 1px solid #ddd; /* 연한 회색 테두리 */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* 더 강한 그림자 효과 */
 }
 
 .detail-text p{
@@ -137,6 +138,7 @@
   border: 1px solid #ccc;
   border-radius: 10px;
 }
+
 
 
 /* GalleryUpload.css */
@@ -198,7 +200,7 @@
 }
 
 .input-file img{
- width: 70px;
+ width: 50px;
  margin-left: 5px;
 }
 
@@ -207,6 +209,8 @@
   min-height: 500px;
   height: auto;
   border: 1px solid gray;
+  display: flex; /* Flexbox 레이아웃 사용 */
+  flex-wrap: wrap; /* 이미지가 부모 컨테이너를 넘어가면 자동으로 줄 바꿈 */
 }
 
 .input-text input{
@@ -216,10 +220,11 @@
 }
 
 .input-text img{
-  margin-top: 5px;
+  margin: 5px 0 0 5px;
   margin-bottom: 15px;
-  width: 40%;
+  width: 150px;
   height: auto;
+  max-height: 150px;
   border-radius: 5%;
   border: 1px solid #ccc;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
