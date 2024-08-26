@@ -1,0 +1,276 @@
+/* member, stadium mainReview  */
+.stadiumReviewMain-container,
+.memberReviewMain-container {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.stadiumReviewMain-content,
+.memberReviewMain-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  gap: 20px;
+}
+
+
+.memberchange-btn {
+  border: none;
+  background-color: lightblue;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.headers {
+  padding: 20px;
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+
+.stadiumchange-btn {
+  border: none;
+  background-color: yellowgreen;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.stadiumReview,
+.memberReview {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 10px;
+  padding: 15px;
+  width: 220px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa;
+  transition: transform 0.3s;
+}
+
+.stadiumReview:hover,
+.memberReview:hover {
+  transform: translateY(-20px);
+}
+
+.stadiumReview-img,
+.memberReview-img {
+  width: 100%;
+  max-width: 200px;
+  max-height: 150px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: white;
+  object-fit: contain;
+}
+
+.stadiumReview h2,
+.memberReview h2 {
+  font-size: 18px;
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+.stadiumReview p,
+.memberReview p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.stadiumReview-textline,
+.memberReview-textline {
+  border-radius: 8px;
+  border: 1px solid #e3e9ef;
+  background-color: #f0f4f8;
+  margin-top: 20px;
+  padding: 8px;
+}
+
+.stadiumReview-link,
+.stadiumReview-link:link,
+.stadiumReview-link:visited,
+.stadiumReview-link:active,
+.stadiumReview-link:hover,
+.memberReview-link,
+.memberReview-link:link,
+.memberReview-link:visited,
+.memberReview-link:active,
+.memberReview-link:hover {
+  text-decoration: none;
+  color: #292929;
+  font-weight: 500;
+}
+
+.loading-spinner {
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  background-color: rgba(255, 255, 255, 0.8); 
+  z-index: 1000; 
+}
+
+/* Stadium Detail css */
+.stadiumdetail-container,
+.memberdetail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+}
+
+.stadiumdetail-content,
+.memberdetail-content {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 500px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.stadiumdetail-content img,
+.memberdetail-content img {
+  width: 40%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.stadiumdetail-content p,
+.memberdetail-content p {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #333;
+  border-bottom: 1px dotted seagreen; /* 색 바꿔야함 */
+}
+
+.stadiumreview,
+.member-review {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.stadiumreview button,
+.member-review button {
+  background-color: yellowgreen;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.stadiumreview button:hover,
+.member-review button:hover {
+  background-color: rgb(126, 161, 55);
+}
+
+.contentBoxView-wrapper {
+  margin-bottom: 20px;
+}
+
+.reviews {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: left;
+}
+
+.reviews h2 {
+  
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.review {
+  padding: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.review:last-child {
+  border-bottom: none;
+}
+
+.review p {
+  font-size: 14px;
+  margin: 5px 0;
+  color: #555;
+}
+.review-comment {
+  border-bottom: 1px solid black;
+}
+
+.review-content .review-text {
+  resize: none;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px; 
+  margin: 20px 0;
+}
+
+.icon-container img {
+  width: 100px; 
+  height: 100px;
+  object-fit: contain;
+}
+
+.icon-container label {
+  font-weight: bolder;
+}
+
+/* pagination css */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.pagination button {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #333;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0 5px;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #ddd;
+}
+
+.pagination button.active {
+  background-color: yellowgreen;
+  color: white;
+  border-color: yellowgreen;
+}
+
+.review-defind {
+  text-align: center;
+}

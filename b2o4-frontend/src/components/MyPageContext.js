@@ -5,6 +5,8 @@ const MyPageContext = createContext({
   setLoginMember: () => {},
   basketList: [],
   setBasketList: () => {},
+  reviewList: [],
+  setReviewList: () => {},
 });
 
 export default MyPageContext;
