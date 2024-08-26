@@ -1,6 +1,5 @@
 package b2o4.service;
 
-<<<<<<< HEAD
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -10,16 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-=======
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
->>>>>>> 2d67df7a0ce3af9babe310a0891221ef3bd63003
 
 import b2o4.dto.Member;
 import b2o4.mapper.MemberMapper;
 
 @Service
-<<<<<<< HEAD
 public class MemberServiceImpl implements MemberService {
     @Autowired
     MemberMapper memberMapper;
@@ -87,16 +81,4 @@ public class MemberServiceImpl implements MemberService {
     public int signup(Member member) {
         return memberMapper.signup(member);
     }
-=======
-public class MemberServiceImpl implements MemberService{
-
-	@Autowired
-	private MemberMapper memberMapper;
-	
-	@Override
-	public void NaverRegister(Member member) {
-		memberMapper.NaverRegister(member);
-	}
-	
->>>>>>> 2d67df7a0ce3af9babe310a0891221ef3bd63003
 }

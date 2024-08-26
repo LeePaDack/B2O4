@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 package b2o4.service;
 
@@ -21,14 +20,4 @@ public interface MemberService {
 	int signup(Member member);
 	
 	
-=======
-package b2o4.service;
-
-import b2o4.dto.Member;
-
-public interface MemberService {
-	// 네이버 SNS 연동해서 회원가입하는 insert
-	public void NaverRegister(Member member);
-
->>>>>>> 2d67df7a0ce3af9babe310a0891221ef3bd63003
 }
