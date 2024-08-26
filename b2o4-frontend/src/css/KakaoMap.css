@@ -1,0 +1,62 @@
+/* KakaoMap.css */
+
+/* 지도 컨테이너 스타일 */
+.map-container {
+  position: relative;
+  width: 80%; /* 가로 크기를 화면의 1/4로 설정 */
+  height: 100vh; /* 세로 크기를 화면 높이의 1/4로 설정 */
+  margin: 0; /* 여백 제거 */
+  border-radius: 10px; /* 모서리를 둥글게 */
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); /* 그림자 추가 */
+}
+
+/* 지도 자체 스타일 */
+#map {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+/* 지도 내 컨트롤 패널 스타일 */
+.map-control {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+  padding: 5px 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+/* 검색 바 스타일 */
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  width: 200px; /* 너비 조정 */
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px 0 0 3px;
+  outline: none;
+  font-size: 14px;
+}
+
+.search-bar button {
+  padding: 5px 15px;
+  border-radius: 0 3px 3px 0;
+  border: 1px solid #4CAF50;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+}
+
+.search-bar button:hover {
+  background-color: #45a049;
+}
