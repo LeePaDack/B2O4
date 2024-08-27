@@ -37,8 +37,8 @@ const GalleryDetail = () => {
           </>
         )}
     </div>
-      <div className="detail-content">
-        <p className="category"> > 갤러리</p>
+    <div className="detail-content">
+        <p className="category">갤러리</p>
         <h1>{list.gbPostTitle}</h1>
         <h5>{list.gbPostCreateDate}</h5>
         <div className="detail-item">

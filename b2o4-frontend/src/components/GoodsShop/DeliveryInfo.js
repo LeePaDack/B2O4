@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import MyPageContext from "./MyPageContext";
+import MyPageContext from "../MyPageContext";
 import axios from "axios";
-import "./css/DeliveryInfo.css";
+import "../css/DeliveryInfo.css";
 
 const GoodsPurchase = () => {
   //memberName, memberAddress, memberPhone

@@ -22,7 +22,7 @@ public class StadiumController {
 		return stadiumService.stadiumMainList();
 	}
 	
-	@GetMapping("/stadiumDetail/{stadiumNo}")
+	@GetMapping("/stadiumListDetail/{stadiumNo}")
 	public Stadium getStadiumById(@PathVariable("stadiumNo") int stadiumNo) {
 		return stadiumService.getStadiumById(stadiumNo);
 	}

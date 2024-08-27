@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import '../css/BoardMain.css';
 import Table from 'react-bootstrap/Table';
-import Pagination from "./PagiNation";
-import MyPageContext from "./MyPageContext";
+import Pagination from "../PagiNation";
+import MyPageContext from "../MyPageContext";
 
 const BoardMain = ({}) => {
     const navigate = useNavigate();

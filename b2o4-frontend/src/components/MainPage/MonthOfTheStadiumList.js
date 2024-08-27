@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import '../css/MainPage.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const StadiumList = () => {
+const MonthOfTheStadiumList = () => {
     const [stadiumList, setStadiumList] = useState([]);
     const [mostLike, setMostLike] = useState('');
+    const navigate = useNavigate();
 
     const getStadiumList = () => {
         axios.get("/main/stadium")
@@ -26,6 +27,10 @@ const StadiumList = () => {
     useEffect(() => {
         getStadiumList();
     }, []);
+
+    const handleRowClick = (stadium) => {
+        navigate(`/stadiumDetail/${stadium.stadiumNo}`, { state: { stadium } });
+    };
 
     return (
         <div className='famous-stadium-list-container'>
@@ -62,7 +67,7 @@ const StadiumList = () => {
                                 </p>
                                 </div>
                             </div>
-                            <Link to={`/stadiumList/${stadium.stadiumNo}`}><button className="btn btn-outline-success">자세히 보기</button></Link>
+                           <button className="btn btn-outline-success" onClick={() => {handleRowClick(stadium)}}>자세히 보기</button>
                         </div>
                     ))}
                 </div>
@@ -70,4 +75,4 @@ const StadiumList = () => {
         </div>
     )
 }
-export default StadiumList;
+export default MonthOfTheStadiumList;

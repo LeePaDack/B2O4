@@ -1,7 +1,7 @@
 import { loadTossPayments } from "@tosspayments/tosspayments-sdk";
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import '../../css/PaymentCheckoutPage.css';
+import '../css/PaymentCheckoutPage.css';
 import MyPageContext from "../MyPageContext";
 
 const clientKey = "test_ck_AQ92ymxN34YkyXwdXe2PVajRKXvd";

@@ -5,16 +5,9 @@
     background-color: rgb(192, 192, 192);
 }
 
-.carousel-item {
-    position: relative; 
-    width: 70%;
-    height: 100%;
-    margin: 0;
-    padding: 10px;
-    display: flex; 
-    align-items: center;
-    justify-content: center;
+.carousel-items{
     text-align: center;
+    padding: 10px;
 }
 
 .carousel-item img {

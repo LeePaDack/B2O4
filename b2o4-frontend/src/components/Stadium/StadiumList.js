@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import '../css/StadiumList.css';
-import Pagination from "./PagiNation";
+import Pagination from "../PagiNation.js";
 
 const StadiumList = () => {
     const [stadiums, setStadiums] = useState([]);
@@ -23,7 +23,7 @@ const StadiumList = () => {
     };
 
     const handleRowClick = (stadium) => {
-        navigate(`/stadiumDetail/${stadium.stadiumNo}`, { state: { stadium } });
+        navigate(`/stadiumListDetail/${stadium.stadiumNo}`, { state: { stadium } });
     };
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from 'axios';
-import MyPageContext from './MyPageContext'; // MyPageContext를 불러옴
+import MyPageContext from '../MyPageContext'; // MyPageContext를 불러옴
 import { useNavigate } from "react-router-dom";
 import '../css/BoardPosting.css';
 
