@@ -8,8 +8,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 const GalleryList = () => {
     const [galleryItem, setGalleryItem] = useState([]);
+    const navigate = useNavigate();
     const sliderRef = useRef(null);
-    const navigate = useNavigate('');
 
     const getGalleryList = () => {
         axios.get("/main/gallery")
@@ -24,7 +24,7 @@ const GalleryList = () => {
 
     const settings = {
         dots: true,
-        infinite: false,
+        infinite: true,
         speed: 400,
         slidesToShow: 3,
         slidesToScroll: 3,
@@ -59,8 +59,11 @@ const GalleryList = () => {
     };
 
     const handleRowClick = (gallery) => {
-        navigate(`/galleryBoard/${gallery.gbpostNo}`, { state: { list : gallery } });
+        navigate(`/galleryBoard/${gallery.gbPostNo}`, { state: { list:gallery } });
     };
+
+    console.log(galleryItem);
+    
 
     return (
         <div className='gallery-list-container'>
@@ -72,11 +75,13 @@ const GalleryList = () => {
                 <Slider {...settings} ref={sliderRef}>
                     {galleryItem && galleryItem.map(gallery => (
                             <div onClick={() => handleRowClick(gallery)} key={gallery.gbPostNo} className="gallery-card-body">
-                                {gallery.gbImages ? <img src={gallery.gbImages} alt='갤러리 사진' />
-                                    : <img src='/images/defaultImage.png' alt="이미지없음" />}
+                                {gallery.gbImages ? <img src={`/images/${
+                                    gallery.gbImages.split(",")[0]
+                                  }`} alt='갤러리 사진' />
+                                    : <img src='./default-image.png' alt="이미지없음" />}
                                 <div className="gallery-desc">
-                                    <p className="gbpostTitle">{gallery.gbPostTitle}</p>
-                                    <p className="memberName">{gallery.memberName}</p>
+                                    <p className="gallery-desc-title">{gallery.gbPostTitle}</p>
+                                    <p className="gallery-desc-name">{gallery.memberName}</p>
                                 </div>
                             </div>
 
