@@ -29,8 +29,10 @@ const MonthOfTheStadiumList = () => {
     }, []);
 
     const handleRowClick = (stadium) => {
-        navigate(`/stadiumDetail/${stadium.stadiumNo}`, { state: { stadium } });
+        navigate(`/stadiumDetail/${stadium.stadiumNo}`, { state: { stadium:stadium } });
     };
+
+    console.log(stadiumList);
 
     return (
         <div className='famous-stadium-list-container'>
@@ -40,22 +42,22 @@ const MonthOfTheStadiumList = () => {
             </div>
             <div className='famous-stadium'>
                 <div className='card-container' >
-                    {stadiumList && stadiumList.map(stadium => (
+                    {stadiumList && stadiumList.length > 0 && stadiumList.map(stadium => (
                         <div key={stadium.stadiumNo} 
                         className={
                             `card-body ${mostLike && stadium.stadiumName === mostLike.stadiumName ? 'highlight' : '' }` 
                             }>
                             {mostLike && stadium.stadiumName === mostLike.stadiumName ?
                             <img className="hot" src="/images/hotItem.jpg" alt="핫아이템"/>  : ''}
-                            {stadium.stadiumImage ? <img src={stadium.stadiumImage} alt='스타디움 사진' />
+                            {stadium.stadiumImage ? <img src={`/images/${stadium.stadiumImage}`} alt='스타디움 사진' />
                             : <img src="defaultImage" alt="이미지 없음" />}
                             
                             <div className="stadium-desc row">
                                 <div className="col-10">
-                                <p className="stadiumName">{stadium.stadiumName}</p>
-                                <p className="stadiumAddress">{stadium.stadiumAddress}</p>
-                                <p className="stadiumCapacity">최대 수용 인원 : {stadium.stadiumCapacity} 명</p>
-                                <p className="stadiumPrice">{stadium.stadiumPrice.toLocaleString()} 원(1인)</p>
+                                <p className="stadium-name">{stadium.stadiumName}</p>
+                                <p className="stadium-address">{stadium.stadiumAddress}</p>
+                                <p className="stadium-capacity">최대 수용 인원 : {stadium.stadiumCapacity} 명</p>
+                                <p className="stadium-price">{stadium.stadiumPrice.toLocaleString()} 원(1인)</p>
                                 </div>
                                 <div className="col-2">
                                 <p className="totalLike">
@@ -67,7 +69,7 @@ const MonthOfTheStadiumList = () => {
                                 </p>
                                 </div>
                             </div>
-                           <button className="btn btn-outline-success" onClick={() => {handleRowClick(stadium)}}>자세히 보기</button>
+                            <button className="btn btn-outline-success" onClick={() => handleRowClick(stadium)}>자세히 보기</button>
                         </div>
                     ))}
                 </div>

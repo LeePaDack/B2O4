@@ -79,7 +79,7 @@ const Header = () => {
         <Link to="/" className="d-flex align-items-center">
           <img src="/images/logo.png" className="brand-logo" alt="Brand Logo" />
         </Link>
-        <div className="search-bar">
+        <div className="total-search-bar">
           <Form className="d-flex" onSubmit={handleSearch}>
             <div className="search-input-container">
               <Form.Control
