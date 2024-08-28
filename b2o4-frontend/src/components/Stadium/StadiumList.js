@@ -23,7 +23,7 @@ const StadiumList = () => {
     };
 
     const handleRowClick = (stadium) => {
-        navigate(`/stadiumListDetail/${stadium.stadiumNo}`, { state: { stadium } });
+        navigate(`/stadiumDetail/${stadium.stadiumNo}`, { state: { stadium } });
     };
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);

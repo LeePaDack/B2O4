@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import '../css/KakaoMap.css'; // CSS 파일을 임포트합니다.
+import { defaultFormat } from "moment";
 const KakaoMap = () => {
   useEffect(() => {
     const script = document.createElement("script");
@@ -101,3 +102,5 @@ const KakaoMap = () => {
     </div>
   );
 };
+
+export default KakaoMap;

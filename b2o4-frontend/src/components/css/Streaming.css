@@ -36,9 +36,8 @@
 }
 
 .streaming-start-btn {
-  margin-top: 10px;
   position: absolute; 
-  bottom: -20px;
+  bottom: -30px;
 }
 
 .chat-container {
@@ -172,4 +171,8 @@
   font-size: 1rem;
 }
 
+
+.freezing{
+  margin-top: 3px;
+}
 

@@ -2,11 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/ReviewCss.css";
 import axios from "axios";
-
-const StadiumsMain = () => {
+const StadiumReviewMain = () => {
   const [stadiumList, setStadiumList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);  // 로딩 상태 추가
-
+  const [isLoading, setIsLoading] = useState(true);
   const stadiums = async () => {
     try {
       const response = await axios.get('/api/stadiumReview');
@@ -14,28 +12,26 @@ const StadiumsMain = () => {
     } catch (error) {
       console.error("Error fetching stadiums:", error);
     } finally {
-      setIsLoading(false);  // 로딩 상태 업데이트
+      setIsLoading(false);
     }
   };
-
   useEffect(() => {
     stadiums();
   }, []);
-
   return (
     <div className="stadiumReviewMain-container">
-      <h1 className="headers">⚽구장 평가⚽</h1>
+      <h1 className="headers">:축구공:구장 평가:축구공:</h1>
       <Link to="/memberInfo">
         <button className="memberchange-btn">참가자 평가</button>
       </Link>
       <div className="stadiumReviewMain-content">
-        {isLoading ? (  // 로딩 중이면 로딩 메시지 또는 스피너 표시
+        {isLoading ? (
           <div className="loading-spinner">
             <img src="./loading.gif"/>
           </div>
         ) : (
           stadiumList.map(list => (
-            <Link key={list.stadiumNo} to={`/stadiumdetail/${list.stadiumNo}`} state={{ list: list }} className="stadiumReview-link">
+            <Link key={list.stadiumNo} to={`/stadiumReviewDetail/${list.stadiumNo}`} state={{ list: list }} className="stadiumReview-link">
               <div className="stadiumReview">
                 <img src={list.stadiumImage} className="stadiumReview-img" alt={list.stadiumName} />
                 <div className="stadiumReview-textline">
@@ -52,5 +48,4 @@ const StadiumsMain = () => {
     </div>
   );
 };
-
-export default StadiumsMain;
+export default StadiumReviewMain;

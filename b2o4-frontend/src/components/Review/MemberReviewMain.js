@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/ReviewCss.css";
 
-const MemberMain = () => {
+const MemberReviewMain = () => {
   const [memberList, setMemberList] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태 추가
 
@@ -38,7 +38,7 @@ const MemberMain = () => {
           memberList.map((list) => (
             <Link
               key={list.memberNo}
-              to={`/memberdetail/${list.memberNo}`}
+              to={`/memberReviewDetail/${list.memberNo}`}
               state={{ list: list }}
               className="memberReview-link"
             >
@@ -67,4 +67,4 @@ const MemberMain = () => {
   );
 };
 
-export default MemberMain;
+export default MemberReviewMain;

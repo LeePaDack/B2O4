@@ -27,7 +27,7 @@ const BoardMain = ({}) => {
 
       const [data, setData] = useState([]);
       const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
-      const [itemPerPage] = useState(8); // 한 페이지에서 게시글 10 개 씩 보여줌
+      const [itemPerPage] = useState(8); // 한 페이지에서 게시글 8 개 씩 보여줌
 
 
           // 현재페이지에서 첫번째 항목과 마지막 항목을 체크

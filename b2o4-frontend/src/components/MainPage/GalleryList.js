@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import '../css/MainPage.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 const GalleryList = () => {
     const [galleryItem, setGalleryItem] = useState([]);
     const sliderRef = useRef(null);
+    const navigate = useNavigate('');
 
     const getGalleryList = () => {
         axios.get("/main/gallery")
@@ -57,6 +58,10 @@ const GalleryList = () => {
         sliderRef.current.slickPrev();
     };
 
+    const handleRowClick = (gallery) => {
+        navigate(`/galleryBoard/${gallery.gbpostNo}`, { state: { list : gallery } });
+    };
+
     return (
         <div className='gallery-list-container'>
             <div className='section-title'>
@@ -66,16 +71,15 @@ const GalleryList = () => {
             <div className="slider-container">
                 <Slider {...settings} ref={sliderRef}>
                     {galleryItem && galleryItem.map(gallery => (
-                        <Link key={gallery.gbpostNo} to={`/gallery/${gallery.gbpostNo}`}>
-                            <div className="gallery-card-body">
-                                {gallery.gbiamges ? <img src={gallery.gbiamges} alt='갤러리 사진' />
+                            <div onClick={() => handleRowClick(gallery)} key={gallery.gbPostNo} className="gallery-card-body">
+                                {gallery.gbImages ? <img src={gallery.gbImages} alt='갤러리 사진' />
                                     : <img src='/images/defaultImage.png' alt="이미지없음" />}
                                 <div className="gallery-desc">
-                                    <p className="gbpostTitle">{gallery.gbpostTitle}</p>
+                                    <p className="gbpostTitle">{gallery.gbPostTitle}</p>
                                     <p className="memberName">{gallery.memberName}</p>
                                 </div>
                             </div>
-                        </Link>
+
                     ))}
                 </Slider>
                 <button className="slick-prev" onClick={handlePrev}>

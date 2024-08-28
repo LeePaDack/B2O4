@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../css/Signup.css'; // CSS 파일을 별도로 분리
+import './css/Signup.css'; // CSS 파일을 별도로 분리
 import axios from 'axios';
 
 const Signup = () => {

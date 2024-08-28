@@ -216,7 +216,7 @@ const LiveChat = () => {
         </div>
       </div>
       {loginMember.memberType === 'A' &&
-        <button onClick={handleFreezeChat} className='btn btn-outline-success'>
+        <button onClick={handleFreezeChat} className='btn btn-outline-success freezing'>
           {freezeChat ? 'Release Chat' : 'Freeze Chat'}
         </button>
       }
