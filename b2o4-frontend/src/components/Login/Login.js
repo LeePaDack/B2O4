@@ -6,6 +6,7 @@ import "../css/Login.css";
 import Button from "react-bootstrap/esm/Button";
 import NaverApi from "./NaverApi";
 import KakaoApi from "./KakaoApi";
+import GoogleApi from "./GoogleApi";
 
 const Login = () => {
   const { loginMember, setLoginMember } = useContext(MyPageContext);
@@ -92,10 +93,7 @@ const Login = () => {
                 <NaverApi />
               </li>
               <li className="api-item">
-                <Link to="/login" className="api-link">
-                  <img src="IOS_Google_icon.png" />
-     
-                </Link>
+                <GoogleApi />
               </li>
               <li className="api-item">
                 <KakaoApi />
