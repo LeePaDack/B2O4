@@ -22,7 +22,13 @@ const BoardMain = ({}) => {
 
 
       const handleRowClick = (board) => {
+        if(!loginMember){
+            alert("비로그인 상태입니다.")
+            navigate('/login')
+        }
+        else {
         navigate(`/boardContent/${board.boardNo}`, { state: { board: board } });
+        }
       };
 
       const [data, setData] = useState([]);

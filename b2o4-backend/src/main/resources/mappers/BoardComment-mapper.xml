@@ -21,4 +21,8 @@
 		JOIN member m ON m.memberNo = b.memberNo
 		WHERE boardNo = #{boardNo}
 	</select>
+	
+	<delete id="deleteBoardCommentByCommentNo">
+		DELETE FROM boardComment WHERE commentNo = #{commentNo}
+	</delete>
 </mapper>

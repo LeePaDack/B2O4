@@ -13,4 +13,6 @@ public interface BoardCommentMapper {
 	void adminBoardComment(BoardComment boardComment);
 	
 	List<BoardComment> getBoardCommentByBoardNo1(int boardNo);
+	
+	void deleteBoardCommentByCommentNo(int commentNo);
 }
