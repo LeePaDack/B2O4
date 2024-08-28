@@ -6,7 +6,7 @@ import "../css/Login.css";
 import Button from "react-bootstrap/esm/Button";
 import NaverApi from "./NaverApi";
 import KakaoApi from "./KakaoApi";
-import GoogleApi from "./GoogleApi";
+// import GoogleApi from "./GoogleApi";
 
 const Login = () => {
   const { loginMember, setLoginMember } = useContext(MyPageContext);
@@ -92,9 +92,11 @@ const Login = () => {
               <li className="api-item">
                 <NaverApi />
               </li>
+              {/* 
               <li className="api-item">
                 <GoogleApi />
               </li>
+              */}
               <li className="api-item">
                 <KakaoApi />
               </li>
