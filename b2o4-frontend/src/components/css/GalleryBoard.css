@@ -72,14 +72,14 @@
 
 /* GalleryDetail.css */
 
-.detail-container {
+.gallery-detail-container {
   width: 50%;
   padding: 20px;
   margin: 0 auto;
   position: relative; /* 버튼 위치 기준을 위한 상대 위치 설정 */
 }
 
-.detail-container button {
+.gallery-detail-container button {
   margin: 5px;
   
 }

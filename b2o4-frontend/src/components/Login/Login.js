@@ -41,7 +41,7 @@ const Login = () => {
   };
 
   return (
-    <div className="wrapper">
+    <div className="wrapper-login">
       <div className="login-container">
         {!loginMember && (
           <>

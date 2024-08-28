@@ -158,7 +158,7 @@ const GalleryComment = () => {
         <div className="comment-content">
           {comment.gbCommentImages && (
             comment.gbCommentImages.split(",").map(image => (
-              <img key={image} src={`http://localhost:9000/images/${image}`} alt={comment.gbCommentNo} />
+              <img key={image} src={`/images/${image}`} alt={comment.gbCommentNo} />
             ))
           )}
           <p>{comment.gbCommentContent}</p>

@@ -26,7 +26,7 @@ const GalleryDetail = () => {
   }
 
   return (
-    <div className="detail-container">
+    <div className="gallery-detail-container">
       <div className="button-container">
         {loginMember && list && loginMember.memberNo === list.memberNo && (
           <>
@@ -48,7 +48,7 @@ const GalleryDetail = () => {
               .map((image) => (
                 <img
                   key={image}
-                  src={`http://localhost:9000/images/${image}`}
+                  src={`/images/${image}`}
                   alt={list.gbPostTitle}
                 />
               ))
