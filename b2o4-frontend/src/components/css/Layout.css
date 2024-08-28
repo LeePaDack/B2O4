@@ -21,7 +21,7 @@ header {
     width: 170px;
 }
 
-.search-bar {
+.total-search-bar {
     margin-left: 350px;
     flex: 1; 
     max-width: 800px;
