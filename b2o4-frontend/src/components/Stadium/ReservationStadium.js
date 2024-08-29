@@ -113,7 +113,7 @@ const ReservationStadium = () => {
           required
         />
         &nbsp; &nbsp; &nbsp;
-        <select className="reservationTime" value={reservationTime} onChange={handleTimeChange}>
+        <select className="reservationTime-select" value={reservationTime} onChange={handleTimeChange}>
           <option>예약 시간</option>
           <option value="06:00 ~ 08:00">06:00 ~ 08:00</option>
           <option value="08:00 ~ 10:00">08:00 ~ 10:00</option>
@@ -127,14 +127,18 @@ const ReservationStadium = () => {
           <option value="00:00 ~ 02:00">00:00 ~ 02:00</option>
         </select>
         &nbsp; &nbsp; &nbsp;
+          <div className="qwer">
         <select className="reservationPersonCount" value={personCount} onChange={handlePersonCountChange}>
           {[...Array(stadiumCapacity).keys()].map(i => (
             <option key={i+1} value={i+1}>{i+1}명</option>
           ))}
         </select>
+        </div>
+        <div>
         <tr>
           <td className="reservation-stadium-total-price">총액 : <span id="totalPrice">{calculateTotalPrice().toLocaleString()}</span></td>
         </tr>
+        </div>
         <button className="reservation-button" onClick={handlePayment}>결제하기</button>
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>

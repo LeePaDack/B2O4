@@ -160,7 +160,7 @@ const Header = () => {
                 <NavDropdown.Item href="/StadiumList">
                   구장 목록
                 </NavDropdown.Item>
-                <NavDropdown.Item href="/StadiumSearch">
+                <NavDropdown.Item href="/members/kakaoMap">
                   구장 찾기
                 </NavDropdown.Item>
               </NavDropdown>

@@ -15,6 +15,7 @@ import GoodsShop from "./components/GoodsShop/GoodsShop.js";
 import GoodsDetail from "./components/GoodsShop/GoodsDetail.js";
 import ShoppingBasket from "./components/GoodsShop/ShoppingBasket.js";
 
+import Sidebar from './components/Layout/Sidebar.js';
 import Footer from './components/Layout/Footer.js';
 import GalleryUpdate from './components/Gallery/GalleryUpdate.js'
 import DeliveryInfo from './components/GoodsShop/DeliveryInfo.js';
@@ -115,10 +116,11 @@ function App() {
           <Route path="/userDeliveryInfo/:memberNo" element={<UserDeliveryInfo/>}/>
           <Route path='/stadiumListDetail/:stadiumNo' element={<StadiumListDetail/>}/>
           <Route path='/liveStreamingPage' element={<LiveStreamingPage/>}/>
-          <Route path="/members/Signup" element={<Signup/>}/>
+          <Route path="/Signup" element={<Signup/>}/>
           <Route path="/members/kakaoMap" element={<KakaoMap/>}/>
           <Route path="/search" element={<SearchResultPage />} />
         </Routes>
+        <Sidebar/>
         <Footer />
       </Router>
     </MyPageContext.Provider>

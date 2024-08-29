@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import MemberReviewUpload from "./MemberReviewUpload";
 import axios from "axios";
+import '../css/ReviewCss.css'
 
-const MemberDetail = () => {
+const MemberReviewDetail = () => {
   const location = useLocation();
   const list = location.state.list;
   const [contentBoxView, setContentBoxView] = useState(false);
@@ -61,8 +62,8 @@ const MemberDetail = () => {
   }
 
   return (
-    <div className="memberdetail-container">
-      <div className="memberdetail-content">
+    <div className="memberReviewdetail-container">
+      <div className="memberReviewdetail-content">
         <h3 className="headers">🏃‍♂️ {list.memberName} 님의 정보 🏃‍♀️</h3>
         <img src={`/images/userProfile/${list.memberProfile}`} alt="Profile" />
         <p>참가자 이름 : {list.memberName}</p>
@@ -84,7 +85,9 @@ const MemberDetail = () => {
         </div>
       </div>
       <div className="member-review">
-      <Link to="/memberInfo"><button>돌아가기</button></Link>
+        <Link to="/memberInfo">
+          <button>돌아가기</button>
+        </Link>
         <button
           onClick={() => {
             setContentBoxView(!contentBoxView);
@@ -131,4 +134,4 @@ const MemberDetail = () => {
   );
 };
 
-export default MemberDetail;
+export default MemberReviewDetail;

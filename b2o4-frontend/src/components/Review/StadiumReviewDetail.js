@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import StadiumReviewUpload from "./StadiumReviewUpload";
+import '../css/ReviewCss.css';
 
-const StadiumDetail = () => {
+const StadiumReviewDetail = () => {
   const location = useLocation();
   const list = location.state.list;
   const [contentBoxView, setContentBoxView] = useState(false);
@@ -59,10 +60,10 @@ const StadiumDetail = () => {
   }
 
   return (
-    <div className="stadiumdetail-container">
-      <div className="stadiumdetail-content">
+    <div className="stadiumReviewdetail-container">
+      <div className="stadiumReviewdetail-content">
       <h3 className="headers">🥅 {list.stadiumName} 의 정보 🥅</h3>
-        <img src={list.stadiumImage} alt={list.stadiumName} />
+        <img src={`/images/${list.stadiumImage}`} alt={list.stadiumName} />
         <p>풋살장 이름 : {list.stadiumName}</p>
         <p>매칭 인원 수 : {list.stadiumCapacity} 명</p>
         <p>주소 : {list.stadiumAddress}</p>
@@ -98,7 +99,7 @@ const StadiumDetail = () => {
               <div key={review.stadiumReviewNo} className="review">
                 <p>⚽</p>
                 <p className="review-comment">
-                  평가 글 : {review.stadiumComment}
+                 <strong className="review-comment-info">평가 글</strong> : {review.stadiumComment}
                 </p>
                 <p>작성 날짜 : {review.stadiumCommentDate}</p>
                 <p>
@@ -108,7 +109,7 @@ const StadiumDetail = () => {
               </div>
             ))
           ) : (
-            <p>평가 글이 없습니다.</p>
+            <p className="review-defind">평가 글이 없습니다.</p>
           )}
           <div className="pagination">
             {pageNumbers.map((number) => (
@@ -127,4 +128,4 @@ const StadiumDetail = () => {
   );
 };
 
-export default StadiumDetail;
+export default StadiumReviewDetail;

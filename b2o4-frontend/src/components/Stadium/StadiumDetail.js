@@ -64,8 +64,9 @@ const StadiumDetail = () => {
                             <td>인당가격 : \ {stadium.stadiumPrice.toLocaleString()}</td>
                         </div>
                 </div>
-            
-            <button onClick={makeReservation} className="go-reservation-button">예약하기</button>
+            <div className="go-reservation-button-div">
+                <button onClick={makeReservation} className="go-reservation-button">예약하기</button>
+            </div>
         </div>
     )
 }

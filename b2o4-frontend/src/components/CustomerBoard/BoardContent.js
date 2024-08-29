@@ -106,7 +106,7 @@ const BoardContent = () => {
             수정하기
           </button>
         )}
-        <button onClick={handleBackClick} className="back-button">
+        <button onClick={handleBackClick} className="back-button-board-content">
           돌아가기
         </button>
         <table className="boardContent-table">
@@ -122,7 +122,7 @@ const BoardContent = () => {
             <input
               className="admin-board-comment"
               type="text"
-              disabled={loginMember.memberType !== "A"}
+              hidden={loginMember.memberType !== "A"}
               placeholder="문의 답변"
               value={commentContent} // 상태 연결
               onChange={(e) => setCommentContent(e.target.value)}
@@ -131,6 +131,7 @@ const BoardContent = () => {
               <button
                 className="admin-post-board-comment"
                 onClick={adminBoardComment}
+                hidden={loginMember.memberType !== "A"}
               >
                 작성하기
               </button>
@@ -144,6 +145,7 @@ const BoardContent = () => {
                     onClick={() =>
                       handleContentCommentDelete(comment.commentNo)
                     }
+                    hidden={loginMember.memberType !== "A"}
                   >
                     &times;
                   </p>
