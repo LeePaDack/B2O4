@@ -12,18 +12,13 @@ const customerKey = generateRandomString();
 export function PaymentCheckoutPage() {
   const [payment, setPayment] = useState(null);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
+  const [isRequesting, setIsRequesting] = useState(false);  
   const navigate = useNavigate();
   const location = useLocation();
 
   const { loginMember } = useContext(MyPageContext);
-  console.log("!!!!!!!로그인정보 : " , loginMember)
+  console.log("loginMember : ", loginMember);
   const { stadium, personCount, reservationDate, reservationTime, totalPrice } = location.state;
-  console.log("!!!!!!totalPrice", totalPrice);
-  console.log("location.state", location.state);
-  sessionStorage.setItem('paymentInfo', JSON.stringify(location.state));
-  const selectPaymentMethod = (method) => {
-    setSelectedPaymentMethod(method);
-  };
 
   useEffect(() => {
     async function fetchPayment() {
@@ -42,10 +37,12 @@ export function PaymentCheckoutPage() {
   }, []);
 
   const requestPayment = async () => {
-    try {
-      console.log("window.location", window.location)
-      const orderId = generateRandomString();
+    if (isRequesting) return;
 
+    setIsRequesting(true);  
+
+    try {
+      const orderId = generateRandomString();
       const response = await payment.requestPayment({
         method: selectedPaymentMethod,
         amount: {
@@ -61,11 +58,36 @@ export function PaymentCheckoutPage() {
         customerMobilePhone: loginMember.memberPhone,
       });
 
+      // Ensure `response.paymentKey` is correctly retrieved
+      const paymentKey = response.paymentKey || response.data?.paymentKey;
+
+      if (!orderId || !paymentKey || !totalPrice) {
+        console.error("Failed to retrieve essential payment information: ", { orderId, paymentKey, totalPrice });
+      } else {
+        const paymentInfo = {
+          orderId,
+          paymentKey,
+          totalPrice,
+          stadium,
+          reservationDate,
+          reservationTime,
+          personCount
+        };
+        console.log("Storing paymentInfo in sessionStorage: ", paymentInfo);
+        sessionStorage.setItem('paymentInfo', JSON.stringify(paymentInfo));
+      }
+
       console.log(response);
       
     } catch (error) {
       console.error("결제 요청 중 오류가 발생했습니다:", error);
+    } finally {
+      setIsRequesting(false);  
     }
+  };
+
+  const selectPaymentMethod = (method) => {
+    setSelectedPaymentMethod(method);
   };
 
   return (
@@ -79,12 +101,13 @@ export function PaymentCheckoutPage() {
               id={method}
               className={`button2 ${selectedPaymentMethod === method ? "active" : ""}`}
               onClick={() => selectPaymentMethod(method)}
+              disabled={isRequesting}  
             >
               {method}
             </button>
           ))}
         </div>
-        <button className="button" onClick={requestPayment}>
+        <button className="button" onClick={requestPayment} disabled={isRequesting}>
           결제하기
         </button>
       </div>

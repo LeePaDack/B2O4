@@ -10,9 +10,9 @@ import b2o4.mapper.ReservationStadiumMapper;
 public class ReservationStadiumServiceImpl implements ReservationStadiumService {
 	
 	@Autowired
-	private ReservationStadiumMapper RSMapper;
+	private ReservationStadiumMapper reservationStadiumMapper;
 	
 	public void reservationStadiumDetail(ReservationStadium reservationStadium) {
-		RSMapper.reservationStadiumDetail(reservationStadium);
+		reservationStadiumMapper.reservationStadiumDetail(reservationStadium);
 	};
 }

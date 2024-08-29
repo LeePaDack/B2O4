@@ -25,7 +25,7 @@ const ReservationStadium = () => {
       onChange: (selectedDates) => {
         const selectedDate = selectedDates[0];
         const nextDay = new Date(selectedDate);
-        nextDay.setDate(nextDay.getDate() + 1);  // ********** 날짜에 하루를 더함  값이 0 이기 때문?
+        nextDay.setDate(nextDay.getDate() + 1);
         setReservationDate(nextDay.toISOString().split("T")[0]);
         console.log("Selected Date: ", nextDay);
       },
@@ -53,25 +53,6 @@ const ReservationStadium = () => {
     }
   };
 
-  useEffect(() => {
-    const getKSTDateString = (date) => {
-      const offset = 9 * 60;
-      const kstDate = new Date(date.getTime() + offset * 60 * 1000);
-      return kstDate.toISOString().split("T")[0];
-    };
-
-    const today = new Date();
-    const min = getKSTDateString(today);
-    
-    console.log("today" , today);
-
-    const twoWeeksLater = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000);
-    const max = getKSTDateString(twoWeeksLater);
-
-    setMinDate(min);
-    setMaxDate(max);
-  }, []);
-
   const handlePersonCountChange = (event) => {
     setPersonCount(parseInt(event.target.value));
   };
@@ -89,14 +70,17 @@ const ReservationStadium = () => {
   };
 
   const handlePayment = () => {
+    const paymentInfo = {
+      stadium,
+      personCount,
+      reservationDate,
+      reservationTime,
+      totalPrice: calculateTotalPrice(),
+    };
+    sessionStorage.setItem('paymentInfo', JSON.stringify(paymentInfo)); 
+
     navigate('/payment/checkout', {
-      state: {
-        stadium: stadium,
-        personCount: personCount,
-        reservationDate: reservationDate,
-        reservationTime: reservationTime,
-        totalPrice: calculateTotalPrice(),
-      }
+      state: paymentInfo
     });
   };
 
@@ -111,13 +95,6 @@ const ReservationStadium = () => {
   const handleBackClick = () => {
     navigate("/StadiumList");
   };
-
-  console.log("reservationDate 값 ", reservationDate);
-  console.log("stadium 값 ", stadium);
-  console.log("reservationTime 값 ", reservationTime);
-  console.log("personCount 값 ", personCount);
-  console.log("calculateTotalPrice 값 ", calculateTotalPrice());
-
 
   return (
     <div className="stadium-reservation-container">
