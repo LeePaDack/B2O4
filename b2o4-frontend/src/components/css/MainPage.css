@@ -43,6 +43,10 @@
     text-decoration: none;
     color : #333;
 }
+
+.recommended-goods-container{
+    margin-bottom: 100px;
+}
 .card-container{
     display: flex;
     justify-content: center;

@@ -7,12 +7,12 @@
     margin-right: 10%;
 }
 
-.back-button {
+.back-button-board-content {
     float: left;
     margin-left: 10%;
 }
 
-.update-button, .back-button {
+.update-button, .back-button-board-content {
     color: white;
     background-color: darkgreen;
     border-radius: 8px;
@@ -22,7 +22,7 @@
     margin-bottom: 45px;
 }
 
-.update-button:hover,.back-button:hover {
+.update-button:hover,.back-button-board-content:hover {
     background-color: rgb(9, 157, 9);
 }
 
@@ -55,6 +55,7 @@
     width: 100%;
     height: 500px;
     padding: 7px;
+    margin-bottom: 100px;
 }
 
 .boardContent-table {
