@@ -17,7 +17,7 @@
 		WHERE
 		r.memberNo =
 		#{memberNo}
-		ORDER BY desc
+		ORDER BY r.reservationDate desc
 	</select>
 
 	<!-- 구매 내역 보기 -->

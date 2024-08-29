@@ -14,6 +14,20 @@ export function PaymentSuccessPage() {
   const location = useLocation();
   const [hasRequested, setHasRequested] = useState(false);
 
+  // 새로고침 방지 및 경고 메시지 처리
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = ""; // 이 줄은 일부 브라우저에서 경고 메시지가 나타나게 합니다.
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
   useEffect(() => {
     const urlOrderId = searchParams.get("orderId");
     const urlPaymentKey = searchParams.get("paymentKey");
@@ -102,6 +116,16 @@ export function PaymentSuccessPage() {
       });
     }
   }
+
+  // 3초 후에 메인 페이지로 리다이렉트
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/");
+    }, 3000);
+
+    // 컴포넌트가 언마운트될 때 타이머를 클리어하여 메모리 누수를 방지
+    return () => clearTimeout(timer);
+  }, [navigate]);
 
   if (!loginMember || !orderId || !paymentKey || !amount) {
     return <div>정보를 불러오는 중입니다...</div>;

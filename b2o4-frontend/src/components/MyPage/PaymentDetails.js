@@ -21,6 +21,8 @@ const PaymentHistory = () => {
     }
   }, [loginMember]);
 
+  console.log(paymentDetails)
+
   return (
     <div className="payment-history-container">
       <h2>예약 정보</h2>
