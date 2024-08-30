@@ -86,3 +86,35 @@
   margin-top: -15px;
   margin-bottom: 20px;
 }
+
+.already-container{
+  border: 1px solid gray;
+  border-radius: 8px;
+  width: 30%;
+  height: 300px;
+  margin: 10px auto;
+  margin-top: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px gray;
+  
+}
+
+.already-container h1{
+  margin-top: 40px;
+}
+
+.already-button{
+  margin-top: 80px;
+}
+
+.already-button button{
+  padding: 9px 18px;
+  width: 150px;
+  margin: 10px;
+  border: none;
+    border-radius: 5px;
+    background-color: #77dd77;
+    color: #212121;
+    font-weight: bold;
+    font-size: 18px;
+}

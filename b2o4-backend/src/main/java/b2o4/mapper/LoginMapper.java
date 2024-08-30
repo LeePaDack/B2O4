@@ -25,4 +25,7 @@ public interface LoginMapper {
 	
 	// 네이버 로그인 회원가입
 	void NaverRegister(Member member);
+	
+	// 이메일 중복 체크
+	int emailCheck(String memberEmail);
 }

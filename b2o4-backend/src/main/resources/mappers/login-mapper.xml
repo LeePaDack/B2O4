@@ -38,5 +38,12 @@
 		VALUES(#{memberId}, #{memberPw}, #{memberEmail}, #{memberName}, #{memberBirth}, #{memberPhone}, #{memberAddress})
 	</insert>
 	
+	<!-- 이메일 중복체크 -->
+	<select id="emailCheck" >
+		SELECT COUNT(*)
+		FROM member
+		WHERE memberEmail = #{memberEmail}
+	</select>
+	
 		
 </mapper>

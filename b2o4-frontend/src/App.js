@@ -22,7 +22,7 @@ import DeliveryInfo from './components/GoodsShop/DeliveryInfo.js';
 
 import PasswordChange from './components/Login/PasswordChange.js';
 import NaverSignup from './components/Login/NaverSignup.js';
-import KakaoRedirectPage from './components/Login/KakaoRedirectPage.js';
+import KakaoRedirection from './components/Login/KakaoRedirection.js';
 import UserDeliveryInfo from './components/MyPage/UserDeliveryInfo.js';
 
 import MyPage from './components/MyPage/MyPage.js';
@@ -55,6 +55,9 @@ import KakaoMap from './components/Stadium/KakaoMap.js';
 
 import SearchResultPage from './components/Layout/SearchResultPage.js';
 import StadiumDetail from './components/Stadium/StadiumDetail.js';
+
+import GoogleSignup from './components/Login/GoogleSignup.js';
+import KakaoSignup from './components/Login/KakaoSignup.js';
 
 function App() {
 
@@ -90,7 +93,6 @@ function App() {
           <Route path='/galleryUpdate' element={<GalleryUpdate />} />
           <Route path='/passwordChange' element={<PasswordChange />} />       
           <Route path='/signup/naver' element={<NaverSignup />} />
-          <Route path='/oauth/redirected/kakao' element={<KakaoRedirectPage />} />
           <Route path="/goodsShop" element={<GoodsShop />} /> 
           <Route path="/goodsDetail/:goodsNo" element={<GoodsDetail  loginMember={loginMember}/>} />
           <Route path="/shoppingBasket/" element={<ShoppingBasket  loginMember={loginMember}/>} />
@@ -119,6 +121,9 @@ function App() {
           <Route path="/Signup" element={<Signup/>}/>
           <Route path="/members/kakaoMap" element={<KakaoMap/>}/>
           <Route path="/search" element={<SearchResultPage />} />
+          <Route path="/result" element={<GoogleSignup />} />
+          <Route path="/signup/kakao" element={<KakaoSignup />} />
+          <Route path="/oauth2/callback/kakao" element={<KakaoRedirection />} />
         </Routes>
         <Sidebar/>
         <Footer />

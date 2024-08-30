@@ -181,7 +181,7 @@ const FindPw = () => {
             <div className="findPw">
               <div className="email-auth">
               <div className="email-Auth-content">
-                <h4>인증받을 본인의 이메일을 확인해주세요.</h4>
+                <h4>인증받을 본인의 이메일을 <br/>확인해주세요.</h4>
                 <div className="email-Auth">
                   <p>"{userInfo.memberEmail}"</p>
                 </div>

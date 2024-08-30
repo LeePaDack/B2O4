@@ -1,5 +1,6 @@
 package b2o4.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,10 +52,18 @@ public class LoginController {
         }
 	}
 	
+	// 네이버로 로그인하기
 	@PostMapping("/naverAPI/register")
     public String NaverRegister(@RequestBody Member member) {
 		loginService.NaverRegister(member);
 
         return "회원가입 성공!!!!";
     }
+	
+	// 이메일 중복체크
+	@PostMapping("/emailCheck")
+	public int  emailCheck(@RequestParam("email") String memberEmail) {
+        return loginService.emailCheck(memberEmail);
+    }	
+	
 }

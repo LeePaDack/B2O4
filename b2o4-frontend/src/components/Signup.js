@@ -1,45 +1,51 @@
 import React, { useState } from 'react';
 import './css/Signup.css'; // CSS 파일을 별도로 분리
 import axios from 'axios';
-
 const Signup = () => {
   const [member, setMember] = useState({
     memberId: '',
     memberPw: '',
-    memberPwConfirm: '', 
+    memberPwConfirm: '',
     memberName: '',
     memberPhone: '',
     memberEmail: '',
     memberAddress: '',
+    memberDetailAddress: '', // 상세 주소 필드 추가
     memberBirth: '',
     profileImage: '', // 미리보기를 위한 URL을 저장
     memberProfile: null,  // 이미지 파일을 저장할 상태 추가
   });
-
   const [errors, setErrors] = useState({
     memberId: '',
     memberPw: '',
-    memberPwConfirm: '', 
+    memberPwConfirm: '',
     memberName: '',
     memberPhone: '',
-    memberEmail: ''
+    memberEmail: '',
+    memberAddress: '',
+    memberDetailAddress: '',
+    memberBirth: '',
+    profileImage: ''
   });
-
   const [isIdAvailable, setIsIdAvailable] = useState(null); // 아이디 중복 검사 결과 저장
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    validateField(name, value);
-
+    // 입력 값이 비어있을 때 오류 메시지 삭제
+    if (value === '') {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: ''
+      }));
+    } else {
+      validateField(name, value);
+    }
     setMember((prevMember) => ({
       ...prevMember,
       [name]: value
     }));
   };
-
   const validateField = (name, value) => {
     let errorMsg = '';
-
     switch (name) {
       case 'memberId':
         if (!/^[a-zA-Z0-9]{4,12}$/.test(value)) {
@@ -74,13 +80,11 @@ const Signup = () => {
       default:
         break;
     }
-
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: errorMsg,
     }));
   };
-
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -91,19 +95,16 @@ const Signup = () => {
       });
     }
   };
-
   const handleIdCheck = async () => {
     if (!member.memberId.trim()) {
       alert("아이디를 입력하세요");
       setIsIdAvailable(false);
       return;
     }
-  
     try {
       const response = await axios.get('http://localhost:9000/api/idCheck', {
         params: { id: member.memberId },
       });
-  
       if (response.data.isAvailable) {
         setIsIdAvailable(true);
         setErrors((prevErrors) => ({
@@ -122,13 +123,10 @@ const Signup = () => {
       setIsIdAvailable(false);
     }
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
     // 모든 필드에 대한 유효성 검사 수행
     Object.keys(member).forEach((name) => validateField(name, member[name]));
-
     // 이미지 파일이 선택되지 않은 경우 에러 처리
     if (!member.memberProfile) {
         setErrors({
@@ -137,15 +135,12 @@ const Signup = () => {
         });
         return;
     }
-
     // 오류가 있는 경우 제출 중지
     if (Object.values(errors).some((error) => error !== '')) {
       console.log('유효성 검사 오류:', errors);
       return;
     }
-
     console.log('Member Data:', member);
-
     const formData = new FormData();
     formData.append('memberId', member.memberId);
     formData.append('memberPw', member.memberPw);
@@ -153,9 +148,9 @@ const Signup = () => {
     formData.append('memberPhone', member.memberPhone);
     formData.append('memberEmail', member.memberEmail);
     formData.append('memberAddress', member.memberAddress);
+    formData.append('memberDetailAddress', member.memberDetailAddress); // 상세 주소 추가
     formData.append('memberBirth', member.memberBirth);
     formData.append('profileImage', member.memberProfile);
-
     fetch('http://localhost:9000/api/members', {
       method: 'POST',
       body: formData,
@@ -173,13 +168,14 @@ const Signup = () => {
         setMember({
           memberId: '',
           memberPw: '',
-          memberPwConfirm: '', 
+          memberPwConfirm: '',
           memberName: '',
           memberPhone: '',
           memberEmail: '',
           memberAddress: '',
+          memberDetailAddress: '', // 초기화
           memberBirth: '',
-          profileImage: '', 
+          profileImage: '',
           memberProfile: null,
         });
       })
@@ -188,7 +184,6 @@ const Signup = () => {
         alert('회원가입 실패하였습니다!'); // 실패 메시지
       });
   };
-
   const handleAddressSearch = () => {
     new window.daum.Postcode({
       oncomplete: function(data) {
@@ -199,7 +194,6 @@ const Signup = () => {
       }
     }).open();
   };
-
   return (
     <div className="signup-container">
       <form onSubmit={handleSubmit}>
@@ -320,6 +314,17 @@ const Signup = () => {
         </div>
         <div>
           <label>
+            상세 주소
+            <input
+              type="text"
+              name="memberDetailAddress"
+              value={member.memberDetailAddress}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
             프로필
             <input
               type="file"
@@ -330,7 +335,7 @@ const Signup = () => {
           {member.profileImage && (
             <div>
               <img
-                src={member.profileImage} 
+                src={member.profileImage}
                 alt="Profile Preview"
                 style={{ width: '100px', height: '100px', marginTop: '10px' }}
               />
@@ -344,5 +349,4 @@ const Signup = () => {
     </div>
   );
 };
-
 export default Signup;
