@@ -3,7 +3,7 @@ import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import '../css/Streaming.css';
 import axios from 'axios';
-import MyPageContext from './MyPageContext';
+import MyPageContext from '../MyPageContext';
 
 const WebCam = () => {
     const videoRef = useRef(null);
@@ -105,7 +105,7 @@ const WebCam = () => {
                 </span>
             }
             {loginMember.memberType === 'A' &&
-                <div className="button-container">
+                <div className="streaming-start-btn">
                     <button onClick={handleBeginStreaming} className='btn btn-outline-success'>
                         {webCamView ? 'Quit Streaming' : 'Begin Streaming'}
                     </button>

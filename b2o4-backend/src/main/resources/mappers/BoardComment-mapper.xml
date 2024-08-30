@@ -9,4 +9,20 @@
 		FROM boardComment c
 		JOIN board b ON b.boardNo = c. boardNo
 	</select>
+	
+	<insert id="adminBoardComment">
+		INSERT INTO boardComment (memberNo, boardNo, commentContent)
+		VALUES (#{memberNo}, #{boardNo}, #{commentContent}) 
+	</insert>
+	
+	<select id="getBoardCommentByBoardNo1">
+		SELECT * 
+		FROM boardComment b
+		JOIN member m ON m.memberNo = b.memberNo
+		WHERE boardNo = #{boardNo}
+	</select>
+	
+	<delete id="deleteBoardCommentByCommentNo">
+		DELETE FROM boardComment WHERE commentNo = #{commentNo}
+	</delete>
 </mapper>

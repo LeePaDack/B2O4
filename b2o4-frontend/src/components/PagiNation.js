@@ -1,4 +1,4 @@
-import '../css/PajiNation.css';
+import './css/PajiNation.css';
 
 const Pagination = ({itemPerPage, totalItems, paginate, currentPage}) => {
     const pageNumbers = [];

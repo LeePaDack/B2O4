@@ -13,10 +13,9 @@ public class Member {
 	private String memberPw;
 	private String memberEmail;
 	private String memberName;
-	private String membereBirth;
 	private String memberPhone;
 	private String memberAddress;
 	private String memberBirth;
 	private String memberProfile;
-	private String memberType;
+	private char memberType;
 }

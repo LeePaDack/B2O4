@@ -46,8 +46,15 @@ public class LoginServiceImpl implements LoginService{
 		loginMapper.updatePassword(member);
 	}
 	
+	// 네이버로 로그인하기
 	@Override
 	public void NaverRegister(Member member) {
 		loginMapper.NaverRegister(member);
+	}
+	
+	// 이메일 중복 체크
+	@Override
+	public int emailCheck(String memberEmail) {
+		return loginMapper.emailCheck(memberEmail);
 	}
 }

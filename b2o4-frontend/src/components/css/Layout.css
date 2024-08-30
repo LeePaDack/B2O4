@@ -21,7 +21,7 @@ header {
     width: 170px;
 }
 
-.search-bar {
+.total-search-bar {
     margin-left: 350px;
     flex: 1; 
     max-width: 800px;
@@ -95,7 +95,6 @@ header {
     padding: 20px 0;
     text-align: center;
     width: 100%;
-    margin-top: 200px;
 }
 
 .footer-content{

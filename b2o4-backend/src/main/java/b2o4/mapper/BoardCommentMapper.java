@@ -9,4 +9,10 @@ import b2o4.dto.BoardComment;
 @Mapper
 public interface BoardCommentMapper {
 	List<BoardComment> getBoardCommentByBoardNo();
+	
+	void adminBoardComment(BoardComment boardComment);
+	
+	List<BoardComment> getBoardCommentByBoardNo1(int boardNo);
+	
+	void deleteBoardCommentByCommentNo(int commentNo);
 }

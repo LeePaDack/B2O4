@@ -19,4 +19,7 @@ public interface LoginService {
 	
 	// 네이버 SNS 연동해서 회원가입하는 insert
 	public void NaverRegister(Member member);
+	
+	// 이메일 중복 체크
+	int emailCheck(String memberEmail);
 }

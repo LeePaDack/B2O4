@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.510fa72a.css",
+    "main.js": "/static/js/main.948a8fcb.js",
+    "static/js/453.b5d39b00.chunk.js": "/static/js/453.b5d39b00.chunk.js",
+    "static/media/background.png": "/static/media/background.9a390a1a45e2b7d38217.png",
+    "static/media/soccer-player.gif": "/static/media/soccer-player.14e80a53720e4374e844.gif",
+    "static/media/축구장.jpg": "/static/media/축구장.51c914cd330e331fdd16.jpg",
+    "static/media/urbanbrush--548x583.jpg": "/static/media/urbanbrush-20200212125558962337-548x583.c30b173ccea798a9bdd1.jpg",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/index.html",
+    "main.510fa72a.css.map": "/static/css/main.510fa72a.css.map",
+    "main.948a8fcb.js.map": "/static/js/main.948a8fcb.js.map",
+    "453.b5d39b00.chunk.js.map": "/static/js/453.b5d39b00.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.510fa72a.css",
+    "static/js/main.948a8fcb.js"
+  ]
+}

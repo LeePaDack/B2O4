@@ -71,3 +71,31 @@
     height: 50px;
     padding: 7px;
 }
+
+.admin-post-board-comment-div{
+    width: 100%;
+    display: inline-block;
+}
+
+.admin-post-board-comment {
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    float: right;
+    padding: 10px 20px;
+}
+
+.admin-board-content-delete-button {
+    float: right;
+    font-size: 20px;
+    transition: transform 0.2s;
+}
+
+.admin-board-content-delete-button:hover{
+    cursor: pointer;
+    transform: scale(1.13);
+}
+

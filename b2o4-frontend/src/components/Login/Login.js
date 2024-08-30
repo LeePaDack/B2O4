@@ -6,6 +6,7 @@ import "../css/Login.css";
 import Button from "react-bootstrap/esm/Button";
 import NaverApi from "./NaverApi";
 import KakaoApi from "./KakaoApi";
+import GoogleApi from "./GoogleApi";
 
 const Login = () => {
   const { loginMember, setLoginMember } = useContext(MyPageContext);
@@ -40,7 +41,7 @@ const Login = () => {
   };
 
   return (
-    <div className="wrapper">
+    <div className="wrapper-login">
       <div className="login-container">
         {!loginMember && (
           <>
@@ -81,7 +82,7 @@ const Login = () => {
               </li>
               <pre>|</pre>
               <li className="login-item">
-                <Link to="/register" className="login-link">
+                <Link to="/members/Signup" className="login-link">
                   <img src="soccer.jpg" />
                   &nbsp;회원가입
                 </Link>
@@ -90,12 +91,9 @@ const Login = () => {
             <ul className="login-api">
               <li className="api-item">
                 <NaverApi />
-              </li>
+              </li> 
               <li className="api-item">
-                <Link to="/login" className="api-link">
-                  <img src="IOS_Google_icon.png" />
-     
-                </Link>
+                <GoogleApi />
               </li>
               <li className="api-item">
                 <KakaoApi />

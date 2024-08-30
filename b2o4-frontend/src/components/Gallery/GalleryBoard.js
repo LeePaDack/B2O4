@@ -51,7 +51,7 @@ const GalleryBoard = () => {
               {list.gbImages ? (
                 <img
                   className="gallery-item-img"
-                  src={`http://localhost:9000/images/${
+                  src={`/images/${
                     list.gbImages.split(",")[0]
                   }`}
                   alt={list.gbPostTitle}

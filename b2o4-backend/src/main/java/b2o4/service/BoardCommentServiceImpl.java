@@ -17,4 +17,19 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	public List<BoardComment> getBoardCommentByBoardNo() {
 		return boardCommentMapper.getBoardCommentByBoardNo();
 	}
+	
+	@Override
+	public void adminBoardComment(BoardComment boardComment) {
+		boardCommentMapper.adminBoardComment(boardComment);
+	}
+	
+	@Override
+	public List<BoardComment> getBoardCommentByBoardNo1(int boardNo) {
+		return boardCommentMapper.getBoardCommentByBoardNo1(boardNo);
+	}
+	
+	@Override
+	public void deleteBoardCommentByCommentNo(int commentNo) {
+		boardCommentMapper.deleteBoardCommentByCommentNo(commentNo);
+	}
 }

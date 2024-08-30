@@ -11,5 +11,5 @@ public class ChatMessage {
     private String profile;
     private String viewedTime;
     private String formattedTime;
-    
+    private String color;
 }

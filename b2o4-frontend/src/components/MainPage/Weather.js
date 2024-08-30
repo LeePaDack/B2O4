@@ -122,7 +122,7 @@ const DisplayWeather = () => {
             <div className='weather-view'>
                 <div className='today-weather-container'>
                     {weatherValue && (
-                        <div>
+                        <div style={{display: 'grid'}}>
                             <h2>{weatherValue.name}</h2>
                             <div className='today-weather row'>
                                 <div className='col-5'>

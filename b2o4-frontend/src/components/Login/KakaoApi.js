@@ -1,21 +1,26 @@
 import React from 'react';
 
-const LoginPage = () => {
-    const handleButtonClick = () => {
-        window.location.href = 'http://localhost:9000/oauth/kakao';
+const KakaoApi = () => {
+    const Rest_api_key = "8bbb8a3533ffe081525698b3125aa35c";
+    const redirect_uri = "http://localhost:3000/oauth2/callback/kakao";
+
+    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`;
+
+    const handleLogin = () => {
+        window.location.href = kakaoURL;
     };
 
     return (
         <div>
-            <a onClick={handleButtonClick}>
-               <img
-               height="50"
-               src="kakao.png"
-               style={{ cursor: 'pointer' }}
-               />
-            </a>
+            <img
+                height="50"
+                src="kakao.png"
+                onClick={handleLogin}
+                style={{ cursor: 'pointer' }}
+                alt="Kakao Login"
+            />
         </div>
     );
 };
 
-export default LoginPage;
+export default KakaoApi;

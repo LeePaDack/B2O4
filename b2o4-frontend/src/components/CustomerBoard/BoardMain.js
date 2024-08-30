@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import '../css/BoardMain.css';
 import Table from 'react-bootstrap/Table';
-import Pagination from "./PagiNation";
-import MyPageContext from "./MyPageContext";
+import Pagination from "../PagiNation";
+import MyPageContext from "../MyPageContext";
 
 const BoardMain = ({}) => {
     const navigate = useNavigate();
@@ -22,12 +22,18 @@ const BoardMain = ({}) => {
 
 
       const handleRowClick = (board) => {
+        if(!loginMember){
+            alert("비로그인 상태입니다.")
+            navigate('/login')
+        }
+        else {
         navigate(`/boardContent/${board.boardNo}`, { state: { board: board } });
+        }
       };
 
       const [data, setData] = useState([]);
       const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
-      const [itemPerPage] = useState(8); // 한 페이지에서 게시글 10 개 씩 보여줌
+      const [itemPerPage] = useState(8); // 한 페이지에서 게시글 8 개 씩 보여줌
 
 
           // 현재페이지에서 첫번째 항목과 마지막 항목을 체크
