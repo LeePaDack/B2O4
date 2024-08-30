@@ -24,7 +24,7 @@
     margin-bottom: 10px;
 }
 
-.purchase-info input, select {
+.purchase-info input, .purchase-info select {
     border-radius: 5px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -32,7 +32,7 @@
     max-width: 400px; /* 최대 너비 설정 */
 }
 
-.purchase-info input:focus, select:focus {
+.purchase-info input:focus, .purchase-info select:focus {
     border-color: rgb(26, 102, 208); /* 포커스 시 테두리 색상 */
     outline: none;
 }

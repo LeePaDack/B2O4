@@ -91,7 +91,7 @@ export function PaymentCheckoutPage() {
   };
 
   return (
-    <div className="wrapper">
+    <div className="wrapper-payment">
       <div className="box_section">
         <h1>일반 결제</h1>
         <div id="payment-method">

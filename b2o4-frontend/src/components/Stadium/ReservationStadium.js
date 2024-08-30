@@ -17,6 +17,7 @@ const ReservationStadium = () => {
   const navigate = useNavigate();
   const stadium = location.state?.stadium;
 
+  
   useEffect(() => {
     flatpickr(".reservationDate", {
       dateFormat: "Y-m-d",
@@ -77,8 +78,10 @@ const ReservationStadium = () => {
       reservationTime,
       totalPrice: calculateTotalPrice(),
     };
+  
     sessionStorage.setItem('paymentInfo', JSON.stringify(paymentInfo)); 
-
+    sessionStorage.setItem('hasRequested', 'false'); // 새로운 결제 시작 시 플래그를 false로 설정
+  
     navigate('/payment/checkout', {
       state: paymentInfo
     });

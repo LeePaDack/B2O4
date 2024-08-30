@@ -58,7 +58,7 @@ const BoardContent = () => {
   console.log("board 정보", board);
   console.log("memberNo", loginMember.memberNo);
 
-  const 전달데이터 = {
+  const sendingDate = {
     commentContent: commentContent, // 댓글 내용
     memberNo: loginMember.memberNo, // 로그인한 사용자 번호
     boardNo: board.boardNo, // 게시글 번호
@@ -67,7 +67,7 @@ const BoardContent = () => {
   // 댓글 작성하기
   const adminBoardComment = () => {
     axios
-      .post(`http://localhost:9000/boards/comment`, 전달데이터) // URL 수정
+      .post(`http://localhost:9000/boards/comment`, sendingDate) // URL 수정
       .then((response) => {
         alert("댓글 작성 완료");
         setCommentContent(""); // 댓글 작성 후 입력 필드 초기화

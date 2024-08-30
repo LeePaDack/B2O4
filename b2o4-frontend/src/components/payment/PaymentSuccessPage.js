@@ -12,21 +12,10 @@ export function PaymentSuccessPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const [hasRequested, setHasRequested] = useState(false);
-
-  // 새로고침 방지 및 경고 메시지 처리
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      event.preventDefault();
-      event.returnValue = ""; // 이 줄은 일부 브라우저에서 경고 메시지가 나타나게 합니다.
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
+  
+  const [hasRequested, setHasRequested] = useState(
+    sessionStorage.getItem("hasRequested") === "true"
+  );
 
   useEffect(() => {
     const urlOrderId = searchParams.get("orderId");
@@ -65,6 +54,8 @@ export function PaymentSuccessPage() {
 
   async function confirmPayment() {
     setHasRequested(true);
+    sessionStorage.setItem("hasRequested", "true");
+
     const requestData = {
       orderId,
       amount,
@@ -117,13 +108,11 @@ export function PaymentSuccessPage() {
     }
   }
 
-  // 3초 후에 메인 페이지로 리다이렉트
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/");
-    }, 3000);
+    }, 10000);
 
-    // 컴포넌트가 언마운트될 때 타이머를 클리어하여 메모리 누수를 방지
     return () => clearTimeout(timer);
   }, [navigate]);
 
