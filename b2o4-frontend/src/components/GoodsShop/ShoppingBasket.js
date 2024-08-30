@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import "./css/ShoppingBasket.css";
+import "../css/ShoppingBasket.css";
 import { useNavigate, Link } from "react-router-dom";
-import MyPageContext from "./MyPageContext";
+import MyPageContext from "../MyPageContext";
 
 
 // 장바구니 컴포넌트

@@ -4,7 +4,7 @@ import SockJS from 'sockjs-client';
 import '../css/Streaming.css';
 import Emoji from './Emoji';
 import axios from 'axios';
-import MyPageContext from './MyPageContext';
+import MyPageContext from '../MyPageContext';
 import moment from 'moment';
 
 const LiveChat = () => {
@@ -16,6 +16,7 @@ const LiveChat = () => {
   const [emojiPick, setEmojiPick] = useState(false);
   const [freezeChat, setFreezeChat] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const messagesContainerRef = useRef(null);
 
   // 서버에 요청 보내서 일반 사용자들에게 기능시행 후 결과를 전파하는 기능
@@ -100,7 +101,10 @@ const LiveChat = () => {
           sender: loginMember.memberId,
           content: message,
           viewedTime: moment().format("hh:mm a"),
-          formattedTime: moment().format("YYYY-MM-DD HH:mm:ss")
+          formattedTime: moment().format("YYYY-MM-DD HH:mm:ss"),
+          color: getRandomColor(),
+          senderType: loginMember.memberType,
+          isAdmin: loginMember.memberType === 'A' // 관리자인지 여부 설정
         })
       });
       setMessage('');
@@ -149,7 +153,7 @@ const LiveChat = () => {
 
   //채팅창 재정렬
   const sortedMessages = [...messages].sort((a, b) => new Date(b.formattedTime) - new Date(a.formattedTime));
-  
+
   //채팅창 전체 동결
   const handleFreezeChat = () => {
     if (stompClient) {
@@ -160,7 +164,7 @@ const LiveChat = () => {
   }
 
   //로그인 정보 null일때 ui 불러오기 막기
-  if(!loginMember){
+  if (!loginMember) {
     return;
   }
 
@@ -171,24 +175,45 @@ const LiveChat = () => {
   console.log("로그인 멤버 정보 : ", loginMember);
   console.log("정렬된 메시지 : ", messages);
 
+  const colors = ['red', 'yellow', 'purple', "skyblue", "yellowgreen", 'green', 'pink', 'orange']; // 빨간색, 노란색, 연두색, 보라색
+
+  // 랜덤 색상 선택 함수
+  const getRandomColor = () => {
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  };
+
   return (
     <div className='chat-container'>
       <div className='messages' ref={messagesContainerRef}>
-        {sortedMessages.map((msg, msgNo) => (
-          <div key={msgNo} className='message'>
-            <img src={msg.profile} alt="profileImage" className='profile-image' />
-            <div className='message-content'>
-              <strong>{msg.sender}</strong>
-              <p>{msg.content} <span className='time-text'>{msg.viewedTime}</span></p>
+        {sortedMessages.map(msg => {
+          console.log(msg); // 디버깅용
+          return (
+            <div key={msg.msgNo} className='message'>
+              {msg.profile.split(",")[0] ?
+                <img src={`/images/${msg.profile.split(",")[0]}`} alt="profileImage" className='profile-image' />
+                :
+                <img src="/default-image" alt="profileImage" className='profile-image' />
+              }
+              <div className='message-content'>
+                <div className='msg-body'>
+                  <strong className='msg-sender' style={{ color: msg.color }}>
+                    {msg.sender}
+                    {msg.admin && <img src='/images/admincrown.png' className='admin-crown' alt="admin crown" />}
+                  </strong>
+                </div>
+                <p className='msg-content'>
+                  {msg.content} <span className='time-text'>{msg.viewedTime}</span>
+                </p>
+              </div>
+              {loginMember.memberType === 'A' &&
+                <button className='deleteBtn' onClick={() => handleDeleteMessage({ msgContent: msg.content, msgAt: msg.formattedTime })}>
+                  &times;
+                </button>
+              }
             </div>
-            {loginMember.memberType === 'A' &&
-              <button className='deleteBtn' onClick={() => handleDeleteMessage({ msgContent: msg.content, msgAt: msg.formattedTime })}>
-                &times;
-              </button>
-            }
-
-          </div>
-        ))}
+          );
+        })}
       </div>
       <div className='chat-box'>
         <div className='input-container'>
@@ -197,7 +222,7 @@ const LiveChat = () => {
             type="text"
             value={message}
             onChange={handleInputChange}
-            disabled={!connected || freezeChat}
+            disabled={!connected || freezeChat || loginMember.chatable === "N"}
             onKeyDown={enterKey}
             className='message-input'
           />
@@ -216,7 +241,7 @@ const LiveChat = () => {
         </div>
       </div>
       {loginMember.memberType === 'A' &&
-        <button onClick={handleFreezeChat} className='btn btn-outline-success'>
+        <button onClick={handleFreezeChat} className='freezing btn btn-outline-success'>
           {freezeChat ? 'Release Chat' : 'Freeze Chat'}
         </button>
       }

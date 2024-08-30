@@ -3,7 +3,7 @@ import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import '../css/Streaming.css';
 import axios from 'axios';
-import MyPageContext from './MyPageContext';
+import MyPageContext from '../MyPageContext';
 
 const WebCam = () => {
     const videoRef = useRef(null);
@@ -17,16 +17,16 @@ const WebCam = () => {
         navigator.mediaDevices.getUserMedia({
             video: true
         })
-        .then((stream) => {
-            let video = videoRef.current;
-            video.srcObject = stream;
-            video.onloadedmetadata = () => {
-                video.play();
-            };
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+            .then((stream) => {
+                let video = videoRef.current;
+                video.srcObject = stream;
+                video.onloadedmetadata = () => {
+                    video.play();
+                };
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     // 스트리밍 시작 버튼 활성화/비활성화 다른 사용자들에게 공유 시키기
@@ -46,7 +46,7 @@ const WebCam = () => {
                     setWebCamView(JSON.parse(response.body));
                 });
 
-                //현재 스트리밍 상태 여부를 서버에서 가져오기
+                //현재 스트리밍 상태를 서버에서 가져오기
                 axios.get('http://localhost:9000/chat/streaming')
                     .then(res => {
                         const stream = res.data;
@@ -73,8 +73,9 @@ const WebCam = () => {
             }
         };
     }, [webCamView]);
+    console.log(webCamView);
 
-    //스트리밍이 활성화되면 카메라 시작
+    //스트리밍이 활성화되면 카메라 시작, 비활성화 되면 카메라 끄기
     useEffect(() => {
         if (webCamView) {
             getCamera();
@@ -91,7 +92,7 @@ const WebCam = () => {
     }
 
     //로그인 정보 null일때 ui 불러오기 막기
-    if(!loginMember){
+    if (!loginMember) {
         return;
     }
 
@@ -105,8 +106,8 @@ const WebCam = () => {
                 </span>
             }
             {loginMember.memberType === 'A' &&
-                <div className="button-container">
-                    <button onClick={handleBeginStreaming} className='btn btn-outline-success'>
+                <div className="streaming-start-btn">
+                    <button onClick={handleBeginStreaming} className={`btn ${webCamView ? 'btn-outline-danger' : 'btn-outline-success'}`}>
                         {webCamView ? 'Quit Streaming' : 'Begin Streaming'}
                     </button>
                 </div>

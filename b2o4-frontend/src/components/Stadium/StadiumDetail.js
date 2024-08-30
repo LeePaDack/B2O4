@@ -39,6 +39,9 @@ const StadiumDetail = () => {
     
     };
         
+    if(!stadium){
+        return;
+    }
     console.log(typeof stadium.stadiumPrice);
 
     return (

@@ -8,7 +8,7 @@ const BoardContent = () => {
     
     const location = useLocation();
     const [boards, setBoards] = useState([]);
-    const [comment, setComment] = useState('');
+    const [commentContent, setComment] = useState('');
     const board = location.state.board;
     const navigate = useNavigate();
 
@@ -51,8 +51,23 @@ const BoardContent = () => {
     };
 
     // 댓글 작성하기
+    console.log("board 정보",board)
+    const 전달데이터 = {
+        commentContent:commentContent,
+        memberNo:loginMember.memberNo,
+        boardNo:board.boardNo
+    }
+
+    // 댓글 작성하기
     const adminBoardComment = () => {
-        axios.post(`http://localhost:9000/`)
+        axios.post(`http://localhost:9000/boards/comment/${board.boardNo}`, 전달데이터)
+        .then((response) => {
+            alert("댓글 작성 완료");
+        })
+        .catch((e) => {
+            console.log("실패" , e);
+            alert("댓글 작성 실패");
+        })
     };
 
     // 작성되어있다면 그 댓글 불러오기
@@ -90,6 +105,8 @@ const BoardContent = () => {
                                 type="text" 
                                 disabled={loginMember.memberType !== 'A'}
                                 placeholder="문의 답변"
+                                value={commentContent}
+                                onChange={(e) => setComment(e.target.value)}
                             />
                             <button className="admin-post-board-comment" onClick={adminBoardComment}>작성하기</button>
                     </tbody>    

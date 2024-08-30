@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
-import '../../css/Layout.css';
+import '../css/Layout.css';
 import { Link, useNavigate } from "react-router-dom";
 import MyPageContext from '../MyPageContext';
 

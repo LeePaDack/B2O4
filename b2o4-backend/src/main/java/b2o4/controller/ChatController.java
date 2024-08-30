@@ -2,19 +2,23 @@ package b2o4.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import b2o4.dto.ChatLog;
+import b2o4.dto.Member;
 import b2o4.service.ChatService;
 import b2o4.vo.ChatMessage;
 
@@ -23,6 +27,9 @@ public class ChatController {
 
     @Autowired
     private ChatService chatService;
+    
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
     
     private boolean freezeChat = false;
     private boolean streamingBegin = false;
@@ -33,19 +40,19 @@ public class ChatController {
     @MessageMapping("/chat.send")
     @SendTo("/topic/messages")
     public ChatMessage send(ChatMessage message) {
-    	chatLog.setMemberId(message.getSender()); // 유저 id
-    	chatLog.setMsgContent(message.getContent()); // 유저 채팅
-    	
-    	//신식 날짜 포맷터
-    	DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    	String msgAt = LocalDateTime.now().format(timeFormat);
-    	chatLog.setMsgAt(msgAt);
-
-    	System.out.println("리액트에서 들어온 메시지 : " + message.getContent());
-    	System.out.println("채팅 입력한 멤버 아이디 : " + chatLog.getMemberId());
-    	System.out.println("로그로 들어온 메시지 : " + chatLog.getMsgContent());
-    	
-    	chatService.recordChatMessage(chatLog);
+        chatLog.setMemberId(message.getSender());
+        chatLog.setMsgContent(message.getContent());
+        
+        // 관리자 여부 확인
+        boolean isAdmin = chatService.isAdmin(message.getSender()); // 실제 사용자 확인
+        message.setAdmin(isAdmin); // 관리자 여부 설정
+        
+        //신식 날짜 포맷터
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String msgAt = LocalDateTime.now().format(timeFormat);
+        chatLog.setMsgAt(msgAt);
+        
+        chatService.recordChatMessage(chatLog);
         return message;
     }
     
@@ -106,4 +113,21 @@ public class ChatController {
     public ChatLog getRemoveMessageSpread() {
         return forDeleteMessage;
     }
+    
+    //검색한 사용자의 채팅목록 가져오기
+    @GetMapping("/search/chat")
+    public ResponseEntity<List<ChatLog>> showWhosChat(@RequestParam("memberId") String memberId){
+    	List<ChatLog> chatLog = chatService.showWhosChat(memberId);
+    	return ResponseEntity.ok(chatLog);
+    }
+    
+    // 채팅 금지 / 허용 전환
+    @PutMapping("/switch/chat")
+    public ResponseEntity<String> switchAuthToChat(
+            @RequestParam("memberId") String memberId,
+            @RequestParam("chatable") char chatable) {
+        String res = chatService.switchAuthToChat(memberId, chatable);
+        return ResponseEntity.ok(res);
+    }
+    
 }

@@ -40,7 +40,7 @@ const Login = () => {
   };
 
   return (
-    <div className="wrapper">
+    <div className="wrapper-login">
       <div className="login-container">
         {!loginMember && (
           <>
@@ -81,7 +81,7 @@ const Login = () => {
               </li>
               <pre>|</pre>
               <li className="login-item">
-                <Link to="/register" className="login-link">
+                <Link to="/signup" className="login-link">
                   <img src="soccer.jpg" />
                   &nbsp;회원가입
                 </Link>

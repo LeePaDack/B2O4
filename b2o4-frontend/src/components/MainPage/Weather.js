@@ -36,7 +36,7 @@ const DisplayWeather = () => {
 
     useEffect(() => {
         const getWeather = async () => {
-            try {
+
                 const { latitude, longitude } = await currentLocation();
 
                 const getCityStateName = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`, {
@@ -82,10 +82,6 @@ const DisplayWeather = () => {
                 console.log(resultCurrent);
                 console.log(weatherData);
 
-            } catch (error) {
-                console.error('Error: ', error);
-                alert('⚠️ 위치를 받아올 수 없습니다. 잠시만 기다려주세요.');
-            }
         };
         getWeather();
     }, [key]);

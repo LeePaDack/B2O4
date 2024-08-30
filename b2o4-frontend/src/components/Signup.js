@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import '../css/Signup.css'; // CSS 파일을 별도로 분리
+import './css/Signup.css'; // CSS 파일을 별도로 분리
 import axios from 'axios';
 
 const Signup = () => {
   const [member, setMember] = useState({
     memberId: '',
     memberPw: '',
-    memberPwConfirm: '', 
+    memberPwConfirm: '',
     memberName: '',
     memberPhone: '',
     memberEmail: '',
@@ -19,7 +19,7 @@ const Signup = () => {
   const [errors, setErrors] = useState({
     memberId: '',
     memberPw: '',
-    memberPwConfirm: '', 
+    memberPwConfirm: '',
     memberName: '',
     memberPhone: '',
     memberEmail: ''
@@ -98,12 +98,12 @@ const Signup = () => {
       setIsIdAvailable(false);
       return;
     }
-  
+
     try {
       const response = await axios.get('http://localhost:9000/api/idCheck', {
         params: { id: member.memberId },
       });
-  
+
       if (response.data.isAvailable) {
         setIsIdAvailable(true);
         setErrors((prevErrors) => ({
@@ -131,11 +131,11 @@ const Signup = () => {
 
     // 이미지 파일이 선택되지 않은 경우 에러 처리
     if (!member.memberProfile) {
-        setErrors({
-            ...errors,
-            memberProfile: '프로필 이미지를 선택해주세요.'
-        });
-        return;
+      setErrors({
+        ...errors,
+        memberProfile: '프로필 이미지를 선택해주세요.'
+      });
+      return;
     }
 
     // 오류가 있는 경우 제출 중지
@@ -173,13 +173,13 @@ const Signup = () => {
         setMember({
           memberId: '',
           memberPw: '',
-          memberPwConfirm: '', 
+          memberPwConfirm: '',
           memberName: '',
           memberPhone: '',
           memberEmail: '',
           memberAddress: '',
           memberBirth: '',
-          profileImage: '', 
+          profileImage: '',
           memberProfile: null,
         });
       })
@@ -191,7 +191,7 @@ const Signup = () => {
 
   const handleAddressSearch = () => {
     new window.daum.Postcode({
-      oncomplete: function(data) {
+      oncomplete: function (data) {
         setMember((prevMember) => ({
           ...prevMember,
           memberAddress: data.address
@@ -203,25 +203,24 @@ const Signup = () => {
   return (
     <div className="signup-container">
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className='id-container'>
           <label>
             아이디
-            <div className="input-container">
-              <input
-                type="text"
-                name="memberId"
-                value={member.memberId}
-                onChange={handleChange}
-              />
-              <button type="button" onClick={handleIdCheck}>중복확인</button>
-            </div>
-            {errors.memberId && (
-              <div style={{ color: 'red' }}>{errors.memberId}</div>
-            )}
-            {isIdAvailable === true && (
-              <div style={{ color: 'green' }}>사용 가능한 아이디입니다.</div>
-            )}
+            <button type="button" onClick={handleIdCheck} className='validateDup'>중복확인</button>
+            <input
+              type="text"
+              name="memberId"
+              value={member.memberId}
+              onChange={handleChange}
+            />
           </label>
+          {errors.memberId && (
+            <span style={{ color: 'red' }}>{errors.memberId}</span>
+          )}
+          {isIdAvailable === true && (
+            <span style={{ color: 'green' }}>사용 가능한 아이디입니다.</span>
+          )}
+
         </div>
         <div>
           <label>
@@ -233,7 +232,7 @@ const Signup = () => {
               onChange={handleChange}
             />
             {errors.memberPw && (
-              <div style={{ color: 'red' }}>{errors.memberPw}</div>
+              <span style={{ color: 'red' }}>{errors.memberPw}</span>
             )}
           </label>
         </div>
@@ -247,7 +246,7 @@ const Signup = () => {
               onChange={handleChange}
             />
             {errors.memberPwConfirm && (
-              <div style={{ color: 'red' }}>{errors.memberPwConfirm}</div>
+              <span style={{ color: 'red' }}>{errors.memberPwConfirm}</span>
             )}
           </label>
         </div>
@@ -261,7 +260,7 @@ const Signup = () => {
               onChange={handleChange}
             />
             {errors.memberName && (
-              <div style={{ color: 'red' }}>{errors.memberName}</div>
+              <span style={{ color: 'red' }}>{errors.memberName}</span>
             )}
           </label>
         </div>
@@ -275,7 +274,7 @@ const Signup = () => {
               onChange={handleChange}
             />
             {errors.memberPhone && (
-              <div style={{ color: 'red' }}>{errors.memberPhone}</div>
+              <span style={{ color: 'red' }}>{errors.memberPhone}</span>
             )}
           </label>
         </div>
@@ -289,7 +288,7 @@ const Signup = () => {
               onChange={handleChange}
             />
             {errors.memberEmail && (
-              <div style={{ color: 'red' }}>{errors.memberEmail}</div>
+              <span style={{ color: 'red' }}>{errors.memberEmail}</span>
             )}
           </label>
         </div>
@@ -307,15 +306,13 @@ const Signup = () => {
         <div>
           <label>
             주소
-            <div className="input-container">
-              <input
-                type="text"
-                name="memberAddress"
-                value={member.memberAddress}
-                onChange={handleChange}
-              />
-              <button type="button" onClick={handleAddressSearch}>주소 검색</button>
-            </div>
+            <input
+              type="text"
+              name="memberAddress"
+              value={member.memberAddress}
+              onChange={handleChange}
+            />
+            <button type="button" onClick={handleAddressSearch}>주소 검색</button>
           </label>
         </div>
         <div>
@@ -330,7 +327,7 @@ const Signup = () => {
           {member.profileImage && (
             <div>
               <img
-                src={member.profileImage} 
+                src={member.profileImage}
                 alt="Profile Preview"
                 style={{ width: '100px', height: '100px', marginTop: '10px' }}
               />

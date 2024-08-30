@@ -11,4 +11,24 @@
     <delete id="deleteChatMessage" parameterType="b2o4.dto.ChatLog">
         DELETE FROM LiveChatMessage WHERE msgContent = #{msgContent} AND msgAt = #{msgAt}
     </delete>
+    
+    <!-- 검색한 사용자의 채팅목록 가져오기 -->
+    <select id="showWhosChat" parameterType="b2o4.dto.ChatLog">
+    	SELECT * from livechatmessage where memberId = #{memberId}
+    </select>
+    
+    <!-- 채팅 금지 / 허용 -->
+    <update id="switchAuthToChat" parameterType="Map">
+    	UPDATE member SET chatable = #{chatable} where memberId = #{memberId}
+    </update>
+    
+	<!-- 관리자인지 여부 확인 -->
+    <select id="isAdmin" parameterType="String" resultType="boolean">
+        SELECT memberType = 'A' FROM member WHERE memberId = #{memberId}
+    </select>
+	
+	<!-- 채팅 허용/금지 상태 조회 -->
+	<select id="getChatableStatus" parameterType="String" resultType="b2o4.dto.Member">
+	    SELECT memberId, chatable FROM member WHERE memberId = #{memberId}
+	</select>
 </mapper>

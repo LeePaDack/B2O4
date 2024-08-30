@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import './css/GoodsDetail.css';
+import '../css/GoodsDetail.css';
 import axios from "axios";
 
 // 디테일
@@ -44,9 +44,6 @@ const GoodsDetail = ({ loginMember, userBasketItem, checkLogin }) => {
       return;
     }
 
-
-
-
     const basketItem = {
       memberNo: loginMember.memberNo,
       goodsNo: good.goodsNo,
@@ -66,10 +63,10 @@ const GoodsDetail = ({ loginMember, userBasketItem, checkLogin }) => {
       });
   };
 
+  if (!good) {
+    return <p>상품 정보를 불러오는 데 실패했습니다.</p>; // 데이터가 없을 경우 처리
+  }
 
-
-
-  
   return (
     <div className="detail-container">
       <h2>{good.goodsName}</h2>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import '../css/StadiumList.css';
-import Pagination from "./PagiNation";
+import Pagination from "../PagiNation";
 
 const StadiumList = () => {
     const [stadiums, setStadiums] = useState([]);

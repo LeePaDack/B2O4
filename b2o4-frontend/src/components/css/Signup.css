@@ -1,6 +1,6 @@
 /* 전체 컨테이너 스타일링 */
 .signup-container {
-  max-width: 500px; /* 컨테이너의 최대 너비를 500px로 설정 */
+  max-width: 700px; /* 컨테이너의 최대 너비를 500px로 설정 */
   margin: 50px auto; /* 컨테이너를 화면의 가운데에 배치하고, 위아래에 50px 여백 추가 */
   padding: 30px; /* 컨테이너 내부 여백을 30px으로 설정 */
   background-color: #f7f9fc; /* 컨테이너의 배경색을 부드러운 연회색으로 설정 */
@@ -18,20 +18,17 @@
   margin-bottom: 8px; /* 라벨과 입력 필드 사이에 8px의 간격 추가 */
 }
 
-/* 입력 필드와 버튼 사이의 컨테이너 스타일링 */
-.signup-container .input-container {
-  display: flex; /* 플렉스 박스로 설정하여 요소를 수평으로 배치 */
-  align-items: center; /* 요소를 수직으로 가운데 정렬 */
-  gap: 10px; /* 요소 사이에 10px 간격 추가 */
+.validateDup{
+  padding: 5px 10px !important;
+}
+
+.id-container button{
+  top: 0;
+  right: 5px;
 }
 
 /* 입력 필드 스타일링 */
-.signup-container input[type="text"],
-.signup-container input[type="password"],
-.signup-container input[type="email"],
-.signup-container input[type="date"],
-.signup-container input[type="file"],
-.signup-container input[name="memberAddress"] {
+.signup-container input{
   width: 100%; /* 입력 필드가 전체 컨테이너의 너비를 차지하도록 설정 */
   max-width: 100%; /* 모든 입력 필드의 최대 너비를 컨테이너 너비에 맞춤 */
   padding: 12px; /* 입력 필드 내부 여백을 12px으로 설정 */
@@ -43,12 +40,7 @@
   transition: border-color 0.3s ease, box-shadow 0.3s ease; /* 포커스 시 변화를 부드럽게 설정 */
 }
 
-.signup-container input[type="text"]:focus,
-.signup-container input[type="password"]:focus,
-.signup-container input[type="email"]:focus,
-.signup-container input[type="date"]:focus,
-.signup-container input[type="file"]:focus,
-.signup-container input[name="memberAddress"]:focus {
+.signup-container input:focus{
   border-color: #5b9bd5; /* 포커스 시 경계선을 파란색으로 변경 */
   box-shadow: 0 0 5px rgba(91, 155, 213, 0.5); /* 포커스 시 부드러운 그림자 효과 추가 */
   outline: none; /* 기본 포커스 아웃라인 제거 */
@@ -72,9 +64,6 @@
   font-size: 16px; /* 버튼 텍스트 크기를 16px로 설정 */
   font-weight: bold; /* 버튼 텍스트를 굵게 설정 */
   transition: background-color 0.3s ease, transform 0.2s ease; /* 버튼 배경색과 크기 변화 시 애니메이션 적용 */
-  white-space: nowrap; /* 텍스트가 한 줄로 유지되도록 설정 */
-  display: inline-block; /* 버튼이 인라인 블록으로 동작하게 설정 */
-  flex-shrink: 0; /* 버튼이 축소되지 않도록 설정 */
 }
 
 .signup-container button:hover {

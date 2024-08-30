@@ -2,19 +2,12 @@
     margin-top: 5px;
     width: 100%;
     height: 25%;
-    background-color: rgb(192, 192, 192);
+    background-color: rgba(7, 83, 247, 0.774);
 }
 
-.carousel-item {
-    position: relative; 
-    width: 70%;
-    height: 100%;
-    margin: 0;
-    padding: 10px;
-    display: flex; 
-    align-items: center;
-    justify-content: center;
+.carousel-items{
     text-align: center;
+    padding: 10px;
 }
 
 .carousel-item img {
@@ -48,7 +41,7 @@
 .section-title{
     font-weight: bold;
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 170px;
     align-items: center;
 }
 
@@ -62,19 +55,20 @@
     justify-content: center;
 }
 
-.card-body{
+.stadium-card-body{
     position: relative; 
-    border: 3px solid #ccc;
     border-radius: 4px;
     margin: 10px;
     max-width: 400px;
     padding: 20px;
     transition: transform 0.3s;
     text-align: center;
+    cursor: pointer;
 }
 
-.card-body:hover {
+.stadium-card-body:hover {
     transform: scale(1.03); 
+    background-color: #f1f0f0;
 }
 
 .hot{
@@ -85,48 +79,52 @@
     z-index: 10 ; 
 }
 
-.card-body img {
+.stadium-card-body img {
     width: 100%; 
     height: auto; 
-    max-height: 300px; 
     display: block; 
     margin: 0 auto; 
 }
 
-.highlight {
-    border: 7px solid gold; 
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6); 
+.stadium-image{
+    min-height: 275px;
+    max-height: 275px;
 }
 
-.card-body p {
+.highlight {
+    border: 2px solid gold; 
+}
+
+.stadium-card-body p {
     margin-top: 20px;
 }
 
-.card-body button{
+.stadium-card-body button{
     padding: 8px 16px;
     margin-bottom: 10px;
     width: 95%;
 }
 
 .stadium-desc{
-    padding: 20px;
-    line-height: 0.5;
+    height: 200px;
+    padding: 0;
     text-align: left;
+    line-height: 0.7;
 }
 
-.stadiumName{
+.stadium-name{
     font-size: 18px;
     font-weight: bold;
     color: #4f4b4b;
 }
 
-.stadiumAddress, .stadiumCapacity{
+.stadium-address, .stadium-capacity{
     font-size: 13px;
     font-weight: bold;
     color: #5f5f5f;
 }
 
-.stadiumPrice{
+.stadium-price{
     font-size: 22px;
     font-weight: bold;
     color: #333;
@@ -153,6 +151,7 @@
 
 .slider-container {
     position: relative;
+    justify-content: center;
 }
 
 .slick-prev, .slick-next {
@@ -189,30 +188,30 @@
     position: relative; 
     border-radius: 4px;
     margin: 0 10px; 
-    width: 300px; 
-    height: 300px;
+    height: 450px;
     padding: 20px;
     box-sizing: border-box; 
     transition: transform 0.3s;
     text-align: center;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 .gallery-card-body:hover {
     transform: scale(1.03); 
+    background-color: #f1f0f0;
 }
 
 .gallery-card-body img {
+    object-fit: cover;
+    overflow: auto;
     width: 100%; 
     height: auto; 
-    max-height: 100px; 
+    min-width: 300px;
+    min-height: 300px;
+    max-height: 300px;
     display: block; 
     margin: 0 auto; 
-}
-
-.gallery-card-body button{
-    padding: 8px 16px;
-    width: 95%;
 }
 
 .gallery-desc{
@@ -220,35 +219,69 @@
     padding: 20px;
 }
 
-.gbpostTitle{
+.gallery-desc-title{
     font-size: 18px;
     font-weight: bold;
     color: #4f4b4b;
 }
 
-.memberName{
+.gallery-desc-name{
     font-size: 13px;
     font-weight: bold;
     color: #5f5f5f;
 }
 
-.goods{
-    border: none;
-    box-shadow: 0 0 5px #ccc;
+.recommended-goods-container{
+    margin-bottom: 100px;
 }
 
-.goods-desc{
+.recommended-goods-card-body {
+    position: relative; 
+    border-radius: 4px;
+    margin: 0 10px; 
+    height: 400px;
+    padding: 20px;
+    box-sizing: border-box; 
+    transition: transform 0.3s;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.recommended-goods-card-body:hover {
+    transform: scale(1.03); 
+    background-color: #f1f0f0;
+}
+
+.recommended-goods-card-body img {
+    width: 50%; 
+    height: 50%; 
+    display: block; 
+    margin: 0 auto; 
+}
+
+.recommended-goods-desc{
     text-align: left;
     padding: 20px;
+    height: 200px;
 }
 
-.goodsName{
+.recommended-goods-name-box{
+    height: 60px;
+}
+
+.recommended-goods-name{
     font-size: 18px;
     font-weight: bold;
     color: #4f4b4b;
 }
 
-.goodsPrice{
+.recommended-goods-kind{
+    font-weight: bold;
+    font-size: large;
+}
+
+.recommended-goods-price{
     font-size: 30px;
     font-weight: bold;
     color: #5f5f5f;
