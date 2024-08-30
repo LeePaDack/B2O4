@@ -26,9 +26,5 @@
     <select id="isAdmin" parameterType="String" resultType="boolean">
         SELECT memberType = 'A' FROM member WHERE memberId = #{memberId}
     </select>
-	
-	<!-- 채팅 허용/금지 상태 조회 -->
-	<select id="getChatableStatus" parameterType="String" resultType="b2o4.dto.Member">
-	    SELECT memberId, chatable FROM member WHERE memberId = #{memberId}
-	</select>
+
 </mapper>

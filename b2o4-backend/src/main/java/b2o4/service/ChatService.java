@@ -24,7 +24,5 @@ public interface ChatService {
 	
     //관리자인지 여부 확인
     boolean isAdmin(@Param("memberId") String memberId);
-    
-    //검색한 사용자의 채팅 권한 여부 확인
-    Member getChatableStatus(String memberId);
+
 }

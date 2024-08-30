@@ -252,6 +252,7 @@
 }
 
 .emoji-list {
+  background-color: #333;
   font-family: sans-serif;
   text-align: center;
   padding: 1rem; 

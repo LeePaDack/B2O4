@@ -45,9 +45,5 @@ public class ChatServiceImpl implements ChatService{
     public boolean isAdmin(String memberId) {
         return mapper.isAdmin(memberId);
     }
-    
-    @Override
-    public Member getChatableStatus(String memberId) {
-        return mapper.getChatableStatus(memberId);
-    }
+
 }

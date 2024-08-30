@@ -7,7 +7,6 @@ import axios from "axios";
 import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
-
 const LiveStreamingPage = () => {
     const [searchWord, setSearchWord] = useState('');
     const [searchedChat, setSearchedChat] = useState([]);
@@ -16,6 +15,14 @@ const LiveStreamingPage = () => {
     const chatLogPerPage = 20; // 페이지당 항목 수
     const { loginMember } = useContext(MyPageContext);
     const [stompClient, setStompClient] = useState(null);
+
+    useEffect(() => {
+        // localStorage에서 chatable 상태를 가져옴
+        const savedChatable = localStorage.getItem('chatable');
+        if (savedChatable) {
+            setChatable(JSON.parse(savedChatable));
+        }
+    }, []);
 
     useEffect(() => {
         axios.get("/search/chat", {
@@ -38,13 +45,18 @@ const LiveStreamingPage = () => {
             onConnect: function (frame) {
                 console.log('STOMP Connected:', frame);
                 setStompClient(client);
+
+                // 채팅 권한 업데이트 구독
                 client.subscribe('/topic/chatPermissionUpdate', (response) => {
-                    const { memberId, chatable } = JSON.parse(response.body);
-                    if (loginMember.memberId === memberId) {
-                        setChatable(!chatable);
+                    const updatedMember = JSON.parse(response.body);
+                    if (loginMember.memberId === updatedMember.memberId) {
+                        const newChatable = updatedMember.chatable === 'Y';
+                        setChatable(newChatable);
+                        // 변경된 chatable 값을 로컬 스토리지에 저장
+                        localStorage.setItem('chatable', JSON.stringify(newChatable));
                     }
                 });
-
+                
             },
             onStompError: function (frame) {
                 console.error('STOMP Error:', frame);
@@ -88,7 +100,6 @@ const LiveStreamingPage = () => {
             }
         })
             .then(res => {
-                setChatable(!chatable);
                 stompClient.publish({
                     destination: '/app/chat.PermissionUpdate',
                     body: JSON.stringify({
@@ -96,6 +107,8 @@ const LiveStreamingPage = () => {
                         chatable
                     })
                 });
+                // chatable 값을 로컬 스토리지에 저장
+                localStorage.setItem('chatable', JSON.stringify(chatable === "Y"));
             })
             .catch(error => {
                 console.error('채팅 상태 업데이트 오류:', error);
@@ -110,7 +123,7 @@ const LiveStreamingPage = () => {
         <div className="livePage-container">
             <div className="livePage-wrapper">
                 <WebCam />
-                <LiveChat />
+                <LiveChat chatable={chatable} />
             </div>
             {loginMember.memberType === 'A' &&
                 <div className="chat-search-container">

@@ -30,7 +30,7 @@ public class ChatController {
     
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
-    
+ 
     private boolean freezeChat = false;
     private boolean streamingBegin = false;
     ChatLog forDeleteMessage = new ChatLog();
@@ -126,8 +126,17 @@ public class ChatController {
     public ResponseEntity<String> switchAuthToChat(
             @RequestParam("memberId") String memberId,
             @RequestParam("chatable") char chatable) {
+
         String res = chatService.switchAuthToChat(memberId, chatable);
+
+        // Member 객체 생성하여 업데이트 내용 전송
+        Member member = new Member();
+        member.setMemberId(memberId);
+        member.setChatable(chatable);
+
+        // 변경된 채팅 권한을 모든 클라이언트에게 전송
+        messagingTemplate.convertAndSend("/topic/chatPermissionUpdate", member);
+
         return ResponseEntity.ok(res);
     }
-    
 }
