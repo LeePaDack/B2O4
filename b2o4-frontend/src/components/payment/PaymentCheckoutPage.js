@@ -52,7 +52,7 @@ export function PaymentCheckoutPage() {
         orderId,
         orderName: `${stadium.stadiumName} 예약 (${reservationDate}, ${reservationTime} 시간대, ${personCount}명)`,
         successUrl: window.location.origin + "/payment/success",
-        failUrl: window.location.origin + "/fail",
+        failUrl: window.location.origin + "/payment/fail",
         customerEmail: loginMember.memberEmail,
         customerName: loginMember.memberName,
         customerMobilePhone: loginMember.memberPhone,

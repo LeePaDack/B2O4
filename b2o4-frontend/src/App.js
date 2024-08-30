@@ -109,7 +109,7 @@ function App() {
           <Route path='/reservationStadium/:stadiumNo' element={<ReservationStadium/>}/>
           <Route path="/payment/checkout" element={<PaymentCheckoutPage />} />
           <Route path="/payment/success" element={<PaymentSuccessPage />} />
-          <Route path="/fail" element={<PaymentFailPage />} />
+          <Route path="/payment/fail" element={<PaymentFailPage />} />
           <Route path="/stadiumdetail/:stadiumNo" element={<StadiumDetail/>}/>
           <Route path="/memberReviewDetail/:memberNo" element={<MemberReviewDetail/>}/>
           <Route path="/stadiumReviewUpload" element={<StadiumReviewUpload/>}/>

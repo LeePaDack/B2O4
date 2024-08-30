@@ -3,6 +3,7 @@
 .memberReviewMain-container {
   text-align: center;
   padding: 20px 0;
+  background: linear-gradient(to bottom, #f4fcf0, rgb(217, 247, 158));
 }
 
 .stadiumReviewMain-content,
@@ -158,10 +159,17 @@
 
 .stadiumReviewdetail-content img,
 .memberReviewdetail-content img {
-  width: 100%;
-  height: auto;
+  width: 70%;
+  height: 400px;
   border-radius: 12px;
   margin-bottom: 25px;
+}
+
+.stadiumReviewdetail-content .headers,
+.memberReviewdetail-content .headers {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .stadiumReviewdetail-content p,

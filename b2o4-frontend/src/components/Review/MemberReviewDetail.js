@@ -65,7 +65,7 @@ const MemberReviewDetail = () => {
     <div className="memberReviewdetail-container">
       <div className="memberReviewdetail-content">
         <h3 className="headers">🏃‍♂️ {list.memberName} 님의 정보 🏃‍♀️</h3>
-        <img src={`/images/userProfile/${list.memberProfile}`} alt="Profile" />
+        <img src={`/images/${list.memberProfile}`} alt="Profile" />
         <p>참가자 이름 : {list.memberName}</p>
         <p>참가 매치 수 : {list.matchCount}</p>
         <p>랭크 : {list.memberRank}</p>
