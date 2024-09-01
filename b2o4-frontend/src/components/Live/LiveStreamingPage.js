@@ -19,8 +19,11 @@ const LiveStreamingPage = () => {
     useEffect(() => {
         // localStorage에서 chatable 상태를 가져옴
         const savedChatable = localStorage.getItem('chatable');
-        if (savedChatable) {
+        if (savedChatable !== null) {
             setChatable(JSON.parse(savedChatable));
+        } else {
+            // 기본값을 true로 설정
+            setChatable(true);
         }
     }, []);
 

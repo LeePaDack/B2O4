@@ -75,7 +75,7 @@ const LiveChat = ({ chatable }) => {
       if (!chatable) {
         alert('채팅이 금지되었습니다.');
       } else {
-        alert('채팅이 가능합니다.');
+        alert('채팅이 허용되었습니다.');
       }
       prevChatableRef.current = chatable;
     }
