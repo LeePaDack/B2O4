@@ -1,15 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const NaverApi = () => {
   return (
     <div>
-      <a href="http://localhost:9000/naverLogin">
+      <Link to="http://localhost:9000/naverLogin">        
         <img
           height="50"
           src="btnW_icon_circle.PNG"
           alt="Naver Login"
         />
-      </a>
+      </Link>
     </div>
   );
 };

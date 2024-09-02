@@ -238,6 +238,9 @@ const MyPage = () => {
                 </div>
               )}
             </div>
+            <label className="img-input">
+              <img className="input-profile" src="/images/input-profile.gif"/>
+              프로필 업로드
             <input
               type="file"
               name="memberProfile"
@@ -245,6 +248,7 @@ const MyPage = () => {
               onChange={profileChange}
               className="file-input"
             />
+            </label>
           </label>
           <label>
             I D

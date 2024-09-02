@@ -39,6 +39,7 @@ const Header = () => {
         break;
     }
   };
+
   const [keyword, setKeyword] = useState(""); // 검색어 상태
   const [searchResults, setSearchResults] = useState({
     stadiums: [],
@@ -56,7 +57,6 @@ const Header = () => {
     console.log("Search keyword:", keyword); // 디버깅용 로그
     navigate(`/search?keyword=${encodeURIComponent(keyword)}`); // 검색어를 쿼리 파라미터로 추가하여 이동
   };
-
 
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
 
@@ -130,13 +130,13 @@ const Header = () => {
             className="justify-content-center"
           >
             <Nav className="d-flex">
-              <Nav.Link
-                href="/galleryBoard"
-                className="item"
+              <Link
+                to="/galleryBoard"
+                className="nav-link item"
                 style={{ marginLeft: "140px" }}
               >
                 갤러리
-              </Nav.Link>
+              </Link>
               <NavDropdown
                 title="용품 장터"
                 id="basic-nav-dropdown"
@@ -145,9 +145,9 @@ const Header = () => {
                 <NavDropdown.Item onClick={() => afterLoginNavigate(1)}>
                   메인 장터
                 </NavDropdown.Item>
-                <NavDropdown.Item href="/usedMarket">
+                <Link to="/usedMarket" className="dropdown-item">
                   중고 장터
-                </NavDropdown.Item>
+                </Link>
                 <NavDropdown.Item onClick={() => afterLoginNavigate(2)}>
                   장바구니
                 </NavDropdown.Item>
@@ -157,19 +157,19 @@ const Header = () => {
                 id="basic-nav-dropdown"
                 className="item"
               >
-                <NavDropdown.Item href="/StadiumList">
+                <Link to="/StadiumList" className="dropdown-item">
                   구장 목록
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/members/kakaoMap">
+                </Link>
+                <Link to="/members/kakaoMap" className="dropdown-item">
                   구장 찾기
-                </NavDropdown.Item>
+                </Link>
               </NavDropdown>
               <Nav.Link className="item" onClick={() => afterLoginNavigate(3)}>
                 라이브
               </Nav.Link>
-              <Nav.Link href="/boardMain" className="item">
+              <Link to="/boardMain" className="nav-link item">
                 고객센터
-              </Nav.Link>
+              </Link>
               <NavDropdown
                 title="마이페이지"
                 id="basic-nav-dropdown"
@@ -178,15 +178,18 @@ const Header = () => {
                 <NavDropdown.Item onClick={openModal}>
                   내 정보 수정
                 </NavDropdown.Item>
-                <NavDropdown.Item href="/paymentDetails/:memberNo">
+                <Link to="/paymentDetails/:memberNo" className="dropdown-item">
                   내 예약 정보보기
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/userDeliveryInfo/:memberNo">
+                </Link>
+                <Link
+                  to="/userDeliveryInfo/:memberNo"
+                  className="dropdown-item"
+                >
                   내 상품 결재 내역보기
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/stadiumInfo">
+                </Link>
+                <Link to="/stadiumInfo" className="dropdown-item">
                   평가하기
-                </NavDropdown.Item>
+                </Link>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
