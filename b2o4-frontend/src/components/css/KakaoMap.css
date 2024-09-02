@@ -5,6 +5,7 @@
   height: 90vh; /* 세로 크기를 90vh로 설정 */
   margin: auto; /* 수평 중앙 정렬 */
   margin-top: 200px;
+  margin-bottom: 200px;
   top: calc(50vh - 45vh - 50px); /* 헤더와 푸터의 높이를 고려하여 중앙 정렬 */
   border-radius: 10px; /* 모서리를 둥글게 */
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); /* 그림자 추가 */
