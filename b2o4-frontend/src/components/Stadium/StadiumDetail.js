@@ -50,17 +50,17 @@ const StadiumDetail = () => {
                         </div>
                         <div className="col-4 stadium-detail-text">
                             <td className="stadium-detail-name">{stadium.stadiumName}</td>
-                            <br/>
+                            <hr></hr>
                             <td>구장주소 : {stadium.stadiumAddress}</td>
-                            <br/>
+                            <hr></hr>
                             <td>수용인원 : {stadium.stadiumCapacity}명</td>
-                            <br/>
+                            <hr></hr>
                             <td>주차여부 : {stadium.stadiumParking == 'Y' ? "가능" : "불가능"}</td>
-                            <br/>
+                            <hr></hr>
                             <td>실내외 : {stadium.stadiumInOutdoor == 'I' ? "실내" : "실외"} </td>
-                            <br/>
+                            <hr></hr>
                             <td>신발렌트 : {stadium.shoesRent == 'Y' ? "가능" : "불가능"}</td>
-                            <br/>
+                            <hr></hr>
                             <td>인당가격 : \ {stadium.stadiumPrice.toLocaleString()}</td>
                         </div>
                 </div>
