@@ -30,6 +30,7 @@ const Signup = () => {
   const [isIdAvailable, setIsIdAvailable] = useState(null); // 아이디 중복 검사 결과 저장
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'memberId') setIsIdAvailable(null); // 아이디 입력 시 중복 확인 초기화
     // 입력 값이 비어있을 때 오류 메시지 삭제
     if (value === '') {
       setErrors((prevErrors) => ({
@@ -96,6 +97,12 @@ const Signup = () => {
     }
   };
   const handleIdCheck = async () => {
+    const memberIdError = errors.memberId;
+    // 아이디 유효성 검사 먼저 체크
+    if (memberIdError) {
+      alert(memberIdError);
+      return;
+    }
     if (!member.memberId.trim()) {
       alert("아이디를 입력하세요");
       setIsIdAvailable(false);

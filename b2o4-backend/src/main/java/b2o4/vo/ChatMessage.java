@@ -12,4 +12,7 @@ public class ChatMessage {
     private String viewedTime;
     private String formattedTime;
     private String color;
+    private String senderType; // 관리자 여부를 판단할 타입 정보
+    private boolean isAdmin;
+    
 }
