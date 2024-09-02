@@ -204,6 +204,7 @@
   width: 30px;
   margin-right: 10px;
   border-radius: 100%;
+  transform: translateY(50%);
 }
 
 .timestamp {
