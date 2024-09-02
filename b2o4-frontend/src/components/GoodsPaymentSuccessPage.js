@@ -30,10 +30,10 @@ export function GoodsPaymentSuccessPage() {
   useEffect(() => {
     if (orderId && paymentKey && amount && basketNos.length > 0 && loginMember) {
       saveOrderDetails({
-        deliveryAddress: "",
-        recipientName: "",
-        recipientPhone: "",
-        deliveryRequest: ""
+        deliveryAddress: "deliveryAddress",
+        recipientName: "recipientName",
+        recipientPhone: "recipientPhone",
+        deliveryRequest: "deliveryRequest"
       });
     }
   }, [orderId, paymentKey, amount, basketNos, loginMember]);
