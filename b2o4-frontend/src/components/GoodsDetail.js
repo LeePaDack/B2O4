@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import './css/GoodsDetail.css';
 import axios from "axios";
 
-// 디테일
+
 const GoodsDetail = ({ loginMember, userBasketItem, checkLogin }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,16 +36,13 @@ const GoodsDetail = ({ loginMember, userBasketItem, checkLogin }) => {
   // 장바구니에 추가
   const addToShoppingBasket = () => {
 
-    //로그인하지 않았으면 로그인해주세요
+    //로그인하지 않았으면 로그인페이지로
     if(!loginMember) { 
-      if(window.confirm("로그인이 필요합니다!")){ //window.confirm alert창 확인/취소
-        navigate("/login") //확인누르면 로그인화면으로
+      if(window.confirm("로그인이 필요합니다!")){
+        navigate("/login") 
       }
       return;
     }
-
-
-
 
     const basketItem = {
       memberNo: loginMember.memberNo,

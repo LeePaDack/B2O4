@@ -34,32 +34,7 @@ const ShoppingBasket = () => {
 }, [loginMember, basketList]);
 console.log("basketGoods", basketGoods);
 
-/* 쓰레기들
-useEffect(() => {
-    if (loginMember) {
-        axios.get(`http://localhost:9000/basket/all/${loginMember.memberNo}`)
-            .then((response) => {
-                setBasketGoods(response.data);
-            })
-            .catch((err) => {
-                console.error("Error: ", err);
-            });
-    }
-}, [loginMember]); */
-  
-  /*
-    useEffect(() => {
-        axios.get('http://localhost:9000/basket/all/',  {
-            params: {memberNo: memberNo}
-        })
-        .then(response => {
-            setBasketGoods(response.data);
-        })
-        .catch(err => {
-            console.log("Error", err);
-        });
-    }, [memberNo]);
-*/
+
 
 
 

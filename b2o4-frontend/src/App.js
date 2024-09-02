@@ -19,6 +19,11 @@ import Footer from './components/Layout/Footer.js';
 import GalleryUpdate from './components/Gallery/GalleryUpdate.js'
 import DeliveryInfo from './components/DeliveryInfo.js';
 
+import UsedItemBoard from './components/UsedItem/UsedItemBoard.js';
+import UsedItemUpload from './components/UsedItem/UsedItemUpload.js';
+import UsedItemDetail from './components/UsedItem/UsedItemDetail.js';
+import UsedItemUpdate from './components/UsedItem/UsedItemUpdate.js';
+
 function App() {
 
   const [loginMember, setLoginMember] = useState(null);
@@ -54,7 +59,11 @@ function App() {
           <Route path="/goodsDetail/:goodsNo" element={<GoodsDetail  loginMember={loginMember}/>} />
           <Route path="/shoppingBasket/" element={<ShoppingBasket  loginMember={loginMember}/>} />
           <Route path="/DeliveryInfo/" element={<DeliveryInfo  loginMember={loginMember} /> } />
-
+          
+          <Route path='/usedItemBoard' element={<UsedItemBoard loginMember={loginMember} />} />
+          <Route path='/usedItem/upload' element={<UsedItemUpload loginMember={loginMember} />} />
+          <Route path='/usedItem/:usedItemNo' element={<UsedItemDetail loginMember={loginMember} />} />
+          <Route path='/usedItem/edit/:usedItemNo' element={<UsedItemUpdate loginMember={loginMember} />} />
         </Routes>
         <Footer />
       </Router>

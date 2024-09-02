@@ -115,7 +115,6 @@ const GoodsPurchase = () => {
       .post("http://localhost:9000/delivery/add", submitData)
       .then((response) => {
         alert("주문이 완료되었습니다.");
-        //navigate("/마이페이지 확인")
       })
       .catch((error) => {
         alert("주문내역을 다시 확인해주세요.");
@@ -248,7 +247,7 @@ const GoodsPurchase = () => {
         <table className="final-amount-table">
           <tbody>
             <tr>
-              <th>결제 총액</th>
+              <th>결제 총액 : </th>
               <td>₩{totalAmount.toLocaleString()}</td>
             </tr>
             <tr>
