@@ -30,10 +30,10 @@ export function GoodsPaymentSuccessPage() {
   useEffect(() => {
     if (orderId && paymentKey && amount && basketNos.length > 0 && loginMember) {
       saveOrderDetails({
-        deliveryAddress: "배송지 주소", // 예시로 넣은 값
-        recipientName: "수령인 이름", // 예시로 넣은 값
-        recipientPhone: "수령인 전화번호", // 예시로 넣은 값
-        deliveryRequest: "배송 요청 사항" // 예시로 넣은 값
+        deliveryAddress: "",
+        recipientName: "",
+        recipientPhone: "",
+        deliveryRequest: ""
       });
     }
   }, [orderId, paymentKey, amount, basketNos, loginMember]);
