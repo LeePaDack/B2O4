@@ -12,6 +12,15 @@ const Header = () => {
   const { loginMember, setLoginMember } = useContext(MyPageContext);
   const navigate = useNavigate();
 
+  const openMyPageModal = () => {
+    if (!loginMember) {
+      alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
+      navigate("/Login");
+    } else {
+      setIsModalOpen(true);
+    }
+  };
+
   const logout = () => {
     setLoginMember(null);
     localStorage.removeItem("loginMember");
@@ -175,7 +184,7 @@ const Header = () => {
                 id="basic-nav-dropdown"
                 className="item"
               >
-                <NavDropdown.Item onClick={openModal}>
+                <NavDropdown.Item onClick={openMyPageModal}>
                   내 정보 수정
                 </NavDropdown.Item>
                 <Link to="/paymentDetails/:memberNo" className="dropdown-item">
