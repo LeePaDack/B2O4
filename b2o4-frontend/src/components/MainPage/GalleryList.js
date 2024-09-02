@@ -68,7 +68,7 @@ const GalleryList = () => {
     return (
         <div className='gallery-list-container'>
             <div className='section-title'>
-                <Link to="/gallery"><h1>Gallery</h1></Link>
+                <Link to="/galleryBoard"><h1>Gallery</h1></Link>
                 <hr />
             </div>
             <div className="slider-container">
