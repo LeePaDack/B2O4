@@ -23,6 +23,9 @@ import UsedItemBoard from './components/UsedItem/UsedItemBoard.js';
 import UsedItemUpload from './components/UsedItem/UsedItemUpload.js';
 import UsedItemDetail from './components/UsedItem/UsedItemDetail.js';
 import UsedItemUpdate from './components/UsedItem/UsedItemUpdate.js';
+import GoodsPaymentDeliveryInfo from './components/GoodsPaymentDeliveryInfo.js';
+import GoodsPaymentSuccessPage from './components/GoodsPaymentSuccessPage.js';
+import GoodsPaymentFailPage from './components/GoodsPaymentFailPage.js';
 
 function App() {
 
@@ -58,8 +61,11 @@ function App() {
           <Route path="/goodsShop" element={<GoodsShop />} /> 
           <Route path="/goodsDetail/:goodsNo" element={<GoodsDetail  loginMember={loginMember}/>} />
           <Route path="/shoppingBasket/" element={<ShoppingBasket  loginMember={loginMember}/>} />
-          <Route path="/DeliveryInfo/" element={<DeliveryInfo  loginMember={loginMember} /> } />
-          
+          {/* <Route path="/DeliveryInfo/" element={<DeliveryInfo  loginMember={loginMember} /> } />  */}
+          <Route path="/payment/checkout" element={<GoodsPaymentDeliveryInfo loginMember={loginMember} />} />  
+          <Route path='/payment/success' element={<GoodsPaymentSuccessPage loginMember={loginMember}/>} />
+          <Route path='/payment/fail' element={<GoodsPaymentFailPage loginMember={loginMember} />} />
+
           <Route path='/usedItemBoard' element={<UsedItemBoard loginMember={loginMember} />} />
           <Route path='/usedItem/upload' element={<UsedItemUpload loginMember={loginMember} />} />
           <Route path='/usedItem/:usedItemNo' element={<UsedItemDetail loginMember={loginMember} />} />

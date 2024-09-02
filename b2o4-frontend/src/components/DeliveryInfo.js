@@ -4,7 +4,7 @@ import MyPageContext from "./MyPageContext";
 import axios from "axios";
 import "./css/DeliveryInfo.css";
 
-const GoodsPurchase = () => {
+const DeliveryInfo = () => {
   //memberName, memberAddress, memberPhone
 
   const { loginMember, basketList, setBasketList } = useContext(MyPageContext);
@@ -108,6 +108,8 @@ const GoodsPurchase = () => {
 
 
 
+
+
   //최종주문
   const finalOrder = () => {
     console.log(submitData);
@@ -115,6 +117,7 @@ const GoodsPurchase = () => {
       .post("http://localhost:9000/delivery/add", submitData)
       .then((response) => {
         alert("주문이 완료되었습니다.");
+        //navigate("/마이페이지 확인")
       })
       .catch((error) => {
         alert("주문내역을 다시 확인해주세요.");
@@ -264,4 +267,4 @@ const GoodsPurchase = () => {
   );
 };
 
-export default GoodsPurchase;
+export default DeliveryInfo;
