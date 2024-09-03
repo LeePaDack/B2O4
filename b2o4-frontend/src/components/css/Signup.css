@@ -1,13 +1,32 @@
 /* 전체 컨테이너 스타일링 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+.signup-background {
+  position: relative; /* 상대적인 위치로 설정하여 다른 요소와의 관계를 유지 */
+  display: flex; /* Flexbox로 중앙 정렬 설정 */
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  width: 100%;
+  min-height: 100vh; /* 최소 높이를 화면 전체로 설정 */
+  background-image: url("../../../public/background.png");
+  background-size: cover;
+  background-position: center;
+  z-index: 0; /* 배경 이미지를 콘텐츠 뒤에 배치 */
+}
 .signup-container {
+  position: relative;
+  z-index: 1; /* 폼을 배경 이미지 위에 배치 */
+  background-color: white; /* 폼 배경색 */
+  padding: 20px;
   max-width: 500px;
-  margin: 50px auto;
-  padding: 30px;
-  background-color: #F7F9FC;
-  border-radius: 15px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-  box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
+  width: 100%; /* 모바일 반응형을 위해 100% 너비 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  opacity: 1; /* 폼의 투명도를 1로 설정하여 흐리게 보이지 않도록 함 */
+  margin: 40px 0; /* 폼 주위에 여백 추가 */
 }
 /* 폼 라벨 스타일링 */
 .signup-container label {
@@ -86,8 +105,7 @@
   margin-top: -15px;
   margin-bottom: 20px;
 }
-
-.already-container{
+.already-container {
   border: 1px solid gray;
   border-radius: 8px;
   width: 30%;
@@ -96,25 +114,21 @@
   margin-top: 20px;
   text-align: center;
   box-shadow: 0 4px 8px gray;
-  
 }
-
-.already-container h1{
+.already-container h1 {
   margin-top: 40px;
 }
-
-.already-button{
+.already-button {
   margin-top: 80px;
 }
-
-.already-button button{
+.already-button button {
   padding: 9px 18px;
   width: 150px;
   margin: 10px;
   border: none;
-    border-radius: 5px;
-    background-color: #77dd77;
-    color: #212121;
-    font-weight: bold;
-    font-size: 18px;
+  border-radius: 5px;
+  background-color: #77DD77;
+  color: #212121;
+  font-weight: bold;
+  font-size: 18px;
 }
