@@ -102,7 +102,7 @@ const BoardContent = () => {
       />
       <div className="board-content-table">
         {loginMember.memberNo === board.memberNo && (
-          <button onClick={handleUpdateClick} className="update-button">
+          <button onClick={handleUpdateClick} className="update-board-button">
             수정하기
           </button>
         )}

@@ -168,7 +168,7 @@ const LiveStreamingPage = () => {
                             ))}
                         </tbody>
                     </table>
-                    <div className="pagination">
+                    <div className="chat-log-pagination">
                         {Array.from({ length: totalPages }, (_, index) => (
                             <button key={index + 1} onClick={() => handlePageChange(index + 1)}
                                 className={currentPage === index + 1 ? 'active' : ''}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/FindLogin.css";
 import axios from "axios";
-import Modal from "../Layout/Modal";
+import Modal from "../Layout/GalleryModal";
 import PasswordChange from "./PasswordChange";
 
 const FindPw = () => {

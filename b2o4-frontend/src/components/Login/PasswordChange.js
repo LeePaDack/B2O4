@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../css/Modal.css';
+import '../css/GalleryModal.css';
 
 const PasswordChange = ({ userInfo }) => {
   const [newPassword, setNewPassword] = useState('');
@@ -53,13 +53,13 @@ const PasswordChange = ({ userInfo }) => {
   };
 
   return (
-    <div>
+    <div className='password-change-container'>
       <h2>비밀번호 변경</h2>
-      
       {success && <div style={{ color: 'green' }}>{success}</div>}
       {!success ? (
         <div className='password-container'>
           <div>
+            <br/><br/>
             <label>새 비밀번호:</label>
             <input
               type="password"
@@ -75,7 +75,7 @@ const PasswordChange = ({ userInfo }) => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
-          {error && <div style={{ color: 'red' }}>{error}</div>}
+          {error && <p style={{ color: 'red' }}>{error}</p>}
           <button className='btn btn-dark' onClick={handlePasswordChange}>비밀번호 변경</button>
         </div>
       ) : (

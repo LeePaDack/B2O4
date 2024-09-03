@@ -154,7 +154,7 @@ const Header = () => {
                 <NavDropdown.Item onClick={() => afterLoginNavigate(1)}>
                   메인 장터
                 </NavDropdown.Item>
-                <Link to="/usedMarket" className="dropdown-item">
+                <Link to="/usedItemBoard" className="dropdown-item">
                   중고 장터
                 </Link>
                 <NavDropdown.Item onClick={() => afterLoginNavigate(2)}>

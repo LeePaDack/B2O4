@@ -60,7 +60,7 @@ const BoardMain = ({}) => {
         <div>
             <img className="board-top-img" src="../images/5346ae379c2ae.png"/>
             <table className="board-table">
-                <h2>고객센터</h2>
+                <h2 className="customer-board-center-h2">고객센터</h2>
                 <Table striped bordered hover size="sm" className="board-Table">
                 <thead>
                     <tr>

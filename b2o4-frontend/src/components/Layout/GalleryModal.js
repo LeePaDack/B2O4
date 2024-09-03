@@ -1,7 +1,7 @@
-import '../css/Modal.css';
+import '../css/GalleryModal.css';
 
 // 버튼을 열거나 닫을 때 동작
-const Modal = ({isOpen, onClose, children}) => {
+const GalleryModal = ({isOpen, onClose, children}) => {
     // isOpen이 false이면 아래 return() 을 보지않고
     // 함수 종료
 
@@ -10,9 +10,9 @@ const Modal = ({isOpen, onClose, children}) => {
     }
 
     return(
-        <div className="modal-overlay">
-            <div className="modal-content">
-                <button className="modal-close" onClick={onClose}>
+        <div className="gallery-modal-overlay">
+            <div className="gallery-modal-content">
+                <button className="gallery-modal-close" onClick={onClose}>
                     &times;
                 </button>
                 {children}
@@ -22,4 +22,4 @@ const Modal = ({isOpen, onClose, children}) => {
 
 }
 
-export default Modal;
+export default GalleryModal;
