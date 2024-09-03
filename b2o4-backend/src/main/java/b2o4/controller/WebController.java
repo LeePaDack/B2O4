@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class WebController {
 
     @GetMapping(value =  {"", "Login","/login","/galleryBoard", "/galleryBoard/**", "/galleryUpload", "/findId", "/findPw", "/galleryUpdate", "/passwordChange",
-    		"/signup/naver", "/GoodsShop", "/goodsDetail/**", "/shoppingBasket/", "/DeliveryInfo/", "/mypage", "/stadiumInfo", "/memberInfo", "/StadiumList", "/stadiumReviewDetail/**", "/boardPosting"
+    		"/signup/naver", "/GoodsShop", "/goodsDetail/**", "/ShoppingBasket/", "/DeliveryInfo/", "/mypage", "/stadiumInfo", "/memberInfo", "/StadiumList", "/stadiumReviewDetail/**", "/boardPosting"
     		, "/boardUpdate/**", "/boardMain", "/boardContent/**", "/reservationStadium/**", "/payment/checkout", "/payment/success", "/payment/fail", "/stadiumDetail/**", "/memberReviewDetail/**", "/stadiumReviewUpload"
     		, "/memberReviewUpload", "/paymentDetails/**", "/userDeliveryInfo/**", "/stadiumListDetail/**", "/LiveStreamingPage", "/Signup", "/members/kakaoMap", "/search", "/result", "/signup/kakao"
     		, "/usedItemBoard", "/usedItem/upload", "/usedItem/**", "/usedItem/edit/**", "/oauth2/callback/kakao"})
