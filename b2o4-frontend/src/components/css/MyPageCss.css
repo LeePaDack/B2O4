@@ -75,15 +75,15 @@
   border: 2px solid #ddd;
 }
 
-.button-group {
-  display: flex;
+.user-page-buttons {
   justify-content: center;
-  gap: 20px;
+  display: flex;
   margin-top: 20px;
+  gap: 20px;
 }
 
-.submit-button,
-.delete-button,
+.user-submit-button,
+.user-delete-button,
 .home-button {
   width: auto;
   max-width: 200px;
@@ -96,11 +96,11 @@
   text-align: center;
 }
 
-.submit-button {
+.user-submit-button {
   background-color: #28a745;
 }
 
-.delete-button {
+.user-delete-button {
   background-color: #dc3545;
 }
 
@@ -132,4 +132,3 @@
 .error-message.invalid {
   color: red;
 }
-
