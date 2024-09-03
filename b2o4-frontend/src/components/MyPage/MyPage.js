@@ -239,15 +239,15 @@ const MyPage = () => {
               )}
             </div>
             <label className="img-input">
-              <img className="input-profile" src="/images/input-profile.gif"/>
+              <img className="input-profile" src="/images/input-profile.gif" />
               프로필 업로드
-            <input
-              type="file"
-              name="memberProfile"
-              accept="image/*"
-              onChange={profileChange}
-              className="file-input"
-            />
+              <input
+                type="file"
+                name="memberProfile"
+                accept="image/*"
+                onChange={profileChange}
+                className="file-input"
+              />
             </label>
           </label>
           <label>
@@ -292,15 +292,17 @@ const MyPage = () => {
       </div>
 
       <div className="button-group">
-        <button className="submit-button" onClick={userInfoSubmit}>
-          수정하기
-        </button>
-        <button className="delete-button" onClick={userDeleteBtn}>
-          회원 탈퇴
-        </button>
-        <Link to="/">
-          <button className="home-button">홈으로 돌아가기</button>
-        </Link>
+        <div className="user-page-buttons">
+          <button className="user-submit-button" onClick={userInfoSubmit}>
+            수정하기
+          </button>
+          <button className="user-delete-button" onClick={userDeleteBtn}>
+            회원 탈퇴
+          </button>
+          <Link to="/">
+            <button className="home-button">홈으로 돌아가기</button>
+          </Link>
+        </div>
       </div>
     </div>
   );
