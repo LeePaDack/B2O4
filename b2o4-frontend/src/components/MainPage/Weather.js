@@ -141,7 +141,7 @@ const DisplayWeather = () => {
                                             {weatherValue.main.humidity} %
                                         </li>
                                         <li>
-                                            <img src="/images/windSpeed.png" alt='풍속' />
+                                            <img src="/images/windspeed.png" alt='풍속' />
                                             {weatherValue.wind.speed} m/s
                                         </li>
                                     </ul>
