@@ -59,6 +59,11 @@ import StadiumDetail from './components/Stadium/StadiumDetail.js';
 import GoogleSignup from './components/Login/GoogleSignup.js';
 import KakaoSignup from './components/Login/KakaoSignup.js';
 
+import UsedItemBoard from './components/UsedItem/UsedItemBoard.js';
+import UsedItemUpload from './components/UsedItem/UsedItemUpload.js';
+import UsedItemDetail from './components/UsedItem/UsedItemDetail.js';
+import UsedItemUpdate from './components/UsedItem/UsedItemUpdate.js';
+
 function App() {
 
   const [loginMember, setLoginMember] = useState(null);
@@ -123,6 +128,10 @@ function App() {
           <Route path="/search" element={<SearchResultPage />} />
           <Route path="/result" element={<GoogleSignup />} />
           <Route path="/signup/kakao" element={<KakaoSignup />} />
+          <Route path='/usedItemBoard' element={<UsedItemBoard loginMember={loginMember} />} />
+          <Route path='/usedItem/upload' element={<UsedItemUpload loginMember={loginMember} />} />
+          <Route path='/usedItem/:usedItemNo' element={<UsedItemDetail loginMember={loginMember} />} />
+          <Route path='/usedItem/edit/:usedItemNo' element={<UsedItemUpdate loginMember={loginMember} />} />
           <Route path="/oauth2/callback/kakao" element={<KakaoRedirection />} />
         </Routes>
         <Sidebar/>
