@@ -20,6 +20,7 @@
     margin-right: 10%;
     padding: 5px 10px;
     margin-bottom: 45px;
+    transition: background-color 0.3s;
 }
 
 .post-button:hover,.post-back-button:hover {
@@ -47,6 +48,7 @@
     width: 100%;
     height: 500px;
     padding: 7px;
+    margin-bottom: 100px;
 }
 
 .post-table {

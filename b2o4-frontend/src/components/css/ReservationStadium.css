@@ -12,6 +12,7 @@
     padding: 5px 10px;
     margin-top: 25px;
     margin-left: 10%;
+    transition: background-color 0.3s;
 }
 
 .go-stadiumList-button-res:hover {
@@ -96,6 +97,7 @@ input[type='date']::before {
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
     padding: 5px 10px;
+    transition: background-color 0.3s;
 }
 
 .reservation-button:hover {

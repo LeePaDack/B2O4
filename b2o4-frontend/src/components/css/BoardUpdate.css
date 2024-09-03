@@ -17,6 +17,7 @@
     border-radius: 8px;
     border-style: none;
     margin-right: 2%;
+    transition: background-color 0.3s;
 }
 
 .back-content-button {
@@ -32,6 +33,7 @@
     margin-right: 10%;
     padding: 5px 10px;
     margin-bottom: 45px;
+    transition: background-color 0.3s;
 }
 
 .delete-post:hover {
