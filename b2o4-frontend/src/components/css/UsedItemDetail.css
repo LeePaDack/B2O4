@@ -39,8 +39,9 @@
 }
 
 .usedItem-detail-info p {
-  font-size: 16px;
+  font-size: 20px;
   margin: 10px 0;
+  margin-left: 8%;
 }
 
 .usedItem-detail-seller {

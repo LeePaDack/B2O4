@@ -19,14 +19,14 @@
 .purchase-info li {
   margin-bottom: 10px;
 }
-.purchase-info input, select {
+.purchase-info input, .purchase-info select {
   border-radius: 5px;
   padding: 10px;
   border: 1px solid #ccc;
   width: 100%;
   max-width: 400px;
 }
-.purchase-info input:focus, select:focus {
+.purchase-info input:focus, .purchase-info select:focus {
   border-color: rgb(26, 102, 208);
   outline: none;
 }
