@@ -202,158 +202,188 @@ const Signup = () => {
     }).open();
   };
   return (
-    <div className="signup-container">
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            아이디
-            <div className="input-container">
+    <div className="signup-background">
+      <div className="signup-container">
+        <form className="signup-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label className="form-label">
+              아이디
+              <div className="input-container">
+                <input
+                  type="text"
+                  name="memberId"
+                  value={member.memberId}
+                  onChange={handleChange}
+                  className="form-input"
+                />
+                <button
+                  type="button"
+                  onClick={handleIdCheck}
+                  className="check-button"
+                >
+                  중복확인
+                </button>
+              </div>
+              {errors.memberId && (
+                <div className="error-message">{errors.memberId}</div>
+              )}
+              {isIdAvailable === true && (
+                <div className="success-message">
+                  사용 가능한 아이디입니다.
+                </div>
+              )}
+            </label>
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              비밀번호
+              <input
+                type="password"
+                name="memberPw"
+                value={member.memberPw}
+                onChange={handleChange}
+                className="form-input"
+              />
+              {errors.memberPw && (
+                <div className="error-message">{errors.memberPw}</div>
+              )}
+            </label>
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              비밀번호 확인
+              <input
+                type="password"
+                name="memberPwConfirm"
+                value={member.memberPwConfirm}
+                onChange={handleChange}
+                className="form-input"
+              />
+              {errors.memberPwConfirm && (
+                <div className="error-message">{errors.memberPwConfirm}</div>
+              )}
+            </label>
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              이름
               <input
                 type="text"
-                name="memberId"
-                value={member.memberId}
+                name="memberName"
+                value={member.memberName}
                 onChange={handleChange}
+                className="form-input"
               />
-              <button type="button" onClick={handleIdCheck}>중복확인</button>
-            </div>
-            {errors.memberId && (
-              <div style={{ color: 'red' }}>{errors.memberId}</div>
-            )}
-            {isIdAvailable === true && (
-              <div style={{ color: 'green' }}>사용 가능한 아이디입니다.</div>
-            )}
-          </label>
-        </div>
-        <div>
-          <label>
-            비밀번호
-            <input
-              type="password"
-              name="memberPw"
-              value={member.memberPw}
-              onChange={handleChange}
-            />
-            {errors.memberPw && (
-              <div style={{ color: 'red' }}>{errors.memberPw}</div>
-            )}
-          </label>
-        </div>
-        <div>
-          <label>
-            비밀번호 확인
-            <input
-              type="password"
-              name="memberPwConfirm"
-              value={member.memberPwConfirm}
-              onChange={handleChange}
-            />
-            {errors.memberPwConfirm && (
-              <div style={{ color: 'red' }}>{errors.memberPwConfirm}</div>
-            )}
-          </label>
-        </div>
-        <div>
-          <label>
-            이름
-            <input
-              type="text"
-              name="memberName"
-              value={member.memberName}
-              onChange={handleChange}
-            />
-            {errors.memberName && (
-              <div style={{ color: 'red' }}>{errors.memberName}</div>
-            )}
-          </label>
-        </div>
-        <div>
-          <label>
-            핸드폰번호
-            <input
-              type="text"
-              name="memberPhone"
-              value={member.memberPhone}
-              onChange={handleChange}
-            />
-            {errors.memberPhone && (
-              <div style={{ color: 'red' }}>{errors.memberPhone}</div>
-            )}
-          </label>
-        </div>
-        <div>
-          <label>
-            이메일
-            <input
-              type="email"
-              name="memberEmail"
-              value={member.memberEmail}
-              onChange={handleChange}
-            />
-            {errors.memberEmail && (
-              <div style={{ color: 'red' }}>{errors.memberEmail}</div>
-            )}
-          </label>
-        </div>
-        <div>
-          <label>
-            생년월일
-            <input
-              type="date"
-              name="memberBirth"
-              value={member.memberBirth}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            주소
-            <div className="input-container">
+              {errors.memberName && (
+                <div className="error-message">{errors.memberName}</div>
+              )}
+            </label>
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              핸드폰번호
               <input
                 type="text"
-                name="memberAddress"
-                value={member.memberAddress}
+                name="memberPhone"
+                value={member.memberPhone}
                 onChange={handleChange}
+                className="form-input"
               />
-              <button type="button" onClick={handleAddressSearch}>주소 검색</button>
-            </div>
-          </label>
-        </div>
-        <div>
-          <label>
-            상세 주소
-            <input
-              type="text"
-              name="memberDetailAddress"
-              value={member.memberDetailAddress}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            프로필
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-          </label>
-          {member.profileImage && (
-            <div>
-              <img
-                src={member.profileImage}
-                alt="Profile Preview"
-                style={{ width: '100px', height: '100px', marginTop: '10px' }}
+              {errors.memberPhone && (
+                <div className="error-message">{errors.memberPhone}</div>
+              )}
+            </label>
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              이메일
+              <input
+                type="email"
+                name="memberEmail"
+                value={member.memberEmail}
+                onChange={handleChange}
+                className="form-input"
               />
-            </div>
-          )}
-        </div>
-        <div className="button-container">
-          <button type="submit">가입하기</button>
-        </div>
-      </form>
+              {errors.memberEmail && (
+                <div className="error-message">{errors.memberEmail}</div>
+              )}
+            </label>
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              생년월일
+              <input
+                type="date"
+                name="memberBirth"
+                value={member.memberBirth}
+                onChange={handleChange}
+                className="form-input"
+              />
+            </label>
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              주소
+              <div className="input-container">
+                <input
+                  type="text"
+                  name="memberAddress"
+                  value={member.memberAddress}
+                  onChange={handleChange}
+                  className="form-input"
+                />
+                <button
+                  type="button"
+                  onClick={handleAddressSearch}
+                  className="address-search-button"
+                >
+                  주소 검색
+                </button>
+              </div>
+            </label>
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              상세 주소
+              <input
+                type="text"
+                name="memberDetailAddress"
+                value={member.memberDetailAddress}
+                onChange={handleChange}
+                className="form-input"
+              />
+            </label>
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              프로필
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="form-input"
+              />
+            </label>
+            {member.profileImage && (
+              <div className="profile-preview">
+                <img
+                  src={member.profileImage}
+                  alt="Profile Preview"
+                  className="profile-image"
+                />
+              </div>
+            )}
+          </div>
+          <div className="button-container">
+            <button type="submit" className="submit-button">
+              가입하기
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
+  
+  
 };
 export default Signup;

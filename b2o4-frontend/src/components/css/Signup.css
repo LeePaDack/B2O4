@@ -1,14 +1,36 @@
 /* 전체 컨테이너 스타일링 */
-.signup-container {
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 30px;
-  background-color: #F7F9FC;
-  border-radius: 15px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-  box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
+
+.signup-background {
+  position: relative; /* 상대적인 위치로 설정하여 다른 요소와의 관계를 유지 */
+  display: flex; /* Flexbox로 중앙 정렬 설정 */
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  width: 100%;
+  min-height: 100vh; /* 최소 높이를 화면 전체로 설정 */
+  background-image: url("../../../public/background.png");
+  background-size: cover;
+  background-position: center;
+  z-index: 0; /* 배경 이미지를 콘텐츠 뒤에 배치 */
+}
+
+.signup-container {
+  position: relative;
+  z-index: 1; /* 폼을 배경 이미지 위에 배치 */
+  background-color: white; /* 폼 배경색 */
+  padding: 20px;
+  max-width: 500px;
+  width: 100%; /* 모바일 반응형을 위해 100% 너비 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  opacity: 1; /* 폼의 투명도를 1로 설정하여 흐리게 보이지 않도록 함 */
+  margin: 40px 0; /* 폼 주위에 여백 추가 */
+}
+
 /* 폼 라벨 스타일링 */
 .signup-container label {
   font-weight: bold;
@@ -16,6 +38,7 @@
   display: block;
   margin-bottom: 8px;
 }
+
 /* 입력 필드와 버튼 사이의 컨테이너 스타일링 */
 .signup-container .input-container {
   display: flex;
@@ -23,6 +46,7 @@
   gap: 10px;
   margin-bottom: 20px; /* 입력 필드 아래에 일정한 간격 추가 */
 }
+
 /* 입력 필드 스타일링 */
 .signup-container input[type="text"],
 .signup-container input[type="password"],
@@ -38,6 +62,7 @@
   box-sizing: border-box;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 .signup-container input[type="text"]:focus,
 .signup-container input[type="password"]:focus,
 .signup-container input[type="email"]:focus,
@@ -48,6 +73,7 @@
   box-shadow: 0 0 5px rgba(91, 155, 213, 0.5);
   outline: none;
 }
+
 /* 버튼 스타일링 */
 .signup-container button {
   background-color: #28A745;
@@ -65,14 +91,17 @@
   flex-shrink: 0;
   height: 46px; /* 입력 필드와 동일한 높이로 설정 */
 }
+
 .signup-container button:hover {
   background-color: #218838;
   transform: translateY(-2px);
 }
+
 .signup-container button:active {
   background-color: #1E7E34;
   transform: translateY(0);
 }
+
 /* 오류 및 성공 메시지 스타일링 */
 .signup-container .error-message {
   color: #D9534F;
@@ -80,6 +109,7 @@
   margin-top: -15px;
   margin-bottom: 20px;
 }
+
 .signup-container .success-message {
   color: #28A745;
   font-size: 14px;
@@ -87,7 +117,7 @@
   margin-bottom: 20px;
 }
 
-.already-container{
+.already-container {
   border: 1px solid gray;
   border-radius: 8px;
   width: 30%;
@@ -96,25 +126,24 @@
   margin-top: 20px;
   text-align: center;
   box-shadow: 0 4px 8px gray;
-  
 }
 
-.already-container h1{
+.already-container h1 {
   margin-top: 40px;
 }
 
-.already-button{
+.already-button {
   margin-top: 80px;
 }
 
-.already-button button{
+.already-button button {
   padding: 9px 18px;
   width: 150px;
   margin: 10px;
   border: none;
-    border-radius: 5px;
-    background-color: #77dd77;
-    color: #212121;
-    font-weight: bold;
-    font-size: 18px;
+  border-radius: 5px;
+  background-color: #77dd77;
+  color: #212121;
+  font-weight: bold;
+  font-size: 18px;
 }
