@@ -89,9 +89,11 @@ const MonthOfTheStadiumList = () => {
                                 : <img src="/images/defaultImage.png" alt="이미지 없음" />}
                             <div className="stadium-desc row">
                                 <div className="col-10">
+                                    <div className="stadium-desc-except-price">
                                     <p className="stadium-name">{stadium.stadiumName}</p>
                                     <p className="stadium-address">{stadium.stadiumAddress}</p>
                                     <p className="stadium-capacity">최대 수용 인원 : {stadium.stadiumCapacity} 명</p>
+                                    </div>
                                     <p className="stadium-price">{stadium.stadiumPrice.toLocaleString()} 원(1인)</p>
                                 </div>
                                 <div className="col-2">

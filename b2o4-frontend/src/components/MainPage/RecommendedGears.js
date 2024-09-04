@@ -63,7 +63,7 @@ const RecommendedGears = () => {
     };
 
     console.log(goodsList);
-    
+
     return (
         <div className='recommended-goods-container'>
             <div className='section-title'>
@@ -81,8 +81,12 @@ const RecommendedGears = () => {
                                 <div className="recommended-goods-name-box">
                                     <p className="recommended-goods-name">{goods.goodsName}</p>
                                 </div>
-                                <p className="recommended-goods-kind">{goods.goodsKind}</p>
-                                <p className="recommended-goods-price">{goods.goodsPrice.toLocaleString()}원</p>
+                                <div>
+                                    <p className="recommended-goods-kind">{goods.goodsKind}</p>
+                                </div>
+                                <div>
+                                    <p className="recommended-goods-price">{goods.goodsPrice.toLocaleString()}원</p>
+                                </div>
                             </div>
                         </div>
                     ))}
