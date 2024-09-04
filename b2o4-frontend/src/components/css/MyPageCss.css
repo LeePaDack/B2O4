@@ -31,6 +31,7 @@
 
 .img-input .input-profile {
   width: 10%;
+  cursor: pointer;
 }
 
 .user-info label,
