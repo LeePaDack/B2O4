@@ -194,7 +194,7 @@ const Header = () => {
                   to="/userDeliveryInfo/:memberNo"
                   className="dropdown-item"
                 >
-                  내 상품 결재 내역보기
+                  내 상품 결제 내역보기
                 </Link>
                 <Link to="/stadiumInfo" className="dropdown-item">
                   평가하기

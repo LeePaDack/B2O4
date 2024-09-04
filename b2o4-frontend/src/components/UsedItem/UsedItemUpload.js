@@ -44,7 +44,7 @@ const UsedItemUpload = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/usedItem/upload", formData, {
+      const response = await axios.post("/usedItem/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }

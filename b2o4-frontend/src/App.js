@@ -95,7 +95,7 @@ function App() {
           <Route path='/galleryUpload' element={<GalleryUpload />} />
           <Route path='/findId' element={<FindId />} />
           <Route path='/findPw' element={<FindPw />} />
-          <Route path='/galleryUpdate' element={<GalleryUpdate />} />
+          <Route path='/galleryUpdate/:gbpostNo' element={<GalleryUpdate />} />
           <Route path='/passwordChange' element={<PasswordChange />} />       
           <Route path='/signup/naver' element={<NaverSignup />} />
           <Route path="/goodsShop" element={<GoodsShop />} /> 
