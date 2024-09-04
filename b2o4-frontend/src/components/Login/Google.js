@@ -11,7 +11,7 @@ const Google = ({ setLoginResult }) => {
     scope: "email profile",
     onSuccess: async ({ code }) => {
       try {
-        const response = await axios.post("http://localhost:9000/auth/google/callback", { code });
+        const response = await axios.post("/auth/google/callback", { code });
         setLoginResult(response.data);
         navigate("/result", { state: response.data });
       } catch (error) {

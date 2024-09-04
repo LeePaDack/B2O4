@@ -16,7 +16,7 @@ const UsedItemDetail = () => {
 
   const handleDelete = () => {
     if (window.confirm('정말로 이 게시글을 삭제하시겠습니까?')) {
-      axios.delete(`http://localhost:9000/usedItem/delete/${item.usedItemNo}`, {
+      axios.delete(`/usedItem/delete/${item.usedItemNo}`, {
         data: { memberNo: loginMember.memberNo }
       })
       .then(response => {
@@ -43,7 +43,7 @@ const UsedItemDetail = () => {
           image ? (
             <img
               key={index}
-              src={`http://localhost:9000/images/${image}`}
+              src={`/images/${image}`}
               alt={`Used Item ${index}`}
               className="usedItem-detail-image"
             />

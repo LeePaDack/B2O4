@@ -9,7 +9,7 @@ const GoodsShop = () => {
 
     //  useEffect -> 자바에서 데이터를 맨 처음 가져오고 마는 코드
     useEffect(() => {
-        axios.get('http://localhost:9000/goods/all')
+        axios.get('/goods/all')
             .then(response => { //자바에서 가져오기 성공했을 경우
                 setGoods(response.data); //  goods 에 자바에서 가져온 데이터를 모두 집어넣기
             })
@@ -29,7 +29,7 @@ const GoodsShop = () => {
       goodsQuantity: 1,
       basketTotal: good.goodsPrice
     };
-    axios.post('http://localhost:9000/basket/add', basketItem)
+    axios.post('/basket/add', basketItem)
       .then(() => {
         alert("장바구니에 추가되었습니다.");
       })

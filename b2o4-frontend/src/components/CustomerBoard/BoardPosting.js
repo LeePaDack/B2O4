@@ -15,7 +15,7 @@ const BoardPosting = () => {
     // addPost 함수 수정: boardTitle, boardContent, memberNo 정보를 포함한 객체를 전송
     const addPost = async (board) => {
         try {
-            const res = await axios.post('http://localhost:9000/boards', board);
+            const res = await axios.post('/boards', board);
             setPosting([...posting, res.data]);
         } catch (err) {
             console.error("Error adding post:", err);

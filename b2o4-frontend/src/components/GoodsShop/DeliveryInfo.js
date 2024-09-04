@@ -52,7 +52,7 @@ const GoodsPurchase = () => {
   useEffect(() => {
     if (loginMember && loginMember.memberNo) {
       axios
-        .get(`http://localhost:9000/basket/all/${loginMember.memberNo}`)
+        .get(`/basket/all/${loginMember.memberNo}`)
         .then((response) => {
           setBasketList(response.data);
           console.log("response.data : ", response.data);
@@ -112,7 +112,7 @@ const GoodsPurchase = () => {
   const finalOrder = () => {
     console.log(submitData);
     axios
-      .post("http://localhost:9000/delivery/add", submitData)
+      .post("/delivery/add", submitData)
       .then((response) => {
         alert("주문이 완료되었습니다.");
         //navigate("/마이페이지 확인")

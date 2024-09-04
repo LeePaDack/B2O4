@@ -38,7 +38,7 @@ const LiveStreamingPage = () => {
     }, [searchWord]);
 
     useEffect(() => {
-        const socket = new SockJS('http://localhost:9000/ws'); // WebSocket 엔드포인트
+        const socket = new SockJS('/ws'); // WebSocket 엔드포인트
         const client = new Client({
             webSocketFactory: () => socket,
             connectHeaders: {},

@@ -21,7 +21,7 @@ const LiveChat = ({ chatable }) => {
 
   // 서버에 요청 보내서 일반 사용자들에게 기능시행 후 결과를 전파하는 기능
   useEffect(() => {
-    const socket = new SockJS("http://localhost:9000/ws"); // java 쪽의 서버포트 설정과 맞춰서 작성
+    const socket = new SockJS("/ws"); // java 쪽의 서버포트 설정과 맞춰서 작성
     const client = new Client({
       webSocketFactory: () => socket,
       connectHeaders: {},
@@ -51,7 +51,7 @@ const LiveChat = ({ chatable }) => {
         });
 
         //현재 채팅창 동결 여부를 서버에서 가져오기
-        axios.get("http://localhost:9000/chat/freezeChat").then((res) => {
+        axios.get("/chat/freezeChat").then((res) => {
           setFreezeChat(res.data);
         });
       },

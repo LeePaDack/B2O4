@@ -55,7 +55,7 @@ const GoodsDetail = ({ loginMember, userBasketItem, checkLogin }) => {
       goodsSize: selectSize
     };
 
-    axios.post('http://localhost:9000/basket/add', basketItem)
+    axios.post('/basket/add', basketItem)
       .then(() => {
         if(window.confirm('장바구니에 추가되었습니다. 이동하시겠습니까?')) {
           navigate("/shoppingBasket");

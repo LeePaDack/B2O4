@@ -64,7 +64,7 @@ export function PaymentSuccessPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:9000/confirm/payment",
+        "/confirm/payment",
         requestData,
         {
           headers: {
@@ -88,7 +88,7 @@ export function PaymentSuccessPage() {
           };
 
           await axios.post(
-            "http://localhost:9000/reservationStadium",
+            "/reservationStadium",
             reservationData,
             {
               headers: {

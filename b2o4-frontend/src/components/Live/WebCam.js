@@ -31,7 +31,7 @@ const WebCam = () => {
 
     // 스트리밍 시작 버튼 활성화/비활성화 다른 사용자들에게 공유 시키기
     useEffect(() => {
-        const socket = new SockJS('http://localhost:9000/ws'); // java 쪽의 서버포트 설정과 맞춰서 작성
+        const socket = new SockJS('/ws'); // java 쪽의 서버포트 설정과 맞춰서 작성
         const client = new Client({
             webSocketFactory: () => socket,
             connectHeaders: {},
@@ -47,7 +47,7 @@ const WebCam = () => {
                 });
 
                 //현재 스트리밍 상태를 서버에서 가져오기
-                axios.get('http://localhost:9000/chat/streaming')
+                axios.get('/chat/streaming')
                     .then(res => {
                         const stream = res.data;
                         setWebCamView(stream);

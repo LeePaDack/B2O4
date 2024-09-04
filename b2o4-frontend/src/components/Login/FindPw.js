@@ -169,7 +169,7 @@ const FindPw = () => {
                 </Link>
               </li>
               <li className="login-item">
-                <Link to="/register" className="login-link">
+                <Link to="/Signup" className="login-link">
                   <img src="soccer.jpg" />
                   &nbsp;회원가입
                 </Link>

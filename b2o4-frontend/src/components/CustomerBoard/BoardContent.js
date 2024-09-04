@@ -20,7 +20,7 @@ const BoardContent = () => {
   const BoardComment = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:9000/boards/comment/${board.boardNo}`
+        `/boards/comment/${board.boardNo}`
       );
       setComments(res.data);
     } catch (error) {
@@ -67,7 +67,7 @@ const BoardContent = () => {
   // 댓글 작성하기
   const adminBoardComment = () => {
     axios
-      .post(`http://localhost:9000/boards/comment`, sendingDate) // URL 수정
+      .post(`/boards/comment`, sendingDate) // URL 수정
       .then((response) => {
         alert("댓글 작성 완료");
         setCommentContent(""); // 댓글 작성 후 입력 필드 초기화

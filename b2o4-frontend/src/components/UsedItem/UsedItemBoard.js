@@ -15,7 +15,7 @@ const UsedItemBoard = () => {
   // 중고 목록 가져오기
   useEffect(() => {
     axios
-      .get("http://localhost:9000/usedItem/all")
+      .get("/usedItem/all")
       .then((response) => {
         console.log(response.data); // 데이터 확인
         setUsedItemList(response.data);
@@ -64,7 +64,7 @@ const UsedItemBoard = () => {
               <div className="usedItem-images">
                 {item.usedItemImages.split(",")[0] && (
                   <img
-                    src={`http://localhost:9000/images/${item.usedItemImages.split(",")[0]}`}
+                    src={`/images/${item.usedItemImages.split(",")[0]}`}
                     alt={`Used Item`}
                     className="usedItem-image"
                   />

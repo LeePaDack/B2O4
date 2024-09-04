@@ -18,7 +18,7 @@ const ShoppingBasket = () => {
   // 장바구니 항목 가져오기
   useEffect(() => {
     if (loginMember) {
-      axios.get(`http://localhost:9000/basket/all/${loginMember.memberNo}`)
+      axios.get(`/basket/all/${loginMember.memberNo}`)
       .then((response) => {
         console.log("RRRRRRRRRRRRRRRREspose ");
         console.log(response);
@@ -37,7 +37,7 @@ console.log("basketGoods", basketGoods);
 /* 쓰레기들
 useEffect(() => {
     if (loginMember) {
-        axios.get(`http://localhost:9000/basket/all/${loginMember.memberNo}`)
+        axios.get(`/basket/all/${loginMember.memberNo}`)
             .then((response) => {
                 setBasketGoods(response.data);
             })
@@ -49,7 +49,7 @@ useEffect(() => {
   
   /*
     useEffect(() => {
-        axios.get('http://localhost:9000/basket/all/',  {
+        axios.get('/basket/all/',  {
             params: {memberNo: memberNo}
         })
         .then(response => {
@@ -87,7 +87,7 @@ useEffect(() => {
     const updatedGoods = basketGoods.find((good) => good.basketNo === basketNo);
     const newTotal = updatedGoods.goodsPrice * newQuantity;
 
-    axios.put(`http://localhost:9000/basket/update`, {
+    axios.put(`/basket/update`, {
       basketNo,
       goodsQuantity: newQuantity,
       basketTotal: newTotal,
@@ -108,7 +108,7 @@ useEffect(() => {
 
   // 장바구니 항목 삭제
   const handleDelete = (basketNo) => {
-    axios.delete(`http://localhost:9000/basket/delete/${basketNo}`)
+    axios.delete(`/basket/delete/${basketNo}`)
     .then(() => {
       setBasketGoods(
         basketGoods.filter((good) => good.basketNo !== basketNo)

@@ -109,7 +109,7 @@ const Signup = () => {
       return;
     }
     try {
-      const response = await axios.get('http://localhost:9000/api/idCheck', {
+      const response = await axios.get('/api/idCheck', {
         params: { id: member.memberId },
       });
       if (response.data.isAvailable) {
@@ -158,7 +158,7 @@ const Signup = () => {
     formData.append('memberDetailAddress', member.memberDetailAddress); // 상세 주소 추가
     formData.append('memberBirth', member.memberBirth);
     formData.append('profileImage', member.memberProfile);
-    fetch('http://localhost:9000/api/members', {
+    fetch('/api/members', {
       method: 'POST',
       body: formData,
     })

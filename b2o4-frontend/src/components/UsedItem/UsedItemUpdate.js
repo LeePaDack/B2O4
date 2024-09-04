@@ -46,7 +46,7 @@ const UsedItemUpdate = () => {
       formData.append('files', file);
     });
 
-    axios.put(`http://localhost:9000/usedItem/edit/${item.usedItemNo}`, formData, {
+    axios.put(`/usedItem/edit/${item.usedItemNo}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

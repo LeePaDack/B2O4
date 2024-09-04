@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const StadiumReviewUpload = () => {
-  const stadiumInputReviewAPI = "http://localhost:9000/api/stadiuminputreview";
+  const stadiumInputReviewAPI = "/api/stadiuminputreview";
 
   const { reviewList, setReviewList, loginMember } = useContext(MyPageContext);
   

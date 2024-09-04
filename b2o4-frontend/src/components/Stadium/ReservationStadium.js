@@ -44,7 +44,7 @@ const ReservationStadium = () => {
 
   const fetchStadiumDetails = async () => {
     try {
-      const res = await axios.get(`http://localhost:9000/stadiums/stadiumDetail/${stadium.stadiumNo}`);
+      const res = await axios.get(`/stadiums/stadiumDetail/${stadium.stadiumNo}`);
       if (res.data && res.data.stadiumCapacity) {
         setStadiumCapacity(res.data.stadiumCapacity);
       }

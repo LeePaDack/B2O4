@@ -13,7 +13,7 @@ const KakaoRedirection = () => {
 
                 if (code) {
                     const response = await axios.post(
-                        'http://localhost:9000/oauth2/callback/kakao',
+                        '/oauth2/callback/kakao',
                         new URLSearchParams({
                             grant_type: 'authorization_code',
                             client_id: '8bbb8a3533ffe081525698b3125aa35c',

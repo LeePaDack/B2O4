@@ -11,7 +11,7 @@ const UserDeliveryInfo = () => {
     if (loginMember && loginMember.memberNo) {
       axios
         .get(
-          `http://localhost:9000/api/payments/user/delivery/${loginMember.memberNo}`
+          `/api/payments/user/delivery/${loginMember.memberNo}`
         )
         .then((response) => {
           setUserDeliveryInfos(response.data);

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const NaverApi = () => {
   return (
     <div>
-      <Link to="http://localhost:9000/naverLogin">        
+      <Link to="/naverLogin">        
         <img
           height="50"
           src="btnW_icon_circle.png"
