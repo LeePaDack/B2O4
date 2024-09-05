@@ -16,4 +16,12 @@ public class ApiController {
     }
     
     
+    @Value("${weather.api.key}")
+    private String weatherApiKey;
+    
+    @GetMapping("/api/weather-api-key")
+    public String getWeatherApiKey() {
+    	return weatherApiKey;
+    }
+    
 }
