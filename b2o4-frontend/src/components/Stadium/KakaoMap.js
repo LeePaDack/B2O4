@@ -1,17 +1,27 @@
 import React, { useEffect } from "react";
 import "../css/KakaoMap.css"; // CSS 파일을 임포트합니다.
-
+const fetchKakaoMapKey = async () => {
+  try {
+    const response = await fetch("/api/kakao-map-key"); // API 엔드포인트 호출
+    if (!response.ok) {
+      throw new Error("API 요청 실패");
+    }
+    const data = await response.json();
+    return data.key; // 가져온 키를 반환
+  } catch (error) {
+    console.error("API 키 가져오기 실패:", error);
+    return null;
+  }
+};
 const KakaoMap = () => {
   useEffect(() => {
     // .env 환경 변수에서 API 키를 가져옵니다.
     const apiKey = process.env.REACT_APP_KAKAO_MAP_API_KEY;
-
     // Kakao Maps API를 비동기적으로 로드하기 위한 스크립트 태그를 생성합니다.
     const script = document.createElement("script");
     script.async = true;
     script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey}&autoload=false`;
     document.head.appendChild(script);
-
     script.onload = () => {
       // 스크립트가 로드된 후 실행할 콜백 함수를 정의합니다.
       if (window.kakao && window.kakao.maps) {
@@ -23,7 +33,6 @@ const KakaoMap = () => {
             level: 10, // 지도의 확대 레벨을 설정합니다.
           };
           const map = new window.kakao.maps.Map(mapContainer, mapOption);
-
           // 미리 정의된 풋살장 위치들에 마커 추가
           const locations = [
             { name: "누리풋볼클럽", lat: 37.50985, lng: 127.033196 },
@@ -72,7 +81,6 @@ const KakaoMap = () => {
             // 부산
             { name: "부산 남구 풋살장", lat: 35.1264, lng: 129.0845 },
             { name: "센텀풋살파크", lat: 35.1686, lng: 129.131 },
-
             // 대구
             {
               name: "대구 북구 시민운동장 풋살장",
@@ -80,56 +88,43 @@ const KakaoMap = () => {
               lng: 128.6123,
             },
             { name: "신암풋살파크", lat: 35.8833, lng: 128.6267 },
-
             // 광주
             { name: "광주 서구 풋살장", lat: 35.1532, lng: 126.8913 },
             { name: "유스퀘어풋살파크", lat: 35.1599, lng: 126.9076 },
-
             // 대전
             { name: "대전 유성구 풋살장", lat: 36.3504, lng: 127.3845 },
             { name: "월평풋살파크", lat: 36.3574, lng: 127.3601 },
-
             // 울산
             { name: "울산 남구 풋살장", lat: 35.5413, lng: 129.264 },
             { name: "문수풋살파크", lat: 35.5466, lng: 129.3077 },
-
             // 인천
             { name: "인천 남동구 풋살장", lat: 37.4484, lng: 126.7317 },
             { name: "송도풋살파크", lat: 37.39, lng: 126.6358 },
-
             // 강원
             { name: "강릉 종합경기장 풋살장", lat: 37.7556, lng: 128.8761 },
             { name: "속초풋살파크", lat: 38.2063, lng: 128.5919 },
-
             // 충북
             { name: "청주 풋살장", lat: 36.6424, lng: 127.4887 },
             { name: "충주 종합운동장 풋살장", lat: 36.9719, lng: 127.9314 },
-
             // 충남
             { name: "천안 종합운동장 풋살장", lat: 36.8152, lng: 127.1139 },
             { name: "아산 풋살파크", lat: 36.7848, lng: 127.0001 },
-
             // 전북
             { name: "전주 월드컵경기장 풋살장", lat: 35.8685, lng: 127.064 },
             { name: "군산 풋살파크", lat: 35.9676, lng: 126.7371 },
-
             // 전남
             { name: "목포 풋살파크", lat: 34.8118, lng: 126.3925 },
             { name: "순천 풋살장", lat: 34.9487, lng: 127.4885 },
-
             // 경북
             { name: "포항 남구 풋살장", lat: 36.019, lng: 129.3435 },
             { name: "경주 월드컵경기장 풋살장", lat: 35.8562, lng: 129.2248 },
-
             // 경남
             { name: "창원 마산종합운동장 풋살장", lat: 35.207, lng: 128.5837 },
             { name: "김해 풋살파크", lat: 35.2338, lng: 128.889 },
-
             // 제주
             { name: "제주 서귀포 풋살장", lat: 33.2539, lng: 126.5618 },
             { name: "한림풋살파크", lat: 33.41, lng: 126.3183 },
           ];
-
           // 각 위치에 마커를 추가하고 인포윈도우를 설정합니다.
           locations.forEach((location) => {
             const markerPosition = new window.kakao.maps.LatLng(
@@ -151,7 +146,6 @@ const KakaoMap = () => {
               infowindow.close()
             );
           });
-
           // 현재 위치로 이동하는 함수
           const moveToCurrentLocation = () => {
             if (navigator.geolocation) {
@@ -178,7 +172,6 @@ const KakaoMap = () => {
               alert("Geolocation을 지원하지 않는 브라우저입니다.");
             }
           };
-
           const locateButton = document.getElementById("locate-button");
           if (locateButton) {
             locateButton.addEventListener("click", moveToCurrentLocation);
@@ -186,13 +179,11 @@ const KakaoMap = () => {
         });
       }
     };
-
     // 컴포넌트 언마운트 시 스크립트를 정리하여 메모리 누수 방지
     return () => {
       document.head.removeChild(script);
     };
   }, []);
-
   return (
     <div className="map-container">
       <div id="map"></div>
@@ -202,5 +193,4 @@ const KakaoMap = () => {
     </div>
   );
 };
-
 export default KakaoMap;
