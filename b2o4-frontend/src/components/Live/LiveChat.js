@@ -211,7 +211,7 @@ const LiveChat = ({ chatable }) => {
           <div key={msg.msgNo} className="message">
             {msg.profile && (
               <img
-                src={`/images/${msg.profile}`}
+                src={`/images/${loginMember.memberProfile}`}
                 alt="profileImage"
                 className="profile-image"
               />

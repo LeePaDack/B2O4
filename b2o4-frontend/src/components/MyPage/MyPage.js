@@ -38,7 +38,7 @@ const MyPage = () => {
           setDefaultName(response.data.memberName);
           if (response.data.memberProfile) {
             setProfileImagePreview(
-              `/images/userProfile/${response.data.memberProfile}`
+              `/images/${response.data.memberProfile}`
             );
           }
         })
