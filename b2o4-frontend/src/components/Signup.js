@@ -134,7 +134,6 @@ const Signup = () => {
     e.preventDefault();
     // 모든 필드에 대한 유효성 검사 수행
     Object.keys(member).forEach((name) => validateField(name, member[name]));
-    
     // 오류가 있는 경우 제출 중지
     if (Object.values(errors).some((error) => error !== '')) {
       console.log('유효성 검사 오류:', errors);

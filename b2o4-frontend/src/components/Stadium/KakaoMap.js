@@ -1,22 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/KakaoMap.css"; // CSS 파일을 임포트합니다.
+// API 키를 비동기적으로 가져오는 함수
 const fetchKakaoMapKey = async () => {
   try {
     const response = await fetch("/api/kakao-map-key"); // API 엔드포인트 호출
     if (!response.ok) {
       throw new Error("API 요청 실패");
     }
-    const data = await response.json();
-    return data.key; // 가져온 키를 반환
+    const data = await response.text(); // JSON 대신 텍스트 형식으로 데이터를 가져옵니다.
+    return data; // 가져온 키를 반환
   } catch (error) {
     console.error("API 키 가져오기 실패:", error);
     return null;
   }
 };
 const KakaoMap = () => {
+  const [apiKey, setApiKey] = useState(null); // 상태로 API 키를 관리합니다.
   useEffect(() => {
-    // .env 환경 변수에서 API 키를 가져옵니다.
-    const apiKey = process.env.REACT_APP_KAKAO_MAP_API_KEY;
+    // 컴포넌트가 마운트되었을 때 API 키를 가져옵니다.
+    const getApiKey = async () => {
+      const key = await fetchKakaoMapKey(); // API 키를 비동기적으로 가져옵니다.
+      setApiKey(key); // 가져온 API 키를 상태에 저장합니다.
+    };
+    getApiKey(); // API 키 가져오기 함수 호출
+  }, []);
+  useEffect(() => {
+    if (!apiKey) return; // API 키가 없으면 스크립트를 로드하지 않습니다.
     // Kakao Maps API를 비동기적으로 로드하기 위한 스크립트 태그를 생성합니다.
     const script = document.createElement("script");
     script.async = true;
@@ -125,72 +134,72 @@ const KakaoMap = () => {
             { name: "제주 서귀포 풋살장", lat: 33.2539, lng: 126.5618 },
             { name: "한림풋살파크", lat: 33.41, lng: 126.3183 },
           ];
-          // 각 위치에 마커를 추가하고 인포윈도우를 설정합니다.
-          locations.forEach((location) => {
-            const markerPosition = new window.kakao.maps.LatLng(
-              location.lat,
-              location.lng
-            );
-            const marker = new window.kakao.maps.Marker({
-              position: markerPosition,
-              title: location.name,
-            });
-            marker.setMap(map);
-            const infowindow = new window.kakao.maps.InfoWindow({
-              content: `<div style="padding:5px;font-size:12px;">${location.name}</div>`,
-            });
-            window.kakao.maps.event.addListener(marker, "mouseover", () =>
-              infowindow.open(map, marker)
-            );
-            window.kakao.maps.event.addListener(marker, "mouseout", () =>
-              infowindow.close()
-            );
+         // 각 위치에 마커를 추가하고 인포윈도우를 설정합니다.
+         locations.forEach((location) => {
+          const markerPosition = new window.kakao.maps.LatLng(
+            location.lat,
+            location.lng
+          );
+          const marker = new window.kakao.maps.Marker({
+            position: markerPosition,
+            title: location.name,
           });
-          // 현재 위치로 이동하는 함수
-          const moveToCurrentLocation = () => {
-            if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(
-                (position) => {
-                  const currentPos = new window.kakao.maps.LatLng(
-                    position.coords.latitude,
-                    position.coords.longitude
-                  );
-                  const currentMarker = new window.kakao.maps.Marker({
-                    position: currentPos,
-                    title: "현재 위치",
-                    map: map,
-                    zIndex: 10,
-                  });
-                  map.setCenter(currentPos);
-                },
-                (error) => {
-                  console.error("Geolocation Error: ", error);
-                  alert("현재 위치를 찾을 수 없습니다.");
-                }
-              );
-            } else {
-              alert("Geolocation을 지원하지 않는 브라우저입니다.");
-            }
-          };
-          const locateButton = document.getElementById("locate-button");
-          if (locateButton) {
-            locateButton.addEventListener("click", moveToCurrentLocation);
-          }
+          marker.setMap(map);
+          const infowindow = new window.kakao.maps.InfoWindow({
+            content: `<div style="padding:5px;font-size:12px;">${location.name}</div>`,
+          });
+          window.kakao.maps.event.addListener(marker, "mouseover", () =>
+            infowindow.open(map, marker)
+          );
+          window.kakao.maps.event.addListener(marker, "mouseout", () =>
+            infowindow.close()
+          );
         });
-      }
-    };
-    // 컴포넌트 언마운트 시 스크립트를 정리하여 메모리 누수 방지
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
-  return (
-    <div className="map-container">
-      <div id="map"></div>
-      <div className="map-control">
-        <button id="locate-button">위치</button>
-      </div>
+        // 현재 위치로 이동하는 함수
+        const moveToCurrentLocation = () => {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                const currentPos = new window.kakao.maps.LatLng(
+                  position.coords.latitude,
+                  position.coords.longitude
+                );
+                const currentMarker = new window.kakao.maps.Marker({
+                  position: currentPos,
+                  title: "현재 위치",
+                  map: map,
+                  zIndex: 10,
+                });
+                map.setCenter(currentPos);
+              },
+              (error) => {
+                console.error("Geolocation Error: ", error);
+                alert("현재 위치를 찾을 수 없습니다.");
+              }
+            );
+          } else {
+            alert("Geolocation을 지원하지 않는 브라우저입니다.");
+          }
+        };
+        const locateButton = document.getElementById("locate-button");
+        if (locateButton) {
+          locateButton.addEventListener("click", moveToCurrentLocation);
+        }
+      });
+    }
+  };
+  // 컴포넌트 언마운트 시 스크립트를 정리하여 메모리 누수 방지
+  return () => {
+    document.head.removeChild(script);
+  };
+}, [apiKey]); // apiKey가 변경될 때마다 useEffect를 다시 실행합니다.
+return (
+  <div className="map-container">
+    <div id="map"></div>
+    <div className="map-control">
+      <button id="locate-button">위치</button>
     </div>
-  );
+  </div>
+);
 };
 export default KakaoMap;
