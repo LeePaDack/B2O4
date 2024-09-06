@@ -53,7 +53,7 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-def reactAppDir = "$projectDir/src/main/my-app-two"
+def reactAppDir = "$projectDir/src/main/b2o4-final"
 
 sourceSets {
 	main {
