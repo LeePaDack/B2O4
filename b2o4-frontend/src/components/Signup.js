@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './css/Signup.css'; // CSS 파일을 별도로 분리
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const Signup = () => {
+  const navigate = useNavigate();
   const [member, setMember] = useState({
     memberId: '',
     memberPw: '',
@@ -152,8 +154,8 @@ const Signup = () => {
     formData.append('memberBirth', member.memberBirth);
     formData.append('profileImage', member.memberProfile);
     fetch('/api/members', {
-      method: 'POST',
-      body: formData,
+      method: "POST",
+      body: formData
     })
       .then((response) => {
         if (response.ok) {
@@ -178,6 +180,7 @@ const Signup = () => {
           profileImage: '',
           memberProfile: null,
         });
+        navigate("/");
       })
       .catch((error) => {
         console.error('오류 발생:', error);

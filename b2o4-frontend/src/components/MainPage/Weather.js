@@ -1,20 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import '../css/Weather.css';
+import axios from 'axios';
 
 const DisplayWeather = () => {
-
     const [weatherValue, setWeatherValue] = useState(null);
     const [forecastValue, setForecastValue] = useState([]);
-    const key = 'fe9dd46de2db8b19d96bf53f5dd11283';
+    const [weatherKey, setWeatherKey] = useState('');
 
-    //요일 계산
+    // 요일 계산
     const getDayOfWeek = (dateStr) => {
         const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
         const date = new Date(dateStr);
         return daysOfWeek[date.getDay()];
     };
 
-    //위치 정보 허용했을 때 위치 정보 가져옴
+    useEffect(() => {
+        axios.get("/api/weather-api-key")
+            .then(res => {
+                setWeatherKey(res.data);
+            })
+            .catch(error => {
+                console.error("Failed to fetch weather key:", error);
+            });
+    }, []);
+
+    // 위치 정보 허용했을 때 위치 정보 가져옴
     const currentLocation = () => {
         return new Promise((resolve, reject) => {
             if (navigator.geolocation) {
@@ -27,14 +37,15 @@ const DisplayWeather = () => {
                         reject(error);
                     }
                 );
-            }
-            else {
+            } else {
                 reject("위치 정보에 오류가 발생했습니다.");
             }
         });
     };
 
     useEffect(() => {
+        if (!weatherKey) return;
+
         const getWeather = async () => {
             try {
                 const { latitude, longitude } = await currentLocation();
@@ -43,18 +54,16 @@ const DisplayWeather = () => {
                     headers: {
                         'Accept-Language': 'en'
                     }
-                })
+                });
                 const cityOrState = await getCityStateName.json();
                 const locationName = cityOrState.address.city || cityOrState.address.state;
 
                 const responseCurrent = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?q=${locationName}&appid=${key}&units=metric&lang=KR`,
-
+                    `https://api.openweathermap.org/data/2.5/weather?q=${locationName}&appid=${weatherKey}&units=metric&lang=KR`
                 );
-                console.log(`https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=${key}&units=metric&lang=KR`);
 
                 const responseForecast = await fetch(
-                    `https://api.openweathermap.org/data/2.5/forecast?q=${locationName}&appid=${key}&units=metric&lang=KR`,
+                    `https://api.openweathermap.org/data/2.5/forecast?q=${locationName}&appid=${weatherKey}&units=metric&lang=KR`
                 );
 
                 if (!responseCurrent.ok || !responseForecast.ok) {
@@ -88,7 +97,7 @@ const DisplayWeather = () => {
             }
         };
         getWeather();
-    }, [key]);
+    }, [weatherKey]);
 
     // 날씨 상태에 따라 배경 이미지 선택하기
     const getBackgroundImage = (weather) => {

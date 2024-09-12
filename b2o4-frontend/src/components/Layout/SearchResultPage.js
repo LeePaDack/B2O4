@@ -61,7 +61,7 @@ const SearchResultsPage = () => {
                 />
                 <div className="result-info">
                   <h3 className="result-title">
-                    구장 이름 : {stadium.stadiumName}
+                    {stadium.stadiumName}
                   </h3>
                   <p className="result-location">
                     구장 위치 : {stadium.stadiumLocation}
@@ -100,7 +100,7 @@ const SearchResultsPage = () => {
                 />
                 <div className="result-info">
                   <h3 className="result-title">
-                    상품 이름 : {goods.goodsName}
+                    {goods.goodsName}
                   </h3>
                   <p className="result-kind">종류: {goods.goodsKind}</p>
                   <p className="result-price">
@@ -137,7 +137,7 @@ const SearchResultsPage = () => {
                 />
                 <div className="result-info">
                   <h3 className="result-title">
-                    게시글 제목 : {board.gbPostTitle}
+                    {board.gbPostTitle}
                   </h3>
                   <p className="result-date">
                     작성일 : {board.gbPostCreateDate}

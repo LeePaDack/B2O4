@@ -5,7 +5,7 @@ import Button from "react-bootstrap/esm/Button";
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const GalleryUadate = () => {
-  const{gbPostNo} = useParams();
+  const{gbpostNo} = useParams();
   const [files, setFiles] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -28,14 +28,14 @@ const GalleryUadate = () => {
         formData.append("files", file);
       });
     }
-    formData.append("gbPostNo", gbPostNo);
+    formData.append("gbpostNo", gbpostNo);
     formData.append("title", title);
     formData.append("content", content);
     formData.append("memberNo", loginMember.memberNo);
     formData.append("memberName", loginMember.memberName);
 
     try {
-      await axios.put(`/gallery/${gbPostNo}`, formData, {
+      await axios.put(`/gallery/${gbpostNo}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
