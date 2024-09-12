@@ -1,5 +1,7 @@
 package b2o4.dto;
+
 import lombok.*;
+
 @Getter
 @Setter
 @ToString
@@ -11,9 +13,9 @@ public class Member {
 	private String memberPw;
 	private String memberEmail;
 	private String memberName;
+	private String membereBirth;
 	private String memberPhone;
 	private String memberAddress;
-	private String memberDetailAddress;
 	private String memberBirth;
 	private String memberProfile;
 	private char memberType;

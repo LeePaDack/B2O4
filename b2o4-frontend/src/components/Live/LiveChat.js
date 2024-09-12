@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
-import { Client } from "@stomp/stompjs";
-import SockJS from "sockjs-client";
-import "../css/Streaming.css";
-import Emoji from "./Emoji";
-import axios from "axios";
-import MyPageContext from "../MyPageContext";
-import moment from "moment";
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { Client } from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
+import '../css/Streaming.css';
+import Emoji from './Emoji';
+import axios from 'axios';
+import MyPageContext from '../MyPageContext';
+import moment from 'moment';
 
 const LiveChat = ({ chatable }) => {
   const { loginMember } = useContext(MyPageContext);
   const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [stompClient, setStompClient] = useState(null);
   const [connected, setConnected] = useState(false);
   const [emojiPick, setEmojiPick] = useState(false);
@@ -21,46 +21,42 @@ const LiveChat = ({ chatable }) => {
 
   // 서버에 요청 보내서 일반 사용자들에게 기능시행 후 결과를 전파하는 기능
   useEffect(() => {
-    const socket = new SockJS("/ws"); // java 쪽의 서버포트 설정과 맞춰서 작성
+    const socket = new SockJS('/ws'); // java 쪽의 서버포트 설정과 맞춰서 작성
     const client = new Client({
       webSocketFactory: () => socket,
       connectHeaders: {},
       debug: function (str) {
-        console.log("STOMP Debug:", str);
+        console.log('STOMP Debug:', str);
       },
       onConnect: function (frame) {
-        console.log("STOMP Connected:", frame);
+        console.log('STOMP Connected:', frame);
         setConnected(true);
-        client.subscribe("/topic/messages", (response) => {
-          // java 쪽의 컨트롤러(@SendTo)와 맞춰서 작성
+        client.subscribe('/topic/messages', (response) => { // java 쪽의 컨트롤러(@SendTo)와 맞춰서 작성
           const newMessage = JSON.parse(response.body);
           setMessages((prevMessages) => [...prevMessages, newMessage]);
         });
-        client.subscribe("/topic/freezeChat", (response) => {
+        client.subscribe('/topic/freezeChat', (response) => {
           setFreezeChat(JSON.parse(response.body));
         });
-        client.subscribe("/topic/deleteMessage", (response) => {
+        client.subscribe('/topic/deleteMessage', (response) => {
           const deletedMessage = JSON.parse(response.body);
-          if (
-            deletedMessage &&
-            deletedMessage.msgContent &&
-            deletedMessage.msgAt
-          ) {
+          if (deletedMessage && deletedMessage.msgContent && deletedMessage.msgAt) {
             setDeleteMessage(deletedMessage);
           }
         });
 
         //현재 채팅창 동결 여부를 서버에서 가져오기
-        axios.get("/chat/freezeChat").then((res) => {
-          setFreezeChat(res.data);
-        });
+        axios.get('/chat/freezeChat')
+          .then(res => {
+            setFreezeChat(res.data);
+          });
       },
       onStompError: function (frame) {
-        console.error("STOMP Error:", frame);
+        console.error('STOMP Error:', frame);
       },
       onWebSocketError: function (error) {
-        console.error("웹소켓 에러:", error);
-      },
+        console.error('웹소켓 에러:', error);
+      }
     });
 
     client.activate();
@@ -72,14 +68,14 @@ const LiveChat = ({ chatable }) => {
       }
     };
   }, []);
-
+  
   // chatable 상태 변경 알림
   useEffect(() => {
     if (prevChatableRef.current !== chatable) {
       if (!chatable) {
-        alert("채팅이 금지되었습니다.");
+        alert('채팅이 금지되었습니다.');
       } else {
-        alert("채팅이 허용되었습니다.");
+        alert('채팅이 허용되었습니다.');
       }
       prevChatableRef.current = chatable;
     }
@@ -89,12 +85,8 @@ const LiveChat = ({ chatable }) => {
   useEffect(() => {
     if (deleteMessage) {
       setMessages((prevMessages) =>
-        prevMessages.filter(
-          (message) =>
-            !(
-              message.content === deleteMessage.msgContent &&
-              message.formattedTime === deleteMessage.msgAt
-            )
+        prevMessages.filter(message =>
+          !(message.content === deleteMessage.msgContent && message.formattedTime === deleteMessage.msgAt)
         )
       );
       setDeleteMessage(null); // 삭제 후 deleteMessage 비우기
@@ -104,8 +96,7 @@ const LiveChat = ({ chatable }) => {
   // 최신 채팅이 일어난 곳으로 채팅창 스크롤만 움직이게 하기
   useEffect(() => {
     if (messagesContainerRef.current) {
-      messagesContainerRef.current.scrollTop =
-        messagesContainerRef.current.scrollHeight;
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -113,7 +104,7 @@ const LiveChat = ({ chatable }) => {
   const sendMessage = () => {
     if (stompClient && connected && message && chatable) {
       stompClient.publish({
-        destination: "/app/chat.send",
+        destination: '/app/chat.send',
         body: JSON.stringify({
           profile: loginMember.memberProfile,
           sender: loginMember.memberId,
@@ -122,16 +113,16 @@ const LiveChat = ({ chatable }) => {
           formattedTime: moment().format("YYYY-MM-DD HH:mm:ss"),
           color: getRandomColor(),
           senderType: loginMember.memberType,
-          isAdmin: loginMember.memberType === "A",
-        }),
+          isAdmin: loginMember.memberType === 'A'
+        })
       });
-      setMessage("");
+      setMessage('');
     }
   };
 
   //채팅 입력창 엔터키 반응
   const enterKey = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       e.preventDefault();
       sendMessage();
     }
@@ -144,44 +135,33 @@ const LiveChat = ({ chatable }) => {
   const handleFreezeChat = () => {
     if (stompClient) {
       stompClient.publish({
-        destination: "/app/chat.freezeChat",
+        destination: '/app/chat.freezeChat'
       });
     }
   };
 
   //채팅창 재정렬
-  const sortedMessages = [...messages].sort(
-    (a, b) => new Date(b.formattedTime) - new Date(a.formattedTime)
-  );
+  const sortedMessages = [...messages].sort((a, b) => new Date(b.formattedTime) - new Date(a.formattedTime));
 
   // 랜덤 색상 선택 함수
   const getRandomColor = () => {
-    const colors = [
-      "red",
-      "yellow",
-      "purple",
-      "skyblue",
-      "yellowgreen",
-      "green",
-      "pink",
-      "orange",
-    ];
+    const colors = ['red', 'yellow', 'purple', "skyblue", "yellowgreen", 'green', 'pink', 'orange'];
     return colors[Math.floor(Math.random() * colors.length)];
   };
 
   //채팅 메시지 삭제 요청 서버랑 주고 받기
   const handleDeleteMessage = async ({ msgContent, msgAt }) => {
-    await axios.delete("/chat/delete", {
+    await axios.delete('/chat/delete', {
       params: {
         msgContent: msgContent,
-        msgAt: msgAt,
-      },
+        msgAt: msgAt
+      }
     });
 
     if (stompClient) {
       stompClient.publish({
-        destination: "/app/chat.deleteMessage",
-        body: JSON.stringify({ msgContent, msgAt }),
+        destination: '/app/chat.deleteMessage',
+        body: JSON.stringify({ msgContent, msgAt })
       });
     }
   };
@@ -196,62 +176,42 @@ const LiveChat = ({ chatable }) => {
     setEmojiPick(!emojiPick);
   };
 
-  console.log("로그인 멤버 정보 : ", loginMember);
-  console.log("메시지 보기 : ", messages);
+  console.log("로그인 멤버 정보 : " , loginMember);
+  console.log("메시지 보기 : " , messages);
+  
 
   //로그인 정보 없을 때 UI가 렌더링 되는 걸 막기
-  if (!loginMember) {
+  if(!loginMember){
     return;
   }
 
   return (
-    <div className="chat-container">
-      <div className="messages" ref={messagesContainerRef}>
-        {sortedMessages.map((msg) => (
-          <div key={msg.msgNo} className="message">
-            {msg.profile && (
-              <img
-                src={`/images/${msg.profile}`}
-                alt="profileImage"
-                className="profile-image"
-              />
-            )}{" "}
-            <div className="message-content">
-              <div className="msg-body">
-                <strong className="msg-sender" style={{ color: msg.color }}>
+    <div className='chat-container'>
+      <div className='messages' ref={messagesContainerRef}>
+        {sortedMessages.map(msg => (
+          <div key={msg.msgNo} className='message'>
+            <img src={`/images/${msg.profile.split(",")[0]}`} alt="profileImage" className='profile-image' />
+            <div className='message-content'>
+              <div className='msg-body'>
+                <strong className='msg-sender' style={{ color: msg.color }}>
                   {msg.sender}
-                  {msg.admin && (
-                    <img
-                      src="/images/admincrown.png"
-                      className="admin-crown"
-                      alt="admin crown"
-                    />
-                  )}
+                  {msg.admin && <img src='/images/admincrown.png' className='admin-crown' alt="admin crown" />}
                 </strong>
               </div>
-              <p className="msg-content">
-                {msg.content}{" "}
-                <span className="time-text">{msg.viewedTime}</span>
+              <p className='msg-content'>
+                {msg.content} <span className='time-text'>{msg.viewedTime}</span>
               </p>
             </div>
-            {loginMember.memberType === "A" && (
-              <button
-                className="deleteBtn"
-                onClick={() =>
-                  handleDeleteMessage({
-                    msgContent: msg.content,
-                    msgAt: msg.formattedTime,
-                  })
-                }
-              >
+            {loginMember.memberType === 'A' &&
+              <button className='deleteBtn' onClick={() => handleDeleteMessage({ msgContent: msg.content, msgAt: msg.formattedTime })}>
                 &times;
               </button>
-            )}
+            }
           </div>
         ))}
       </div>
-      <div className="chat-box">
-        <div className="input-container">
+      <div className='chat-box'>
+        <div className='input-container'>
           {emojiPick && <Emoji onSelect={emojiMessage} />}
           <input
             type="text"
@@ -259,7 +219,7 @@ const LiveChat = ({ chatable }) => {
             onChange={handleInputChange}
             disabled={!connected || freezeChat || !chatable}
             onKeyDown={enterKey}
-            className="message-input"
+            className='message-input'
           />
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -275,14 +235,11 @@ const LiveChat = ({ chatable }) => {
           </svg>
         </div>
       </div>
-      {loginMember.memberType === "A" && (
-        <button
-          onClick={handleFreezeChat}
-          className="freezing btn btn-outline-success"
-        >
-          {freezeChat ? "Release Chat" : "Freeze Chat"}
+      {loginMember.memberType === 'A' &&
+        <button onClick={handleFreezeChat} className='freezing btn btn-outline-success'>
+          {freezeChat ? 'Release Chat' : 'Freeze Chat'}
         </button>
-      )}
+      }
       {!connected && <p>서버 연결중...</p>}
     </div>
   );

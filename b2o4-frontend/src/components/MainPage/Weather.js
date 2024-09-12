@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/Weather.css';
 
 const DisplayWeather = () => {
@@ -96,56 +96,70 @@ const DisplayWeather = () => {
         const mainWeather = weather.weather[0].main;
         switch (mainWeather) {
             case 'Clear':
-                return 'weatherBackground_sunny.jpg';
+                return '/images/weatherBackground_sunny.jpg';
             case 'Clouds':
-                return 'weatherBackground_cloudy.jpg';
+                return '/images/weatherBackground_cloudy.jpg';
             case 'Rain':
-                return 'weatherBackground_rainy.jpg';
+                return '/images/weatherBackground_rainy.jpg';
             case 'Snow':
-                return 'weatherBackground_snowy.jpg';
+                return '/images/weatherBackground_snowy.jpg';
             case 'Thunderstorm':
-                return 'weatherBackground_thunderstorm.jpg';
+                return '/images/weatherBackground_thunderstorm.jpg';
             case 'Fog':
-                return 'weatherBackground_foggy.jpg';
+                return '/images/weatherBackground_foggy.jpg';
             case 'Breeze':
-                return 'weatherBackground_windy.jpg';
+                return '/images/weatherBackground_windy.jpg';
             case 'Hail':
-                return 'weatherBackground_hail.webp';
+                return '/images/weatherBackground_hail.webp';
             default:
-                return 'weatherBackground_sunny.jpg';
+                return '/images/weatherBackground_sunny.jpg';
         }
     };
 
     return (
-        <div className='weather-widget'>
+        <div className='weather-widget'
+            style={{ backgroundImage: `url(${process.env.PUBLIC_URL}${getBackgroundImage(weatherValue)})` }}>
             <div className='weather-view'>
                 <div className='today-weather-container'>
                     {weatherValue && (
-                        <div className="today-weather">
-                            <div>
-                                <img src={`/images/${weatherValue.weather[0].icon}.png`} alt={weatherValue.weather[0].description} />
-                                <h3>{Math.round(weatherValue.main.temp)}°C</h3>
+                        <div>
+                            <h1>{weatherValue.name}</h1>
+                            <div className="today-weather">
+                                <div>
+                                    <img src={`/images/${weatherValue.weather[0].icon}.png`} alt={weatherValue.weather[0].description} />
+                                    <h3>{Math.round(weatherValue.main.temp)}°C</h3>
+                                </div>
+                                <ul>
+                                    <li style={{fontSize: "18px"}}>
+                                        <img src={`${process.env.PUBLIC_URL}/images/humidity.png`} alt='습도' />
+                                        {weatherValue.main.humidity} %
+                                    </li>
+                                    <li style={{fontSize: "18px"}}>
+                                        <img src={`${process.env.PUBLIC_URL}/images/windspeed.png`} alt='풍속' />
+                                        {weatherValue.wind.speed} m/s
+                                    </li>
+                                </ul>
                             </div>
-                            <ul>
-                                <li>Humidity: {weatherValue.main.humidity}%</li>
-                                <li>Wind Speed: {weatherValue.wind.speed} m/s</li>
-                            </ul>
                         </div>
                     )}
                 </div>
-                <hr />
+                <hr style={{ padding: 0, marginBottom: 10, margin: 0, border: '1px solid white', width: '100%' }} />
                 <div className='forecast-container'>
                     <ul className='forecast-list'>
                         {forecastValue.map((item, index) => (
-                            <li key={index} className="feature-weather">
-                                <p>{new Date(item.dt_txt).toLocaleDateString()}</p>
-                                <img src={`/images/${item.weather[0].icon}.png`} alt="" />
-                                <p>{Math.round(item.main.temp)}°C</p>
+                            <li className='feature-weather' key={index}>
+                                <p style={{ fontWeight: "bold" }}>{getDayOfWeek(item.dt_txt)}</p>
+                                <img
+                                    src={`${process.env.PUBLIC_URL}/images/${item.weather[0].icon}.png`}
+                                    alt=''
+                                />
+                                <p style={{ fontWeight: "bold" }}>{parseInt(item.main.temp)}°C</p>
                             </li>
                         ))}
                     </ul>
                 </div>
             </div>
+
         </div>
     );
 };
