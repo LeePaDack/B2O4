@@ -1,7 +1,8 @@
 .mypage-container {
+  height: 100%;
   width: 80%;
-  margin: 0 auto;
-  margin-top: 50px;
+  margin: 100px auto;
+  margin-top: 250px;
   padding: 20px;
   background-color: #f7f7f7;
   border-radius: 8px;

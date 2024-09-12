@@ -51,9 +51,7 @@ const GalleryBoard = () => {
               {list.gbImages ? (
                 <img
                   className="gallery-item-img"
-                  src={`/images/${
-                    list.gbImages.split(",")[0]
-                  }`}
+                  src={`/images/${list.gbImages.split(",")[0]}`}
                   alt={list.gbPostTitle}
                 />
               ) : (
@@ -75,17 +73,20 @@ const GalleryBoard = () => {
           </div>
         ))}
       </div>
-      <Pagination
-        className="pagination"
-        itemPerPage={gbPerPage}
-        totalItems={GBList.length}
-        paginate={paginate}
-        currentPage={currentPage}
-      />
-      <div className="write-button">
-        <Button variant="secondary" onClick={handleClick}>
-          글쓰기
-        </Button>
+
+      <div className="pagination-container">
+        <Pagination
+          className="pagination"
+          itemPerPage={gbPerPage}
+          totalItems={GBList.length}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+        <div className="write-button">
+          <Button variant="primary" onClick={handleClick}>
+            글쓰기
+          </Button>
+        </div>
       </div>
     </div>
   );

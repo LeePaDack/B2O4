@@ -117,55 +117,33 @@ const DisplayWeather = () => {
     };
 
     return (
-        <div className='weather-widget' 
-            style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/${getBackgroundImage(weatherValue)})`}}>
+        <div className='weather-widget'>
             <div className='weather-view'>
                 <div className='today-weather-container'>
                     {weatherValue && (
-                        <div style={{display: 'grid'}}>
-                            <h2>{weatherValue.name}</h2>
-                            <div className='today-weather row'>
-                                <div className='col-5'>
-                                    <img
-                                        src={`${process.env.PUBLIC_URL}/images/${weatherValue.weather[0].icon}.png`}
-                                        alt={`${weatherValue.weather[0].description}`}
-                                    />
-                                </div>
-                                <div className='col-7'>
-                                    <ul>
-                                        <li>
-                                            <h3>{parseInt(weatherValue.main.temp)}°C</h3>
-                                        </li>
-                                        <li>
-                                            <img src='/images/humidity.png' alt='습도' />
-                                            {weatherValue.main.humidity} %
-                                        </li>
-                                        <li>
-                                            <img src="/images/windspeed.png" alt='풍속' />
-                                            {weatherValue.wind.speed} m/s
-                                        </li>
-                                    </ul>
-                                </div>
+                        <div className="today-weather">
+                            <div>
+                                <img src={`/images/${weatherValue.weather[0].icon}.png`} alt={weatherValue.weather[0].description} />
+                                <h3>{Math.round(weatherValue.main.temp)}°C</h3>
                             </div>
+                            <ul>
+                                <li>Humidity: {weatherValue.main.humidity}%</li>
+                                <li>Wind Speed: {weatherValue.wind.speed} m/s</li>
+                            </ul>
                         </div>
                     )}
                 </div>
-                <hr style={{padding:0,marginBottom:10, margin:0, border: '1px solid white', width:'100%'}}/>
+                <hr />
                 <div className='forecast-container'>
-                    {forecastValue.length > 0 && (
-                        <ul className='forecast-list'>
-                            {forecastValue.map((item, index) => (
-                                <li className='feature-weather' key={index}>
-                                    <p style={{ fontWeight: "bold" }}>{getDayOfWeek(item.dt_txt)}</p>
-                                    <img
-                                        src={`${process.env.PUBLIC_URL}/images/${item.weather[0].icon}.png`}
-                                        alt=''
-                                    />
-                                    <p style={{ fontWeight: "bold" }}>{parseInt(item.main.temp)}°C</p>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
+                    <ul className='forecast-list'>
+                        {forecastValue.map((item, index) => (
+                            <li key={index} className="feature-weather">
+                                <p>{new Date(item.dt_txt).toLocaleDateString()}</p>
+                                <img src={`/images/${item.weather[0].icon}.png`} alt="" />
+                                <p>{Math.round(item.main.temp)}°C</p>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </div>

@@ -2,14 +2,18 @@
     overflow: hidden;
     border-radius: 10px;
     height: 400px; 
-    width: 350px; 
+    width: 400px; 
     padding: 20px;
-    position: sticky; 
-    top: 20px; /* 상단에서 20px 떨어진 위치에 고정*/
+    position: fixed;
+    top: 200px;
+    right: 20px;
+    z-index: 1000; 
     color: white;
     background-size: cover; 
     background-position: center;
-    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: rgba(0,0,0,0.5);
+    font-family: Arial, sans-serif;
 }
 
 .weather-view {
@@ -31,8 +35,9 @@
     margin: 0;
 }
 
-.today-weather-container h2{
+.today-weather-container h2 {
     font-weight: bold;
+    font-size: 1.5em;
 }
 
 .today-weather {
@@ -42,54 +47,45 @@
     padding: 20px;
 }
 
-.today-weather h3{
+.today-weather h3 {
     font-weight: bold;
-    font-size: 250%;
+    font-size: 3em;
+    margin: 0;
 }
 
 .today-weather img {
-    width: 100px;
-}
-
-.today-weather ul {
-    display: flex;
-    flex-direction: column; 
-    list-style: none;
-    margin: 0; 
-    text-align: left;
-}
-
-.today-weather li {
-    margin-bottom: 1px; 
-}
-
-.today-weather li img {
-    width: 20px;
-    margin-right: 5px;
+    width: 80px;
 }
 
 .forecast-container {
     display: flex; 
     justify-content: center; 
     align-items: center;
-    flex: 1; /* 남은 공간을 차지하도록 설정 */
+    flex: 1;
+    margin-top: 10px;
 }
 
 .forecast-list {
     display: flex;
-    justify-content: center; /* 수평으로 중앙 정렬 */
-    align-items: center; /* 수직으로 중앙 정렬 */
+    justify-content: space-between;
     width: 100%;
     list-style: none;
     padding: 0;
-    margin: 0; /* 여백을 제거하여 정렬이 깨지지 않도록 함 */
+    margin: 0;
 }
 
 .feature-weather {
     text-align: center;
+    width: 50px;
+    font-size: 0.8em;
 }
 
 .feature-weather img {
-    width: 80%;
-    margin-bottom: 10px;
+    width: 40px;
+    margin-bottom: 5px;
+}
+
+.feature-weather p {
+    margin: 5px 0;
+    line-height: 1.2;
 }

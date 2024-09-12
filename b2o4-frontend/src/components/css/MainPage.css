@@ -5,40 +5,40 @@
     background-color: rgba(7, 83, 247, 0.774);
 }
 
-.carousel-items{
+.carousel-items {
     text-align: center;
     padding: 10px;
 }
 
 .carousel-item img {
     border-radius: 20px;
-    width: 70%; 
-    height: 600px; 
-    object-fit: cover; 
+    width: 70%;
+    height: 600px;
+    object-fit: cover;
     position: relative;
 }
 
 .carousel-item::after {
-    content: ""; 
-    position: absolute; 
+    content: "";
+    position: absolute;
     left: 0;
     width: 84.6%;
-    height: 600px; 
+    height: 600px;
     background: linear-gradient(to left, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 40%);
-    pointer-events: none; 
-    border-radius: 20px; 
+    pointer-events: none;
+    border-radius: 20px;
 }
 
 .carousel-caption-text {
     text-align: right !important;
     margin-right: 20px;
     padding: 15px !important;
-    position: absolute; 
+    position: absolute;
     z-index: 1000;
     font-size: large;
 }
 
-.section-title h1{
+.section-title h1 {
     font-size: 2.5em;
     font-style: italic;
     font-weight: bold;
@@ -49,16 +49,16 @@
 
 .section-title a {
     text-decoration: none;
-    color : #333;
+    color: #333;
 }
 
-.card-container{
+.card-container {
     display: flex;
     justify-content: center;
 }
 
-.stadium-card-body{
-    position: relative; 
+.stadium-card-body {
+    position: relative;
     border-radius: 4px;
     margin: 10px;
     max-width: 400px;
@@ -69,45 +69,45 @@
 }
 
 .stadium-card-body:hover {
-    transform: scale(1.03); 
+    transform: scale(1.03);
     background-color: #f1f0f0;
 }
 
-.hot{
+.hot {
     position: absolute;
     top: -5px;
-    left: 15px ; 
+    left: 15px;
     width: 75px !important;
-    z-index: 10 ; 
+    z-index: 10;
 }
 
 .stadium-card-body img {
-    width: 100%; 
-    height: auto; 
-    display: block; 
-    margin: 0 auto; 
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
-.stadium-image{
+.stadium-image {
     min-height: 275px;
     max-height: 275px;
 }
 
 .highlight {
-    border: 2px solid gold; 
+    border: 2px solid gold;
 }
 
 .stadium-card-body p {
     margin-top: 20px;
 }
 
-.stadium-card-body button{
+.stadium-card-body button {
     padding: 8px 16px;
     margin-bottom: 10px;
     width: 95%;
 }
 
-.stadium-desc{
+.stadium-desc {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -117,45 +117,46 @@
     text-align: left;
 }
 
-.stadium-name{
+.stadium-name {
     font-size: 18px;
     font-weight: bold;
     color: #4f4b4b;
 }
 
-.stadium-address, .stadium-capacity{
+.stadium-address, .stadium-capacity {
     font-size: 13px;
     font-weight: bold;
     color: #5f5f5f;
 }
 
-.stadium-desc-except-price{
+.stadium-desc-except-price {
     height: 125px;
 }
 
-.stadium-price{
+.stadium-price {
     font-size: 22px;
     font-weight: bold;
     color: #333;
 }
 
-.totalLike{
+.totalLike {
     font-weight: bold;
     font-size: 15px;
-    color:#5f5f5f;
+    color: #5f5f5f;
 }
 
-.card-body svg{
+.card-body svg {
     width: 15px;
 }
 
 .gallery-list-container {
     width: 100%;
 }
+
 .slider-container a {
     text-decoration: none !important;
-    color: inherit !important; 
-    display: block !important; 
+    color: inherit !important;
+    display: block !important;
 }
 
 .slider-container {
@@ -166,7 +167,7 @@
 .slick-prev, .slick-next {
     font-size: 0 !important;
     color: #000 !important;
-    background-color: rgba(0,0,0,0.1)  !important;
+    background-color: rgba(0, 0, 0, 0.1) !important;
     border: none !important;
     border-radius: 10px;
     width: 40px !important;
@@ -188,108 +189,106 @@
     right: 10px !important;
 }
 
-.slider-container .slick-prev::before, 
+.slider-container .slick-prev::before,
 .slider-container .slick-next::before {
     content: none !important;
 }
 
 .gallery-card-body {
-    position: relative; 
+    position: relative;
     border-radius: 4px;
-    margin: 0 10px; 
+    margin: 0 10px;
     height: 450px;
     padding: 20px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     transition: transform 0.3s;
     text-align: center;
-    box-sizing: border-box;
     cursor: pointer;
 }
 
 .gallery-card-body:hover {
-    transform: scale(1.03); 
+    transform: scale(1.03);
     background-color: #f1f0f0;
 }
 
 .gallery-card-body img {
     object-fit: cover;
     overflow: auto;
-    width: 100%; 
-    height: auto; 
+    width: 100%;
+    height: auto;
     min-width: 300px;
     min-height: 300px;
     max-height: 300px;
-    display: block; 
-    margin: 0 auto; 
+    display: block;
+    margin: 0 auto;
 }
 
-.gallery-desc{
+.gallery-desc {
     text-align: left;
     padding: 20px;
 }
 
-.gallery-desc-title{
+.gallery-desc-title {
     font-size: 18px;
     font-weight: bold;
     color: #4f4b4b;
 }
 
-.gallery-desc-name{
+.gallery-desc-name {
     font-size: 13px;
     font-weight: bold;
     color: #5f5f5f;
 }
 
-.recommended-goods-container{
+.recommended-goods-container {
     margin-bottom: 100px;
 }
 
 .recommended-goods-card-body {
-    position: relative; 
+    position: relative;
     border-radius: 4px;
-    margin: 0 10px; 
+    margin: 0 10px;
     padding: 20px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     transition: transform 0.3s;
     text-align: center;
-    box-sizing: border-box;
     cursor: pointer;
 }
 
 .recommended-goods-card-body:hover {
-    transform: scale(1.03); 
+    transform: scale(1.03);
     background-color: #f1f0f0;
 }
 
 .recommended-goods-card-body img {
-    width: 50%; 
-    height: 100px; 
-    display: block; 
-    margin: 0 auto; 
+    width: 50%;
+    height: 100px;
+    display: block;
+    margin: 0 auto;
 }
 
-.recommended-goods-desc{
+.recommended-goods-desc {
     text-align: left;
     padding: 20px;
     height: 200px;
 }
 
-.recommended-goods-name-box{
+.recommended-goods-name-box {
     height: 120px;
 }
 
-.recommended-goods-name{
+.recommended-goods-name {
     font-size: 18px;
     font-weight: bold;
     color: #4f4b4b;
 }
 
-.recommended-goods-kind{
+.recommended-goods-kind {
     font-weight: bold;
     font-size: large;
 }
 
-.recommended-goods-price{
+.recommended-goods-price {
     font-size: 25px;
     font-weight: bold;
     color: #5f5f5f;
@@ -298,5 +297,7 @@
 .weather-container {
     padding: 20px;
     position: relative;
-    height: 200vh;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
 }

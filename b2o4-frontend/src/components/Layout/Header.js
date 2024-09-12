@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -11,6 +11,11 @@ import MyPageModal from "../MyPage/MyPageModal";
 const Header = () => {
   const { loginMember, setLoginMember } = useContext(MyPageContext);
   const navigate = useNavigate();
+  
+  const [keyword, setKeyword] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
+  const [visible, setVisible] = useState(true);
 
   const openMyPageModal = () => {
     if (!loginMember) {
@@ -49,41 +54,36 @@ const Header = () => {
     }
   };
 
-  const [keyword, setKeyword] = useState(""); // 검색어 상태
-  const [searchResults, setSearchResults] = useState({
-    stadiums: [],
-    goods: [],
-    gallery: [],
-  });
-
-  const handleKeywordChange = (e) => {
-    setKeyword(e.target.value);
-  };
-
-  // 검색 처리 함수
-  const handleSearch = async (e) => {
-    e.preventDefault(); // 폼 제출 기본 동작 방지
-    console.log("Search keyword:", keyword); // 디버깅용 로그
-    navigate(`/search?keyword=${encodeURIComponent(keyword)}`); // 검색어를 쿼리 파라미터로 추가하여 이동
-  };
-
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
-
-  const openModal = () => {
-    setIsModalOpen(true); // 모달 열기
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/search?keyword=${encodeURIComponent(keyword)}`);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // 모달 닫기
+    setIsModalOpen(false);
   };
 
   const handlePasswordCorrect = () => {
-    setIsModalOpen(false); // 모달 닫기
-    navigate("/mypage"); // 비밀번호가 맞으면 mypage로 이동
+    setIsModalOpen(false);
+    navigate("/mypage");
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      const isScrollingUp = prevScrollPos > currentScrollPos;
+
+      setVisible(isScrollingUp || currentScrollPos < 10);
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollPos]);
+
   return (
-    <header>
+    <header className={visible ? "header-visible" : "header-hidden"}>
       <div className="header-top">
         <Link to="/" className="d-flex align-items-center">
           <img src="/images/logo.png" className="brand-logo" alt="Brand Logo" />
@@ -96,7 +96,7 @@ const Header = () => {
                 placeholder="통합검색"
                 className="search-input"
                 value={keyword}
-                onChange={handleKeywordChange}
+                onChange={(e) => setKeyword(e.target.value)}
               />
               <button type="submit" className="search-button">
                 <svg
@@ -212,4 +212,5 @@ const Header = () => {
     </header>
   );
 };
+
 export default Header;

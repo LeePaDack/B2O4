@@ -1,156 +1,269 @@
-/************** comment *****************/
-.comment-container{
-  border: 1px solid #ddd; /* 연한 회색 테두리 */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* 더 강한 그림자 효과 */
+.comment-container {
+  width: 60%;
+  margin: 0 auto;
+  background-color: #fdfdfd;
+  border: 1px solid #ddd;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
-.comment-title{
-  padding: 1px;
+.comment-title {
+  padding: 10px;
   background-color: #77dd77;
   color: #212121;
+  border-radius: 10px 10px 0 0;
+  text-align: center;
 }
 
 .comment-title p {
   font-weight: bold;
-  font-size: 20px;
-  margin: 5px;
+  font-size: 1.2rem;
+  margin: 0;
 }
 
-.comment-write{
+.comment-write {
   border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 15px;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 20px;
+  background-color: #fafafa;
 }
 
-
-.name-file{
+.name-file {
   display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-.name-file{
-  width: 100%;
-
+.name-file p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
 }
 
-.name-file input{
+.name-file label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+ 
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: 2px solid transparent;
+  transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
+}
+
+.name-file label:hover {
+  background-color: #919191b6;
+  color: #ffffff;
+  border: 2px solid #919191b6;
+}
+
+.name-file img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.name-file input {
   display: none;
 }
 
-.name-file img{
- width: 40px;
- margin-left: 15px;
-}
-
-.content-submit{
+.content-submit {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
-
-.comment-write p{
-  font-weight: bold;
-  margin: 10px 0 0 10px;
-  font-size: 14px;
+.content-submit input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px 0 0 10px;
+  font-size: 0.9rem;
+  background-color: #f5f5f5;
 }
 
 .content-submit button {
-  margin-left: 10px; /* input과 button 사이에 간격 추가 */
-}
-
-.content-submit input{
-  flex: 1;
-  margin: 10px -10px 10px 10px;
-  border: 1px solid #ccc;
-  border-radius: 10px 0 0 10px;
-  font-size: 14px;
-  width: 90%;
-  padding: 5px;
-}
-
-.content-submit button{
-  background-color: black;
+  background-color: #77dd77;
   color: white;
-  border: 1px solid black;
+  border: none;
   border-radius: 0 10px 10px 0;
-  font-weight: bold;    
-  font-size: 12px;
-  width: 50px;
-  padding: 6.5px;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
 }
 
-
-.comment-item{
-  border-bottom: 1px solid #ccc;
-  margin: 15px;
-  padding: 10px;
+.content-submit button:hover {
+  background-color: #66cc66;
 }
 
-.comment-item img{
-  width: 100px;
+.comment-item {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+  margin-bottom: 10px;
+  transition: box-shadow 0.3s ease;
 }
 
-.comment-content{
+.comment-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comment-content p {
+  margin-top: 10px;
+  font-size: 20px;
+  line-height: 1.4;
+  color: #555;
+}
+
+.name-date {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
-.comment-content p{
+
+.comment-date p {
+  color: gray;
+  font-size: 0.8rem;
+}
+
+.reply-write {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-top: 10px;
 }
 
-.name-date{
-  display: flex;
-}
-
-.comment-date{
-  display: flex;
-  color: gray;
-  margin-left: 10px;
-}
-
-.comment-reply button{
-  border: none;
-  background-color: white;
-  color: gray;
-}
-
-
-.content-submit{
-  display: flex;
-  align-items: center;
-}
-
-.reply-write{
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-}
-
-.reply-write p{
-  font-weight: bold;
-  margin: 10px 0 0 10px;
-  font-size: 14px;
-}
-
-.reply-write input{
+.reply-write input {
   flex: 1;
-  margin: 10px -10px 10px 10px;
-  border: 1px solid #ccc;
+  padding: 10px;
+  border: 1px solid #ddd;
   border-radius: 10px 0 0 10px;
-  font-size: 14px;
-  width: 90%;
-  padding: 5px;
+  background-color: #f5f5f5;
 }
 
-.reply-write button{
-  background-color: black;
+.reply-write button {
+  background-color: #77dd77;
   color: white;
-  border: 1px solid black;
+  border: none;
   border-radius: 0 10px 10px 0;
-  font-weight: bold;    
-  font-size: 12px;
-  width: 50px;
-  padding: 6.5px;
+  padding: 10px 20px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
+.reply-write button:hover {
+  background-color: #66cc66;
+}
+
+.comment-view {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.comment-item {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.comment-item:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.name-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+}
+
+.comment-date {
+  font-size: 12px;
+  color: #999;
+}
+
+.comment-content {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.comment-content p {
+  margin: 5px 0;
+}
+
+.comment-item img {
+  width: 80px;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.comment-reply {
+  margin-top: 10px;
+}
+
+.comment-reply button {
+  background-color: #f7f7f7;
+  color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comment-reply button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.reply-list {
+  margin-left: 20px;
+  margin-top: 10px;
+  border-left: 2px solid #ddd;
+  padding-left: 15px;
+}
+
+.reply-item {
+  background-color: #fafafa;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #eee;
+}
+
+.reply-item p {
+  font-size: 14px;
+  color: #555;
+}
+
+.reply-item .comment-writer {
+  font-weight: bold;
+  color: #333;
+}
+
+.reply-item .comment-date {
+  font-size: 12px;
+  color: #999;
+  margin-top: 5px;
+}

@@ -6,7 +6,7 @@ import Login from './components/Login/Login.js';
 import MyPageContext from './components/MyPageContext.js';
 import { useEffect, useState } from 'react';
 import GalleryDetail from './components/Gallery/GalleryDetail.js';
-import 'bootstrap/dist/css/bootstrap.css';
+
 import Header from './components/Layout/Header.js'
 import FindId from './components/Login/FindId.js';
 import FindPw from './components/Login/FindPw.js';
@@ -86,54 +86,56 @@ function App() {
   return (
     <MyPageContext.Provider value={{loginMember, setLoginMember,basketList, setBasketList,reviewList, setReviewList}}> 
       <Router>
-      <Header />
-        <Routes>
-          <Route path='/' element={<MainPage/>}/>
-          <Route path='/login' element={<Login />} />
-          <Route path='/galleryBoard' element={<GalleryBoard />} />
-          <Route path='/galleryBoard/:gbpostNo' element={<GalleryDetail />} />
-          <Route path='/galleryUpload' element={<GalleryUpload />} />
-          <Route path='/findId' element={<FindId />} />
-          <Route path='/findPw' element={<FindPw />} />
-          <Route path='/galleryUpdate/:gbpostNo' element={<GalleryUpdate />} />
-          <Route path='/passwordChange' element={<PasswordChange />} />       
-          <Route path='/signup/naver' element={<NaverSignup />} />
-          <Route path="/goodsShop" element={<GoodsShop />} /> 
-          <Route path="/goodsDetail/:goodsNo" element={<GoodsDetail  loginMember={loginMember}/>} />
-          <Route path="/shoppingBasket/" element={<ShoppingBasket  loginMember={loginMember}/>} />
-          <Route path="/DeliveryInfo/" element={<DeliveryInfo  loginMember={loginMember} /> } />
-          <Route path="/mypage" element={<MyPage/>}/>
-          <Route path="/stadiumInfo" element={<StadiumReviewMain/>}/>
-          <Route path="/memberInfo" element={<MemberReviewMain/>}/>
-          <Route path='/stadiumList' element={<StadiumList/>}/>
-          <Route path="/stadiumReviewDetail/:stadiumNo" element={<StadiumReviewDetail />} />
-          <Route path='/boardPosting' element={<BoardPosting/>}/>
-          <Route path='/boardUpdate/:boardNo' element={<BoardUpdate/>}/>
-          <Route path='/boardMain' element={<BoardMain/>}/>
-          <Route path='/boardContent/:boardNo' element={<BoardContent/>}/>
-          <Route path='/reservationStadium/:stadiumNo' element={<ReservationStadium/>}/>
-          <Route path="/payment/checkout" element={<PaymentCheckoutPage />} />
-          <Route path="/payment/success" element={<PaymentSuccessPage />} />
-          <Route path="/payment/fail" element={<PaymentFailPage />} />
-          <Route path="/stadiumdetail/:stadiumNo" element={<StadiumDetail/>}/>
-          <Route path="/memberReviewDetail/:memberNo" element={<MemberReviewDetail/>}/>
-          <Route path="/stadiumReviewUpload" element={<StadiumReviewUpload/>}/>
-          <Route path="/memberReviewUpload" element={<MemberReviewUpload/>}/>
-          <Route path="/paymentDetails/:memberNo" element={<PaymentDetails/>}/>
-          <Route path="/userDeliveryInfo/:memberNo" element={<UserDeliveryInfo/>}/>
-          <Route path='/stadiumListDetail/:stadiumNo' element={<StadiumListDetail/>}/>
-          <Route path='/liveStreamingPage' element={<LiveStreamingPage/>}/>
-          <Route path="/Signup" element={<Signup/>}/>
-          <Route path="/members/kakaoMap" element={<KakaoMap/>}/>
-          <Route path="/search" element={<SearchResultPage />} />
-          <Route path="/result" element={<GoogleSignup />} />
-          <Route path="/signup/kakao" element={<KakaoSignup />} />
-          <Route path='/usedItemBoard' element={<UsedItemBoard loginMember={loginMember} />} />
-          <Route path='/usedItem/upload' element={<UsedItemUpload loginMember={loginMember} />} />
-          <Route path='/usedItem/:usedItemNo' element={<UsedItemDetail loginMember={loginMember} />} />
-          <Route path='/usedItem/edit/:usedItemNo' element={<UsedItemUpdate loginMember={loginMember} />} />
-          <Route path="/oauth2/callback/kakao" element={<KakaoRedirection />} />
-        </Routes>
+        <Header /> 
+        <div className="main-container"> {/* 모든 컨텐츠를 감싸는 div */}
+          <Routes>
+            <Route path='/' element={<MainPage/>}/>
+            <Route path='/login' element={<Login />} />
+            <Route path='/galleryBoard' element={<GalleryBoard />} />
+            <Route path='/galleryBoard/:gbpostNo' element={<GalleryDetail />} />
+            <Route path='/galleryUpload' element={<GalleryUpload />} />
+            <Route path='/findId' element={<FindId />} />
+            <Route path='/findPw' element={<FindPw />} />
+            <Route path='/galleryUpdate/:gbpostNo' element={<GalleryUpdate />} />
+            <Route path='/passwordChange' element={<PasswordChange />} />       
+            <Route path='/signup/naver' element={<NaverSignup />} />
+            <Route path="/goodsShop" element={<GoodsShop />} /> 
+            <Route path="/goodsDetail/:goodsNo" element={<GoodsDetail  loginMember={loginMember}/>} />
+            <Route path="/shoppingBasket/" element={<ShoppingBasket  loginMember={loginMember}/>} />
+            <Route path="/DeliveryInfo/" element={<DeliveryInfo  loginMember={loginMember} /> } />
+            <Route path="/mypage" element={<MyPage/>}/>
+            <Route path="/stadiumInfo" element={<StadiumReviewMain/>}/>
+            <Route path="/memberInfo" element={<MemberReviewMain/>}/>
+            <Route path='/stadiumList' element={<StadiumList/>}/>
+            <Route path="/stadiumReviewDetail/:stadiumNo" element={<StadiumReviewDetail />} />
+            <Route path='/boardPosting' element={<BoardPosting/>}/>
+            <Route path='/boardUpdate/:boardNo' element={<BoardUpdate/>}/>
+            <Route path='/boardMain' element={<BoardMain/>}/>
+            <Route path='/boardContent/:boardNo' element={<BoardContent/>}/>
+            <Route path='/reservationStadium/:stadiumNo' element={<ReservationStadium/>}/>
+            <Route path="/payment/checkout" element={<PaymentCheckoutPage />} />
+            <Route path="/payment/success" element={<PaymentSuccessPage />} />
+            <Route path="/payment/fail" element={<PaymentFailPage />} />
+            <Route path="/stadiumdetail/:stadiumNo" element={<StadiumDetail/>}/>
+            <Route path="/memberReviewDetail/:memberNo" element={<MemberReviewDetail/>}/>
+            <Route path="/stadiumReviewUpload" element={<StadiumReviewUpload/>}/>
+            <Route path="/memberReviewUpload" element={<MemberReviewUpload/>}/>
+            <Route path="/paymentDetails/:memberNo" element={<PaymentDetails/>}/>
+            <Route path="/userDeliveryInfo/:memberNo" element={<UserDeliveryInfo/>}/>
+            <Route path='/stadiumListDetail/:stadiumNo' element={<StadiumListDetail/>}/>
+            <Route path='/liveStreamingPage' element={<LiveStreamingPage/>}/>
+            <Route path="/Signup" element={<Signup/>}/>
+            <Route path="/members/kakaoMap" element={<KakaoMap/>}/>
+            <Route path="/search" element={<SearchResultPage />} />
+            <Route path="/result" element={<GoogleSignup />} />
+            <Route path="/signup/kakao" element={<KakaoSignup />} />
+            <Route path='/usedItemBoard' element={<UsedItemBoard loginMember={loginMember} />} />
+            <Route path='/usedItem/upload' element={<UsedItemUpload loginMember={loginMember} />} />
+            <Route path='/usedItem/:usedItemNo' element={<UsedItemDetail loginMember={loginMember} />} />
+            <Route path='/usedItem/edit/:usedItemNo' element={<UsedItemUpdate loginMember={loginMember} />} />
+            <Route path="/oauth2/callback/kakao" element={<KakaoRedirection />} />
+          </Routes>
+        </div>
         <Sidebar/>
         <Footer />
       </Router>

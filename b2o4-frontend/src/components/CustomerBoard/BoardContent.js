@@ -19,9 +19,7 @@ const BoardContent = () => {
   // boardComment 정보 가져오기
   const BoardComment = async () => {
     try {
-      const res = await axios.get(
-        `/boards/comment/${board.boardNo}`
-      );
+      const res = await axios.get(`/boards/comment/${board.boardNo}`);
       setComments(res.data);
     } catch (error) {
       console.error("댓글 불러오기 실패", error);
@@ -118,44 +116,41 @@ const BoardContent = () => {
               </div>
             </tr>
             <td className="board-content">{board.boardContent}</td>
-
-            <input
-              className="admin-board-comment"
-              type="text"
-              hidden={loginMember.memberType !== "A"}
-              placeholder="문의 답변"
-              value={commentContent} // 상태 연결
-              onChange={(e) => setCommentContent(e.target.value)}
-            />
-            <div className="admin-post-board-comment-div">
-              <button
-                className="admin-post-board-comment"
-                onClick={adminBoardComment}
-                hidden={loginMember.memberType !== "A"}
-              >
-                작성하기
-              </button>
-            </div>
-            {/* 댓글 목록 표시 */}
-            <div className="comments-section">
-              {comments.map((comment) => (
-                <div key={comment.commentNo} className="comment-item">
-                  <p
-                    className="admin-board-content-delete-button"
-                    onClick={() =>
-                      handleContentCommentDelete(comment.commentNo)
-                    }
-                    hidden={loginMember.memberType !== "A"}
-                  >
-                    &times;
-                  </p>
-                  <small>관리자 : {comment.memberName}</small>
-                  <p>{comment.commentContent}</p>
-                </div>
-              ))}
-            </div>
           </tbody>
         </table>
+        <input
+          className="admin-board-comment"
+          type="text"
+          hidden={loginMember.memberType !== "A"}
+          placeholder="문의 답변"
+          value={commentContent} // 상태 연결
+          onChange={(e) => setCommentContent(e.target.value)}
+        />
+        <div className="admin-post-board-comment-div">
+          <button
+            className="admin-post-board-comment"
+            onClick={adminBoardComment}
+            hidden={loginMember.memberType !== "A"}
+          >
+            작성하기
+          </button>
+        </div>
+        {/* 댓글 목록 표시 */}
+        <div className="comments-section">
+          {comments.map((comment) => (
+            <div key={comment.commentNo} className="comment-item">
+              <p
+                className="admin-board-content-delete-button"
+                onClick={() => handleContentCommentDelete(comment.commentNo)}
+                hidden={loginMember.memberType !== "A"}
+              >
+                &times;
+              </p>
+              <small>관리자 : {comment.memberName}</small>
+              <p>{comment.commentContent}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -9,17 +9,17 @@ import Weather from "./Weather";
 const Main = () => {
 
     return (
-        <div className='main-container'>
+        <div className='main-container col-9'>
             <div className='carousel-container'>
                 <MainPageCarousel />
             </div>
-            <div className="main-content row">
-                <div className="recommended-content col-9">
+            <div className="main-content">
+                <div className="recommended-content ">
                     <MonthOfTheStadiumList />
                     <GalleryList />
                     <RecommendedGears />
                 </div>
-                <div className="weather-container col-3">
+                <div className="weather-container">
                     <Weather/>
                 </div>
             </div>
