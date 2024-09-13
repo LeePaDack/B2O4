@@ -49,6 +49,12 @@ const Header = () => {
       case 5:
         loginMember ? navigate("/mypage") : navigate("/Login");
         break;
+      case 6:
+        loginMember ? navigate("/paymentDetails/:memberNo") : navigate("/Login");
+      break;
+      case 7:
+        loginMember ? navigate("/userDeliveryInfo/:memberNo") : navigate("/Login");
+      break;
       default:
         break;
     }
@@ -187,15 +193,14 @@ const Header = () => {
                 <NavDropdown.Item onClick={openMyPageModal}>
                   내 정보 수정
                 </NavDropdown.Item>
-                <Link to="/paymentDetails/:memberNo" className="dropdown-item">
+                <NavDropdown.Item className="dropdown-item" onClick={() => afterLoginNavigate(6)}>
                   내 예약 정보보기
-                </Link>
-                <Link
-                  to="/userDeliveryInfo/:memberNo"
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => afterLoginNavigate(7)}
                   className="dropdown-item"
                 >
                   내 상품 결제 내역보기
-                </Link>
+                </NavDropdown.Item>
                 <Link to="/stadiumInfo" className="dropdown-item">
                   평가하기
                 </Link>
