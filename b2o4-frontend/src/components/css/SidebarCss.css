@@ -1,0 +1,52 @@
+/* 사이드바와 스크롤 상단 버튼을 포함하는 컨테이너 */
+.sidebar-container {
+    position: fixed;
+    bottom: 120px; /* 푸터 높이를 고려한 하단 여백 */
+    right: 20px; /* 오른쪽에서 20px */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* 버튼 사이의 간격 */
+    z-index: 1000;
+  }
+  
+  /* 사이드바 버튼 스타일 */
+  .sidebar-button {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    background-color: black;
+  }
+  
+  /* 페이지 상단으로 이동하는 버튼 스타일 */
+  .scroll-to-top {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .scroll-to-top.visible {
+    opacity: 1;
+  }
+  
+  .upicon {
+    width: 50px;
+  }
+  
+  .backicon {
+    width: 50px;
+  }
